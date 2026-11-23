@@ -193,6 +193,17 @@ input.f,select.f{background:var(--input)}
 .task .tt .exb{align-self:flex-start;margin:3px 0 0}
 .lc .k .exb{margin-left:6px}
 
+.chips button.edit{border-style:dashed;color:var(--mute)}
+.fieldrow{margin-top:10px}.fhead{display:flex;gap:6px;align-items:center;margin-bottom:3px}
+input.flab{flex:1;min-width:0;border:0;border-bottom:1.5px dashed var(--line);background:transparent;font-size:12.5px;font-weight:700;color:var(--mute);letter-spacing:.02em;padding:4px 2px;outline:none}
+input.flab:focus{border-bottom-color:var(--acc);color:var(--ink)}
+.mini{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--card);font-size:14px;flex:none;color:var(--mute)}
+.catbox{border:1px solid var(--line);border-left:5px solid;border-radius:14px;padding:10px;margin:10px 0;background:var(--card)}
+.cdots{display:flex;gap:6px;margin:8px 0 2px;flex-wrap:wrap}.cdots button{width:24px;height:24px;border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 1px var(--line)}.cdots button.on{box-shadow:0 0 0 2.5px var(--ink)}
+.deffields .fhead{margin:4px 0}
+.tel .nm span{display:block}
+.warnbox.install{background:#eaf1fb;border-color:#b9cbe6;color:#2f4466}
+
 </style>
 </head>
 <body>
@@ -221,7 +232,7 @@ const L={de:{app:'Dienst-Tagebuch',tabs:['Tagebuch','Notizbuch','Aufgaben','Tele
  addTodo:'+ Aufgabe hinzufügen',addLearn:'+ Notiz hinzufügen',addPhoto:'Foto hinzufügen',save:'Fertig',del:'Löschen',delQ:'Diesen Dienst wirklich löschen?',cancel:'Abbrechen',
  openT:'Offene Aufgaben',handT:'Für die Übergabe',memo:'Erinnerung an einen guten Tag',emptyT:'Dein erster Dienst wartet.',emptyP:'Tippe auf „Neuer Dienst“.',demo:'Beispiele laden',
  ex:'Beispiel',exBanner:'Das sind Beispiele. Sie zeigen nur, wie man das Notizbuch nutzen kann. Trag hier dein eigenes Wissen ein, so wie es in deiner Abteilung gilt.',exBannerJ:'Das sind Beispiel-Einträge, damit du siehst, wie ein Tagebuch aussehen kann.',exDel:'Alle Beispiele entfernen',exDelQ:'Alle Beispiele (Einträge, Notizen, Aufgaben und Nummern) entfernen? Deine eigenen Einträge bleiben.',
- privacy:'Bitte keine Patientennamen, Geburtsdaten, Fallnummern oder Fotos von Patient:innen eintragen. Alles bleibt nur auf diesem Gerät gespeichert.',
+ editTabs:'Reiter bearbeiten',editTabsHint:'Benenne Reiter um, ändere Farbe und Reihenfolge, leg neue an. Die Felder unten sind die Vorlage für neue Notizen in diesem Reiter.',defFields:'Felder für neue Notizen',addField:'+ Feld hinzufügen',fieldName:'Feldname',fieldHint:'Tipp: Jeder Feldname ist änderbar, einfach antippen.',newTab:'Neuer Reiter',noteField:'Notiz',delTabQ:'Diesen Reiter löschen? {n} Notiz(en) darin werden ebenfalls gelöscht.',editCats:'Kategorien bearbeiten',newCat:'Neue Kategorie',delCatQ:'Diese Kategorie löschen? Die Nummern darin bleiben erhalten.',telExtra:'Pieper',instT:'Wichtig für iPhone und iPad',instP:'Tippe auf „Teilen“ und „Zum Home-Bildschirm“. Nur so behält Safari deine Einträge dauerhaft, sonst kann Safari sie nach einigen Tagen ohne Nutzung löschen.',bkT:'Zeit für eine Sicherung',bkP:'Deine Einträge liegen nur auf diesem Gerät. Lade ab und zu eine Sicherung herunter, z. B. für ein neues Handy.',privacy:'Bitte keine Patientennamen, Geburtsdaten, Fallnummern oder Fotos von Patient:innen eintragen. Alles bleibt nur auf diesem Gerät gespeichert.',
  search:'Suchen …',all:'Alle',cardFrom:'aus dem Dienst am',emptyL:'Noch keine Notizen in dieser Kategorie. Tippe auf „+ Notiz“.',sortAZ:'A–Z',sortNew:'Neueste',
  kinds:{med:'Medikamente',ia:'Interaktionen',sop:'Stationsrichtlinien',rule:'Regeln & Merksätze',lab:'Laborwerte',score:'Scores',gl:'Leitlinien',note:'Eigene Notizen'},kind1:{med:'Medikament',ia:'Interaktion',sop:'Stationsrichtlinie',rule:'Regel',lab:'Laborwert',score:'Score',gl:'Leitlinie',note:'Notiz'},
  kf:{med:['Dosierung','Indikation','Kontraindikation / Cave'],ia:['Was kann passieren?','Was tust du dann?'],sop:['Gilt für','Ablauf','Ansprechpartner / Durchwahl'],rule:['Regel','Warum?'],lab:['Normbereich (eures Labors)','Erhöht bei','Erniedrigt bei','Merke'],score:['Wofür?','Kriterien / Punkte','Auswertung'],gl:['Kernaussagen','Quelle / Link'],note:['Notiz']},
@@ -239,7 +250,7 @@ en:{app:'Shift Journal',tabs:['Journal','Notebook','Tasks','Phone','Review'],new
  addTodo:'+ Add task',addLearn:'+ Add note',addPhoto:'Add photo',save:'Done',del:'Delete',delQ:'Really delete this shift?',cancel:'Cancel',
  openT:'Open tasks',handT:'For handover',memo:'A good day to remember',emptyT:'Your first shift is waiting.',emptyP:'Tap “New shift”.',demo:'Load samples',
  ex:'Example',exBanner:'These are examples. They only show how the notebook can be used. Add your own knowledge, the way it applies in your department.',exBannerJ:'These are sample entries so you can see what a journal can look like.',exDel:'Remove all examples',exDelQ:'Remove all examples (entries, notes, tasks and numbers)? Your own entries stay.',
- privacy:'Please never enter patient names, dates of birth, case numbers or photos of patients. Everything stays on this device only.',
+ editTabs:'Edit tabs',editTabsHint:'Rename tabs, change colour and order, add new ones. The fields below are the template for new notes in this tab.',defFields:'Fields for new notes',addField:'+ Add field',fieldName:'Field name',fieldHint:'Tip: every field name can be changed, just tap it.',newTab:'New tab',noteField:'Note',delTabQ:'Delete this tab? {n} note(s) in it will be deleted too.',editCats:'Edit categories',newCat:'New category',delCatQ:'Delete this category? The numbers in it are kept.',telExtra:'Pager',instT:'Important on iPhone and iPad',instP:'Tap “Share” and “Add to Home Screen”. Only then does Safari keep your entries for good; otherwise Safari may delete them after a few days without use.',bkT:'Time for a backup',bkP:'Your entries live only on this device. Download a backup now and then, e.g. for a new phone.',privacy:'Please never enter patient names, dates of birth, case numbers or photos of patients. Everything stays on this device only.',
  search:'Search …',all:'All',cardFrom:'from shift on',emptyL:'No notes in this category yet. Tap “+ Note”.',sortAZ:'A–Z',sortNew:'Newest',
  kinds:{med:'Medications',ia:'Interactions',sop:'Ward policies',rule:'Rules & reminders',lab:'Lab values',score:'Scores',gl:'Guidelines',note:'My notes'},kind1:{med:'Medication',ia:'Interaction',sop:'Ward policy',rule:'Rule',lab:'Lab value',score:'Score',gl:'Guideline',note:'Note'},
  kf:{med:['Dose','Indication','Contraindication / caution'],ia:['What can happen?','What do you do?'],sop:['Applies to','Procedure','Contact / extension'],rule:['Rule','Why?'],lab:['Reference range (your lab)','Raised in','Lowered in','Remember'],score:['Used for','Criteria / points','Interpretation'],gl:['Key points','Source / link'],note:['Note']},
@@ -300,7 +311,7 @@ function render(){applyLook();shell();const m=$('#main');m.innerHTML='';({journa
 /* ---------- journal ---------- */
 function typeStyle(tp){return `background:var(${TCOL[tp]}-l);color:var(${TCOL[tp]}-t)`}
 const sortedE=()=>[...E].sort((a,b)=>(b.date+b.start).localeCompare(a.date+a.start));
-function vJournal(m){const es=sortedE();
+function vJournal(m){installHint(m);const es=sortedE();
  if(!es.length){m.append(h('div',{class:'card empty'},h('div',{class:'tape'}),h('div',{class:'big'},t('emptyT')),h('p',{},t('emptyP')),h('button',{class:'btn sm',onclick:seedExamples},t('demo'))));m.append(h('div',{class:'warnbox'},t('privacy')));return}
  if(es.some(x=>x.ex))m.append(exBanner(t('exBannerJ')));
  const last=es[0];if(last.handOut&&last.handOut.trim())m.append(h('div',{class:'card hand'},h('div',{class:'tape g'}),h('small',{class:'hint'},t('handT')+' · '+t('types')[last.type]+' '+dObj(last.date).toLocaleDateString(loc(),{day:'numeric',month:'short'})),h('div',{class:'hw'},last.handOut.trim())));
@@ -355,36 +366,71 @@ function vTasks(m){const ti=h('input',{class:'f',id:'taskin',placeholder:t('task
  const open=TK.filter(k=>!k.d).sort((a,b)=>(b.prio?1:0)-(a.prio?1:0)||a.created-b.created),done=TK.filter(k=>k.d).sort((a,b)=>(b.doneAt||0)-(a.doneAt||0));
  m.append(h('h2',{class:'sec'},`${t('open')} (${open.length})`));m.append(open.length?h('div',{class:'card checks'},open.map(k=>taskRow(k))):h('div',{class:'card empty'},h('div',{class:'big'},t('emptyTask'))));
  if(done.length){m.append(h('h2',{class:'sec'},`${t('doneT')} (${done.length})`),h('div',{class:'card checks'},done.slice(0,30).map(k=>taskRow(k))),h('div',{style:'text-align:center'},h('button',{class:'btn sm',onclick:async()=>{for(const k of done)await DB.del('tasks',k.id);TK=TK.filter(k=>!k.d);render()}},t('clearDone'))))}}
+/* ---------- categories (fully editable) ---------- */
+const PALC=['#c98b8b','#8a7448','#7d5a7c','#4f6e95','#d08a6a','#5f7d6b','#8a7f74','#b5654a','#3d4f7a','#9a8a3a'];
+const DEFCATS={de:[['med','Medikamente',['Dosierung','Indikation','Kontraindikation / Cave','Interaktionen']],['rule','Merksätze',['Merksatz']],['sop','Abläufe',['Gilt für','Ablauf','Ansprechpartner / Durchwahl']],['lab','Laborwerte',['Normbereich (eures Labors)','Erhöht bei','Erniedrigt bei','Merke']],['score','Scores',['Wofür?','Kriterien / Punkte','Auswertung']],['gl','Leitlinien',['Kernaussagen','Quelle / Link']],['note','Eigene Notizen',['Notiz']]],
+ en:[['med','Medications',['Dose','Indication','Contraindication / caution','Interactions']],['rule','Mnemonics',['Mnemonic']],['sop','Procedures',['Applies to','Procedure','Contact / extension']],['lab','Lab values',['Reference range (your lab)','Raised in','Lowered in','Remember']],['score','Scores',['Used for','Criteria / points','Interpretation']],['gl','Guidelines',['Key points','Source / link']],['note','My notes',['Note']]]};
+let CATS=[],TCATS=[];
+const defCats=()=>DEFCATS[ST.lang].map(([id,name,fields],i)=>({id,name,color:PALC[i%PALC.length],fields:[...fields]}));
+const defTcats=()=>t('tcats').map((n,i)=>({id:'t'+i,name:n}));
+const saveCats=()=>DB.put('kv',{id:'cats',list:CATS});const saveTcats=()=>DB.put('kv',{id:'tcats',list:TCATS});
+const catOf=id=>CATS.find(c=>c.id===id)||{id,name:'?',color:'#8a7f74',fields:['Notiz']};
+function normCard(c){if(!c.cat){const map={med:'med',ia:'med',sop:'sop',rule:'rule',lab:'lab',score:'score',gl:'gl',note:'note',abx:'med',misc:'note'};c.cat=map[c.kind]||'note';const labs=(L.de.kf[c.kind]||['Notiz']);c.fields=labs.map((l,i)=>({l,v:(c.f||[])[i]||''})).filter(x=>x.v);if(!c.fields.length)c.fields=catOf(c.cat).fields.map(l=>({l,v:''}))}if(!c.fields)c.fields=[];return c}
 /* ---------- notebook ---------- */
-function cardView(c,onclick){const k=c.kind,col=KC[k]||'#8a7f74';const ent=c.entryId&&E.find(x=>x.id===c.entryId);
- return h('div',{class:'card lc'+(c.ex?' isex':''),style:`border-left-color:${col}`,onclick},h('div',{class:'k',style:`color:${col}`},t('kind1')[k]||k,c.ex?exBadge():'',ent&&!c.ex?h('span',{class:'hint',style:'font-weight:500;letter-spacing:0;text-transform:none'},` · ${t('cardFrom')} ${dObj(ent.date).toLocaleDateString(loc())}`):''),h('h4',{},c.title||'—'),
-  (t('kf')[k]||[]).map((lab,i)=>c.f&&c.f[i]?h('div',{class:'fld'},h('b',{},lab+': '),h('span',{class:'hw'},c.f[i])):''))}
-function editCard(c,entry,after){const isNew=!c;c=c||{id:uid(),kind:kindF!=='all'?kindF:'med',title:'',f:[],entryId:entry?entry.id:null,created:Date.now()};
- modal(mc=>{const draw=()=>{mc.innerHTML='';mc.append(h('h3',{},isNew?t('newCard'):t('kind1')[c.kind],c.ex?exBadge():''));
+function cardView(c,onclick){const cat=catOf(c.cat),col=cat.color;const ent=c.entryId&&E.find(x=>x.id===c.entryId);
+ return h('div',{class:'card lc'+(c.ex?' isex':''),style:`border-left-color:${col}`,onclick},h('div',{class:'k',style:`color:${col}`},cat.name,c.ex?exBadge():'',ent&&!c.ex?h('span',{class:'hint',style:'font-weight:500;letter-spacing:0;text-transform:none'},` · ${t('cardFrom')} ${dObj(ent.date).toLocaleDateString(loc())}`):''),h('h4',{},c.title||'—'),
+  c.fields.map(f=>f.v?h('div',{class:'fld'},h('b',{},f.l+': '),h('span',{class:'hw'},f.v)):''))}
+function editCard(c,entry,after){const isNew=!c;c=c||{id:uid(),cat:kindF!=='all'?kindF:(CATS[0]||{}).id,title:'',fields:[],entryId:entry?entry.id:null,created:Date.now()};
+ if(isNew)c.fields=catOf(c.cat).fields.map(l=>({l,v:''}));const work=JSON.parse(JSON.stringify(c));
+ modal(mc=>{const draw=()=>{mc.innerHTML='';mc.append(h('h3',{},isNew?t('newCard'):(work.title||catOf(work.cat).name),c.ex?exBadge():''));
   if(c.ex)mc.append(h('div',{class:'exbanner',style:'margin:6px 0'},h('div',{},t('exBanner'))));
-  const ch=h('div',{class:'chips wrap'});KINDS.forEach(k=>ch.append(h('button',{class:c.kind===k?'on':'',onclick:()=>{c.kind=k;draw()}},t('kind1')[k])));mc.append(ch);
-  const ti=h('input',{class:'f',value:c.title});ti.oninput=()=>c.title=ti.value;mc.append(h('label',{class:'l'},t('title')),ti);
-  t('kf')[c.kind].forEach((lab,i)=>{const a=h('textarea',{class:'f hwin',rows:2});a.value=c.f[i]||'';a.oninput=()=>{c.f[i]=a.value;autosize(a)};setTimeout(()=>autosize(a));mc.append(h('label',{class:'l'},lab),a)});
+  const ch=h('div',{class:'chips wrap'});CATS.forEach(k=>ch.append(h('button',{class:work.cat===k.id?'on':'',onclick:()=>{const empty=work.fields.every(f=>!f.v);work.cat=k.id;if(empty)work.fields=k.fields.map(l=>({l,v:''}));draw()}},k.name)));mc.append(ch);
+  const ti=h('input',{class:'f',value:work.title});ti.oninput=()=>work.title=ti.value;mc.append(h('label',{class:'l'},t('title')),ti);
+  mc.append(h('p',{class:'hint',style:'margin:10px 0 0'},t('fieldHint')));
+  work.fields.forEach((f,i)=>{const li=h('input',{class:'flab',value:f.l,placeholder:t('fieldName')});li.oninput=()=>f.l=li.value;const a=h('textarea',{class:'f hwin',rows:2});a.value=f.v||'';a.oninput=()=>{f.v=a.value;autosize(a)};setTimeout(()=>autosize(a));
+   mc.append(h('div',{class:'fieldrow'},h('div',{class:'fhead'},li,h('button',{class:'mini',title:'↑',onclick:()=>{if(i){work.fields.splice(i-1,0,work.fields.splice(i,1)[0]);draw()}}},'↑'),h('button',{class:'mini',onclick:()=>{work.fields.splice(i,1);draw()}},'×')),a))});
+  mc.append(h('button',{class:'add',onclick:()=>{work.fields.push({l:'',v:''});draw();const ls=mc.querySelectorAll('.flab');ls[ls.length-1].focus()}},t('addField')));
   mc.append(h('div',{class:'row',style:'margin-top:14px'},!isNew?h('button',{class:'btn danger',onclick:async()=>{await DB.del('cards',c.id);C=C.filter(x=>x!==c);E.forEach(x=>{if(x.learn)x.learn=x.learn.filter(y=>y!==c.id)});closeModal();after?after():render()}},t('del')):h('button',{class:'btn',onclick:closeModal},t('cancel')),
-   h('button',{class:'btn pri',onclick:async()=>{if(c.ex&&!isNew)delete c.ex;c.updated=Date.now();await DB.put('cards',c);if(!C.includes(c))C.push(c);if(entry&&!(entry.learn||[]).includes(c.id)){entry.learn=entry.learn||[];entry.learn.push(c.id);await DB.put('entries',entry);if(!E.includes(entry))E.push(entry)}closeModal();after?after():render()}},t('save'))))};draw()})}
+   h('button',{class:'btn pri',onclick:async()=>{Object.assign(c,work);if(c.ex&&!isNew)delete c.ex;c.updated=Date.now();await DB.put('cards',c);if(!C.includes(c))C.push(c);if(entry&&!(entry.learn||[]).includes(c.id)){entry.learn=entry.learn||[];entry.learn.push(c.id);await DB.put('entries',entry);if(!E.includes(entry))E.push(entry)}closeModal();after?after():render()}},t('save'))))};draw()})}
 function vBook(m){const si=h('input',{class:'f',placeholder:t('search'),value:q});si.oninput=()=>{q=si.value;list()};
  const so=h('div',{class:'seg'},[['az',t('sortAZ')],['new',t('sortNew')]].map(([k,l])=>h('button',{class:ST.sort===k?'on':'',onclick:()=>{ST.sort=k;saveST();render()}},l)));
  m.append(h('div',{class:'row',style:'margin-top:4px;align-items:center'},h('div',{class:'search',style:'flex:1;margin:0'},h('span',{html:ic('search')}),si),so));
- const ch=h('div',{class:'chips'});['all',...KINDS].forEach(k=>ch.append(h('button',{class:kindF===k?'on':'',onclick:()=>{kindF=k;render()}},k==='all'?t('all')+` (${C.length})`:t('kinds')[k]+` (${C.filter(c=>c.kind===k).length})`)));m.append(ch);
+ if(kindF!=='all'&&!CATS.find(c=>c.id===kindF))kindF='all';
+ const ch=h('div',{class:'chips'});ch.append(h('button',{class:kindF==='all'?'on':'',onclick:()=>{kindF='all';render()}},t('all')+` (${C.length})`));
+ CATS.forEach(k=>ch.append(h('button',{class:kindF===k.id?'on':'',style:kindF===k.id?`background:${k.color};border-color:${k.color}`:'',onclick:()=>{kindF=k.id;render()}},k.name+` (${C.filter(c=>c.cat===k.id).length})`)));
+ m.append(ch,h('div',{style:'text-align:right;margin:-2px 0 6px'},h('button',{class:'btn sm',onclick:manageCats},'✎ '+t('editTabs'))));
  if(C.some(c=>c.ex))m.append(exBanner(t('exBanner')));
- const box=h('div',{});m.append(box);const list=()=>{box.innerHTML='';const qq=q.toLowerCase();let cs=C.filter(c=>(kindF==='all'||c.kind===kindF)&&(!qq||(c.title+' '+(c.f||[]).join(' ')).toLowerCase().includes(qq)));
+ const box=h('div',{});m.append(box);const list=()=>{box.innerHTML='';const qq=q.toLowerCase();let cs=C.filter(c=>(kindF==='all'||c.cat===kindF)&&(!qq||(c.title+' '+c.fields.map(f=>f.l+' '+f.v).join(' ')).toLowerCase().includes(qq)));
   cs.sort(ST.sort==='az'?(a,b)=>(a.title||'').localeCompare(b.title||'',loc(),{sensitivity:'base'}):(a,b)=>(b.updated||b.created)-(a.updated||a.created));
   if(!cs.length){box.append(h('div',{class:'card empty'},h('p',{},t('emptyL'))));return}
-  if(ST.sort==='az'&&!qq){let L0='';cs.forEach(c=>{const l=(c.title||'#').trim()[0].toUpperCase();if(l!==L0){L0=l;box.append(h('div',{class:'letter'},l))}box.append(cardView(c,()=>editCard(c)))})}else cs.forEach(c=>box.append(cardView(c,()=>editCard(c))))};list()}
+  if(ST.sort==='az'&&!qq){let L0='';cs.forEach(c=>{const l=((c.title||'#').trim()[0]||'#').toUpperCase();if(l!==L0){L0=l;box.append(h('div',{class:'letter'},l))}box.append(cardView(c,()=>editCard(c)))})}else cs.forEach(c=>box.append(cardView(c,()=>editCard(c))))};list()}
+function manageCats(){const work=JSON.parse(JSON.stringify(CATS));modal(mc=>{const draw=()=>{mc.innerHTML='';mc.append(h('h3',{},t('editTabs')),h('p',{class:'hint',style:'margin-top:0'},t('editTabsHint')));
+  work.forEach((k,i)=>{const n=h('input',{class:'f',value:k.name,style:'font-weight:600'});n.oninput=()=>k.name=n.value;
+   const cols=h('div',{class:'cdots'},PALC.map(col=>h('button',{class:k.color===col?'on':'',style:`background:${col}`,onclick:()=>{k.color=col;draw()}})));
+   const fl=h('div',{class:'deffields'});k.fields.forEach((f,j)=>{const fi=h('input',{class:'flab',value:f});fi.oninput=()=>k.fields[j]=fi.value;fl.append(h('div',{class:'fhead'},fi,h('button',{class:'mini',onclick:()=>{k.fields.splice(j,1);draw()}},'×')))});
+   mc.append(h('div',{class:'catbox',style:`border-left-color:${k.color}`},h('div',{class:'row',style:'align-items:center'},n,h('button',{class:'mini',onclick:()=>{if(i){work.splice(i-1,0,work.splice(i,1)[0]);draw()}}},'↑'),h('button',{class:'mini',onclick:()=>{if(i<work.length-1){work.splice(i+1,0,work.splice(i,1)[0]);draw()}}},'↓'),h('button',{class:'mini',onclick:()=>{const nC=C.filter(c=>c.cat===k.id).length;if(confirm(t('delTabQ').replace('{n}',nC))){work.splice(i,1);draw()}}},'🗑')),
+    cols,h('label',{class:'l'},t('defFields')),fl,h('button',{class:'add',onclick:()=>{k.fields.push('');draw()}},t('addField'))))});
+  mc.append(h('button',{class:'btn',style:'width:100%;margin-top:8px',onclick:()=>{work.push({id:'c'+uid(),name:t('newTab'),color:PALC[work.length%PALC.length],fields:[t('noteField')]});draw();setTimeout(()=>{const ins=mc.querySelectorAll('.catbox input.f');ins[ins.length-1].select()})}},'+ '+t('newTab')));
+  mc.append(h('div',{class:'row',style:'margin-top:14px'},h('button',{class:'btn',onclick:closeModal},t('cancel')),h('button',{class:'btn pri',onclick:async()=>{const ids=new Set(work.map(k=>k.id));for(const c of C.filter(c=>!ids.has(c.cat))){await DB.del('cards',c.id)}C=C.filter(c=>ids.has(c.cat));work.forEach(k=>k.fields=k.fields.filter(f=>f.trim()));CATS=work;await saveCats();closeModal();render()}},t('save'))))};draw()})}
 /* ---------- phone ---------- */
-function vTel(m){if(TL.some(x=>x.ex))m.append(exBanner(t('exBannerJ')));if(!TL.length){m.append(h('div',{class:'card empty'},h('div',{class:'tape g'}),h('p',{},t('emptyTel'))));return}
- t('tcats').forEach((cat,ci)=>{const ts=TL.filter(x=>(x.cat||0)===ci).sort((a,b)=>a.name.localeCompare(b.name,loc()));if(!ts.length)return;m.append(h('h2',{class:'sec'},cat));
-  m.append(h('div',{class:'card'},ts.map(x=>h('div',{class:'tel'},h('div',{class:'nm',onclick:()=>editTel(x)},h('b',{},x.name,x.ex?exBadge():''),x.note?h('span',{},x.note):''),h('div',{class:'num',onclick:()=>editTel(x)},x.num),
+function vTel(m){if(TL.some(x=>x.ex))m.append(exBanner(t('exBannerJ')));
+ m.append(h('div',{style:'text-align:right;margin:4px 0 -4px'},h('button',{class:'btn sm',onclick:manageTcats},'✎ '+t('editCats'))));
+ if(!TL.length){m.append(h('div',{class:'card empty'},h('div',{class:'tape g'}),h('p',{},t('emptyTel'))));return}
+ const ids=TCATS.map(c=>c.id);const orphan=TL.filter(x=>!ids.includes(x.cat));
+ [...TCATS,...(orphan.length?[{id:'__',name:'—'}]:[])].forEach(cat=>{const ts=(cat.id==='__'?orphan:TL.filter(x=>x.cat===cat.id)).sort((a,b)=>a.name.localeCompare(b.name,loc()));if(!ts.length)return;m.append(h('h2',{class:'sec'},cat.name));
+  m.append(h('div',{class:'card'},ts.map(x=>h('div',{class:'tel'},h('div',{class:'nm',onclick:()=>editTel(x)},h('b',{},x.name,x.ex?exBadge():''),x.note?h('span',{},x.note):'',(x.extra||[]).filter(f=>f.v).map(f=>h('span',{},`${f.l}: ${f.v}`))),h('div',{class:'num',onclick:()=>editTel(x)},x.num),
    h('button',{class:'c',html:ic('copy'),onclick:async()=>{try{await navigator.clipboard.writeText(x.num);toast(t('copied'))}catch(e){}}}),h('a',{href:'tel:'+x.num.replace(/[^\d+]/g,''),html:ic('phone')})))))})}
-function editTel(x){const isNew=!x;x=x||{id:uid(),name:'',num:'',cat:0,note:''};modal(mc=>{const f=(k,lab,type='text')=>{const i=h('input',{class:'f',type,value:x[k]||''});i.oninput=()=>x[k]=i.value;return h('div',{},h('label',{class:'l'},lab),i)};
- const sel=h('select',{class:'f'},t('tcats').map((c,i)=>h('option',{value:i,selected:x.cat===i},c)));sel.onchange=()=>x.cat=+sel.value;
- mc.append(h('h3',{},isNew?t('newTel'):x.name),f('name',t('tname')),f('num',t('tnum'),'tel'),h('label',{class:'l'},t('tcat')),sel,f('note',t('tnote')),
-  h('div',{class:'row',style:'margin-top:14px'},!isNew?h('button',{class:'btn danger',onclick:async()=>{await DB.del('tels',x.id);TL=TL.filter(y=>y!==x);closeModal();render()}},t('del')):h('button',{class:'btn',onclick:closeModal},t('cancel')),h('button',{class:'btn pri',onclick:async()=>{if(!x.name&&!x.num)return closeModal();if(!isNew)delete x.ex;await DB.put('tels',x);if(!TL.includes(x))TL.push(x);closeModal();render()}},t('save'))))})}
+function editTel(x){const isNew=!x;x=x||{id:uid(),name:'',num:'',cat:(TCATS[0]||{}).id,note:'',extra:[]};const w=JSON.parse(JSON.stringify(x));w.extra=w.extra||[];
+ modal(mc=>{const draw=()=>{mc.innerHTML='';const f=(k,lab,type='text')=>{const i=h('input',{class:'f',type,value:w[k]||''});i.oninput=()=>w[k]=i.value;return h('div',{},h('label',{class:'l'},lab),i)};
+  const sel=h('select',{class:'f'},TCATS.map(c=>h('option',{value:c.id,selected:w.cat===c.id},c.name)));sel.onchange=()=>w.cat=sel.value;
+  mc.append(h('h3',{},isNew?t('newTel'):w.name),f('name',t('tname')),f('num',t('tnum'),'tel'),h('label',{class:'l'},t('tcat')),sel,f('note',t('tnote')));
+  w.extra.forEach((e2,i)=>{const li=h('input',{class:'flab',value:e2.l,placeholder:t('fieldName')});li.oninput=()=>e2.l=li.value;const vi=h('input',{class:'f',value:e2.v});vi.oninput=()=>e2.v=vi.value;mc.append(h('div',{class:'fieldrow'},h('div',{class:'fhead'},li,h('button',{class:'mini',onclick:()=>{w.extra.splice(i,1);draw()}},'×')),vi))});
+  mc.append(h('button',{class:'add',onclick:()=>{w.extra.push({l:t('telExtra'),v:''});draw()}},t('addField')));
+  mc.append(h('div',{class:'row',style:'margin-top:14px'},!isNew?h('button',{class:'btn danger',onclick:async()=>{await DB.del('tels',x.id);TL=TL.filter(y=>y!==x);closeModal();render()}},t('del')):h('button',{class:'btn',onclick:closeModal},t('cancel')),h('button',{class:'btn pri',onclick:async()=>{if(!w.name&&!w.num)return closeModal();Object.assign(x,w);if(!isNew)delete x.ex;await DB.put('tels',x);if(!TL.includes(x))TL.push(x);closeModal();render()}},t('save'))))};draw()})}
+function manageTcats(){const work=JSON.parse(JSON.stringify(TCATS));modal(mc=>{const draw=()=>{mc.innerHTML='';mc.append(h('h3',{},t('editCats')));
+  work.forEach((k,i)=>{const n=h('input',{class:'f',value:k.name});n.oninput=()=>k.name=n.value;mc.append(h('div',{class:'row',style:'align-items:center;margin:4px 0'},n,h('button',{class:'mini',onclick:()=>{if(i){work.splice(i-1,0,work.splice(i,1)[0]);draw()}}},'↑'),h('button',{class:'mini',onclick:()=>{if(confirm(t('delCatQ'))){work.splice(i,1);draw()}}},'🗑')))});
+  mc.append(h('button',{class:'btn',style:'width:100%;margin-top:8px',onclick:()=>{work.push({id:'t'+uid(),name:t('newCat')});draw();setTimeout(()=>{const ins=mc.querySelectorAll('input.f');ins[ins.length-1].select()})}},'+ '+t('newCat')));
+  mc.append(h('div',{class:'row',style:'margin-top:14px'},h('button',{class:'btn',onclick:closeModal},t('cancel')),h('button',{class:'btn pri',onclick:async()=>{TCATS=work;await saveTcats();closeModal();render()}},t('save'))))};draw()})}
 /* ---------- stats ---------- */
 function vStats(m){if(!E.length){m.append(h('div',{class:'card empty'},h('p',{},t('noData'))));return}const y=new Date().getFullYear();const ey=E.filter(e=>dObj(e.date).getFullYear()===y);
  const hrs=ey.reduce((a,e)=>a+hours(e),0),nights=ey.filter(e=>e.type==='na'||e.type==='h24').length;
@@ -410,36 +456,34 @@ function settings(){modal(mc=>{const ni=h('input',{class:'f',value:ST.name});ni.
   h('div',{class:'warnbox',style:'margin-top:14px'},t('privacy')),h('p',{class:'hint'},t('hint2')),
   h('div',{class:'row',style:'margin-top:8px'},h('button',{class:'btn danger',onclick:async()=>{if(confirm(t('resetQ'))){for(const s of['entries','cards','tels','photos','tasks'])await DB.clear(s);E=[];C=[];TL=[];TK=[];closeModal();render()}}},t('reset')),h('button',{class:'btn pri',onclick:closeModal},t('save'))),
   h('p',{class:'hint',style:'text-align:center;margin-top:14px'},t('copyright')))})}
-async function exportBackup(){const ph=await DB.all('photos');const data={v:2,app:'lv-dienst-tagebuch',at:new Date().toISOString(),settings:{...ST,pin:''},entries:E,cards:C,tels:TL,tasks:TK,photos:ph};const b=new Blob([JSON.stringify(data)],{type:'application/json'});const u=URL.createObjectURL(b);const a=h('a',{href:u,download:`dienst-tagebuch-${todayISO()}.json`});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),20000)}
-async function importBackup(f){if(!f)return;try{const d=JSON.parse(await f.text());if(d.app!=='lv-dienst-tagebuch')throw 0;for(const [s,a] of [['entries',d.entries],['cards',d.cards],['tels',d.tels],['tasks',d.tasks],['photos',d.photos]])for(const x of a||[])await DB.put(s,x);await load();closeModal();render();toast(t('impOk'))}catch(e){alert('?')}}
+async function exportBackup(){ST.lastBackup=Date.now();saveST();const ph=await DB.all('photos');const data={v:2,app:'lv-dienst-tagebuch',at:new Date().toISOString(),settings:{...ST,pin:''},cats:CATS,tcats:TCATS,entries:E,cards:C,tels:TL,tasks:TK,photos:ph};const b=new Blob([JSON.stringify(data)],{type:'application/json'});const u=URL.createObjectURL(b);const a=h('a',{href:u,download:`dienst-tagebuch-${todayISO()}.json`});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),20000)}
+async function importBackup(f){if(!f)return;try{const d=JSON.parse(await f.text());if(d.app!=='lv-dienst-tagebuch')throw 0;for(const [s,a] of [['entries',d.entries],['cards',d.cards],['tels',d.tels],['tasks',d.tasks],['photos',d.photos]])for(const x of a||[])await DB.put(s,x);if(d.cats)await DB.put('kv',{id:'cats',list:d.cats});if(d.tcats)await DB.put('kv',{id:'tcats',list:d.tcats});await load();closeModal();render();toast(t('impOk'))}catch(e){alert('?')}}
 /* ---------- print ---------- */
 async function printEntries(list){const pa=$('#printarea');pa.innerHTML='';for(const e of list){const d=dObj(e.date);const pg=h('div',{class:'pp'},h('h1',{},`${t('types')[e.type]} · ${d.toLocaleDateString(loc(),{weekday:'long',day:'numeric',month:'long',year:'numeric'})}`),h('div',{},`${e.start}–${e.end}${e.ward?' · '+e.ward:''}`),h('div',{html:(e.mood?face(e.mood,28):'')+' '+(e.energy?battery(e.energy,28):'')}));
   for(const k of['handIn','handOut','best','worst','annoy','wish','notes','priv'])if(e[k]&&e[k].trim())pg.append(h('h3',{},t('q')[k][0]),h('div',{class:'hw'},e[k]));
   const td=TK.filter(k=>k.entryId===e.id);if(td.length)pg.append(h('h3',{},t('q').todo[0]),h('div',{class:'hw'},td.map(x=>(x.d?'☑ ':'☐ ')+x.t).join('\n')));
-  const cs=(e.learn||[]).map(id=>C.find(c=>c.id===id)).filter(Boolean);if(cs.length){pg.append(h('h3',{},t('q').learn[0]));cs.forEach(c=>pg.append(h('div',{},h('b',{},t('kind1')[c.kind]+': '+c.title),t('kf')[c.kind].map((lab,i)=>c.f[i]?h('div',{},lab+': '+c.f[i]):''))))}
+  const cs=(e.learn||[]).map(id=>C.find(c=>c.id===id)).filter(Boolean);if(cs.length){pg.append(h('h3',{},t('q').learn[0]));cs.forEach(c=>pg.append(h('div',{},h('b',{},catOf(c.cat).name+': '+c.title),c.fields.map(f=>f.v?h('div',{},f.l+': '+f.v):''))))}
   if((e.photos||[]).length){const w=h('div',{});for(const p of e.photos){const r=photoCache[p]||(await DB.get('photos',p)||{}).data;if(r)w.append(h('img',{src:r}))}pg.append(w)}pa.append(pg)}setTimeout(()=>print(),300)}
-function printBook(){const pa=$('#printarea');pa.innerHTML='';const pg=h('div',{class:'pp'},h('h1',{},t('tabs')[1]));KINDS.forEach(k=>{const cs=C.filter(c=>c.kind===k).sort((a,b)=>(a.title||'').localeCompare(b.title||'',loc()));if(!cs.length)return;pg.append(h('h2',{},t('kinds')[k]));cs.forEach(c=>pg.append(h('div',{class:'pc'},h('b',{},c.title+(c.ex?' ('+t('ex')+')':'')),t('kf')[k].map((lab,i)=>c.f[i]?h('div',{},lab+': '+c.f[i]):''))))});
+function printBook(){const pa=$('#printarea');pa.innerHTML='';const pg=h('div',{class:'pp'},h('h1',{},t('tabs')[1]));CATS.forEach(k=>{const cs=C.filter(c=>c.cat===k.id).sort((a,b)=>(a.title||'').localeCompare(b.title||'',loc()));if(!cs.length)return;pg.append(h('h2',{},k.name));cs.forEach(c=>pg.append(h('div',{class:'pc'},h('b',{},c.title+(c.ex?' ('+t('ex')+')':'')),c.fields.map(f=>f.v?h('div',{},f.l+': '+f.v):''))))});
  if(TL.length){pg.append(h('h2',{},t('telT')));TL.slice().sort((a,b)=>a.name.localeCompare(b.name,loc())).forEach(x=>pg.append(h('div',{},`${x.name} · ${x.num}`)))}pa.append(pg);setTimeout(()=>print(),300)}
 /* ---------- examples (clearly marked, department-neutral) ---------- */
 async function seedExamples(){const de=ST.lang==='de';const day=n=>{const d=new Date();d.setDate(d.getDate()-n);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
  const cards=de?[
-  ['med','Wirkstoff (Handelsname)',['Dosis und Intervall, wie es bei euch üblich ist','Wofür ihr es einsetzt','Worauf du achten musst, z. B. Nierenfunktion, Allergien']],
-  ['ia','Medikament A + Medikament B',['Was kann passieren, wenn beides zusammen gegeben wird?','Was tust du dann? z. B. Spiegel kontrollieren, Apotheke fragen']],
-  ['sop','Neuaufnahme auf Station',['Für wen gilt das? z. B. alle elektiven Aufnahmen','Die Schritte, wie sie bei euch laufen','Wen rufst du an? Name und Durchwahl']],
-  ['rule','Regel eurer Abteilung',['z. B. „Vor dem Wochenende Entlassbriefe vorbereiten“','Warum ist das bei euch wichtig?']],
-  ['lab','Laborwert XY',['Normbereich eures Labors','Wann ist er erhöht?','Wann ist er erniedrigt?','Was du dir merken willst']],
-  ['score','Score XY',['Wofür nutzt ihr ihn?','Kriterien und Punkte','Was bedeutet das Ergebnis?']],
-  ['gl','Leitlinie XY',['Die drei Kernaussagen, die du dir merken willst','Wo findest du sie? Link oder Ordner']],
-  ['note','Wo steht was?',['Alles, was sonst nirgends passt: Passwörter gehören nicht hierher, aber z. B. wo das Notfallset steht.']]]:[
-  ['med','Drug (brand name)',['Dose and interval, the way you use it','What you use it for','What to watch for, e.g. kidney function, allergies']],
-  ['ia','Drug A + drug B',['What can happen when both are given?','What do you do? e.g. check levels, ask pharmacy']],
-  ['sop','New admission on the ward',['Who does it apply to? e.g. all elective admissions','The steps, the way your team does it','Who do you call? Name and extension']],
-  ['rule','A rule in your department',['e.g. “Prepare discharge letters before the weekend”','Why does it matter in your team?']],
-  ['lab','Lab value XY',['Reference range of your lab','When is it raised?','When is it lowered?','What you want to remember']],
-  ['score','Score XY',['What do you use it for?','Criteria and points','What does the result mean?']],
-  ['gl','Guideline XY',['The three key points you want to remember','Where to find it: link or folder']],
-  ['note','Where is what?',['Anything that doesn’t fit elsewhere: no passwords here, but e.g. where the emergency kit is.']]];
- for(const [kind,title,f] of cards){const c={id:uid(),kind,title,f,ex:true,created:Date.now()};await DB.put('cards',c)}
+  ['med','Wirkstoff (Handelsname)',[['Dosierung','Dosis und Intervall, wie es bei euch üblich ist'],['Indikation','Wofür ihr es einsetzt'],['Kontraindikation / Cave','Worauf du achten musst, z. B. Nierenfunktion, Allergien'],['Interaktionen','Mit welchen Medikamenten es sich nicht verträgt und was du dann tust']]],
+  ['rule','Merksatz eurer Abteilung',[['Merksatz','z. B. „Vor dem Wochenende Entlassbriefe vorbereiten“']]],
+  ['sop','Neuaufnahme',[['Gilt für','z. B. alle geplanten Aufnahmen – diesen Feldnamen kannst du ändern'],['Ablauf','Die Schritte, wie sie bei euch laufen'],['Ansprechpartner / Durchwahl','Wen rufst du an?']]],
+  ['lab','Laborwert XY',[['Normbereich (eures Labors)','Normbereich eures Labors'],['Erhöht bei','Wann ist er erhöht?'],['Erniedrigt bei','Wann ist er erniedrigt?']]],
+  ['score','Score XY',[['Wofür?','Wofür nutzt ihr ihn?'],['Kriterien / Punkte','Kriterien und Punkte'],['Auswertung','Was bedeutet das Ergebnis?']]],
+  ['gl','Leitlinie XY',[['Kernaussagen','Die drei Kernaussagen, die du dir merken willst'],['Quelle / Link','Link oder Ordner']]],
+  ['note','Wo steht was?',[['Notiz','z. B. wo das Notfallset steht. Keine Passwörter!']]]]:[
+  ['med','Drug (brand name)',[['Dose','Dose and interval, the way you use it'],['Indication','What you use it for'],['Contraindication / caution','What to watch for, e.g. kidney function, allergies'],['Interactions','Which drugs it doesn’t combine with and what you do then']]],
+  ['rule','A mnemonic from your team',[['Mnemonic','e.g. “Prepare discharge letters before the weekend”']]],
+  ['sop','New admission',[['Applies to','e.g. all planned admissions – you can rename this field'],['Procedure','The steps, the way your team does it'],['Contact / extension','Who do you call?']]],
+  ['lab','Lab value XY',[['Reference range (your lab)','Reference range of your lab'],['Raised in','When is it raised?'],['Lowered in','When is it lowered?']]],
+  ['score','Score XY',[['Used for','What do you use it for?'],['Criteria / points','Criteria and points'],['Interpretation','What does the result mean?']]],
+  ['gl','Guideline XY',[['Key points','The three key points you want to remember'],['Source / link','Link or folder']]],
+  ['note','Where is what?',[['Note','e.g. where the emergency kit is. No passwords!']]]];
+ for(const [cat,title,fl] of cards){const c={id:uid(),cat,title,fields:fl.map(([l,v])=>({l,v})),ex:true,created:Date.now()};await DB.put('cards',c)}
  const ents=de?[{type:'fr',d:1,mood:4,energy:3,ward:'Station 3',handIn:'Zwei Aufnahmen für heute angekündigt, Zimmer 5 Blutzucker im Blick behalten.',handOut:'Laborwerte von heute Nachmittag noch nicht da, bitte nachschauen.',best:'Eine Patientin hat sich beim Abschied bedankt und gesagt, ich hätte ihr die Angst genommen.',worst:'Drei Aufnahmen gleichzeitig, und das Telefon hat nicht aufgehört.',annoy:'Schon wieder kein Drucker auf Station.',wish:'Feste Zeit für die Visite, ohne Unterbrechungen.',notes:'Viele Entlassungen, eine Verlegung.',priv:'In der Pause überlegt: Im Frühling will ich endlich den Italienischkurs anfangen.'},
   {type:'na',d:3,mood:2,energy:1,ward:'Notaufnahme',handIn:'',handOut:'',best:'Um 3 Uhr Pizza mit dem ganzen Team.',worst:'Eine Nacht, in der alles gleichzeitig kam.',annoy:'',wish:'Mehr Zeit für ein Gespräch im Team nach schweren Fällen.',notes:'',priv:''},
   {type:'sp',d:6,mood:5,energy:4,ward:'Station 3',best:'Zum ersten Mal ganz allein eine Aufnahme gemacht, alles lief glatt.',annoy:'Übergabe hat 40 Minuten gedauert.',priv:'Urlaubsziele 2027 gesammelt: Lissabon, Dolomiten.'}]:
@@ -450,15 +494,20 @@ async function seedExamples(){const de=ST.lang==='de';const day=n=>{const d=new 
  const tasks=de?['Arztbrief fertig schreiben','Rückruf Labor','Fortbildung anmelden']:['Finish discharge letter','Call the lab back','Sign up for training'];
  for(const [i,x] of tasks.entries())await DB.put('tasks',{id:uid(),t:x,d:i===0,doneAt:Date.now(),prio:i===1,entryId:i<2?first.id:null,ex:true,created:Date.now()+i});
  const tels=de?[['Station 3','1234',0],['Labor','2200',1],['Radiologie','2300',1],['Reanimationsteam','0000',2],['Sekretariat','3000',3]]:[['Ward 3','1234',0],['Lab','2200',1],['Radiology','2300',1],['Resuscitation team','0000',2],['Office','3000',3]];
- for(const [n,num,cat] of tels)await DB.put('tels',{id:uid(),name:n,num,cat,note:de?'Beispiel-Nummer':'Example number',ex:true});
+ for(const [n,num,cat] of tels)await DB.put('tels',{id:uid(),name:n,num,cat:'t'+cat,note:de?'Beispiel-Nummer':'Example number',extra:[],ex:true});
  ST.seeded=true;await saveST();await load();render()}
+async function persistStorage(){try{if(navigator.storage&&navigator.storage.persist&&!(await navigator.storage.persisted()))await navigator.storage.persist()}catch(e){}}
+function installHint(m){const ios=/iP(hone|ad|od)/.test(navigator.userAgent),standalone=navigator.standalone||matchMedia('(display-mode: standalone)').matches;const last=ST.lastBackup||0,days=(Date.now()-last)/864e5;
+ if(ios&&!standalone&&!ST.hideInstall)m.prepend(h('div',{class:'warnbox install'},h('b',{},t('instT')),h('div',{},t('instP')),h('button',{class:'btn sm',style:'margin-top:6px',onclick:()=>{ST.hideInstall=true;saveST();render()}},'OK')));
+ else if(E.filter(x=>!x.ex).length>=3&&days>14)m.prepend(h('div',{class:'warnbox'},h('b',{},t('bkT')),h('div',{},t('bkP')),h('button',{class:'btn sm',style:'margin-top:6px',onclick:exportBackup},t('exp'))))}
 /* ---------- lock & boot ---------- */
 async function lock(){if(!ST.pin)return;await new Promise(res=>{let v='';const w=h('div',{class:'lock'});const dots=h('div',{class:'pin'});const msg=h('div',{class:'hint'},t('pinEnter'));const draw=()=>{dots.innerHTML='';for(let i=0;i<4;i++)dots.append(h('i',{class:i<v.length?'f':''}))};draw();
  const pad=h('div',{class:'pad'});[1,2,3,4,5,6,7,8,9,'',0,'⌫'].forEach(k=>pad.append(k===''?h('span'):h('button',{onclick:async()=>{if(k==='⌫')v=v.slice(0,-1);else if(v.length<4)v+=k;draw();if(v.length===4){if(await sha(v)===ST.pin){w.remove();res()}else{msg.textContent=t('pinWrong');v='';setTimeout(draw,300)}}}},String(k))));
  w.append(h('h2',{},t('app')),dots,msg,pad);document.body.append(w)})}
-async function load(){[E,C,TL,TK]=await Promise.all([DB.all('entries'),DB.all('cards'),DB.all('tels'),DB.all('tasks')])}
+async function load(){[E,C,TL,TK]=await Promise.all([DB.all('entries'),DB.all('cards'),DB.all('tels'),DB.all('tasks')]);const kc=await DB.get('kv','cats');CATS=kc&&kc.list&&kc.list.length?kc.list:defCats();if(!kc)await saveCats();const kt=await DB.get('kv','tcats');TCATS=kt&&kt.list?kt.list:defTcats();if(!kt)await saveTcats();C.forEach(normCard);TL.forEach(x=>{if(typeof x.cat==='number')x.cat='t'+x.cat})}
 (async()=>{await DB.open();const s=await DB.get('kv','settings');if(s)ST={...ST,...s};applyLook();await load();
  if(!ST.seeded&&!E.length&&!C.length&&!TL.length&&!TK.length){await seedExamples()}
+ await persistStorage();
  $('#gear').innerHTML=ic('gear');$('#gear').onclick=settings;await lock();render()})();
 
 </script>
