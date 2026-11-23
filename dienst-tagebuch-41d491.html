@@ -609,20 +609,7 @@ async function printEntries(list){const pa=$('#printarea');pa.innerHTML='';for(c
 function printBook(){const pa=$('#printarea');pa.innerHTML='';const pg=h('div',{class:'pp'},h('h1',{},t('tabs')[1]));CATS.forEach(k=>{const cs=C.filter(c=>c.cat===k.id).sort((a,b)=>(a.title||'').localeCompare(b.title||'',loc()));if(!cs.length)return;pg.append(h('h2',{},k.name));cs.forEach(c=>pg.append(h('div',{class:'pc'},h('b',{},c.title+(c.ex?' ('+t('ex')+')':'')),c.fields.map(f=>f.v?h('div',{},f.l+': '+f.v):''))))});
  if(TL.length){pg.append(h('h2',{},t('telT')));TL.slice().sort((a,b)=>a.name.localeCompare(b.name,loc())).forEach(x=>pg.append(h('div',{},`${x.name} · ${x.num}`)))}pa.append(pg);setTimeout(()=>print(),300)}
 /* ---------- examples (clearly marked, department-neutral) ---------- */
-async function seedExamples(){const de=ST.lang==='de';const day=n=>{const d=new Date();d.setDate(d.getDate()-n);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
- await seedCards(de);
- const ents=de?[{type:'fr',d:1,mood:4,energy:3,ward:'Station 3',handIn:'Zwei Aufnahmen für heute angekündigt, Zimmer 5 Blutzucker im Blick behalten.',handOut:'Laborwerte von heute Nachmittag noch nicht da, bitte nachschauen.',best:'Eine Patientin hat sich beim Abschied bedankt und gesagt, ich hätte ihr die Angst genommen.',worst:'Drei Aufnahmen gleichzeitig, und das Telefon hat nicht aufgehört.',annoy:'Schon wieder kein Drucker auf Station.',wish:'Feste Zeit für die Visite, ohne Unterbrechungen.',notes:'Viele Entlassungen, eine Verlegung.',priv:'In der Pause überlegt: Im Frühling will ich endlich den Italienischkurs anfangen.'},
-  {type:'na',d:3,mood:2,energy:1,ward:'Notaufnahme',handIn:'',handOut:'',best:'Um 3 Uhr Pizza mit dem ganzen Team.',worst:'Eine Nacht, in der alles gleichzeitig kam.',annoy:'',wish:'Mehr Zeit für ein Gespräch im Team nach schweren Fällen.',notes:'',priv:''},
-  {type:'sp',d:6,mood:5,energy:4,ward:'Station 3',best:'Zum ersten Mal ganz allein eine Aufnahme gemacht, alles lief glatt.',annoy:'Übergabe hat 40 Minuten gedauert.',priv:'Urlaubsziele 2027 gesammelt: Lissabon, Dolomiten.'}]:
-  [{type:'fr',d:1,mood:4,energy:3,ward:'Ward 3',handIn:'Two admissions announced for today, keep an eye on blood sugar in room 5.',handOut:'This afternoon’s labs aren’t back yet, please check.',best:'A patient thanked me and said I took away her fear.',worst:'Three admissions at once and the phone never stopped.',annoy:'Once again no working printer on the ward.',wish:'A fixed time for rounds without interruptions.',notes:'Lots of discharges, one transfer.',priv:'Thought during my break: this spring I finally want to start Italian lessons.'},
-  {type:'na',d:3,mood:2,energy:1,ward:'ED',best:'Pizza with the whole team at 3 am.',worst:'A night when everything came at once.',wish:'More time to talk as a team after hard cases.'},
-  {type:'sp',d:6,mood:5,energy:4,ward:'Ward 3',best:'Did a full admission on my own for the first time, all smooth.',annoy:'Handover took 40 minutes.',priv:'Collected holiday ideas for 2027: Lisbon, Dolomites.'}];
- let first=null;for(const x of ents){const e={id:uid(),date:day(x.d),type:x.type,start:DEFT[x.type][0],end:DEFT[x.type][1],ward:x.ward,mood:x.mood,energy:x.energy,handIn:x.handIn||'',handOut:x.handOut||'',best:x.best||'',worst:x.worst||'',annoy:x.annoy||'',wish:x.wish||'',notes:x.notes||'',priv:x.priv||'',learn:[],photos:[],ex:true,created:Date.now()};if(!first)first=e;await DB.put('entries',e)}
- const tasks=de?['Arztbrief fertig schreiben','Rückruf Labor','Fortbildung anmelden']:['Finish discharge letter','Call the lab back','Sign up for training'];
- for(const [i,x] of tasks.entries())await DB.put('tasks',{id:uid(),t:x,d:i===0,doneAt:Date.now(),prio:i===1,entryId:i<2?first.id:null,ex:true,created:Date.now()+i});
- const tels=de?[['Station 3','1234',0],['Labor','2200',1],['Radiologie','2300',1],['Reanimationsteam','0000',2],['Sekretariat','3000',3]]:[['Ward 3','1234',0],['Lab','2200',1],['Radiology','2300',1],['Resuscitation team','0000',2],['Office','3000',3]];
- for(const [n,num,cat] of tels)await DB.put('tels',{id:uid(),name:n,num,cat:'t'+cat,note:de?'Beispiel-Nummer':'Example number',extra:[],ex:true});
- ST.seeded=true;ST.seedV=2;await saveST();await load();render()}
+async function seedExamples(){await seedCards(ST.lang==='de');ST.seeded=true;ST.seedV=3;await saveST();await load();render()}
 async function persistStorage(){try{if(navigator.storage&&navigator.storage.persist&&!(await navigator.storage.persisted()))await navigator.storage.persist()}catch(e){}}
 function installHint(m){const ios=/iP(hone|ad|od)/.test(navigator.userAgent),standalone=navigator.standalone||matchMedia('(display-mode: standalone)').matches;const last=ST.lastBackup||0,days=(Date.now()-last)/864e5;
  if(ios&&!standalone&&!ST.hideInstall)m.prepend(h('div',{class:'warnbox install'},h('b',{},t('instT')),h('div',{},t('instP')),h('button',{class:'btn sm',style:'margin-top:6px',onclick:()=>{ST.hideInstall=true;saveST();render()}},'OK')));
@@ -643,9 +630,19 @@ async function seedCards(de){
   ['score','Score XY',[['Used for','What do you use it for?'],['Criteria / points','Criteria and points'],['Interpretation','What does the result mean?']]],
   ['gl','Guideline XY',[['Key points','The three key points you want to remember'],['Source / link','Link or folder']]],
   ['note','Where is what?',[['Note','e.g. where the emergency kit is. No passwords!']]]];
- for(const [cat,title,fl] of cards){const c={id:uid(),cat,title,fields:fl.map(([l,v])=>({l,v})),ex:true,created:Date.now()};await DB.put('cards',c)}
+ for(const [cat,title,fl] of cards.filter(c=>c[0]==='med'||c[0]==='sop')){const c={id:uid(),cat,title,fields:fl.map(([l,v])=>({l,v})),ex:true,created:Date.now()};await DB.put('cards',c)}
 }
-async function upgradeExamples(){if(!ST.seeded||ST.seedV>=2)return;const ex=C.filter(c=>c.ex);if(ex.length){for(const c of ex)await DB.del('cards',c.id);await seedCards(ST.lang==='de');const med=CATS.find(k=>k.id==='med');const old=[['Dosierung','Indikation','Kontraindikation / Cave','Interaktionen'],['Dose','Indication','Contraindication / caution','Interactions']];if(med&&old.some(o=>o.join()===med.fields.join())){med.fields=DEFCATS[ST.lang][0][2].slice();await saveCats()}C=(await DB.all('cards'));C.forEach(normCard)}ST.seedV=2;await saveST()}
+async function upgradeExamples(){if((ST.seedV||0)>=3)return;
+ const V1C=['Divertikulitis (unkompliziert)','Diverticulitis (uncomplicated)','CRP','qSOFA','Lap. Cholezystektomie','Lap. cholecystectomy'];
+ const V1B=['Frau aus Zimmer 12','The lady in room 12','Um 3 Uhr Pizza','Pizza with the whole team','Zum ersten Mal allein eine Drainage','Removed a drain on my own','Ruhige Stunde am Morgen','A quiet hour at sunrise'];
+ const V1T=['Station 4B|1234','Notaufnahme|1100','Labor|2200','Radiologie|2300','Reanimation|4444','Blutbank|2500','Sekretariat Chirurgie|3000','Ward 4B|1234','Emergency dept.|1100','Lab|2200','Radiology|2300','Resuscitation|4444','Blood bank|2500','Surgery office|3000'];
+ const had=C.some(c=>c.ex)||ST.seeded;
+ for(const c of C.filter(c=>c.ex||(c.kind&&V1C.includes(c.title))))await DB.del('cards',c.id);
+ for(const e of E.filter(e=>e.ex||V1B.some(b=>(e.best||'').startsWith(b))))await DB.del('entries',e.id);
+ for(const x of TL.filter(x=>x.ex||V1T.includes(x.name+'|'+String(x.num).trim())))await DB.del('tels',x.id);
+ for(const k of TK.filter(k=>k.ex))await DB.del('tasks',k.id);
+ const med=CATS.find(k=>k.id==='med');const old=[['Dosierung','Indikation','Kontraindikation / Cave','Interaktionen'],['Dose','Indication','Contraindication / caution','Interactions']];if(med&&old.some(o=>o.join()===med.fields.join())){med.fields=DEFCATS[ST.lang][0][2].slice();await saveCats()}
+ await load();if(had||!C.length)await seedCards(ST.lang==='de');ST.seeded=true;ST.seedV=3;await saveST();await load()}
 /* ---------- lock & boot ---------- */
 async function lock(){if(!ST.pin)return;await new Promise(res=>{let v='';const w=h('div',{class:'lock'});const dots=h('div',{class:'pin'});const msg=h('div',{class:'hint'},t('pinEnter'));const draw=()=>{dots.innerHTML='';for(let i=0;i<4;i++)dots.append(h('i',{class:i<v.length?'f':''}))};draw();
  const pad=h('div',{class:'pad'});[1,2,3,4,5,6,7,8,9,'',0,'⌫'].forEach(k=>pad.append(k===''?h('span'):h('button',{onclick:async()=>{if(k==='⌫')v=v.slice(0,-1);else if(v.length<4)v+=k;draw();if(v.length===4){if(await sha(v)===ST.pin){w.remove();res()}else{msg.textContent=t('pinWrong');v='';setTimeout(draw,300)}}}},String(k))));
