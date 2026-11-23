@@ -45,7 +45,7 @@ h2.sec{font-family:'Fraunces';font-weight:600;font-size:20px;margin:18px 2px 10p
 .datebox span{font-size:11px;text-transform:uppercase;letter-spacing:.06em}
 .entry .meta{flex:1;min-width:0}
 .entry .ttl{display:flex;gap:6px;align-items:center;font-weight:600}
-.entry .snip{font-family:'Caveat';font-size:21px;line-height:1.15;color:#4b433c;margin-top:2px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.entry .snip{font-family:'Caveat';font-size:21px;line-height:1.15;color:var(--ink);opacity:.85;margin-top:2px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px}
 .mood{width:26px;height:26px;flex:none}
 .empty{text-align:center;padding:40px 16px;color:var(--mute)}
@@ -70,7 +70,7 @@ h2.sec{font-family:'Fraunces';font-weight:600;font-size:20px;margin:18px 2px 10p
 label.l{display:block;font-size:12.5px;font-weight:600;color:var(--mute);margin:10px 0 4px;letter-spacing:.02em}
 input.f,select.f,textarea.f{width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;outline:none;font-size:16px}
 input.f:focus,textarea.f:focus,select.f:focus{border-color:var(--acc)}
-textarea.f{resize:none;min-height:64px;font-family:'Caveat';font-size:23px;line-height:1.25;background:#fff repeating-linear-gradient(transparent,transparent 28px,#efe7da 28px,#efe7da 29px);background-position:0 9px}
+textarea.f{resize:none;min-height:64px;line-height:1.25;background-position:0 9px}
 .row{display:flex;gap:10px}.row>*{flex:1;min-width:0}
 .q h3{display:flex;align-items:center;gap:8px;font-family:'Fraunces';font-weight:600;font-size:17px;margin:0 0 2px}
 .q h3 i{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none}
@@ -135,6 +135,63 @@ textarea.f{resize:none;min-height:64px;font-family:'Caveat';font-size:23px;line-
 
 .phadd svg{width:28px;height:28px}.phadd div{margin-top:4px}
 input.f[type=date],input.f[type=time]{min-height:46px;-webkit-appearance:none;appearance:none}
+/* ===== v2 ===== */
+:root{--fr-t:#6b5420;--zw-t:#7a4a2a;--sp-t:#7a3f40;--na-t:#3d4f7a;--h24-t:#5d3f5c;--bd-t:#3f5a45;--rule:#efe7da;--hw:'Caveat';--hws:23px;--tape:rgba(201,139,139,.35)}
+html[data-font=sans]{--hw:'DM Sans';--hws:16px}html[data-font=serif]{--hw:'Fraunces';--hws:16.5px}
+.hw,.hwin,.entry .snip,.memo .q,.checks .it input[type=text]{font-family:var(--hw)!important;font-size:var(--hws)!important}
+textarea.f.hwin{line-height:1.3}
+html[data-font=sans] textarea.f.hwin,html[data-font=serif] textarea.f.hwin{background:var(--input);line-height:1.5}
+.card.hand{background:var(--na-l);border:0}.card.hand .hw{white-space:pre-wrap;margin-top:4px;color:var(--ink)}
+.exb{display:inline-block;font-family:'DM Sans'!important;font-size:10.5px!important;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#f0c94f;color:#3d3010;border-radius:6px;padding:2px 7px;margin-left:8px;vertical-align:middle}
+.exbanner{background:#fff6d6;border:1.5px dashed #e2bd4a;color:#5a4613;border-radius:14px;padding:12px 14px;margin:6px 0 12px;font-size:13.5px;display:flex;flex-direction:column;gap:8px}
+.exbanner .btn{align-self:flex-start;background:#fff;border-color:#e2bd4a}
+.card.isex{background:repeating-linear-gradient(135deg,var(--card),var(--card) 14px,rgba(240,201,79,.07) 14px,rgba(240,201,79,.07) 28px)}
+.letter{font-family:'Fraunces';font-weight:600;font-size:15px;color:var(--mute);margin:14px 4px 6px;border-bottom:1px solid var(--line);padding-bottom:2px}
+.seg{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:3px;flex:0 0 auto}
+.seg button{padding:8px 11px;border-radius:9px;font-size:13px;font-weight:600;color:var(--mute)}.seg button.on{background:var(--ink);color:var(--bg)}
+.seg.wide{display:flex}.seg.wide button{flex:1}
+.chips.wrap{flex-wrap:wrap;overflow:visible}
+.task{gap:10px}.task .tt{flex:1;min-width:0;display:flex;flex-direction:column}.task .tt small{font-size:11.5px}
+.task input[type=checkbox]{appearance:none;-webkit-appearance:none;width:26px;height:26px;border:2px solid var(--acc);border-radius:8px;display:grid;place-items:center;flex:none;background:var(--card);transition:.2s}
+.task input[type=checkbox]:checked{background:var(--acc)}
+.task input[type=checkbox]:checked::after{content:'';width:12px;height:7px;border-left:3px solid #fff;border-bottom:3px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.task.done .hw{text-decoration:line-through;color:var(--mute)}
+.task.pop input{animation:pop .35s}@keyframes pop{50%{transform:scale(1.3)}}
+.task .star{width:28px;height:28px;border-radius:50%;font-weight:800;color:var(--mute);border:1.5px solid var(--line)}.task .star.on{background:#b5654a;color:#fff;border-color:#b5654a}
+.task.prio .hw{font-weight:600}
+nav.tabs .in{grid-template-columns:repeat(5,1fr)}nav.tabs button{position:relative;font-size:11px}
+nav.tabs em{position:absolute;top:2px;left:calc(50% + 6px);background:#b5654a;color:#fff;font-style:normal;font-size:10px;font-weight:700;border-radius:999px;padding:1px 5px}
+h3.ch{font-family:'Fraunces';font-weight:600;margin:0 0 6px;font-size:17px}
+.designs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.dz{border:2px solid var(--line);border-radius:12px;padding:6px;font-size:11.5px;font-weight:600;display:flex;flex-direction:column;gap:4px;align-items:center}
+.dz i{width:100%;height:40px;border-radius:8px;display:block}
+.dz-paper i{background:linear-gradient(135deg,#f2ece2 50%,#c98b8b 50%)}.dz-white i{background:linear-gradient(135deg,#fff 50%,#5f7d6b 50%);border:1px solid #eee}.dz-bw i{background:linear-gradient(135deg,#fff 50%,#111 50%);border:1px solid #ddd}.dz-dark i{background:linear-gradient(135deg,#16181d 50%,#8fb59a 50%)}
+.dz.on{border-color:var(--ink)}
+.sample{margin:8px 2px 0;color:var(--mute)}
+:root{--input:#fff}
+/* themes */
+html[data-theme=white]{--paper:#fff;--bg:#ffffff;--card:#fff;--line:#ececec;--rule:#f1f1f1}
+html[data-theme=white] body{background:#fff}html[data-theme=white] .tape{display:none}html[data-theme=white] .card{box-shadow:0 1px 6px rgba(0,0,0,.04)}
+html[data-theme=bw]{--paper:#fff;--bg:#fff;--card:#fff;--ink:#111;--mute:#666;--line:#d9d9d9;--acc:#111;--acc-l:#eee;--rose-l:#f3f3f3;--warn:#111;--rule:#ececec;
+ --fr:#bbb;--zw:#999;--sp:#777;--na:#333;--h24:#111;--bd:#555;--fr-l:#f4f4f4;--zw-l:#eee;--sp-l:#e6e6e6;--na-l:#dedede;--h24-l:#d3d3d3;--bd-l:#ebebeb;--fr-t:#111;--zw-t:#111;--sp-t:#111;--na-t:#111;--h24-t:#111;--bd-t:#111}
+html[data-theme=bw] body{background:#fff;filter:none}html[data-theme=bw] .tape{background:rgba(0,0,0,.12)}html[data-theme=bw] .q h3 i,html[data-theme=bw] .scale svg,html[data-theme=bw] .entry svg{filter:grayscale(1)}
+html[data-theme=bw] .card.memo,html[data-theme=bw] .card.carry,html[data-theme=bw] .card.hand{background:#f6f6f6;border:1px solid #ddd}
+html[data-theme=dark]{--paper:#1c1f26;--bg:#14161b;--card:#1f232b;--ink:#ecebe7;--mute:#9aa1ab;--line:#2f3540;--acc:#8fb59a;--acc-l:#26332b;--rose-l:#2d2426;--warn:#e39b80;--rule:#2b303a;--input:#191c22;
+ --fr-l:#3a3322;--zw-l:#3b2d24;--sp-l:#3a2829;--na-l:#232c44;--h24-l:#33263a;--bd-l:#25332a;--fr-t:#f0d38a;--zw-t:#efbf98;--sp-t:#e8b1b1;--na-t:#b9c6ea;--h24-t:#d6b6d5;--bd-t:#b5d0ba}
+html[data-theme=dark] body{background:#14161b}html[data-theme=dark] .tape{opacity:.45}
+html[data-theme=dark] input.f,html[data-theme=dark] select.f,html[data-theme=dark] textarea.f{background-color:var(--input);color:var(--ink);border-color:var(--line)}
+html[data-theme=dark] textarea.f.hwin{background-image:repeating-linear-gradient(transparent,transparent 28px,var(--rule) 28px,var(--rule) 29px)}
+html[data-theme=dark] .card.carry{background:#2e2a1c;border-color:#5a4c22}html[data-theme=dark] .card.memo{background:#2d2426}html[data-theme=dark] .warnbox{background:#2e2520;border-color:#4b3a2e;color:#e7c3aa}
+html[data-theme=dark] .exbanner{background:#2e2a1c;color:#f0d98a;border-color:#8a7426}html[data-theme=dark] .exbanner .btn{background:#1f232b;color:#f0d98a}
+html[data-theme=dark] .ph{background:#2a2e36}html[data-theme=dark] .scale button{background:var(--input)}html[data-theme=dark] .scale button.on{background:#2a2f38}
+html[data-theme=dark] nav.tabs{background:rgba(20,22,27,.96)}html[data-theme=dark] .fab{background:#ecebe7;color:#14161b}html[data-theme=dark] .btn.pri{background:#ecebe7;color:#14161b;border-color:#ecebe7}
+html[data-theme=dark] header.top{background:linear-gradient(var(--bg) 78%,transparent)}html[data-theme=dark] .card.isex{background:repeating-linear-gradient(135deg,var(--card),var(--card) 14px,rgba(240,201,79,.06) 14px,rgba(240,201,79,.06) 28px)}
+textarea.f{background-color:var(--input)}textarea.f.hwin{background-image:repeating-linear-gradient(transparent,transparent 28px,var(--rule) 28px,var(--rule) 29px)}
+input.f,select.f{background:var(--input)}
+.pp h2{font-family:'Fraunces';font-size:16px;margin:12px 0 4px}.pp .pc{margin:4px 0 8px}
+
+.task .tt .exb{align-self:flex-start;margin:3px 0 0}
+.lc .k .exb{margin-left:6px}
 
 </style>
 </head>
@@ -157,40 +214,47 @@ const h=(tag,a={},...k)=>{const e=document.createElement(tag);for(const x in a){
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const todayISO=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
 /* ---------- i18n ---------- */
-const L={de:{app:'Dienst-Tagebuch',tabs:['Tagebuch','Wissen','Telefon','Rückblick'],newShift:'Neuer Dienst',hi:['Guten Morgen','Hallo','Guten Abend','Gute Nacht'],
+const L={de:{app:'Dienst-Tagebuch',tabs:['Tagebuch','Notizbuch','Aufgaben','Telefon','Rückblick'],newShift:'Neuer Dienst',newTask:'Aufgabe',newCard:'Notiz',newTel:'Nummer',hi:['Guten Morgen','Hallo','Guten Abend','Gute Nacht'],
  types:{fr:'Frühdienst',zw:'Zwischendienst',sp:'Spätdienst',na:'Nachtdienst',h24:'24-h-Dienst',bd:'Bereitschaft'},short:{fr:'Früh',zw:'Zwischen',sp:'Spät',na:'Nacht',h24:'24 h',bd:'Ruf/Bereit.'},
  date:'Datum',start:'Beginn',end:'Ende',ward:'Station / Bereich',mood:'Wie war der Dienst?',energy:'Wie viel Energie hast du noch?',
- q:{best:['Das Beste heute','Ein Moment, ein Satz, ein Dankeschön.'],worst:['Das Schlimmste heute','Schreib es auf, damit es nicht mit nach Hause muss.'],annoy:['Was mich genervt hat','Raus damit.'],wish:['Das wünsche ich mir anders','Abläufe, Kommunikation, Ausstattung …'],todo:['Für den nächsten Dienst merken','Offene Punkte werden beim nächsten Dienst wieder angezeigt.'],learn:['Heute gelernt','Antibiose, Laborwerte, Leitlinien, Scores, Abläufe – landet automatisch in „Wissen“.'],notes:['Was heute lief','Themen und Abläufe, ohne Patientennamen.'],priv:['Für mich & meine Zukunft','Gedanken aus einer ruhigen Minute: Pläne, Ideen, Wünsche.'],photos:['Fotos','Eigene Bilder, z. B. Ausblick aus der Nachtschicht oder die Pizza um 3 Uhr.']},
- addTodo:'+ Punkt hinzufügen',addLearn:'+ Gelerntes hinzufügen',addPhoto:'Foto hinzufügen',save:'Fertig',del:'Löschen',delQ:'Diesen Dienst wirklich löschen?',cancel:'Abbrechen',
- open:'Offen vom letzten Dienst',memo:'Erinnerung an einen guten Tag',emptyT:'Dein erster Dienst wartet.',emptyP:'Tippe auf „Neuer Dienst“, oder lade Beispiel-Einträge, um alles auszuprobieren.',demo:'Beispiele laden',
+ q:{handIn:['Aus der Übergabe davor','Was dir übergeben wurde: offene Punkte, worauf du achten sollst.'],handOut:['Für die Übergabe danach','Was du weitergeben musst. Wird auf der Startseite angezeigt.'],best:['Das Beste heute','Ein Moment, ein Satz, ein Dankeschön.'],worst:['Das Schlimmste heute','Schreib es auf, damit es nicht mit nach Hause muss.'],annoy:['Was mich genervt hat','Raus damit.'],wish:['Das wünsche ich mir anders','Abläufe, Kommunikation, Ausstattung …'],todo:['Aufgaben aus diesem Dienst','Landen in „Aufgaben“ und bleiben, bis du sie abhakst.'],learn:['Heute gelernt','Wird als Notiz in deinem Notizbuch gespeichert.'],notes:['Was heute lief','Themen und Abläufe, ohne Patientennamen.'],priv:['Für mich & meine Zukunft','Gedanken aus einer ruhigen Minute: Pläne, Ideen, Wünsche.'],photos:['Fotos','Eigene Bilder, z. B. Ausblick aus der Nachtschicht oder die Pizza um 3 Uhr.']},
+ addTodo:'+ Aufgabe hinzufügen',addLearn:'+ Notiz hinzufügen',addPhoto:'Foto hinzufügen',save:'Fertig',del:'Löschen',delQ:'Diesen Dienst wirklich löschen?',cancel:'Abbrechen',
+ openT:'Offene Aufgaben',handT:'Für die Übergabe',memo:'Erinnerung an einen guten Tag',emptyT:'Dein erster Dienst wartet.',emptyP:'Tippe auf „Neuer Dienst“.',demo:'Beispiele laden',
+ ex:'Beispiel',exBanner:'Das sind Beispiele. Sie zeigen nur, wie man das Notizbuch nutzen kann. Trag hier dein eigenes Wissen ein, so wie es in deiner Abteilung gilt.',exBannerJ:'Das sind Beispiel-Einträge, damit du siehst, wie ein Tagebuch aussehen kann.',exDel:'Alle Beispiele entfernen',exDelQ:'Alle Beispiele (Einträge, Notizen, Aufgaben und Nummern) entfernen? Deine eigenen Einträge bleiben.',
  privacy:'Bitte keine Patientennamen, Geburtsdaten, Fallnummern oder Fotos von Patient:innen eintragen. Alles bleibt nur auf diesem Gerät gespeichert.',
- learnT:'Wissen',search:'Suchen …',all:'Alle',newCard:'+ Karte',cardFrom:'aus dem Dienst am',emptyL:'Noch nichts gespeichert. Alles, was du unter „Heute gelernt“ einträgst, sammelt sich hier.',
- kinds:{abx:'Antibiose',lab:'Laborwert',gl:'Leitlinie',score:'Score',med:'Medikament',sop:'Ablauf',misc:'Notiz'},
- kf:{abx:['Erkrankung','Erreger','Antibiotikum & Dosis','Dauer','Quelle / Leitlinie'],lab:['Normbereich','Erhöht bei','Erniedrigt bei','Merke'],gl:['Kernaussagen','Quelle / Link'],score:['Wofür?','Kriterien / Punkte','Auswertung'],med:['Dosierung','Indikation','Kontraindikation / Cave'],sop:['Tag 0 (OP-Tag)','Tag 1','Ab Tag 2','Entlassung / Procedere'],misc:['Notiz']},
- title:'Titel',kind:'Art',telT:'Telefon',newTel:'+ Nummer',tname:'Name / Funktion',tnum:'Nummer',tcat:'Kategorie',tnote:'Notiz (optional)',tcats:['Station','Funktion','Notfall','Verwaltung','Extern','Privat'],emptyTel:'Noch keine Nummern. Leg dir die wichtigsten Durchwahlen an, dann musst du nie wieder suchen.',copied:'Kopiert',
- statsT:'Rückblick',year:'Dienste',hours:'Stunden',nights:'Nächte',perType:'Dienste nach Art',moodType:'Stimmung nach Dienstart',moodLast:'Stimmung der letzten Dienste',noData:'Sobald du Dienste einträgst, siehst du hier deinen Rückblick.',thisYear:'dieses Jahr',
- settings:'Einstellungen',name:'Dein Name',role:'Beruf',roles:['Ärztin / Arzt','Pflege','Rettungsdienst','MFA / MTA','Studium / PJ','Hebamme','Andere'],lang:'Sprache',pin:'PIN-Sperre',pinSet:'PIN festlegen',pinOff:'PIN entfernen',pinNew:'Neue PIN (4 Ziffern)',pinEnter:'PIN eingeben',pinWrong:'Falsche PIN',
- backup:'Sicherung',exp:'Sicherung herunterladen',imp:'Sicherung laden',impOk:'Sicherung geladen',print:'Drucken / PDF',printAll:'Alle Dienste drucken',printOne:'Diesen Dienst drucken',reset:'Alles löschen',resetQ:'Wirklich alle Einträge, Karten und Nummern löschen?',
- hint2:'Tipp: Am Handy über „Teilen“ und „Zum Home-Bildschirm“ wie eine App ablegen.',copyright:'© Lia Valentina · Nur für den persönlichen Gebrauch',saved:'Gespeichert',min:'Min',wk:['So','Mo','Di','Mi','Do','Fr','Sa'],mon:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']},
-en:{app:'Shift Journal',tabs:['Journal','Knowledge','Phone','Review'],newShift:'New shift',hi:['Good morning','Hello','Good evening','Good night'],
+ search:'Suchen …',all:'Alle',cardFrom:'aus dem Dienst am',emptyL:'Noch keine Notizen in dieser Kategorie. Tippe auf „+ Notiz“.',sortAZ:'A–Z',sortNew:'Neueste',
+ kinds:{med:'Medikamente',ia:'Interaktionen',sop:'Stationsrichtlinien',rule:'Regeln & Merksätze',lab:'Laborwerte',score:'Scores',gl:'Leitlinien',note:'Eigene Notizen'},kind1:{med:'Medikament',ia:'Interaktion',sop:'Stationsrichtlinie',rule:'Regel',lab:'Laborwert',score:'Score',gl:'Leitlinie',note:'Notiz'},
+ kf:{med:['Dosierung','Indikation','Kontraindikation / Cave'],ia:['Was kann passieren?','Was tust du dann?'],sop:['Gilt für','Ablauf','Ansprechpartner / Durchwahl'],rule:['Regel','Warum?'],lab:['Normbereich (eures Labors)','Erhöht bei','Erniedrigt bei','Merke'],score:['Wofür?','Kriterien / Punkte','Auswertung'],gl:['Kernaussagen','Quelle / Link'],note:['Notiz']},
+ title:'Titel',tasksT:'Aufgaben',open:'Offen',doneT:'Erledigt',clearDone:'Erledigte löschen',taskPh:'Neue Aufgabe …',emptyTask:'Alles erledigt. Schön!',fromShift:'aus',prio:'Wichtig',
+ telT:'Telefon',tname:'Name / Funktion',tnum:'Nummer',tcat:'Kategorie',tnote:'Notiz (optional)',tcats:['Station','Funktion','Notfall','Verwaltung','Extern','Privat'],emptyTel:'Noch keine Nummern. Leg dir die wichtigsten Durchwahlen an.',copied:'Kopiert',
+ statsT:'Rückblick',year:'Dienste',hours:'Stunden',nights:'Nächte',perType:'Dienste nach Art',moodType:'Stimmung nach Dienstart',moodLast:'Stimmung der letzten Dienste',noData:'Sobald du Dienste einträgst, siehst du hier deinen Rückblick.',
+ settings:'Einstellungen',look:'Aussehen',design:'Design',designs:{paper:'Papier',white:'Ganz in Weiß',bw:'Schwarz-Weiß',dark:'Dunkel (Nachtdienst)'},font:'Schrift',fonts:{hand:'Handschrift',sans:'Klar',serif:'Klassisch'},fontSample:'So sieht deine Schrift aus.',
+ name:'Dein Name',role:'Beruf',roles:['Ärztin / Arzt','Pflege','Rettungsdienst','MFA / MTA','Studium / PJ','Hebamme','Andere'],lang:'Sprache',pin:'PIN-Sperre',pinSet:'PIN festlegen',pinOff:'PIN entfernen',pinNew:'Neue PIN (4 Ziffern)',pinEnter:'PIN eingeben',pinWrong:'Falsche PIN',
+ backup:'Sicherung',exp:'Sicherung herunterladen',imp:'Sicherung laden',impOk:'Sicherung geladen',print:'Drucken / PDF',printAll:'Alle Dienste drucken',printBook:'Notizbuch drucken',reset:'Alles löschen',resetQ:'Wirklich alle Einträge, Notizen, Aufgaben und Nummern löschen?',
+ hint2:'Tipp: Am Handy über „Teilen“ und „Zum Home-Bildschirm“ wie eine App ablegen.',copyright:'© Lia Valentina · Nur für den persönlichen Gebrauch',saved:'Gespeichert',wk:['So','Mo','Di','Mi','Do','Fr','Sa'],mon:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']},
+en:{app:'Shift Journal',tabs:['Journal','Notebook','Tasks','Phone','Review'],newShift:'New shift',newTask:'Task',newCard:'Note',newTel:'Number',hi:['Good morning','Hello','Good evening','Good night'],
  types:{fr:'Early shift',zw:'Middle shift',sp:'Late shift',na:'Night shift',h24:'24 h shift',bd:'On call'},short:{fr:'Early',zw:'Middle',sp:'Late',na:'Night',h24:'24 h',bd:'On call'},
  date:'Date',start:'Start',end:'End',ward:'Ward / unit',mood:'How was the shift?',energy:'How much energy is left?',
- q:{best:['Best moment today','A moment, a sentence, a thank you.'],worst:['Hardest moment today','Write it down so you don’t take it home.'],annoy:['What annoyed me','Let it out.'],wish:['What I wish were different','Processes, communication, equipment …'],todo:['Remember for next shift','Open items show up again at your next shift.'],learn:['Learned today','Antibiotics, labs, guidelines, scores, procedures – saved to “Knowledge”.'],notes:['What happened today','Topics and procedures, no patient names.'],priv:['For me & my future','Thoughts from a quiet minute: plans, ideas, wishes.'],photos:['Photos','Your own pictures, e.g. the view on night shift or the 3 am pizza.']},
- addTodo:'+ Add item',addLearn:'+ Add something learned',addPhoto:'Add photo',save:'Done',del:'Delete',delQ:'Really delete this shift?',cancel:'Cancel',
- open:'Open from last shift',memo:'A good day to remember',emptyT:'Your first shift is waiting.',emptyP:'Tap “New shift”, or load sample entries to try everything out.',demo:'Load samples',
+ q:{handIn:['From the previous handover','What was handed to you: open items, things to watch.'],handOut:['For the next handover','What you need to pass on. Shown on the start page.'],best:['Best moment today','A moment, a sentence, a thank you.'],worst:['Hardest moment today','Write it down so you don’t take it home.'],annoy:['What annoyed me','Let it out.'],wish:['What I wish were different','Processes, communication, equipment …'],todo:['Tasks from this shift','Saved to “Tasks” until you tick them off.'],learn:['Learned today','Saved as a note in your notebook.'],notes:['What happened today','Topics and procedures, no patient names.'],priv:['For me & my future','Thoughts from a quiet minute: plans, ideas, wishes.'],photos:['Photos','Your own pictures, e.g. the view on night shift or the 3 am pizza.']},
+ addTodo:'+ Add task',addLearn:'+ Add note',addPhoto:'Add photo',save:'Done',del:'Delete',delQ:'Really delete this shift?',cancel:'Cancel',
+ openT:'Open tasks',handT:'For handover',memo:'A good day to remember',emptyT:'Your first shift is waiting.',emptyP:'Tap “New shift”.',demo:'Load samples',
+ ex:'Example',exBanner:'These are examples. They only show how the notebook can be used. Add your own knowledge, the way it applies in your department.',exBannerJ:'These are sample entries so you can see what a journal can look like.',exDel:'Remove all examples',exDelQ:'Remove all examples (entries, notes, tasks and numbers)? Your own entries stay.',
  privacy:'Please never enter patient names, dates of birth, case numbers or photos of patients. Everything stays on this device only.',
- learnT:'Knowledge',search:'Search …',all:'All',newCard:'+ Card',cardFrom:'from shift on',emptyL:'Nothing saved yet. Everything you add under “Learned today” collects here.',
- kinds:{abx:'Antibiotics',lab:'Lab value',gl:'Guideline',score:'Score',med:'Medication',sop:'Procedure',misc:'Note'},
- kf:{abx:['Condition','Pathogen','Antibiotic & dose','Duration','Source / guideline'],lab:['Reference range','Raised in','Lowered in','Remember'],gl:['Key points','Source / link'],score:['Used for','Criteria / points','Interpretation'],med:['Dose','Indication','Contraindication / caution'],sop:['Day 0 (surgery)','Day 1','From day 2','Discharge / follow-up'],misc:['Note']},
- title:'Title',kind:'Type',telT:'Phone',newTel:'+ Number',tname:'Name / role',tnum:'Number',tcat:'Category',tnote:'Note (optional)',tcats:['Ward','Service','Emergency','Admin','External','Private'],emptyTel:'No numbers yet. Add the extensions you need most and never search again.',copied:'Copied',
- statsT:'Review',year:'Shifts',hours:'Hours',nights:'Nights',perType:'Shifts by type',moodType:'Mood by shift type',moodLast:'Mood of recent shifts',noData:'As soon as you log shifts, your review appears here.',thisYear:'this year',
- settings:'Settings',name:'Your name',role:'Profession',roles:['Doctor','Nurse','Paramedic','Medical assistant','Student','Midwife','Other'],lang:'Language',pin:'PIN lock',pinSet:'Set PIN',pinOff:'Remove PIN',pinNew:'New PIN (4 digits)',pinEnter:'Enter PIN',pinWrong:'Wrong PIN',
- backup:'Backup',exp:'Download backup',imp:'Load backup',impOk:'Backup loaded',print:'Print / PDF',printAll:'Print all shifts',printOne:'Print this shift',reset:'Delete everything',resetQ:'Really delete all entries, cards and numbers?',
- hint2:'Tip: on your phone use “Share” and “Add to Home Screen” to keep it like an app.',copyright:'© Lia Valentina · For personal use only',saved:'Saved',min:'min',wk:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],mon:['January','February','March','April','May','June','July','August','September','October','November','December']}};
+ search:'Search …',all:'All',cardFrom:'from shift on',emptyL:'No notes in this category yet. Tap “+ Note”.',sortAZ:'A–Z',sortNew:'Newest',
+ kinds:{med:'Medications',ia:'Interactions',sop:'Ward policies',rule:'Rules & reminders',lab:'Lab values',score:'Scores',gl:'Guidelines',note:'My notes'},kind1:{med:'Medication',ia:'Interaction',sop:'Ward policy',rule:'Rule',lab:'Lab value',score:'Score',gl:'Guideline',note:'Note'},
+ kf:{med:['Dose','Indication','Contraindication / caution'],ia:['What can happen?','What do you do?'],sop:['Applies to','Procedure','Contact / extension'],rule:['Rule','Why?'],lab:['Reference range (your lab)','Raised in','Lowered in','Remember'],score:['Used for','Criteria / points','Interpretation'],gl:['Key points','Source / link'],note:['Note']},
+ title:'Title',tasksT:'Tasks',open:'Open',doneT:'Done',clearDone:'Delete done',taskPh:'New task …',emptyTask:'All done. Nice!',fromShift:'from',prio:'Important',
+ telT:'Phone',tname:'Name / role',tnum:'Number',tcat:'Category',tnote:'Note (optional)',tcats:['Ward','Service','Emergency','Admin','External','Private'],emptyTel:'No numbers yet. Add the extensions you need most.',copied:'Copied',
+ statsT:'Review',year:'Shifts',hours:'Hours',nights:'Nights',perType:'Shifts by type',moodType:'Mood by shift type',moodLast:'Mood of recent shifts',noData:'As soon as you log shifts, your review appears here.',
+ settings:'Settings',look:'Look',design:'Design',designs:{paper:'Paper',white:'All white',bw:'Black & white',dark:'Dark (night shift)'},font:'Font',fonts:{hand:'Handwriting',sans:'Clean',serif:'Classic'},fontSample:'This is how your writing looks.',
+ name:'Your name',role:'Profession',roles:['Doctor','Nurse','Paramedic','Medical assistant','Student','Midwife','Other'],lang:'Language',pin:'PIN lock',pinSet:'Set PIN',pinOff:'Remove PIN',pinNew:'New PIN (4 digits)',pinEnter:'Enter PIN',pinWrong:'Wrong PIN',
+ backup:'Backup',exp:'Download backup',imp:'Load backup',impOk:'Backup loaded',print:'Print / PDF',printAll:'Print all shifts',printBook:'Print notebook',reset:'Delete everything',resetQ:'Really delete all entries, notes, tasks and numbers?',
+ hint2:'Tip: on your phone use “Share” and “Add to Home Screen” to keep it like an app.',copyright:'© Lia Valentina · For personal use only',saved:'Saved',wk:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],mon:['January','February','March','April','May','June','July','August','September','October','November','December']}};
 const TYPES=['fr','zw','sp','na','h24','bd'];const DEFT={fr:['06:00','14:30'],zw:['10:00','18:30'],sp:['13:30','22:00'],na:['21:30','07:00'],h24:['08:00','08:00'],bd:['16:00','08:00']};
-const TCOL={fr:'--fr',zw:'--zw',sp:'--sp',na:'--na',h24:'--h24',bd:'--bd'};const cv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-const KC={abx:'#5f7d6b',lab:'#4f6e95',gl:'#7d5a7c',score:'#b5654a',med:'#c98b8b',sop:'#8a7448',misc:'#8a7f74'};
-const QC={best:['#fbf1d6','#b8892a'],worst:['#f6e6e3','#a8585a'],annoy:['#fbe8da','#b5654a'],wish:['#efe5ee','#7d5a7c'],todo:['#fff7e3','#a07d25'],learn:['#e6eee8','#5f7d6b'],notes:['#e1e6f1','#3d4f7a'],priv:['#f3ece1','#8a7448'],photos:['#f6e6e3','#a8585a']};
+const TCOL={fr:'--fr',zw:'--zw',sp:'--sp',na:'--na',h24:'--h24',bd:'--bd'};
+const KINDS=['med','ia','sop','rule','lab','score','gl','note'];
+const KC={med:'#c98b8b',ia:'#b5654a',sop:'#8a7448',rule:'#7d5a7c',lab:'#4f6e95',score:'#d08a6a',gl:'#5f7d6b',note:'#8a7f74'};
+const QC={handIn:['#e1e6f1','#3d4f7a'],handOut:['#e1e6f1','#3d4f7a'],best:['#fbf1d6','#b8892a'],worst:['#f6e6e3','#a8585a'],annoy:['#fbe8da','#b5654a'],wish:['#efe5ee','#7d5a7c'],todo:['#fff7e3','#a07d25'],learn:['#e6eee8','#5f7d6b'],notes:['#e1e6f1','#3d4f7a'],priv:['#f3ece1','#8a7448'],photos:['#f6e6e3','#a8585a']};
 const I={sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',half:'<path d="M12 3a9 9 0 1 0 0 18"/><path d="M12 3v18"/><circle cx="12" cy="12" r="9"/>',sunset:'<path d="M17 18a5 5 0 0 0-10 0"/><path d="M12 9V2M4.2 10.2l1.4 1.4M1 18h2M21 18h2M18.4 11.6l1.4-1.4M23 22H1M16 5l-4 4-4-4"/>',moon:'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>',
  cloud:'<path d="M17.5 19H9a7 7 0 1 1 6.7-9h1.8a4.5 4.5 0 1 1 0 9z"/>',zap:'<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>',wand:'<path d="M15 4V2M15 16v-2M8 9h2M20 9h2M17.8 11.8 19 13M15 9h0M17.8 6.2 19 5M3 21l9-9M12.2 6.2 11 5"/>',pin:'<path d="M12 17v5M9 10.8V4h6v6.8l3 3.2H6z"/>',book:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/>',clip:'<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>',leaf:'<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.2-6"/>',img:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>',
  journal:'<path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/><path d="M8 8h8M8 12h6"/>',brain:'<path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24A2.5 2.5 0 0 1 9.5 2z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24A2.5 2.5 0 0 0 14.5 2z"/>',phone:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',chart:'<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>',plus:'<path d="M12 5v14M5 12h14"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',back:'<path d="M15 18l-6-6 6-6"/>',search:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',copy:'<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',bat:'<rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 11v2"/>'};
@@ -198,20 +262,22 @@ const ic=(n,sw=1.8)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
 const TIC={fr:'sun',zw:'half',sp:'sunset',na:'moon',h24:'clock',bd:'bell'};const QIC={best:'sun',worst:'cloud',annoy:'zap',wish:'wand',todo:'pin',learn:'book',notes:'clip',priv:'leaf',photos:'img'};
 function face(v,sz=34){const cols=['#c9c1b6','#a8585a','#d08a6a','#d9b45c','#9bb58f','#5f7d6b'];const c=cols[v]||cols[0];const m=[0,-5,-2.5,0,3,5.5][v]||0;return `<svg viewBox="0 0 40 40" width="${sz}" height="${sz}"><circle cx="20" cy="20" r="17" fill="${c}" opacity=".22"/><circle cx="20" cy="20" r="17" fill="none" stroke="${c}" stroke-width="2.2"/><circle cx="14" cy="17" r="2" fill="${c}"/><circle cx="26" cy="17" r="2" fill="${c}"/>${v===3?`<path d="M13 26h14" stroke="${c}" stroke-width="2.4" stroke-linecap="round"/>`:`<path d="M12.5 ${26-m/2} Q20 ${26+m} 27.5 ${26-m/2}" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round"/>`}</svg>`}
 function battery(v,sz=34){const c=['#c9c1b6','#a8585a','#d08a6a','#d9b45c','#9bb58f','#5f7d6b'][v];return `<svg viewBox="0 0 40 40" width="${sz}" height="${sz}"><rect x="5" y="12" width="27" height="16" rx="3.5" fill="none" stroke="${c}" stroke-width="2.2"/><rect x="33" y="17" width="3" height="6" rx="1" fill="${c}"/>${Array.from({length:v},(_,i)=>`<rect x="${8+i*4.8}" y="15" width="3.6" height="10" rx="1" fill="${c}"/>`).join('')}</svg>`}
-/* ---------- storage (IndexedDB) ---------- */
-const DB={db:null,open(){return new Promise((res,rej)=>{const r=indexedDB.open('lv-dienst-tagebuch',1);r.onupgradeneeded=()=>{const d=r.result;['entries','cards','tels','photos','kv'].forEach(s=>d.createObjectStore(s,{keyPath:'id'}))};r.onsuccess=()=>{this.db=r.result;res()};r.onerror=()=>rej(r.error)})},
+Object.assign(I,{swap:'<path d="M7 4 3 8l4 4"/><path d="M3 8h14"/><path d="m17 20 4-4-4-4"/><path d="M21 16H7"/>',list:'<path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1 1 2-2M3 12l1 1 2-2M3 18l1 1 2-2"/>',check:'<path d="M20 6 9 17l-5-5"/>'});
+Object.assign(QIC,{handIn:'swap',handOut:'swap'});
+/* ---------- storage ---------- */
+const DB={db:null,open(){return new Promise((res,rej)=>{const r=indexedDB.open('lv-dienst-tagebuch',2);r.onupgradeneeded=()=>{const d=r.result;['entries','cards','tels','photos','kv','tasks'].forEach(s=>{if(!d.objectStoreNames.contains(s))d.createObjectStore(s,{keyPath:'id'})})};r.onsuccess=()=>{this.db=r.result;res()};r.onerror=()=>rej(r.error)})},
  all(s){return new Promise(r=>{const q=this.db.transaction(s).objectStore(s).getAll();q.onsuccess=()=>r(q.result||[]);q.onerror=()=>r([])})},
  get(s,id){return new Promise(r=>{const q=this.db.transaction(s).objectStore(s).get(id);q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)})},
  put(s,o){return new Promise(r=>{const t=this.db.transaction(s,'readwrite');t.objectStore(s).put(o);t.oncomplete=()=>r()})},
  del(s,id){return new Promise(r=>{const t=this.db.transaction(s,'readwrite');t.objectStore(s).delete(id);t.oncomplete=()=>r()})},
  clear(s){return new Promise(r=>{const t=this.db.transaction(s,'readwrite');t.objectStore(s).clear();t.oncomplete=()=>r()})}};
-let E=[],C=[],TL=[],ST={id:'settings',lang:(navigator.language||'de').toLowerCase().startsWith('de')?'de':'en',name:'',role:0,pin:''},view='journal',kindF='all',q='';
-const t=k=>L[ST.lang][k];
-const saveST=()=>DB.put('kv',ST);
+let E=[],C=[],TL=[],TK=[],ST={id:'settings',lang:(navigator.language||'de').toLowerCase().startsWith('de')?'de':'en',name:'',role:0,pin:'',theme:'paper',font:'hand',sort:'az',seeded:false},view='journal',kindF='all',q='';
+const t=k=>L[ST.lang][k];const saveST=()=>DB.put('kv',ST);
+function applyLook(){document.documentElement.dataset.theme=ST.theme||'paper';document.documentElement.dataset.font=ST.font||'hand'}
 /* ---------- helpers ---------- */
 function dObj(s){const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)}
 function hours(e){const [a,b]=[e.start,e.end].map(x=>{const [hh,mm]=(x||'0:0').split(':').map(Number);return hh*60+mm});let d=b-a;if(d<=0)d+=1440;return d/60}
-function fmtH(x){return (Math.round(x*10)/10).toLocaleString(ST.lang==='de'?'de-DE':'en-GB')}
+const loc=()=>ST.lang==='de'?'de-DE':'en-GB';function fmtH(x){return (Math.round(x*10)/10).toLocaleString(loc())}
 function toast(m){const e=$('#toast');e.textContent=m;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),1800)}
 function modal(build){const m=$('#modal'),c=$('#mc');c.innerHTML='';build(c);m.classList.add('show')}
 function closeModal(){$('#modal').classList.remove('show')}
@@ -219,130 +285,181 @@ $('#modal').addEventListener('pointerdown',e=>{if(e.target.id==='modal')closeMod
 function autosize(ta){ta.style.height='auto';ta.style.height=Math.max(64,ta.scrollHeight+4)+'px'}
 async function shrink(file,max=1400){const u=URL.createObjectURL(file);const im=new Image();await new Promise(r=>{im.onload=im.onerror=r;im.src=u});const k=Math.min(1,max/Math.max(im.naturalWidth,im.naturalHeight));const c=document.createElement('canvas');c.width=Math.round(im.naturalWidth*k);c.height=Math.round(im.naturalHeight*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);return c.toDataURL('image/jpeg',.82)}
 async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('lv-dt:'+s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+const exBadge=()=>h('span',{class:'exb'},t('ex'));
+const hasEx=()=>E.some(x=>x.ex)||C.some(x=>x.ex)||TL.some(x=>x.ex)||TK.some(x=>x.ex);
+function exBanner(txt){return h('div',{class:'exbanner'},h('div',{},h('b',{},t('ex')+' · '),txt),h('button',{class:'btn sm',onclick:removeExamples},t('exDel')))}
+async function removeExamples(){if(!confirm(t('exDelQ')))return;for(const [s,arr] of [['entries',E],['cards',C],['tels',TL],['tasks',TK]])for(const x of arr.filter(y=>y.ex))await DB.del(s,x.id);await load();render()}
 /* ---------- shell ---------- */
+const VIEWS=['journal','book','tasks','tel','stats'],VIC=['journal','book','list','phone','chart'];
 function shell(){document.title=t('app')+' · Lia Valentina';$('#brand').innerHTML=`<h1>${t('app')}</h1><small>${greet()}</small>`;
- const n=$('#tabs');n.innerHTML='';const tv=['journal','learn','tel','stats'],ti=['journal','brain','phone','chart'];t('tabs').forEach((x,i)=>n.append(h('button',{class:view===tv[i]?'on':'',html:ic(ti[i])+`<span>${x}</span>`,onclick:()=>{view=tv[i];render();scrollTo(0,0)}})));
- $('#fab').innerHTML=ic('plus',2.2)+`<span>${view==='learn'?t('newCard').replace('+ ',''):view==='tel'?t('newTel').replace('+ ',''):t('newShift')}</span>`;$('#fab').style.display=view==='stats'?'none':'flex';
- $('#fab').onclick=()=>view==='learn'?editCard():view==='tel'?editTel():editEntry()}
+ const n=$('#tabs');n.innerHTML='';t('tabs').forEach((x,i)=>{const open=VIEWS[i]==='tasks'?TK.filter(k=>!k.d).length:0;n.append(h('button',{class:view===VIEWS[i]?'on':'',html:ic(VIC[i])+(open?`<em>${open}</em>`:'')+`<span>${x}</span>`,onclick:()=>{view=VIEWS[i];render();scrollTo(0,0)}}))});
+ const lab={journal:t('newShift'),book:t('newCard'),tasks:t('newTask'),tel:t('newTel')}[view];$('#fab').innerHTML=ic('plus',2.2)+`<span>${lab||''}</span>`;$('#fab').style.display=view==='stats'?'none':'flex';
+ $('#fab').onclick=()=>({journal:()=>editEntry(),book:()=>editCard(),tasks:()=>{const i=$('#taskin');if(i)i.focus()},tel:()=>editTel()})[view]()}
 function greet(){const hr=new Date().getHours();const g=t('hi')[hr<11?0:hr<17?1:hr<22?2:3];return g+(ST.name?', '+ST.name:'')}
-function render(){shell();const m=$('#main');m.innerHTML='';({journal:vJournal,learn:vLearn,tel:vTel,stats:vStats})[view](m)}
+function render(){applyLook();shell();const m=$('#main');m.innerHTML='';({journal:vJournal,book:vBook,tasks:vTasks,tel:vTel,stats:vStats})[view](m)}
 /* ---------- journal ---------- */
-function typeStyle(tp){return `background:var(${TCOL[tp]}-l);color:${tp==='na'||tp==='h24'?`var(${TCOL[tp]})`:'#5b4a35'}`}
-function vJournal(m){const es=[...E].sort((a,b)=>(b.date+b.start).localeCompare(a.date+a.start));
- if(!es.length){m.append(h('div',{class:'card empty'},h('div',{class:'tape'}),h('div',{class:'big'},t('emptyT')),h('p',{},t('emptyP')),h('button',{class:'btn sm',onclick:loadDemo},t('demo'))));m.append(h('div',{class:'warnbox'},t('privacy')));return}
- const last=es[0];const open=(last.todo||[]).filter(x=>!x.d&&x.t);
- if(open.length)m.append(h('div',{class:'card carry'},h('div',{class:'tape y'}),h('b',{},t('open')),h('div',{class:'checks',style:'margin-top:4px'},open.map(x=>h('div',{class:'it'},h('input',{type:'checkbox',onchange:async ev=>{x.d=ev.target.checked;await DB.put('entries',last);render()}}),h('input',{type:'text',value:x.t,readonly:true}))))));
- const goods=es.filter(e=>e.best&&e.best.trim()&&e!==last);if(goods.length){const g=goods[Math.floor((Date.now()/864e5)%goods.length)];m.append(h('div',{class:'card memo'},h('div',{class:'tape g'}),h('small',{class:'hint'},t('memo')+' · '+dObj(g.date).toLocaleDateString(ST.lang==='de'?'de-DE':'en-GB',{day:'numeric',month:'long'})),h('div',{class:'q'},'„'+g.best.trim().slice(0,180)+'“')))}
- let cur='';for(const e of es){const d=dObj(e.date);const mk=t('mon')[d.getMonth()]+' '+d.getFullYear();if(mk!==cur){cur=mk;m.append(h('h2',{class:'sec'},mk))}
-  const snip=e.best||e.notes||e.priv||e.worst||'';const nL=(e.learn||[]).length,nP=(e.photos||[]).length;
+function typeStyle(tp){return `background:var(${TCOL[tp]}-l);color:var(${TCOL[tp]}-t)`}
+const sortedE=()=>[...E].sort((a,b)=>(b.date+b.start).localeCompare(a.date+a.start));
+function vJournal(m){const es=sortedE();
+ if(!es.length){m.append(h('div',{class:'card empty'},h('div',{class:'tape'}),h('div',{class:'big'},t('emptyT')),h('p',{},t('emptyP')),h('button',{class:'btn sm',onclick:seedExamples},t('demo'))));m.append(h('div',{class:'warnbox'},t('privacy')));return}
+ if(es.some(x=>x.ex))m.append(exBanner(t('exBannerJ')));
+ const last=es[0];if(last.handOut&&last.handOut.trim())m.append(h('div',{class:'card hand'},h('div',{class:'tape g'}),h('small',{class:'hint'},t('handT')+' · '+t('types')[last.type]+' '+dObj(last.date).toLocaleDateString(loc(),{day:'numeric',month:'short'})),h('div',{class:'hw'},last.handOut.trim())));
+ const open=TK.filter(k=>!k.d).sort((a,b)=>(b.prio?1:0)-(a.prio?1:0)).slice(0,4);
+ if(open.length)m.append(h('div',{class:'card carry',onclick:e=>{if(e.target.type!=='checkbox'){view='tasks';render()}}},h('div',{class:'tape y'}),h('b',{},t('openT')+` (${TK.filter(k=>!k.d).length})`),h('div',{class:'checks',style:'margin-top:4px'},open.map(k=>h('label',{class:'it'},h('input',{type:'checkbox',onchange:async()=>{k.d=true;k.doneAt=Date.now();await DB.put('tasks',k);setTimeout(render,350)}}),h('span',{class:'hw'},k.t))))));
+ const goods=es.filter(e=>e.best&&e.best.trim()&&e!==last);if(goods.length){const g=goods[Math.floor((Date.now()/864e5)%goods.length)];m.append(h('div',{class:'card memo'},h('div',{class:'tape g'}),h('small',{class:'hint'},t('memo')+' · '+dObj(g.date).toLocaleDateString(loc(),{day:'numeric',month:'long'})),h('div',{class:'q hw'},'„'+g.best.trim().slice(0,180)+'“')))}
+ let cm='';for(const e of es){const d=dObj(e.date);const mk=t('mon')[d.getMonth()]+' '+d.getFullYear();if(mk!==cm){cm=mk;m.append(h('h2',{class:'sec'},mk))}
+  const snip=e.best||e.notes||e.handOut||e.priv||e.worst||'';const nL=(e.learn||[]).length,nP=(e.photos||[]).length,nT=TK.filter(k=>k.entryId===e.id&&!k.d).length;
   m.append(h('div',{class:'card entry',onclick:()=>editEntry(e)},h('div',{class:'datebox',style:typeStyle(e.type)},h('span',{},t('wk')[d.getDay()]),h('b',{},String(d.getDate())),h('span',{html:ic(TIC[e.type],2).replace('<svg','<svg width="16" height="16"')})),
-   h('div',{class:'meta'},h('div',{class:'ttl'},t('types')[e.type]),h('div',{class:'hint'},`${e.start}–${e.end}`+(e.ward?' · '+e.ward:'')),snip?h('div',{class:'snip'},snip):'',h('div',{class:'hint',style:'margin-top:4px;display:flex;gap:10px'},nL?`📖 ${nL}`:'',nP?`📷 ${nP}`:'',(e.todo||[]).filter(x=>!x.d&&x.t).length?`📌 ${(e.todo||[]).filter(x=>!x.d&&x.t).length}`:'')),
+   h('div',{class:'meta'},h('div',{class:'ttl'},t('types')[e.type],e.ex?exBadge():''),h('div',{class:'hint'},`${e.start}–${e.end}`+(e.ward?' · '+e.ward:'')),snip?h('div',{class:'snip hw'},snip):'',h('div',{class:'hint',style:'margin-top:4px;display:flex;gap:10px'},nL?`📖 ${nL}`:'',nP?`📷 ${nP}`:'',nT?`☐ ${nT}`:'')),
    e.mood?h('div',{html:face(e.mood,30)}):''))}}
 /* ---------- entry editor ---------- */
-let cur=null,photoCache={};
-async function editEntry(e){const isNew=!e;if(isNew){const last=[...E].sort((a,b)=>(b.date+b.start).localeCompare(a.date+a.start))[0];const tp=last?last.type:'fr';e={id:uid(),date:todayISO(),type:tp,start:DEFT[tp][0],end:DEFT[tp][1],ward:last?last.ward:'',mood:0,energy:0,best:'',worst:'',annoy:'',wish:'',notes:'',priv:'',todo:[{t:'',d:false}],learn:[],photos:[],created:Date.now()}}
- cur=e;for(const p of e.photos||[])if(!photoCache[p]){const r=await DB.get('photos',p);if(r)photoCache[p]=r.data}
+let photoCache={};
+async function editEntry(e){const isNew=!e;if(isNew){const last=sortedE()[0];const tp=last?last.type:'fr';e={id:uid(),date:todayISO(),type:tp,start:DEFT[tp][0],end:DEFT[tp][1],ward:last&&!last.ex?last.ward:'',mood:0,energy:0,handIn:last&&last.handOut&&!last.ex?'':'',handOut:'',best:'',worst:'',annoy:'',wish:'',notes:'',priv:'',learn:[],photos:[],created:Date.now()}}
+ for(const p of e.photos||[])if(!photoCache[p]){const r=await DB.get('photos',p);if(r)photoCache[p]=r.data}
  const s=$('#sheet');s.innerHTML='';const persist=async()=>{e.updated=Date.now();await DB.put('entries',e);if(!E.includes(e))E.push(e)};let tm;const soon=()=>{clearTimeout(tm);tm=setTimeout(persist,400)};
- const bar=h('div',{class:'bar'},h('button',{class:'ibtn',html:ic('back',2.2),onclick:closeSheet}),h('div',{style:'display:flex;gap:8px'},!isNew?h('button',{class:'btn sm',onclick:()=>printEntries([e])},t('print')):'',h('button',{class:'btn pri sm',onclick:async()=>{await persist();toast(t('saved'));closeSheet()}},t('save'))));
+ const bar=h('div',{class:'bar'},h('button',{class:'ibtn',html:ic('back',2.2),onclick:closeSheet}),h('div',{style:'display:flex;gap:8px;align-items:center'},e.ex?exBadge():'',!isNew?h('button',{class:'btn sm',onclick:()=>printEntries([e])},t('print')):'',h('button',{class:'btn pri sm',onclick:async()=>{await persist();toast(t('saved'));closeSheet()}},t('save'))));
  const b=h('div',{class:'body'});s.append(bar,b);
- // type + time
  const tg=h('div',{class:'types'});TYPES.forEach(tp=>tg.append(h('button',{class:e.type===tp?'on':'',style:typeStyle(tp),html:ic(TIC[tp])+`<span>${t('short')[tp]}</span>`,onclick:()=>{e.type=tp;[e.start,e.end]=DEFT[tp];soon();editEntry(e)}})));
  const inp=(k,type)=>{const i=h('input',{class:'f',type,value:e[k]||''});i.oninput=()=>{e[k]=i.value;soon()};return i};
  b.append(h('div',{class:'card'},h('div',{class:'tape'}),tg,h('label',{class:'l',style:'margin-top:12px'},t('date')),inp('date','date'),h('div',{class:'row'},h('div',{},h('label',{class:'l'},t('start')),inp('start','time')),h('div',{},h('label',{class:'l'},t('end')),inp('end','time'))),h('label',{class:'l'},t('ward')),inp('ward','text')));
+ const qcard=(k,...inner)=>{const [bgc,fg]=QC[k];return h('div',{class:'card q'},h('h3',{},h('i',{style:`background:${bgc};color:${fg}`,html:ic(QIC[k])}),t('q')[k][0]),h('p',{class:'sub'},t('q')[k][1]),...inner)};
+ const area=k=>{const a=h('textarea',{class:'f hwin',rows:2});a.value=e[k]||'';a.oninput=()=>{e[k]=a.value;autosize(a);soon()};setTimeout(()=>autosize(a));return a};
+ b.append(qcard('handIn',area('handIn')));
+ // tasks of this shift
+ const tl=h('div',{class:'checks'});const drawT=()=>{tl.innerHTML='';TK.filter(k=>k.entryId===e.id).forEach(k=>tl.append(taskRow(k,drawT)))};drawT();
+ const ti=h('input',{class:'f',placeholder:t('taskPh'),onkeydown:async ev=>{if(ev.key==='Enter'&&ti.value.trim()){await persist();await addTask(ti.value.trim(),e.id);ti.value='';drawT()}}});
+ b.append(qcard('todo',tl,h('div',{class:'row',style:'margin-top:6px'},ti,h('button',{class:'btn sm',style:'flex:0 0 auto',onclick:async()=>{if(ti.value.trim()){await persist();await addTask(ti.value.trim(),e.id);ti.value='';drawT()}}},'+'))));
+ b.append(qcard('handOut',area('handOut')));
  const scale=(k,fn,lab)=>{const w=h('div',{class:'scale'});for(let v=1;v<=5;v++)w.append(h('button',{class:e[k]===v?'on':'',html:fn(v),onclick:()=>{e[k]=e[k]===v?0:v;soon();[...w.children].forEach((x,i)=>x.classList.toggle('on',e[k]===i+1))}}));return h('div',{},h('label',{class:'l'},lab),w)};
  b.append(h('div',{class:'card'},scale('mood',face,t('mood')),scale('energy',battery,t('energy'))));
- const qcard=(k,...inner)=>{const [bgc,fg]=QC[k];return h('div',{class:'card q'},h('h3',{},h('i',{style:`background:${bgc};color:${fg}`,html:ic(QIC[k])}),t('q')[k][0]),h('p',{class:'sub'},t('q')[k][1]),...inner)};
- const area=k=>{const a=h('textarea',{class:'f',rows:2});a.value=e[k]||'';a.oninput=()=>{e[k]=a.value;autosize(a);soon()};setTimeout(()=>autosize(a));return a};
  b.append(qcard('best',area('best')),qcard('worst',area('worst')),qcard('annoy',area('annoy')),qcard('wish',area('wish')));
- // todo
- const tl=h('div',{class:'checks'});const drawT=()=>{tl.innerHTML='';(e.todo||[]).forEach((x,i)=>{const cb=h('input',{type:'checkbox',checked:x.d});const tx=h('input',{type:'text',value:x.t});cb.onchange=()=>{x.d=cb.checked;row.classList.toggle('done',x.d);soon()};tx.oninput=()=>{x.t=tx.value;soon()};tx.onkeydown=ev=>{if(ev.key==='Enter'){e.todo.splice(i+1,0,{t:'',d:false});drawT();tl.querySelectorAll('input[type=text]')[i+1].focus()}};const row=h('div',{class:'it'+(x.d?' done':'')},cb,tx,h('button',{class:'x',onclick:()=>{e.todo.splice(i,1);drawT();soon()}},'×'));tl.append(row)})};drawT();
- b.append(qcard('todo',tl,h('button',{class:'add',onclick:()=>{e.todo=e.todo||[];e.todo.push({t:'',d:false});drawT();const ins=tl.querySelectorAll('input[type=text]');ins[ins.length-1].focus()}},t('addTodo'))));
- // learned
- const ll=h('div',{});const drawL=()=>{ll.innerHTML='';(e.learn||[]).map(id=>C.find(c=>c.id===id)).filter(Boolean).forEach(c=>ll.append(cardView(c,()=>editCard(c,e,()=>{drawL()}))))};drawL();
- b.append(qcard('learn',ll,h('button',{class:'add',onclick:async()=>{await persist();editCard(null,e,()=>drawL())}},t('addLearn'))));
+ const ll=h('div',{});const drawL=()=>{ll.innerHTML='';(e.learn||[]).map(id=>C.find(c=>c.id===id)).filter(Boolean).forEach(c=>ll.append(cardView(c,()=>editCard(c,e,drawL))))};drawL();
+ b.append(qcard('learn',ll,h('button',{class:'add',onclick:async()=>{await persist();editCard(null,e,drawL)}},t('addLearn'))));
  b.append(qcard('notes',area('notes')),qcard('priv',area('priv')));
- // photos
  const pg=h('div',{class:'photos'});const fi=h('input',{type:'file',accept:'image/*',multiple:true,style:'display:none'});
  const drawP=()=>{pg.innerHTML='';(e.photos||[]).forEach((id,i)=>pg.append(h('div',{class:'ph'},h('img',{src:photoCache[id]||''}),h('button',{onclick:async()=>{e.photos.splice(i,1);await DB.del('photos',id);drawP();soon()}},'×'))));pg.append(h('button',{class:'phadd',onclick:()=>fi.click(),html:ic('img')+`<div>${t('addPhoto')}</div>`}))};
  fi.onchange=async()=>{for(const f of fi.files){const d=await shrink(f);const id=uid();await DB.put('photos',{id,data:d});photoCache[id]=d;e.photos=e.photos||[];e.photos.push(id)}fi.value='';drawP();soon()};drawP();
  b.append(qcard('photos',pg,fi,h('div',{class:'warnbox'},t('privacy'))));
  if(!isNew)b.append(h('div',{style:'text-align:center;margin-top:10px'},h('button',{class:'btn danger sm',onclick:()=>{if(confirm(t('delQ'))){(e.photos||[]).forEach(p=>DB.del('photos',p));DB.del('entries',e.id);E=E.filter(x=>x!==e);closeSheet()}}},t('del'))));
  s.classList.add('show');s.scrollTop=0;document.body.style.overflow='hidden'}
-function closeSheet(){$('#sheet').classList.remove('show');document.body.style.overflow='';cur=null;render()}
-/* ---------- learning cards ---------- */
-function cardView(c,onclick){const k=c.kind,col=KC[k];const ent=c.entryId&&E.find(x=>x.id===c.entryId);
- return h('div',{class:'card lc',style:`border-left-color:${col}`,onclick},h('div',{class:'k',style:`color:${col}`},t('kinds')[k]+(ent?` · ${t('cardFrom')} ${dObj(ent.date).toLocaleDateString(ST.lang==='de'?'de-DE':'en-GB')}`:'')),h('h4',{},c.title||'—'),
-  t('kf')[k].map((lab,i)=>c.f&&c.f[i]?h('div',{class:'fld'},h('b',{},lab+': '),c.f[i]):''))}
-function editCard(c,entry,after){const isNew=!c;c=c||{id:uid(),kind:'abx',title:'',f:[],entryId:entry?entry.id:null,created:Date.now()};
- modal(mc=>{const draw=()=>{mc.innerHTML='';mc.append(h('h3',{},isNew?t('newCard').replace('+ ',''):t('kinds')[c.kind]));
-  const ch=h('div',{class:'chips'});Object.keys(KC).forEach(k=>ch.append(h('button',{class:c.kind===k?'on':'',onclick:()=>{c.kind=k;draw()}},t('kinds')[k])));mc.append(ch);
-  const ti=h('input',{class:'f',value:c.title,placeholder:t('title')});ti.oninput=()=>c.title=ti.value;mc.append(h('label',{class:'l'},t('title')),ti);
-  t('kf')[c.kind].forEach((lab,i)=>{const a=h('textarea',{class:'f',rows:2});a.style.fontFamily="'DM Sans'";a.style.fontSize='16px';a.style.background='#fff';a.value=c.f[i]||'';a.oninput=()=>{c.f[i]=a.value;autosize(a)};setTimeout(()=>autosize(a));mc.append(h('label',{class:'l'},lab),a)});
-  mc.append(h('div',{class:'row',style:'margin-top:14px'},!isNew?h('button',{class:'btn danger',onclick:async()=>{await DB.del('cards',c.id);C=C.filter(x=>x!==c);if(entry)entry.learn=(entry.learn||[]).filter(x=>x!==c.id);else E.forEach(x=>{if(x.learn)x.learn=x.learn.filter(y=>y!==c.id)});closeModal();after?after():render()}},t('del')):h('button',{class:'btn',onclick:closeModal},t('cancel')),
-   h('button',{class:'btn pri',onclick:async()=>{c.updated=Date.now();await DB.put('cards',c);if(!C.includes(c))C.push(c);if(entry&&!(entry.learn||[]).includes(c.id)){entry.learn=entry.learn||[];entry.learn.push(c.id);await DB.put('entries',entry);if(!E.includes(entry))E.push(entry)}closeModal();after?after():render()}},t('save'))))};draw()})}
-function vLearn(m){const si=h('input',{class:'f',placeholder:t('search'),value:q});si.oninput=()=>{q=si.value;list()};m.append(h('div',{class:'search',style:'margin-top:4px'},h('span',{html:ic('search')}),si));
- const ch=h('div',{class:'chips'});['all',...Object.keys(KC)].forEach(k=>ch.append(h('button',{class:kindF===k?'on':'',onclick:()=>{kindF=k;render()}},k==='all'?t('all')+` (${C.length})`:t('kinds')[k]+` (${C.filter(c=>c.kind===k).length})`)));m.append(ch);
- const box=h('div',{});m.append(box);const list=()=>{box.innerHTML='';const qq=q.toLowerCase();const cs=C.filter(c=>(kindF==='all'||c.kind===kindF)&&(!qq||(c.title+' '+(c.f||[]).join(' ')).toLowerCase().includes(qq))).sort((a,b)=>(b.updated||b.created)-(a.updated||a.created));
-  if(!cs.length){box.append(h('div',{class:'card empty'},h('p',{},t('emptyL'))));return}cs.forEach(c=>box.append(cardView(c,()=>editCard(c))))};list()}
+function closeSheet(){$('#sheet').classList.remove('show');document.body.style.overflow='';render()}
+/* ---------- tasks ---------- */
+async function addTask(txt,entryId=null){const k={id:uid(),t:txt,d:false,prio:false,entryId,created:Date.now()};await DB.put('tasks',k);TK.push(k);return k}
+function taskRow(k,after){const cb=h('input',{type:'checkbox'});cb.checked=k.d;const ent=k.entryId&&E.find(x=>x.id===k.entryId);
+ const row=h('div',{class:'it task'+(k.d?' done':'')+(k.prio?' prio':'')},cb,h('div',{class:'tt'},h('span',{class:'hw'},k.t),ent&&view==='tasks'?h('small',{class:'hint'},`${t('fromShift')} ${t('types')[ent.type]} ${dObj(ent.date).toLocaleDateString(loc(),{day:'numeric',month:'short'})}`):'',k.ex?exBadge():''),
+  h('button',{class:'star'+(k.prio?' on':''),title:t('prio'),onclick:async()=>{k.prio=!k.prio;await DB.put('tasks',k);after?after():render()}},'!'),h('button',{class:'x',onclick:async()=>{await DB.del('tasks',k.id);TK=TK.filter(x=>x!==k);after?after():render()}},'×'));
+ cb.onchange=async()=>{k.d=cb.checked;k.doneAt=Date.now();row.classList.toggle('done',k.d);if(k.d){row.classList.add('pop');if(navigator.vibrate)navigator.vibrate(15)}await DB.put('tasks',k);setTimeout(()=>{after?after():render()},450)};return row}
+function vTasks(m){const ti=h('input',{class:'f',id:'taskin',placeholder:t('taskPh'),onkeydown:async ev=>{if(ev.key==='Enter'&&ti.value.trim()){await addTask(ti.value.trim());render();setTimeout(()=>$('#taskin').focus())}}});
+ m.append(h('div',{class:'card'},h('div',{class:'tape y'}),h('div',{class:'row'},ti,h('button',{class:'btn pri',style:'flex:0 0 auto',onclick:async()=>{if(ti.value.trim()){await addTask(ti.value.trim());render()}}},'+'))));
+ if(TK.some(x=>x.ex))m.append(exBanner(t('exBannerJ')));
+ const open=TK.filter(k=>!k.d).sort((a,b)=>(b.prio?1:0)-(a.prio?1:0)||a.created-b.created),done=TK.filter(k=>k.d).sort((a,b)=>(b.doneAt||0)-(a.doneAt||0));
+ m.append(h('h2',{class:'sec'},`${t('open')} (${open.length})`));m.append(open.length?h('div',{class:'card checks'},open.map(k=>taskRow(k))):h('div',{class:'card empty'},h('div',{class:'big'},t('emptyTask'))));
+ if(done.length){m.append(h('h2',{class:'sec'},`${t('doneT')} (${done.length})`),h('div',{class:'card checks'},done.slice(0,30).map(k=>taskRow(k))),h('div',{style:'text-align:center'},h('button',{class:'btn sm',onclick:async()=>{for(const k of done)await DB.del('tasks',k.id);TK=TK.filter(k=>!k.d);render()}},t('clearDone'))))}}
+/* ---------- notebook ---------- */
+function cardView(c,onclick){const k=c.kind,col=KC[k]||'#8a7f74';const ent=c.entryId&&E.find(x=>x.id===c.entryId);
+ return h('div',{class:'card lc'+(c.ex?' isex':''),style:`border-left-color:${col}`,onclick},h('div',{class:'k',style:`color:${col}`},t('kind1')[k]||k,c.ex?exBadge():'',ent&&!c.ex?h('span',{class:'hint',style:'font-weight:500;letter-spacing:0;text-transform:none'},` · ${t('cardFrom')} ${dObj(ent.date).toLocaleDateString(loc())}`):''),h('h4',{},c.title||'—'),
+  (t('kf')[k]||[]).map((lab,i)=>c.f&&c.f[i]?h('div',{class:'fld'},h('b',{},lab+': '),h('span',{class:'hw'},c.f[i])):''))}
+function editCard(c,entry,after){const isNew=!c;c=c||{id:uid(),kind:kindF!=='all'?kindF:'med',title:'',f:[],entryId:entry?entry.id:null,created:Date.now()};
+ modal(mc=>{const draw=()=>{mc.innerHTML='';mc.append(h('h3',{},isNew?t('newCard'):t('kind1')[c.kind],c.ex?exBadge():''));
+  if(c.ex)mc.append(h('div',{class:'exbanner',style:'margin:6px 0'},h('div',{},t('exBanner'))));
+  const ch=h('div',{class:'chips wrap'});KINDS.forEach(k=>ch.append(h('button',{class:c.kind===k?'on':'',onclick:()=>{c.kind=k;draw()}},t('kind1')[k])));mc.append(ch);
+  const ti=h('input',{class:'f',value:c.title});ti.oninput=()=>c.title=ti.value;mc.append(h('label',{class:'l'},t('title')),ti);
+  t('kf')[c.kind].forEach((lab,i)=>{const a=h('textarea',{class:'f hwin',rows:2});a.value=c.f[i]||'';a.oninput=()=>{c.f[i]=a.value;autosize(a)};setTimeout(()=>autosize(a));mc.append(h('label',{class:'l'},lab),a)});
+  mc.append(h('div',{class:'row',style:'margin-top:14px'},!isNew?h('button',{class:'btn danger',onclick:async()=>{await DB.del('cards',c.id);C=C.filter(x=>x!==c);E.forEach(x=>{if(x.learn)x.learn=x.learn.filter(y=>y!==c.id)});closeModal();after?after():render()}},t('del')):h('button',{class:'btn',onclick:closeModal},t('cancel')),
+   h('button',{class:'btn pri',onclick:async()=>{if(c.ex&&!isNew)delete c.ex;c.updated=Date.now();await DB.put('cards',c);if(!C.includes(c))C.push(c);if(entry&&!(entry.learn||[]).includes(c.id)){entry.learn=entry.learn||[];entry.learn.push(c.id);await DB.put('entries',entry);if(!E.includes(entry))E.push(entry)}closeModal();after?after():render()}},t('save'))))};draw()})}
+function vBook(m){const si=h('input',{class:'f',placeholder:t('search'),value:q});si.oninput=()=>{q=si.value;list()};
+ const so=h('div',{class:'seg'},[['az',t('sortAZ')],['new',t('sortNew')]].map(([k,l])=>h('button',{class:ST.sort===k?'on':'',onclick:()=>{ST.sort=k;saveST();render()}},l)));
+ m.append(h('div',{class:'row',style:'margin-top:4px;align-items:center'},h('div',{class:'search',style:'flex:1;margin:0'},h('span',{html:ic('search')}),si),so));
+ const ch=h('div',{class:'chips'});['all',...KINDS].forEach(k=>ch.append(h('button',{class:kindF===k?'on':'',onclick:()=>{kindF=k;render()}},k==='all'?t('all')+` (${C.length})`:t('kinds')[k]+` (${C.filter(c=>c.kind===k).length})`)));m.append(ch);
+ if(C.some(c=>c.ex))m.append(exBanner(t('exBanner')));
+ const box=h('div',{});m.append(box);const list=()=>{box.innerHTML='';const qq=q.toLowerCase();let cs=C.filter(c=>(kindF==='all'||c.kind===kindF)&&(!qq||(c.title+' '+(c.f||[]).join(' ')).toLowerCase().includes(qq)));
+  cs.sort(ST.sort==='az'?(a,b)=>(a.title||'').localeCompare(b.title||'',loc(),{sensitivity:'base'}):(a,b)=>(b.updated||b.created)-(a.updated||a.created));
+  if(!cs.length){box.append(h('div',{class:'card empty'},h('p',{},t('emptyL'))));return}
+  if(ST.sort==='az'&&!qq){let L0='';cs.forEach(c=>{const l=(c.title||'#').trim()[0].toUpperCase();if(l!==L0){L0=l;box.append(h('div',{class:'letter'},l))}box.append(cardView(c,()=>editCard(c)))})}else cs.forEach(c=>box.append(cardView(c,()=>editCard(c))))};list()}
 /* ---------- phone ---------- */
-function vTel(m){if(!TL.length){m.append(h('div',{class:'card empty'},h('div',{class:'tape g'}),h('p',{},t('emptyTel'))));return}
- t('tcats').forEach((cat,ci)=>{const ts=TL.filter(x=>(x.cat||0)===ci).sort((a,b)=>a.name.localeCompare(b.name));if(!ts.length)return;m.append(h('h2',{class:'sec'},cat));
-  m.append(h('div',{class:'card'},ts.map(x=>h('div',{class:'tel'},h('div',{class:'nm',onclick:()=>editTel(x)},h('b',{},x.name),x.note?h('span',{},x.note):''),h('div',{class:'num',onclick:()=>editTel(x)},x.num),
+function vTel(m){if(TL.some(x=>x.ex))m.append(exBanner(t('exBannerJ')));if(!TL.length){m.append(h('div',{class:'card empty'},h('div',{class:'tape g'}),h('p',{},t('emptyTel'))));return}
+ t('tcats').forEach((cat,ci)=>{const ts=TL.filter(x=>(x.cat||0)===ci).sort((a,b)=>a.name.localeCompare(b.name,loc()));if(!ts.length)return;m.append(h('h2',{class:'sec'},cat));
+  m.append(h('div',{class:'card'},ts.map(x=>h('div',{class:'tel'},h('div',{class:'nm',onclick:()=>editTel(x)},h('b',{},x.name,x.ex?exBadge():''),x.note?h('span',{},x.note):''),h('div',{class:'num',onclick:()=>editTel(x)},x.num),
    h('button',{class:'c',html:ic('copy'),onclick:async()=>{try{await navigator.clipboard.writeText(x.num);toast(t('copied'))}catch(e){}}}),h('a',{href:'tel:'+x.num.replace(/[^\d+]/g,''),html:ic('phone')})))))})}
 function editTel(x){const isNew=!x;x=x||{id:uid(),name:'',num:'',cat:0,note:''};modal(mc=>{const f=(k,lab,type='text')=>{const i=h('input',{class:'f',type,value:x[k]||''});i.oninput=()=>x[k]=i.value;return h('div',{},h('label',{class:'l'},lab),i)};
  const sel=h('select',{class:'f'},t('tcats').map((c,i)=>h('option',{value:i,selected:x.cat===i},c)));sel.onchange=()=>x.cat=+sel.value;
- mc.append(h('h3',{},isNew?t('newTel').replace('+ ',''):x.name),f('name',t('tname')),f('num',t('tnum'),'tel'),h('label',{class:'l'},t('tcat')),sel,f('note',t('tnote')),
-  h('div',{class:'row',style:'margin-top:14px'},!isNew?h('button',{class:'btn danger',onclick:async()=>{await DB.del('tels',x.id);TL=TL.filter(y=>y!==x);closeModal();render()}},t('del')):h('button',{class:'btn',onclick:closeModal},t('cancel')),h('button',{class:'btn pri',onclick:async()=>{if(!x.name&&!x.num)return closeModal();await DB.put('tels',x);if(!TL.includes(x))TL.push(x);closeModal();render()}},t('save'))))})}
+ mc.append(h('h3',{},isNew?t('newTel'):x.name),f('name',t('tname')),f('num',t('tnum'),'tel'),h('label',{class:'l'},t('tcat')),sel,f('note',t('tnote')),
+  h('div',{class:'row',style:'margin-top:14px'},!isNew?h('button',{class:'btn danger',onclick:async()=>{await DB.del('tels',x.id);TL=TL.filter(y=>y!==x);closeModal();render()}},t('del')):h('button',{class:'btn',onclick:closeModal},t('cancel')),h('button',{class:'btn pri',onclick:async()=>{if(!x.name&&!x.num)return closeModal();if(!isNew)delete x.ex;await DB.put('tels',x);if(!TL.includes(x))TL.push(x);closeModal();render()}},t('save'))))})}
 /* ---------- stats ---------- */
 function vStats(m){if(!E.length){m.append(h('div',{class:'card empty'},h('p',{},t('noData'))));return}const y=new Date().getFullYear();const ey=E.filter(e=>dObj(e.date).getFullYear()===y);
  const hrs=ey.reduce((a,e)=>a+hours(e),0),nights=ey.filter(e=>e.type==='na'||e.type==='h24').length;
  m.append(h('h2',{class:'sec'},String(y)),h('div',{class:'kpis'},h('div',{class:'kpi'},h('b',{},String(ey.length)),h('span',{},t('year'))),h('div',{class:'kpi'},h('b',{},fmtH(hrs)),h('span',{},t('hours'))),h('div',{class:'kpi'},h('b',{},String(nights)),h('span',{},t('nights')))));
- const mx=Math.max(1,...TYPES.map(tp=>ey.filter(e=>e.type===tp).length));m.append(h('div',{class:'card'},h('h3',{style:"font-family:'Fraunces';margin:0 0 6px"},t('perType')),h('div',{class:'bars'},TYPES.map(tp=>{const n=ey.filter(e=>e.type===tp).length;return h('div',{class:'b'},h('span',{},t('short')[tp]),h('i',{style:`width:${n/mx*65}%;background:var(${TCOL[tp]})`}),h('span',{class:'hint'},String(n)))}))));
+ const mx=Math.max(1,...TYPES.map(tp=>ey.filter(e=>e.type===tp).length));m.append(h('div',{class:'card'},h('h3',{class:'ch'},t('perType')),h('div',{class:'bars'},TYPES.map(tp=>{const n=ey.filter(e=>e.type===tp).length;return h('div',{class:'b'},h('span',{},t('short')[tp]),h('i',{style:`width:${n/mx*65}%;background:var(${TCOL[tp]})`}),h('span',{class:'hint'},String(n)))}))));
  const mt=TYPES.map(tp=>{const xs=E.filter(e=>e.type===tp&&e.mood);return[tp,xs.length?xs.reduce((a,e)=>a+e.mood,0)/xs.length:0]}).filter(x=>x[1]);
- if(mt.length)m.append(h('div',{class:'card'},h('h3',{style:"font-family:'Fraunces';margin:0 0 6px"},t('moodType')),h('div',{style:'display:flex;flex-wrap:wrap;gap:14px'},mt.map(([tp,v])=>h('div',{style:'text-align:center'},h('div',{html:face(Math.round(v),40)}),h('div',{class:'hint'},t('short')[tp]),h('div',{style:'font-weight:600;font-size:13px'},fmtH(v)))))));
+ if(mt.length)m.append(h('div',{class:'card'},h('h3',{class:'ch'},t('moodType')),h('div',{style:'display:flex;flex-wrap:wrap;gap:14px'},mt.map(([tp,v])=>h('div',{style:'text-align:center'},h('div',{html:face(Math.round(v),40)}),h('div',{class:'hint'},t('short')[tp]),h('div',{style:'font-weight:600;font-size:13px'},fmtH(v)))))));
  const last=[...E].filter(e=>e.mood).sort((a,b)=>a.date.localeCompare(b.date)).slice(-20);if(last.length>1){const W=640,H=120,stp=W/(last.length-1);const pts=last.map((e,i)=>[i*stp,H-10-(e.mood-1)/4*(H-20)]);const d='M'+pts.map(p=>p.join(',')).join(' L');
-  m.append(h('div',{class:'card'},h('h3',{style:"font-family:'Fraunces';margin:0 0 6px"},t('moodLast')),h('div',{html:`<svg viewBox="-10 0 ${W+20} ${H}" style="width:100%;height:auto"><path d="${d}" fill="none" stroke="#5f7d6b" stroke-width="3" stroke-linejoin="round"/>${pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="6" fill="var(${TCOL[last[i].type]})" stroke="#fff" stroke-width="2"/>`).join('')}</svg>`}),h('div',{class:'hint',style:'display:flex;gap:10px;flex-wrap:wrap'},TYPES.map(tp=>h('span',{},h('span',{style:`display:inline-block;width:10px;height:10px;border-radius:50%;background:var(${TCOL[tp]});margin-right:4px`}),t('short')[tp])))))}}
+  m.append(h('div',{class:'card'},h('h3',{class:'ch'},t('moodLast')),h('div',{html:`<svg viewBox="-10 0 ${W+20} ${H}" style="width:100%;height:auto"><path d="${d}" fill="none" stroke="var(--acc)" stroke-width="3" stroke-linejoin="round"/>${pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="6" fill="var(${TCOL[last[i].type]})" stroke="var(--card)" stroke-width="2"/>`).join('')}</svg>`})))}}
 /* ---------- settings ---------- */
 function settings(){modal(mc=>{const ni=h('input',{class:'f',value:ST.name});ni.oninput=()=>{ST.name=ni.value;saveST();shell()};
  const rs=h('select',{class:'f'},t('roles').map((r,i)=>h('option',{value:i,selected:ST.role===i},r)));rs.onchange=()=>{ST.role=+rs.value;saveST()};
  const ls=h('select',{class:'f'},h('option',{value:'de',selected:ST.lang==='de'},'Deutsch'),h('option',{value:'en',selected:ST.lang==='en'},'English'));ls.onchange=()=>{ST.lang=ls.value;saveST();closeModal();render();settings()};
  const imf=h('input',{type:'file',accept:'.json,application/json',style:'display:none'});imf.onchange=()=>importBackup(imf.files[0]);
- mc.append(h('h3',{},t('settings')),h('label',{class:'l'},t('name')),ni,h('label',{class:'l'},t('role')),rs,h('label',{class:'l'},t('lang')),ls,
+ const dz=h('div',{class:'designs'},Object.keys(t('designs')).map(k=>h('button',{class:'dz dz-'+k+(ST.theme===k?' on':''),onclick:()=>{ST.theme=k;saveST();applyLook();[...dz.children].forEach(x=>x.classList.toggle('on',x.classList.contains('dz-'+k)))}},h('i'),h('span',{},t('designs')[k]))));
+ const fz=h('div',{class:'seg wide'},Object.keys(t('fonts')).map(k=>h('button',{class:'fz-'+k+(ST.font===k?' on':''),onclick:()=>{ST.font=k;saveST();applyLook();[...fz.children].forEach(x=>x.classList.toggle('on',x.classList.contains('fz-'+k)))}},t('fonts')[k])));
+ mc.append(h('h3',{},t('settings')),h('label',{class:'l'},t('design')),dz,h('label',{class:'l'},t('font')),fz,h('div',{class:'hw sample'},t('fontSample')),
+  h('label',{class:'l'},t('name')),ni,h('label',{class:'l'},t('role')),rs,h('label',{class:'l'},t('lang')),ls,
   h('label',{class:'l'},t('pin')),h('div',{class:'row'},ST.pin?h('button',{class:'btn',onclick:async()=>{ST.pin='';await saveST();toast(t('saved'))}},t('pinOff')):h('button',{class:'btn',onclick:()=>{const p=prompt(t('pinNew'));if(p&&/^\d{4}$/.test(p))sha(p).then(x=>{ST.pin=x;saveST();toast(t('saved'))})}},t('pinSet'))),
   h('label',{class:'l'},t('backup')),h('div',{class:'row'},h('button',{class:'btn',onclick:exportBackup},t('exp')),h('button',{class:'btn',onclick:()=>imf.click()},t('imp'))),imf,
-  h('label',{class:'l'},t('print')),h('button',{class:'btn',style:'width:100%',onclick:()=>{closeModal();printEntries([...E].sort((a,b)=>a.date.localeCompare(b.date)))}},t('printAll')),
+  h('label',{class:'l'},t('print')),h('div',{class:'row'},h('button',{class:'btn',onclick:()=>{closeModal();printEntries([...E].sort((a,b)=>a.date.localeCompare(b.date)))}},t('printAll')),h('button',{class:'btn',onclick:()=>{closeModal();printBook()}},t('printBook'))),
+  hasEx()?h('button',{class:'btn',style:'width:100%;margin-top:12px',onclick:()=>{closeModal();removeExamples()}},t('exDel')):'',
   h('div',{class:'warnbox',style:'margin-top:14px'},t('privacy')),h('p',{class:'hint'},t('hint2')),
-  h('div',{class:'row',style:'margin-top:8px'},h('button',{class:'btn danger',onclick:async()=>{if(confirm(t('resetQ'))){for(const s of['entries','cards','tels','photos'])await DB.clear(s);E=[];C=[];TL=[];closeModal();render()}}},t('reset')),h('button',{class:'btn pri',onclick:closeModal},t('save'))),
+  h('div',{class:'row',style:'margin-top:8px'},h('button',{class:'btn danger',onclick:async()=>{if(confirm(t('resetQ'))){for(const s of['entries','cards','tels','photos','tasks'])await DB.clear(s);E=[];C=[];TL=[];TK=[];closeModal();render()}}},t('reset')),h('button',{class:'btn pri',onclick:closeModal},t('save'))),
   h('p',{class:'hint',style:'text-align:center;margin-top:14px'},t('copyright')))})}
-async function exportBackup(){const ph=await DB.all('photos');const data={v:1,app:'lv-dienst-tagebuch',at:new Date().toISOString(),settings:{...ST,pin:''},entries:E,cards:C,tels:TL,photos:ph};const b=new Blob([JSON.stringify(data)],{type:'application/json'});const u=URL.createObjectURL(b);const a=h('a',{href:u,download:`dienst-tagebuch-${todayISO()}.json`});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),20000)}
-async function importBackup(f){if(!f)return;try{const d=JSON.parse(await f.text());if(d.app!=='lv-dienst-tagebuch')throw 0;for(const e of d.entries||[])await DB.put('entries',e);for(const c of d.cards||[])await DB.put('cards',c);for(const x of d.tels||[])await DB.put('tels',x);for(const p of d.photos||[])await DB.put('photos',p);await load();closeModal();render();toast(t('impOk'))}catch(e){alert('?')}}
+async function exportBackup(){const ph=await DB.all('photos');const data={v:2,app:'lv-dienst-tagebuch',at:new Date().toISOString(),settings:{...ST,pin:''},entries:E,cards:C,tels:TL,tasks:TK,photos:ph};const b=new Blob([JSON.stringify(data)],{type:'application/json'});const u=URL.createObjectURL(b);const a=h('a',{href:u,download:`dienst-tagebuch-${todayISO()}.json`});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),20000)}
+async function importBackup(f){if(!f)return;try{const d=JSON.parse(await f.text());if(d.app!=='lv-dienst-tagebuch')throw 0;for(const [s,a] of [['entries',d.entries],['cards',d.cards],['tels',d.tels],['tasks',d.tasks],['photos',d.photos]])for(const x of a||[])await DB.put(s,x);await load();closeModal();render();toast(t('impOk'))}catch(e){alert('?')}}
 /* ---------- print ---------- */
-async function printEntries(list){const pa=$('#printarea');pa.innerHTML='';for(const e of list){const d=dObj(e.date);const pg=h('div',{class:'pp'},h('h1',{},`${t('types')[e.type]} · ${d.toLocaleDateString(ST.lang==='de'?'de-DE':'en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}`),h('div',{},`${e.start}–${e.end}${e.ward?' · '+e.ward:''}`),h('div',{html:(e.mood?face(e.mood,28):'')+' '+(e.energy?battery(e.energy,28):'')}));
-  for(const k of['best','worst','annoy','wish','notes','priv'])if(e[k]&&e[k].trim())pg.append(h('h3',{},t('q')[k][0]),h('div',{class:'hw'},e[k]));
-  const td=(e.todo||[]).filter(x=>x.t);if(td.length)pg.append(h('h3',{},t('q').todo[0]),h('div',{class:'hw'},td.map(x=>(x.d?'☑ ':'☐ ')+x.t).join('\n')));
-  const cs=(e.learn||[]).map(id=>C.find(c=>c.id===id)).filter(Boolean);if(cs.length){pg.append(h('h3',{},t('q').learn[0]));cs.forEach(c=>pg.append(h('div',{},h('b',{},t('kinds')[c.kind]+': '+c.title),t('kf')[c.kind].map((lab,i)=>c.f[i]?h('div',{},lab+': '+c.f[i]):''))))}
-  if((e.photos||[]).length){const w=h('div',{});for(const p of e.photos){const r=photoCache[p]||(await DB.get('photos',p)||{}).data;if(r)w.append(h('img',{src:r}))}pg.append(w)}pa.append(pg)}
- setTimeout(()=>print(),300)}
-/* ---------- demo ---------- */
-async function loadDemo(){const de=ST.lang==='de';const day=n=>{const d=new Date();d.setDate(d.getDate()-n);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
- const cards=[{id:uid(),kind:'abx',title:de?'Divertikulitis (unkompliziert)':'Diverticulitis (uncomplicated)',f:de?['Sigmadivertikulitis','Gramnegative, Anaerobier','laut Hausstandard eintragen','laut Hausstandard','S3-Leitlinie Divertikelkrankheit']:['Sigmoid diverticulitis','Gram-negatives, anaerobes','add your local standard','per local standard','national guideline']},
-  {id:uid(),kind:'lab',title:'CRP',f:de?['< 5 mg/l','Entzündung, Infektion, postoperativ (Peak Tag 2–3)','—','Postop. erneuter Anstieg ab Tag 4: an Komplikation denken']:['< 5 mg/l','Inflammation, infection, post-op (peak day 2–3)','—','Rising again after day 4: think of a complication']},
-  {id:uid(),kind:'score',title:'qSOFA',f:de?['Verdacht auf Sepsis außerhalb der Intensiv','AF ≥ 22, RR sys ≤ 100, verändertes Bewusstsein (je 1 Punkt)','≥ 2 Punkte: erhöhtes Risiko, weiter abklären']:['Suspected sepsis outside ICU','RR ≥ 22, SBP ≤ 100, altered mentation (1 point each)','≥ 2 points: higher risk, investigate']},
-  {id:uid(),kind:'sop',title:de?'Lap. Cholezystektomie':'Lap. cholecystectomy',f:de?['Flüssige Kost','Schonkost, mobilisieren','Labor, ggf. Drainage ex','Entlassung nach 2 Nächten']:['Clear fluids','Light diet, mobilise','Labs, drain out if any','Discharge after 2 nights']}];
- const ents=[{type:'fr',d:1,mood:4,energy:3,ward:de?'Station 4B':'Ward 4B',best:de?'Frau aus Zimmer 12 hat sich beim Abschied bedankt und gesagt, ich hätte ihr die Angst vor der OP genommen.':'The lady in room 12 thanked me and said I took away her fear before surgery.',worst:de?'Drei Aufnahmen gleichzeitig, und das Telefon hat nicht aufgehört.':'Three admissions at once and the phone never stopped.',annoy:de?'Schon wieder kein Drucker auf Station.':'Once again no working printer on the ward.',wish:de?'Feste Zeit für die Visite, ohne Unterbrechungen.':'A fixed time for rounds without interruptions.',notes:de?'Viel Wundkontrolle, zwei Entlassungen, eine Verlegung auf IMC.':'Lots of wound checks, two discharges, one transfer to step-down.',priv:de?'In der Pause überlegt: Im Frühling will ich endlich den Italienischkurs anfangen.':'Thought during my break: this spring I finally want to start Italian lessons.',todo:[{t:de?'Laborkontrolle Zimmer 7 nachschauen':'Check labs room 7',d:false},{t:de?'Arztbrief fertig schreiben':'Finish discharge letter',d:true}],learn:[cards[1].id,cards[3].id]},
-  {type:'na',d:3,mood:2,energy:1,ward:de?'Notaufnahme':'ED',best:de?'Um 3 Uhr Pizza mit dem ganzen Team.':'Pizza with the whole team at 3 am.',worst:de?'Eine Reanimation, die wir nicht gewinnen konnten.':'A resuscitation we couldn’t win.',annoy:'',wish:de?'Mehr Zeit für ein Debriefing nach schweren Fällen.':'More time to debrief after hard cases.',notes:de?'Sepsis-Verdacht früh erkannt, Blutkulturen vor Antibiose.':'Spotted suspected sepsis early, blood cultures before antibiotics.',priv:'',todo:[],learn:[cards[2].id]},
-  {type:'sp',d:6,mood:5,energy:4,ward:de?'Station 4B':'Ward 4B',best:de?'Zum ersten Mal allein eine Drainage gezogen, alles glatt.':'Removed a drain on my own for the first time, all smooth.',worst:'',annoy:de?'Übergabe hat 40 Minuten gedauert.':'Handover took 40 minutes.',wish:'',notes:'',priv:de?'Urlaubsziele 2027 gesammelt: Lissabon, Dolomiten.':'Collected holiday ideas for 2027: Lisbon, Dolomites.',todo:[],learn:[cards[0].id]},
-  {type:'h24',d:10,mood:3,energy:2,ward:de?'Chirurgie':'Surgery',best:de?'Ruhige Stunde am Morgen mit Sonnenaufgang aus dem 6. Stock.':'A quiet hour at sunrise from the 6th floor.',worst:'',annoy:'',wish:'',notes:'',priv:'',todo:[],learn:[]}];
- for(const c of cards){c.created=Date.now();await DB.put('cards',c)}
- for(const x of ents){const e={id:uid(),date:day(x.d),type:x.type,start:DEFT[x.type][0],end:DEFT[x.type][1],ward:x.ward,mood:x.mood,energy:x.energy,best:x.best,worst:x.worst,annoy:x.annoy,wish:x.wish,notes:x.notes,priv:x.priv,todo:x.todo,learn:x.learn,photos:[],created:Date.now()};cards.forEach(c=>{if(x.learn.includes(c.id)){c.entryId=e.id;DB.put('cards',c)}});await DB.put('entries',e)}
- const tels=de?[['Station 4B',' 1234',0],['Notaufnahme','1100',1],['Labor','2200',1],['Radiologie','2300',1],['Reanimation','4444',2],['Blutbank','2500',1],['Sekretariat Chirurgie','3000',3]]:[['Ward 4B','1234',0],['Emergency dept.','1100',1],['Lab','2200',1],['Radiology','2300',1],['Resuscitation','4444',2],['Blood bank','2500',1],['Surgery office','3000',3]];
- for(const [n,num,cat] of tels)await DB.put('tels',{id:uid(),name:n,num:num.trim(),cat,note:''});await load();render()}
+async function printEntries(list){const pa=$('#printarea');pa.innerHTML='';for(const e of list){const d=dObj(e.date);const pg=h('div',{class:'pp'},h('h1',{},`${t('types')[e.type]} · ${d.toLocaleDateString(loc(),{weekday:'long',day:'numeric',month:'long',year:'numeric'})}`),h('div',{},`${e.start}–${e.end}${e.ward?' · '+e.ward:''}`),h('div',{html:(e.mood?face(e.mood,28):'')+' '+(e.energy?battery(e.energy,28):'')}));
+  for(const k of['handIn','handOut','best','worst','annoy','wish','notes','priv'])if(e[k]&&e[k].trim())pg.append(h('h3',{},t('q')[k][0]),h('div',{class:'hw'},e[k]));
+  const td=TK.filter(k=>k.entryId===e.id);if(td.length)pg.append(h('h3',{},t('q').todo[0]),h('div',{class:'hw'},td.map(x=>(x.d?'☑ ':'☐ ')+x.t).join('\n')));
+  const cs=(e.learn||[]).map(id=>C.find(c=>c.id===id)).filter(Boolean);if(cs.length){pg.append(h('h3',{},t('q').learn[0]));cs.forEach(c=>pg.append(h('div',{},h('b',{},t('kind1')[c.kind]+': '+c.title),t('kf')[c.kind].map((lab,i)=>c.f[i]?h('div',{},lab+': '+c.f[i]):''))))}
+  if((e.photos||[]).length){const w=h('div',{});for(const p of e.photos){const r=photoCache[p]||(await DB.get('photos',p)||{}).data;if(r)w.append(h('img',{src:r}))}pg.append(w)}pa.append(pg)}setTimeout(()=>print(),300)}
+function printBook(){const pa=$('#printarea');pa.innerHTML='';const pg=h('div',{class:'pp'},h('h1',{},t('tabs')[1]));KINDS.forEach(k=>{const cs=C.filter(c=>c.kind===k).sort((a,b)=>(a.title||'').localeCompare(b.title||'',loc()));if(!cs.length)return;pg.append(h('h2',{},t('kinds')[k]));cs.forEach(c=>pg.append(h('div',{class:'pc'},h('b',{},c.title+(c.ex?' ('+t('ex')+')':'')),t('kf')[k].map((lab,i)=>c.f[i]?h('div',{},lab+': '+c.f[i]):''))))});
+ if(TL.length){pg.append(h('h2',{},t('telT')));TL.slice().sort((a,b)=>a.name.localeCompare(b.name,loc())).forEach(x=>pg.append(h('div',{},`${x.name} · ${x.num}`)))}pa.append(pg);setTimeout(()=>print(),300)}
+/* ---------- examples (clearly marked, department-neutral) ---------- */
+async function seedExamples(){const de=ST.lang==='de';const day=n=>{const d=new Date();d.setDate(d.getDate()-n);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
+ const cards=de?[
+  ['med','Wirkstoff (Handelsname)',['Dosis und Intervall, wie es bei euch üblich ist','Wofür ihr es einsetzt','Worauf du achten musst, z. B. Nierenfunktion, Allergien']],
+  ['ia','Medikament A + Medikament B',['Was kann passieren, wenn beides zusammen gegeben wird?','Was tust du dann? z. B. Spiegel kontrollieren, Apotheke fragen']],
+  ['sop','Neuaufnahme auf Station',['Für wen gilt das? z. B. alle elektiven Aufnahmen','Die Schritte, wie sie bei euch laufen','Wen rufst du an? Name und Durchwahl']],
+  ['rule','Regel eurer Abteilung',['z. B. „Vor dem Wochenende Entlassbriefe vorbereiten“','Warum ist das bei euch wichtig?']],
+  ['lab','Laborwert XY',['Normbereich eures Labors','Wann ist er erhöht?','Wann ist er erniedrigt?','Was du dir merken willst']],
+  ['score','Score XY',['Wofür nutzt ihr ihn?','Kriterien und Punkte','Was bedeutet das Ergebnis?']],
+  ['gl','Leitlinie XY',['Die drei Kernaussagen, die du dir merken willst','Wo findest du sie? Link oder Ordner']],
+  ['note','Wo steht was?',['Alles, was sonst nirgends passt: Passwörter gehören nicht hierher, aber z. B. wo das Notfallset steht.']]]:[
+  ['med','Drug (brand name)',['Dose and interval, the way you use it','What you use it for','What to watch for, e.g. kidney function, allergies']],
+  ['ia','Drug A + drug B',['What can happen when both are given?','What do you do? e.g. check levels, ask pharmacy']],
+  ['sop','New admission on the ward',['Who does it apply to? e.g. all elective admissions','The steps, the way your team does it','Who do you call? Name and extension']],
+  ['rule','A rule in your department',['e.g. “Prepare discharge letters before the weekend”','Why does it matter in your team?']],
+  ['lab','Lab value XY',['Reference range of your lab','When is it raised?','When is it lowered?','What you want to remember']],
+  ['score','Score XY',['What do you use it for?','Criteria and points','What does the result mean?']],
+  ['gl','Guideline XY',['The three key points you want to remember','Where to find it: link or folder']],
+  ['note','Where is what?',['Anything that doesn’t fit elsewhere: no passwords here, but e.g. where the emergency kit is.']]];
+ for(const [kind,title,f] of cards){const c={id:uid(),kind,title,f,ex:true,created:Date.now()};await DB.put('cards',c)}
+ const ents=de?[{type:'fr',d:1,mood:4,energy:3,ward:'Station 3',handIn:'Zwei Aufnahmen für heute angekündigt, Zimmer 5 Blutzucker im Blick behalten.',handOut:'Laborwerte von heute Nachmittag noch nicht da, bitte nachschauen.',best:'Eine Patientin hat sich beim Abschied bedankt und gesagt, ich hätte ihr die Angst genommen.',worst:'Drei Aufnahmen gleichzeitig, und das Telefon hat nicht aufgehört.',annoy:'Schon wieder kein Drucker auf Station.',wish:'Feste Zeit für die Visite, ohne Unterbrechungen.',notes:'Viele Entlassungen, eine Verlegung.',priv:'In der Pause überlegt: Im Frühling will ich endlich den Italienischkurs anfangen.'},
+  {type:'na',d:3,mood:2,energy:1,ward:'Notaufnahme',handIn:'',handOut:'',best:'Um 3 Uhr Pizza mit dem ganzen Team.',worst:'Eine Nacht, in der alles gleichzeitig kam.',annoy:'',wish:'Mehr Zeit für ein Gespräch im Team nach schweren Fällen.',notes:'',priv:''},
+  {type:'sp',d:6,mood:5,energy:4,ward:'Station 3',best:'Zum ersten Mal ganz allein eine Aufnahme gemacht, alles lief glatt.',annoy:'Übergabe hat 40 Minuten gedauert.',priv:'Urlaubsziele 2027 gesammelt: Lissabon, Dolomiten.'}]:
+  [{type:'fr',d:1,mood:4,energy:3,ward:'Ward 3',handIn:'Two admissions announced for today, keep an eye on blood sugar in room 5.',handOut:'This afternoon’s labs aren’t back yet, please check.',best:'A patient thanked me and said I took away her fear.',worst:'Three admissions at once and the phone never stopped.',annoy:'Once again no working printer on the ward.',wish:'A fixed time for rounds without interruptions.',notes:'Lots of discharges, one transfer.',priv:'Thought during my break: this spring I finally want to start Italian lessons.'},
+  {type:'na',d:3,mood:2,energy:1,ward:'ED',best:'Pizza with the whole team at 3 am.',worst:'A night when everything came at once.',wish:'More time to talk as a team after hard cases.'},
+  {type:'sp',d:6,mood:5,energy:4,ward:'Ward 3',best:'Did a full admission on my own for the first time, all smooth.',annoy:'Handover took 40 minutes.',priv:'Collected holiday ideas for 2027: Lisbon, Dolomites.'}];
+ let first=null;for(const x of ents){const e={id:uid(),date:day(x.d),type:x.type,start:DEFT[x.type][0],end:DEFT[x.type][1],ward:x.ward,mood:x.mood,energy:x.energy,handIn:x.handIn||'',handOut:x.handOut||'',best:x.best||'',worst:x.worst||'',annoy:x.annoy||'',wish:x.wish||'',notes:x.notes||'',priv:x.priv||'',learn:[],photos:[],ex:true,created:Date.now()};if(!first)first=e;await DB.put('entries',e)}
+ const tasks=de?['Arztbrief fertig schreiben','Rückruf Labor','Fortbildung anmelden']:['Finish discharge letter','Call the lab back','Sign up for training'];
+ for(const [i,x] of tasks.entries())await DB.put('tasks',{id:uid(),t:x,d:i===0,doneAt:Date.now(),prio:i===1,entryId:i<2?first.id:null,ex:true,created:Date.now()+i});
+ const tels=de?[['Station 3','1234',0],['Labor','2200',1],['Radiologie','2300',1],['Reanimationsteam','0000',2],['Sekretariat','3000',3]]:[['Ward 3','1234',0],['Lab','2200',1],['Radiology','2300',1],['Resuscitation team','0000',2],['Office','3000',3]];
+ for(const [n,num,cat] of tels)await DB.put('tels',{id:uid(),name:n,num,cat,note:de?'Beispiel-Nummer':'Example number',ex:true});
+ ST.seeded=true;await saveST();await load();render()}
 /* ---------- lock & boot ---------- */
 async function lock(){if(!ST.pin)return;await new Promise(res=>{let v='';const w=h('div',{class:'lock'});const dots=h('div',{class:'pin'});const msg=h('div',{class:'hint'},t('pinEnter'));const draw=()=>{dots.innerHTML='';for(let i=0;i<4;i++)dots.append(h('i',{class:i<v.length?'f':''}))};draw();
  const pad=h('div',{class:'pad'});[1,2,3,4,5,6,7,8,9,'',0,'⌫'].forEach(k=>pad.append(k===''?h('span'):h('button',{onclick:async()=>{if(k==='⌫')v=v.slice(0,-1);else if(v.length<4)v+=k;draw();if(v.length===4){if(await sha(v)===ST.pin){w.remove();res()}else{msg.textContent=t('pinWrong');v='';setTimeout(draw,300)}}}},String(k))));
  w.append(h('h2',{},t('app')),dots,msg,pad);document.body.append(w)})}
-async function load(){[E,C,TL]=await Promise.all([DB.all('entries'),DB.all('cards'),DB.all('tels')])}
-(async()=>{await DB.open();const s=await DB.get('kv','settings');if(s)ST={...ST,...s};await load();$('#gear').innerHTML=ic('gear');$('#gear').onclick=settings;await lock();render()})();
+async function load(){[E,C,TL,TK]=await Promise.all([DB.all('entries'),DB.all('cards'),DB.all('tels'),DB.all('tasks')])}
+(async()=>{await DB.open();const s=await DB.get('kv','settings');if(s)ST={...ST,...s};applyLook();await load();
+ if(!ST.seeded&&!E.length&&!C.length&&!TL.length&&!TK.length){await seedExamples()}
+ $('#gear').innerHTML=ic('gear');$('#gear').onclick=settings;await lock();render()})();
 
 </script>
 </body>
