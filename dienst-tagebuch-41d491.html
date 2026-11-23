@@ -145,7 +145,7 @@ html[data-font=sans] textarea.f.hwin,html[data-font=serif] textarea.f.hwin{backg
 .exb{display:inline-block;font-family:'DM Sans'!important;font-size:10.5px!important;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#f0c94f;color:#3d3010;border-radius:6px;padding:2px 7px;margin-left:8px;vertical-align:middle}
 .exbanner{background:#fff6d6;border:1.5px dashed #e2bd4a;color:#5a4613;border-radius:14px;padding:12px 14px;margin:6px 0 12px;font-size:13.5px;display:flex;flex-direction:column;gap:8px}
 .exbanner .btn{align-self:flex-start;background:#fff;border-color:#e2bd4a}
-.card.isex{background:repeating-linear-gradient(135deg,var(--card),var(--card) 14px,rgba(240,201,79,.07) 14px,rgba(240,201,79,.07) 28px)}
+
 .letter{font-family:'Fraunces';font-weight:600;font-size:15px;color:var(--mute);margin:14px 4px 6px;border-bottom:1px solid var(--line);padding-bottom:2px}
 .seg{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:3px;flex:0 0 auto}
 .seg button{padding:8px 11px;border-radius:9px;font-size:13px;font-weight:600;color:var(--mute)}.seg button.on{background:var(--ink);color:var(--bg)}
@@ -185,7 +185,7 @@ html[data-theme=dark] .card.carry{background:#2e2a1c;border-color:#5a4c22}html[d
 html[data-theme=dark] .exbanner{background:#2e2a1c;color:#f0d98a;border-color:#8a7426}html[data-theme=dark] .exbanner .btn{background:#1f232b;color:#f0d98a}
 html[data-theme=dark] .ph{background:#2a2e36}html[data-theme=dark] .scale button{background:var(--input)}html[data-theme=dark] .scale button.on{background:#2a2f38}
 html[data-theme=dark] nav.tabs{background:rgba(20,22,27,.96)}html[data-theme=dark] .fab{background:#ecebe7;color:#14161b}html[data-theme=dark] .btn.pri{background:#ecebe7;color:#14161b;border-color:#ecebe7}
-html[data-theme=dark] header.top{background:linear-gradient(var(--bg) 78%,transparent)}html[data-theme=dark] .card.isex{background:repeating-linear-gradient(135deg,var(--card),var(--card) 14px,rgba(240,201,79,.06) 14px,rgba(240,201,79,.06) 28px)}
+html[data-theme=dark] header.top{background:linear-gradient(var(--bg) 78%,transparent)}
 textarea.f{background-color:var(--input)}textarea.f.hwin{background-image:repeating-linear-gradient(transparent,transparent 28px,var(--rule) 28px,var(--rule) 29px)}
 input.f,select.f{background:var(--input)}
 .pp h2{font-family:'Fraunces';font-size:16px;margin:12px 0 4px}.pp .pc{margin:4px 0 8px}
@@ -220,6 +220,12 @@ textarea.extxt{font-family:inherit;font-size:14px;line-height:1.5;min-height:180
 html[data-theme=dark] .exprv{background:#2b2717;color:#e8d7a0;border-color:#6b5a2a}
 html[data-theme=bw] .exch button.on,html[data-theme=bw] .exdot.on{background:#111;border-color:#111}html[data-theme=bw] .exnorm{border-color:#111;color:#111}
 .fld .hw{white-space:pre-line}
+
+html[data-pat=lines] .card.lc,html[data-pat=lines] .card.entry{background-image:repeating-linear-gradient(transparent 0 31px,rgba(120,140,170,.16) 31px 32px)}
+html[data-pat=grid] .card.lc,html[data-pat=grid] .card.entry{background-image:linear-gradient(rgba(120,140,170,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(120,140,170,.11) 1px,transparent 1px);background-size:18px 18px}
+html[data-pat=dots] .card.lc,html[data-pat=dots] .card.entry{background-image:radial-gradient(rgba(120,110,100,.22) 1px,transparent 1.3px);background-size:16px 16px}
+html[data-pat=stripes] .card.lc,html[data-pat=stripes] .card.entry{background-image:repeating-linear-gradient(135deg,transparent 0 16px,rgba(200,170,90,.06) 16px 32px)}
+.exout{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}.exout .btn{display:flex;align-items:center;justify-content:center;gap:4px}.exout .btn svg{width:18px;height:18px}
 
 </style>
 </head>
@@ -256,7 +262,7 @@ const L={de:{app:'Dienst-Tagebuch',tabs:['Tagebuch','Notizbuch','Aufgaben','Tele
  title:'Titel',tasksT:'Aufgaben',open:'Offen',doneT:'Erledigt',clearDone:'Erledigte löschen',taskPh:'Neue Aufgabe …',emptyTask:'Alles erledigt. Schön!',fromShift:'aus',prio:'Wichtig',
  telT:'Telefon',tname:'Name / Funktion',tnum:'Nummer',tcat:'Kategorie',tnote:'Notiz (optional)',tcats:['Station','Funktion','Notfall','Verwaltung','Extern','Privat'],emptyTel:'Noch keine Nummern. Leg dir die wichtigsten Durchwahlen an.',copied:'Kopiert',
  statsT:'Rückblick',year:'Dienste',hours:'Stunden',nights:'Nächte',perType:'Dienste nach Art',moodType:'Stimmung nach Dienstart',moodLast:'Stimmung der letzten Dienste',noData:'Sobald du Dienste einträgst, siehst du hier deinen Rückblick.',
- settings:'Einstellungen',look:'Aussehen',design:'Design',designs:{paper:'Papier',white:'Ganz in Weiß',bw:'Schwarz-Weiß',dark:'Dunkel (Nachtdienst)'},font:'Schrift',fonts:{hand:'Handschrift',sans:'Klar',serif:'Klassisch'},fontSample:'So sieht deine Schrift aus.',
+ settings:'Einstellungen',look:'Aussehen',design:'Design',designs:{paper:'Papier',white:'Ganz in Weiß',bw:'Schwarz-Weiß',dark:'Dunkel (Nachtdienst)'},font:'Schrift',fonts:{hand:'Handschrift',sans:'Klar',serif:'Klassisch'},fontSample:'So sieht deine Schrift aus.',pat:'Muster auf den Karten',pats:{none:'Schlicht',lines:'Liniert',grid:'Kariert',dots:'Punkte',stripes:'Gestreift'},
  name:'Dein Name',role:'Beruf',roles:['Ärztin / Arzt','Pflege','Rettungsdienst','MFA / MTA','Studium / PJ','Hebamme','Andere'],lang:'Sprache',pin:'PIN-Sperre',pinSet:'PIN festlegen',pinOff:'PIN entfernen',pinNew:'Neue PIN (4 Ziffern)',pinEnter:'PIN eingeben',pinWrong:'Falsche PIN',
  backup:'Sicherung',exp:'Sicherung herunterladen',imp:'Sicherung laden',impOk:'Sicherung geladen',print:'Drucken / PDF',printAll:'Alle Dienste drucken',printBook:'Notizbuch drucken',reset:'Alles löschen',resetQ:'Wirklich alle Einträge, Notizen, Aufgaben und Nummern löschen?',
  hint2:'Tipp: Am Handy über „Teilen“ und „Zum Home-Bildschirm“ wie eine App ablegen.',copyright:'© Lia Valentina · Nur für den persönlichen Gebrauch',saved:'Gespeichert',wk:['So','Mo','Di','Mi','Do','Fr','Sa'],mon:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']},
@@ -274,7 +280,7 @@ en:{app:'Shift Journal',tabs:['Journal','Notebook','Tasks','Phone','Review'],new
  title:'Title',tasksT:'Tasks',open:'Open',doneT:'Done',clearDone:'Delete done',taskPh:'New task …',emptyTask:'All done. Nice!',fromShift:'from',prio:'Important',
  telT:'Phone',tname:'Name / role',tnum:'Number',tcat:'Category',tnote:'Note (optional)',tcats:['Ward','Service','Emergency','Admin','External','Private'],emptyTel:'No numbers yet. Add the extensions you need most.',copied:'Copied',
  statsT:'Review',year:'Shifts',hours:'Hours',nights:'Nights',perType:'Shifts by type',moodType:'Mood by shift type',moodLast:'Mood of recent shifts',noData:'As soon as you log shifts, your review appears here.',
- settings:'Settings',look:'Look',design:'Design',designs:{paper:'Paper',white:'All white',bw:'Black & white',dark:'Dark (night shift)'},font:'Font',fonts:{hand:'Handwriting',sans:'Clean',serif:'Classic'},fontSample:'This is how your writing looks.',
+ settings:'Settings',look:'Look',design:'Design',designs:{paper:'Paper',white:'All white',bw:'Black & white',dark:'Dark (night shift)'},font:'Font',fonts:{hand:'Handwriting',sans:'Clean',serif:'Classic'},fontSample:'This is how your writing looks.',pat:'Card pattern',pats:{none:'Plain',lines:'Lined',grid:'Grid',dots:'Dots',stripes:'Striped'},
  name:'Your name',role:'Profession',roles:['Doctor','Nurse','Paramedic','Medical assistant','Student','Midwife','Other'],lang:'Language',pin:'PIN lock',pinSet:'Set PIN',pinOff:'Remove PIN',pinNew:'New PIN (4 digits)',pinEnter:'Enter PIN',pinWrong:'Wrong PIN',
  backup:'Backup',exp:'Download backup',imp:'Load backup',impOk:'Backup loaded',print:'Print / PDF',printAll:'Print all shifts',printBook:'Print notebook',reset:'Delete everything',resetQ:'Really delete all entries, notes, tasks and numbers?',
  hint2:'Tip: on your phone use “Share” and “Add to Home Screen” to keep it like an app.',copyright:'© Lia Valentina · For personal use only',saved:'Saved',wk:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],mon:['January','February','March','April','May','June','July','August','September','October','November','December']}};
@@ -368,8 +374,8 @@ const EXAM=[
 ];
 function LKO(){return[['n','nicht vergrößert tastbar','not enlarged'],['v','vergrößert tastbar','enlarged'],['d','vergrößert und druckdolent','enlarged and tender']]}
 function PUO(){return[['g','gut tastbar','palpable'],['a','abgeschwächt tastbar','weak'],['0','nicht tastbar','absent']]}
-const EXT={de:{tab:'Befund',title:'Körperliche Untersuchung',intro:'Tippe an, was du findest. „Normal“ füllt einen Abschnitt mit dem Normalbefund, danach änderst du nur das Abweichende. Ein zweites Antippen hebt die Auswahl auf.',seite:'Seitenangabe: einmal tippen = beidseits, zweimal = rechts, dreimal = links.',privacy:'Keine Namen oder Patientendaten eintragen. Der Text entsteht nur auf deinem Handy.',normal:'Normal',reset:'Alles zurücksetzen',resetQ:'Alle Angaben der Untersuchung löschen?',free:'Eigener Text',done:'dokumentiert',gen:'Befundtext',genT:'Befundtext für den Arztbrief',lines:'Je Abschnitt eine Zeile',flow:'Fließtext',copy:'Kopieren',share:'Teilen',close:'Schließen',empty:'Noch nichts angetippt. Wähle zuerst Befunde aus.',hint:'Du kannst den Text hier noch ändern, bevor du ihn kopierst.',b:'beidseits',r:'rechts',l:'links',and:'und',bmi:'BMI',head:'Körperlicher Untersuchungsbefund',copied:'Kopiert',sideB:'bds.',sideR:'re.',sideL:'li.',ofx:'von',sections:'Abschnitte'},
- en:{tab:'Exam',title:'Physical examination',intro:'Tap what you find. “Normal” fills a section with normal findings, then you only change what differs. Tap again to deselect.',seite:'Sides: tap once = bilateral, twice = right, three times = left.',privacy:'Never enter names or patient data. The text is created on your phone only.',normal:'Normal',reset:'Reset all',resetQ:'Clear all examination findings?',free:'Own text',done:'documented',gen:'Write-up',genT:'Findings for the discharge letter',lines:'One line per section',flow:'Paragraph',copy:'Copy',share:'Share',close:'Close',empty:'Nothing selected yet. Pick some findings first.',hint:'You can still edit the text here before copying it.',b:'bilaterally',r:'right',l:'left',and:'and',bmi:'BMI',head:'Physical examination',copied:'Copied',sideB:'bil.',sideR:'R',sideL:'L',ofx:'of',sections:'sections'}};
+const EXT={de:{tab:'Befund',title:'Körperliche Untersuchung',intro:'Tippe an, was du findest. „Normal“ füllt einen Abschnitt mit dem Normalbefund, danach änderst du nur das Abweichende. Ein zweites Antippen hebt die Auswahl auf.',seite:'Seitenangabe: einmal tippen = beidseits, zweimal = rechts, dreimal = links.',privacy:'Keine Namen oder Patientendaten eintragen. Der Text entsteht nur auf deinem Handy.',normal:'Normal',reset:'Alles zurücksetzen',resetQ:'Alle Angaben der Untersuchung löschen?',free:'Eigener Text',done:'dokumentiert',gen:'Befundtext',genT:'Befundtext für den Arztbrief',lines:'Je Abschnitt eine Zeile',flow:'Fließtext',copy:'Kopieren',share:'Teilen',close:'Schließen',empty:'Noch nichts angetippt. Wähle zuerst Befunde aus.',hint:'Du kannst den Text hier noch ändern, bevor du ihn kopierst.',b:'beidseits',r:'rechts',l:'links',and:'und',bmi:'BMI',head:'Körperlicher Untersuchungsbefund',copied:'Kopiert',created:'Erstellt am',fileHint:'PDF und Word entstehen nur auf deinem Handy, nichts wird hochgeladen. Beim Teilen (Mail, AirDrop, Dateien) entscheidest du selbst, wohin sie gehen. Bitte keinen Patientennamen in den Text schreiben.',sideB:'bds.',sideR:'re.',sideL:'li.',ofx:'von',sections:'Abschnitte'},
+ en:{tab:'Exam',title:'Physical examination',intro:'Tap what you find. “Normal” fills a section with normal findings, then you only change what differs. Tap again to deselect.',seite:'Sides: tap once = bilateral, twice = right, three times = left.',privacy:'Never enter names or patient data. The text is created on your phone only.',normal:'Normal',reset:'Reset all',resetQ:'Clear all examination findings?',free:'Own text',done:'documented',gen:'Write-up',genT:'Findings for the discharge letter',lines:'One line per section',flow:'Paragraph',copy:'Copy',share:'Share',close:'Close',empty:'Nothing selected yet. Pick some findings first.',hint:'You can still edit the text here before copying it.',b:'bilaterally',r:'right',l:'left',and:'and',bmi:'BMI',head:'Physical examination',copied:'Copied',created:'Created on',fileHint:'PDF and Word files are created on your phone only, nothing is uploaded. When sharing (mail, AirDrop, Files) you decide where they go. Please don’t put patient names in the text.',sideB:'bil.',sideR:'R',sideL:'L',ofx:'of',sections:'sections'}};
 const xt=k=>EXT[ST.lang][k];const xl=a=>a[ST.lang==='de'?0:1];
 const XO=o=>ST.lang==='de'?o[1]:o[2];
 let EX={},EXopen={};try{EX=JSON.parse(localStorage.getItem('lv-dt-exam')||'{}')}catch(e){EX={}}
@@ -413,8 +419,52 @@ function examOut(){let fmt=localStorage.getItem('lv-dt-exfmt')||'lines';modal(mc
   if(!txt){mc.append(h('p',{class:'hint'},xt('empty')),h('button',{class:'btn',style:'width:100%',onclick:closeModal},xt('close')));return}
   mc.append(h('div',{class:'seg',style:'margin-bottom:8px'},[['lines',xt('lines')],['flow',xt('flow')]].map(([k,l])=>h('button',{class:fmt===k?'on':'',onclick:()=>{fmt=k;try{localStorage.setItem('lv-dt-exfmt',k)}catch(e){}draw()}},l))));
   const ta=h('textarea',{class:'f extxt'});ta.value=txt;mc.append(ta,h('p',{class:'hint',style:'margin:6px 0 0'},xt('hint')));setTimeout(()=>{ta.style.height=Math.min(innerHeight*.55,ta.scrollHeight+6)+'px'});
-  mc.append(h('div',{class:'row',style:'margin-top:12px'},h('button',{class:'btn',onclick:closeModal},xt('close')),navigator.share?h('button',{class:'btn',onclick:()=>navigator.share({text:ta.value}).catch(()=>{})},xt('share')):'',
-   h('button',{class:'btn pri',onclick:async()=>{try{await navigator.clipboard.writeText(ta.value)}catch(e){ta.select();document.execCommand('copy')}toast(xt('copied'))}},xt('copy'))))};draw()})}
+  const meta=()=>{const d=new Date();return{title:xt('head'),date:xt('created')+' '+d.toLocaleDateString(ST.lang==='de'?'de-DE':'en-GB'),fn:(ST.lang==='de'?'Befund_':'Exam_')+d.toISOString().slice(0,10)}};
+  mc.append(h('div',{class:'exout'},
+   h('button',{class:'btn pri',onclick:async()=>{try{await navigator.clipboard.writeText(ta.value)}catch(e){ta.select();document.execCommand('copy')}toast(xt('copied'))}},h('span',{html:ic('copy')}),' '+xt('copy')),
+   h('button',{class:'btn',onclick:()=>{const m=meta();shareFile(makePDF(ta.value,m.title,m.date),m.fn+'.pdf')}},'PDF'),
+   h('button',{class:'btn',onclick:()=>{const m=meta();shareFile(makeDOCX(ta.value,m.title,m.date),m.fn+'.docx')}},'Word'),
+   navigator.share?h('button',{class:'btn',onclick:()=>navigator.share({text:ta.value}).catch(()=>{})},xt('share')):''),
+   h('p',{class:'exprv',style:'margin-top:10px'},xt('fileHint')),
+   h('button',{class:'btn',style:'width:100%;margin-top:10px',onclick:closeModal},xt('close')))};draw()})}
+/* ---------- Export: PDF + Word (docx), local only ---------- */
+const HW=(()=>{const w={};const s=' 278!278"355#556$556%889&667\'191(333)333*389+584,278-333.278/278:278;278<584=584>584?556@1015A667B667C722D722E667F611G778H722I278J500K667L556M833N722O778P667Q778R722S667T611U722V667W944X667Y667Z611[278\\278]278^469_556`333a556b556c500d556e556f278g556h556i222j222k500l222m833n556o556p556q556r333s500t278u556v500w722x500y500z500{334|260}334~584';
+ for(let i=0;i<10;i++)w[String(i)]=556;s.replace(/(.)(\d+)/g,(m,c,n)=>{w[c]=+n});Object.assign(w,{'Ä':667,'Ö':778,'Ü':722,'ä':556,'ö':556,'ü':556,'ß':611,'é':556,'°':400,'²':333,'–':556,'—':1000,'„':333,'“':333,'”':333,'‘':222,'’':222,'·':278,'×':584,'µ':556,'±':584,'…':1000});return w})();
+const WIN={'Ä':0xC4,'Ö':0xD6,'Ü':0xDC,'ä':0xE4,'ö':0xF6,'ü':0xFC,'ß':0xDF,'é':0xE9,'è':0xE8,'°':0xB0,'²':0xB2,'–':0x96,'—':0x97,'„':0x84,'“':0x93,'”':0x94,'‘':0x91,'’':0x92,'·':0xB7,'×':0xD7,'µ':0xB5,'±':0xB1,'…':0x85,' ':0x20};
+const pdfClean=s=>s.replace(/₂/g,'2').replace(/≥/g,'>=').replace(/≤/g,'<=').replace(/→/g,'->');
+const tw=(s,size)=>[...s].reduce((a,c)=>a+(HW[c]||556),0)*size/1000;
+function wrap(s,size,max){const out=[];s.split('\n').forEach(par=>{let line='';par.split(/ +/).forEach(w=>{const tst=line?line+' '+w:w;if(tw(tst,size)>max&&line){out.push(line);line=w}else line=tst});out.push(line)});return out}
+const hex=s=>'<'+[...pdfClean(s)].map(c=>{const k=WIN[c]!=null?WIN[c]:c.charCodeAt(0)<256?c.charCodeAt(0):63;return k.toString(16).padStart(2,'0')}).join('')+'>';
+function parseBlocks(txt){const names=EXAM.map(s=>xl(s.n));return txt.split('\n').filter(l=>l.trim()).map(l=>{const n=names.find(nm=>l.startsWith(nm+':'));return n?{b:n,t:l.slice(n.length+1).trim()}:{b:'',t:l.trim()}})}
+function makePDF(txt,title,dateStr){const W=595,H=842,M=58,max=W-2*M,fs=10.5,ld=15;const pages=[];let ops=[],y=H-M;
+ const newPage=()=>{if(ops.length)pages.push(ops);ops=[];y=H-M};const need=hgt=>{if(y-hgt<M+20)newPage()};
+ const text=(s,x,yy,size,bold,gray)=>ops.push(`BT /${bold?'F2':'F1'} ${size} Tf ${gray?'0.45 g':'0.1 g'} ${x.toFixed(1)} ${yy.toFixed(1)} Td ${hex(s)} Tj ET`);
+ text(title,M,y-16,16,true);y-=26;text(dateStr,M,y-10,9.5,false,true);y-=22;ops.push(`0.8 G 0.6 w ${M} ${y} m ${W-M} ${y} l S`);y-=20;
+ parseBlocks(txt).forEach(bl=>{const lines=wrap(bl.t,fs,max);if(bl.b){need(ld*2);text(bl.b,M,y,fs,true);y-=ld}lines.forEach(l=>{need(ld);text(l,M,y,fs);y-=ld});y-=7});
+ pages.push(ops);const objs=[];const add=s=>{objs.push(s);return objs.length};
+ const f1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>'),f2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+ const pagesId=objs.length+1;objs.push(null);const kids=[];
+ pages.forEach((p,i)=>{const foot=`BT /F1 8 Tf 0.55 g ${W-M-40} 30 Td ${hex((i+1)+' / '+pages.length)} Tj ET`;const st=p.concat([foot]).join('\n');const c=add(`<< /Length ${st.length} >>\nstream\n${st}\nendstream`);kids.push(add(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> >> /Contents ${c} 0 R >>`))});
+ objs[pagesId-1]=`<< /Type /Pages /Kids [${kids.map(k=>k+' 0 R').join(' ')}] /Count ${kids.length} >>`;const cat=add(`<< /Type /Catalog /Pages ${pagesId} 0 R >>`);
+ let out='%PDF-1.4\n';const off=[];objs.forEach((o,i)=>{off.push(out.length);out+=`${i+1} 0 obj\n${o}\nendobj\n`});const xr=out.length;
+ out+=`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`+off.map(o=>String(o).padStart(10,'0')+' 00000 n \n').join('')+`trailer\n<< /Size ${objs.length+1} /Root ${cat} 0 R >>\nstartxref\n${xr}\n%%EOF`;
+ return new Blob([Uint8Array.from(out,c=>c.charCodeAt(0))],{type:'application/pdf'})}
+const CRCT=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc32=b=>{let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=CRCT[(c^b[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0};
+function zip(files){const enc=new TextEncoder();const parts=[],cent=[];let off=0;const u16=v=>[v&255,v>>8&255],u32=v=>[v&255,v>>8&255,v>>16&255,v>>>24&255];
+ files.forEach(([name,str])=>{const n=enc.encode(name),d=enc.encode(str),c=crc32(d);const hd=[...u32(0x04034b50),...u16(20),...u16(0x0800),...u16(0),...u16(0),...u16(0x21),...u32(c),...u32(d.length),...u32(d.length),...u16(n.length),...u16(0)];
+  parts.push(new Uint8Array(hd),n,d);cent.push(new Uint8Array([...u32(0x02014b50),...u16(20),...u16(20),...u16(0x0800),...u16(0),...u16(0),...u16(0x21),...u32(c),...u32(d.length),...u32(d.length),...u16(n.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(off)]),n);off+=hd.length+n.length+d.length});
+ const cs=cent.reduce((a,x)=>a+x.length,0);return new Blob([...parts,...cent,new Uint8Array([...u32(0x06054b50),0,0,0,0,...u16(files.length),...u16(files.length),...u32(cs),...u32(off),0,0])],{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'})}
+function makeDOCX(txt,title,dateStr){const x=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ const run=(s,o={})=>`<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>${o.b?'<w:b/>':''}${o.c?`<w:color w:val="${o.c}"/>`:''}<w:sz w:val="${o.sz||22}"/></w:rPr><w:t xml:space="preserve">${x(s)}</w:t></w:r>`;
+ const par=(runs,after=120)=>`<w:p><w:pPr><w:spacing w:after="${after}" w:line="300" w:lineRule="auto"/></w:pPr>${runs}</w:p>`;
+ const body=[par(run(title,{b:1,sz:30}),60),par(run(dateStr,{c:'777777',sz:19}),240)].concat(parseBlocks(txt).map(bl=>par((bl.b?run(bl.b+': ',{b:1}):'')+run(bl.t)))).join('');
+ const doc=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${body}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1418" w:right="1418" w:bottom="1134" w:left="1418" w:header="709" w:footer="709" w:gutter="0"/></w:sectPr></w:body></w:document>`;
+ return zip([['[Content_Types].xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>'],
+  ['_rels/.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'],
+  ['word/document.xml',doc]])}
+async function shareFile(blob,name){const f=new File([blob],name,{type:blob.type});if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:name});return}catch(e){if(e.name==='AbortError')return}}
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},2000)}
 Object.assign(I,{swap:'<path d="M7 4 3 8l4 4"/><path d="M3 8h14"/><path d="m17 20 4-4-4-4"/><path d="M21 16H7"/>',list:'<path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1 1 2-2M3 12l1 1 2-2M3 18l1 1 2-2"/>',check:'<path d="M20 6 9 17l-5-5"/>'});
 Object.assign(QIC,{handIn:'swap',handOut:'swap'});
 /* ---------- storage ---------- */
@@ -426,7 +476,7 @@ const DB={db:null,open(){return new Promise((res,rej)=>{const r=indexedDB.open('
  clear(s){return new Promise(r=>{const t=this.db.transaction(s,'readwrite');t.objectStore(s).clear();t.oncomplete=()=>r()})}};
 let E=[],C=[],TL=[],TK=[],ST={id:'settings',lang:(navigator.language||'de').toLowerCase().startsWith('de')?'de':'en',name:'',role:0,pin:'',theme:'paper',font:'hand',sort:'az',seeded:false},view='journal',kindF='all',q='';
 const t=k=>L[ST.lang][k];const saveST=()=>DB.put('kv',ST);
-function applyLook(){document.documentElement.dataset.theme=ST.theme||'paper';document.documentElement.dataset.font=ST.font||'hand'}
+function applyLook(){document.documentElement.dataset.pat=ST.pat||'none';document.documentElement.dataset.theme=ST.theme||'paper';document.documentElement.dataset.font=ST.font||'hand'}
 /* ---------- helpers ---------- */
 function dObj(s){const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)}
 function hours(e){const [a,b]=[e.start,e.end].map(x=>{const [hh,mm]=(x||'0:0').split(':').map(Number);return hh*60+mm});let d=b-a;if(d<=0)d+=1440;return d/60}
@@ -589,7 +639,8 @@ function settings(){modal(mc=>{const ni=h('input',{class:'f',value:ST.name});ni.
  const imf=h('input',{type:'file',accept:'.json,application/json',style:'display:none'});imf.onchange=()=>importBackup(imf.files[0]);
  const dz=h('div',{class:'designs'},Object.keys(t('designs')).map(k=>h('button',{class:'dz dz-'+k+(ST.theme===k?' on':''),onclick:()=>{ST.theme=k;saveST();applyLook();[...dz.children].forEach(x=>x.classList.toggle('on',x.classList.contains('dz-'+k)))}},h('i'),h('span',{},t('designs')[k]))));
  const fz=h('div',{class:'seg wide'},Object.keys(t('fonts')).map(k=>h('button',{class:'fz-'+k+(ST.font===k?' on':''),onclick:()=>{ST.font=k;saveST();applyLook();[...fz.children].forEach(x=>x.classList.toggle('on',x.classList.contains('fz-'+k)))}},t('fonts')[k])));
- mc.append(h('h3',{},t('settings')),h('label',{class:'l'},t('design')),dz,h('label',{class:'l'},t('font')),fz,h('div',{class:'hw sample'},t('fontSample')),
+ const pz=h('div',{class:'seg wide'},Object.keys(t('pats')).map(k=>h('button',{class:'pz-'+k+((ST.pat||'none')===k?' on':''),onclick:()=>{ST.pat=k;saveST();applyLook();[...pz.children].forEach(x=>x.classList.toggle('on',x.classList.contains('pz-'+k)))}},t('pats')[k])));
+ mc.append(h('h3',{},t('settings')),h('label',{class:'l'},t('design')),dz,h('label',{class:'l'},t('font')),fz,h('div',{class:'hw sample'},t('fontSample')),h('label',{class:'l'},t('pat')),pz,
   h('label',{class:'l'},t('name')),ni,h('label',{class:'l'},t('role')),rs,h('label',{class:'l'},t('lang')),ls,
   h('label',{class:'l'},t('pin')),h('div',{class:'row'},ST.pin?h('button',{class:'btn',onclick:async()=>{ST.pin='';await saveST();toast(t('saved'))}},t('pinOff')):h('button',{class:'btn',onclick:()=>{const p=prompt(t('pinNew'));if(p&&/^\d{4}$/.test(p))sha(p).then(x=>{ST.pin=x;saveST();toast(t('saved'))})}},t('pinSet'))),
   h('label',{class:'l'},t('backup')),h('div',{class:'row'},h('button',{class:'btn',onclick:exportBackup},t('exp')),h('button',{class:'btn',onclick:()=>imf.click()},t('imp'))),imf,
