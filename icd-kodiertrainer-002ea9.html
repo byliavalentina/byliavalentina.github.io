@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ICD-Kodiertrainer – Diagnosen richtig verschlüsseln üben</title>
+<style>:root{
+  --bg:#faf7f5; --card:#ffffff; --ink:#2b2b2b; --muted:#6b6464; --line:#e8e1dd;
+  --rose:#b0476b; --rose-soft:#f8e6ec;
+  --pass:#f6d3df; --pass-line:#d891aa; --pen:#22407a;
+  --gruen:#2f7d5b; --gruen-soft:#e5f2ec; --gelb:#a8710f; --gelb-soft:#fbf1dc; --rot:#b23a3a; --rot-soft:#f9e3e3;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:16px 14px 60px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 0 14px}
+header.top h1{font-size:1.35rem;margin:0;letter-spacing:.2px}
+header.top .sub{font-size:.82rem;color:var(--muted)}
+.badge{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--rose-soft);color:var(--rose)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:12px 0}
+.card h2{font-size:1.05rem;margin:0 0 8px}
+.card h3{font-size:.95rem;margin:14px 0 6px}
+.muted{color:var(--muted)}
+.small{font-size:.85rem}
+.tabs{display:flex;gap:6px;margin:6px 0 4px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:.9rem;cursor:pointer;color:var(--ink)}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+button.btn{border:0;border-radius:10px;padding:11px 18px;font-size:.95rem;font-weight:600;cursor:pointer;background:var(--rose);color:#fff}
+button.btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line)}
+button.btn:disabled{opacity:.45;cursor:default}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem;cursor:pointer;color:var(--ink);text-align:left}
+.chip.on{border-color:var(--rose);background:var(--rose-soft);color:var(--rose);font-weight:600}
+.chip.ok{border-color:var(--gruen);background:var(--gruen-soft);color:var(--gruen)}
+.chip.bad{border-color:var(--rot);background:var(--rot-soft);color:var(--rot)}
+.list .chip{display:block;width:100%;margin-bottom:6px}
+label.field{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 4px}
+select,input[type=number],input[type=text]{width:100%;font-size:1rem;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>*{flex:1 1 160px}
+
+/* Marcumar-Pass */
+.pass{background:var(--pass);border-radius:10px;padding:10px;overflow-x:auto}
+.pass{padding:8px 6px}
+.pass table{border-collapse:collapse;width:100%;table-layout:fixed}
+.pass th{font-size:.68rem;font-weight:600;color:#7a3550;text-transform:uppercase;letter-spacing:.3px;padding:4px 2px;border-bottom:1.5px solid var(--pass-line)}
+.pass td{border-bottom:1px solid var(--pass-line);border-left:1px solid var(--pass-line);text-align:center;padding:5px 2px;font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;color:var(--pen);font-size:1.02rem;white-space:nowrap}
+.pass td:first-child{border-left:0}
+.pass tr.neu td{background:rgba(255,255,255,.55)}
+.pass td.inr-neu{font-weight:700;color:#9b1c3c}
+.pass td.sum{font-family:inherit;font-size:.82rem;color:#7a3550}
+.step{display:flex;flex-direction:column;align-items:center;gap:2px}
+.step button{width:100%;max-width:30px;height:22px;border:1px solid var(--pass-line);background:#fff;border-radius:6px;font-size:.8rem;line-height:1;cursor:pointer;color:#7a3550;padding:0}
+.step span{min-width:28px;font-size:1.08rem}
+
+.ampel{display:inline-block;padding:4px 10px;border-radius:8px;font-weight:700;font-size:.9rem}
+.ampel.gruen{background:var(--gruen-soft);color:var(--gruen)}
+.ampel.gelb{background:var(--gelb-soft);color:var(--gelb)}
+.ampel.rot{background:var(--rot-soft);color:var(--rot)}
+.fb{border-radius:10px;padding:10px 12px;margin:8px 0;font-size:.93rem}
+.fb.ok{background:var(--gruen-soft)}
+.fb.bad{background:var(--rot-soft)}
+.fb.neutral{background:#f3efec}
+.fb b{display:block;margin-bottom:2px}
+ul.clean{padding-left:18px;margin:6px 0}
+ul.clean li{margin:3px 0}
+.big{font-size:1.6rem;font-weight:700}
+.kpi{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.kpi>div{flex:1 1 140px;background:#f6f2ef;border-radius:10px;padding:8px 10px}
+.kpi .l{font-size:.75rem;color:var(--muted)}
+.kpi .v{font-size:1.1rem;font-weight:700}
+.note{background:#fff8e6;border:1px solid #f0dfb0;border-radius:10px;padding:10px 12px;font-size:.85rem;color:#6b5420}
+footer{margin-top:24px;font-size:.78rem;color:var(--muted);text-align:center}
+.overlay{position:fixed;inset:0;background:rgba(30,24,26,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.overlay .card{max-width:520px;margin:0}
+table.ref{width:100%;border-collapse:collapse;font-size:.88rem}
+table.ref td,table.ref th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}
+.hidden{display:none!important}
+
+@media (max-width:560px){
+  .pass td{font-size:.92rem;padding:4px 1px}
+  .pass th{font-size:.6rem;padding:3px 0}
+  .pass .hide-m{display:none}
+  .step span{min-width:0;font-size:1rem}
+}
+
+.list .chip.opt{display:flex;gap:10px;align-items:flex-start}
+.opt b{min-width:62px;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="overlay" id="disc">
+  <div class="card">
+    <h2>Nur zu Lern- und Trainingszwecken</h2>
+    <p>Dieser Trainer dient ausschließlich der <b>Aus- und Weiterbildung</b> im Kodieren nach ICD-10-GM. Alle Fälle sind frei erfunden.</p>
+    <p>Er ersetzt <b>nicht</b> den amtlichen Katalog des BfArM und die geltenden Kodierrichtlinien. Codes und Titel können sich mit jeder Jahresversion ändern – vor der Abrechnung immer im aktuellen Katalog prüfen.</p>
+    <p class="small muted">Trotz sorgfältiger Erstellung keine Gewähr für Vollständigkeit und Aktualität; keine Haftung.</p>
+    <button class="btn" onclick="document.getElementById('disc').classList.add('hidden')">Verstanden – nur zum Üben</button>
+  </div>
+</div>
+<div class="wrap">
+  <header class="top">
+    <div><h1>ICD-Kodiertrainer</h1><div class="sub">Chirurgie &amp; Innere · der richtige Code statt „n. n. bez.“</div></div>
+    <span class="badge">Nur zum Üben</span>
+  </header>
+  <div class="tabs"><button class="tab on" data-t="train">Trainieren</button><button class="tab" data-t="basics">Grundlagen</button></div>
+
+  <section id="train">
+    <div class="card"><div class="row" style="align-items:center">
+      <div><b id="titel"></b><div class="small muted" id="punkte"></div></div>
+      <div style="flex:0 0 auto" class="chips"><button class="chip on" id="mReihe">Der Reihe nach</button><button class="chip" id="mMix">Gemischt</button></div>
+    </div></div>
+    <div class="card">
+      <p id="fall" style="margin:0;font-size:1.05rem"></p>
+      <p class="small muted" id="setting" style="margin:6px 0 0"></p>
+    </div>
+    <div class="card" id="fragen">
+      <h3>1 · Welcher Code passt am besten?</h3><div class="list" id="qCode"></div>
+      <div id="blkSeite"><h3>2 · Seitenlokalisation</h3><div class="chips" id="qSeite"></div></div>
+      <div id="blkSich"><h3 id="hSich">Diagnosesicherheit (ambulant)</h3><div class="chips" id="qSich"></div></div>
+      <div style="margin-top:14px"><button class="btn" id="auswerten">Auswerten</button></div>
+    </div>
+    <div class="card hidden" id="ergebnis"></div>
+  </section>
+
+  <section id="basics" class="hidden">
+    <div class="card">
+      <h2>Die wichtigsten Regeln</h2>
+      <ul class="clean">
+        <li><b>Endständig kodieren:</b> Nur Codes ohne weitere Unterteilung sind abrechenbar. „K35.3-“ reicht nicht – es muss K35.30 oder K35.31 sein.</li>
+        <li><b>So spezifisch wie möglich:</b> „n. n. bez.“ (…8 / …9) nur, wenn die Information wirklich fehlt.</li>
+        <li><b>Kombinationscodes beachten:</b> Gallenstein + akute Cholezystitis ist K80.0-, nicht K81.0 + K80.2-.</li>
+        <li><b>Familien- und Eigenanamnese</b> stehen im Kapitel Z (Z80–Z84 bzw. Z85–Z87). In der deutschen Fassung ist z. B. Z82 nicht weiter unterteilt.</li>
+        <li><b>Dauertherapie:</b> Z92.1 für die laufende Antikoagulation, Z95.- für Bypass, Stent &amp; Co.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Zusatzkennzeichen</h2>
+      <table class="ref">
+        <tr><th>Kennzeichen</th><th>Bedeutung</th><th>Wann</th></tr>
+        <tr><td><b>G</b></td><td>gesicherte Diagnose</td><td>Diagnose ist bestätigt</td></tr>
+        <tr><td><b>V</b></td><td>Verdachtsdiagnose</td><td>Abklärung läuft noch</td></tr>
+        <tr><td><b>A</b></td><td>ausgeschlossene Diagnose</td><td>Verdacht hat sich nicht bestätigt</td></tr>
+        <tr><td><b>Z</b></td><td>symptomloser Zustand nach</td><td>Z. n. der betreffenden Diagnose</td></tr>
+        <tr><td><b>R / L / B</b></td><td>rechts / links / beidseits</td><td>paarige Organe, Extremitäten</td></tr>
+      </table>
+      <p class="small muted">Die Diagnosesicherheit (G, V, A, Z) ist in der vertragsärztlichen (ambulanten) Versorgung Pflicht. Im Krankenhaus gelten die Deutschen Kodierrichtlinien.</p>
+    </div>
+    <div class="card small muted">Codes und Titel: ICD-10-GM (BfArM), auszugsweise zu Übungszwecken. Stand der Übungsdaten: ICD-10-GM 2023 – im aktuellen Katalog prüfen.</div>
+  </section>
+  <footer>ICD-Kodiertrainer · by Lia Valentina · Nur zu Lern- und Trainingszwecken. Alle Fälle fiktiv. ICD-10-GM © BfArM.</footer>
+</div>
+<script>
+const T={"E11.40": "Diabetes mellitus, Typ 2: Mit neurologischen Komplikationen: Nicht als entgleist bezeichnet", "E11.90": "Diabetes mellitus, Typ 2: Ohne Komplikationen: Nicht als entgleist bezeichnet", "E11.91": "Diabetes mellitus, Typ 2: Ohne Komplikationen: Als entgleist bezeichnet", "I10.00": "Benigne essentielle Hypertonie: Ohne Angabe einer hypertensiven Krise", "I10.01": "Benigne essentielle Hypertonie: Mit Angabe einer hypertensiven Krise", "I25.10": "Atherosklerotische Herzkrankheit: Ohne hämodynamisch wirksame Stenosen", "I25.11": "Atherosklerotische Herzkrankheit: Ein-Gefäß-Erkrankung", "I25.12": "Atherosklerotische Herzkrankheit: Zwei-Gefäß-Erkrankung", "I25.13": "Atherosklerotische Herzkrankheit: Drei-Gefäß-Erkrankung", "I26.0": "Lungenembolie mit Angabe eines akuten Cor pulmonale", "I26.9": "Lungenembolie ohne Angabe eines akuten Cor pulmonale", "I48.0": "Vorhofflimmern, paroxysmal", "I80.28": "Thrombose, Phlebitis und Thrombophlebitis sonstiger tiefer Gefäße der unteren Extremitäten", "K35.2": "Akute Appendizitis mit generalisierter Peritonitis", "K35.30": "Akute Appendizitis mit lokalisierter Peritonitis ohne Perforation oder Ruptur", "K35.31": "Akute Appendizitis mit lokalisierter Peritonitis mit Perforation oder Ruptur", "K35.8": "Akute Appendizitis, nicht näher bezeichnet", "K40.20": "Doppelseitige Hernia inguinalis, ohne Einklemmung und ohne Gangrän: Nicht als Rezidivhernie bezeichnet", "K40.30": "Hernia inguinalis, einseitig oder ohne Seitenangabe, mit Einklemmung, ohne Gangrän: Nicht als Rezidivhernie bezeichnet", "K40.90": "Hernia inguinalis, einseitig oder ohne Seitenangabe, ohne Einklemmung und ohne Gangrän: Nicht als Rezidivhernie bezeichnet", "K40.91": "Hernia inguinalis, einseitig oder ohne Seitenangabe, ohne Einklemmung und ohne Gangrän: Rezidivhernie", "K43.0": "Narbenhernie mit Einklemmung, ohne Gangrän", "K43.2": "Narbenhernie ohne Einklemmung und ohne Gangrän", "K43.90": "Epigastrische Hernie ohne Einklemmung und ohne Gangrän", "K56.5": "Intestinale Adhäsionen [Briden] mit Obstruktion", "K56.7": "Ileus, nicht näher bezeichnet", "K57.22": "Divertikulitis des Dickdarmes mit Perforation und Abszess, ohne Angabe einer Blutung", "K57.30": "Divertikulose des Dickdarmes ohne Perforation, Abszess oder Angabe einer Blutung", "K57.32": "Divertikulitis des Dickdarmes ohne Perforation, Abszess oder Angabe einer Blutung", "K61.0": "Analabszess", "K61.1": "Rektalabszess", "K64.2": "Hämorrhoiden 3. Grades", "K80.00": "Gallenblasenstein mit akuter Cholezystitis: Ohne Angabe einer Gallenwegsobstruktion", "K80.10": "Gallenblasenstein mit sonstiger Cholezystitis: Ohne Angabe einer Gallenwegsobstruktion", "K80.20": "Gallenblasenstein ohne Cholezystitis: Ohne Angabe einer Gallenwegsobstruktion", "K81.0": "Akute Cholezystitis", "K85.00": "Idiopathische akute Pankreatitis: Ohne Angabe einer Organkomplikation", "K85.10": "Biliäre akute Pankreatitis: Ohne Angabe einer Organkomplikation", "K85.20": "Alkoholinduzierte akute Pankreatitis: Ohne Angabe einer Organkomplikation", "L05.0": "Pilonidalzyste mit Abszess", "L05.9": "Pilonidalzyste ohne Abszess", "R10.4": "Sonstige und nicht näher bezeichnete Bauchschmerzen", "S72.00": "Schenkelhalsfraktur: Teil nicht näher bezeichnet", "S72.01": "Schenkelhalsfraktur: Intrakapsulär", "S72.10": "Femurfraktur: Trochantär, nicht näher bezeichnet", "Z82": "Bestimmte Behinderungen oder chronische Krankheiten in der Familienanamnese, die zu Schädigung oder Behinderung führen", "Z92.1": "Dauertherapie (gegenwärtig) mit Antikoagulanzien in der Eigenanamnese", "Z95.1": "Vorhandensein eines aortokoronaren Bypasses"};
+const F=[
+ {t:'22-jährige Patientin, Laparoskopie: phlegmonöse Appendix, lokale Peritonitis im rechten Unterbauch, keine Perforation.',ok:'K35.30',o:['K35.31','K35.2','K35.8'],tipp:'Lokale Peritonitis ohne Perforation = K35.30. „n. n. bez.“ (K35.8) nur, wenn wirklich nichts bekannt ist.'},
+ {t:'45-jähriger Patient, OP-Bericht: perforierte Appendizitis mit lokal begrenzter Peritonitis.',ok:'K35.31',o:['K35.30','K35.2','K35.8'],tipp:'Perforation bei lokaler Peritonitis = K35.31. Generalisierte Peritonitis wäre K35.2.'},
+ {t:'58-jähriger Patient, elektive TAPP: erstmals aufgetretene Leistenhernie rechts, nicht eingeklemmt.',ok:'K40.90',o:['K40.91','K40.30','K40.20'],seite:'R',tipp:'Einseitig, ohne Einklemmung, kein Rezidiv = K40.90, Seite R.'},
+ {t:'67-jähriger Patient: erneute Leistenhernie links, 3 Jahre nach Lichtenstein-OP. Reponibel.',ok:'K40.91',o:['K40.90','K40.30','K40.20'],seite:'L',tipp:'Die 5. Stelle unterscheidet Rezidiv (…1) und Nicht-Rezidiv (…0).'},
+ {t:'41-jährige Patientin, elektive Cholezystektomie bei symptomatischen Gallenblasensteinen, histologisch keine Cholezystitis.',ok:'K80.20',o:['K80.00','K80.10','K81.0'],tipp:'Stein ohne Entzündung, ohne Obstruktion = K80.20.'},
+ {t:'52-jähriger Patient: akute Cholezystitis bei Cholezystolithiasis, kein Gallengangsstein.',ok:'K80.00',o:['K81.0','K80.20','K80.10'],tipp:'Kombinationscode! Stein + akute Cholezystitis = K80.00 – nicht K81.0 (Cholezystitis ohne Stein).'},
+ {t:'63-jährige Patientin, CT: Sigmadivertikulitis mit Wandverdickung, kein Abszess, keine Perforation, keine Blutung.',ok:'K57.32',o:['K57.22','K57.30'],tipp:'Divertikulitis (= Entzündung) ohne Komplikationen = K57.32. Divertikulose ohne Entzündung wäre K57.30.'},
+ {t:'70-jähriger Patient: Narbenhernie nach medianer Laparotomie, nicht eingeklemmt.',ok:'K43.2',o:['K43.0','K43.90','K40.90'],tipp:'Narbenhernie ohne Einklemmung und ohne Gangrän = K43.2.'},
+ {t:'19-jähriger Patient: fluktuierende, gerötete Schwellung in der Rima ani, Inzision eines Pilonidalabszesses.',ok:'L05.0',o:['L05.9','K61.0','K61.1'],tipp:'Pilonidalsinus mit Abszess = L05.0 – nicht mit dem Analabszess (K61.0) verwechseln.'},
+ {t:'38-jähriger Patient: schmerzhafte, gerötete Schwellung direkt am Anus, Inzision eines perianalen Abszesses.',ok:'K61.0',o:['K61.1','L05.0','K64.2'],tipp:'Perianaler Abszess = K61.0 (Analabszess). Rektalabszess (K61.1) liegt höher.'},
+ {t:'72-jährige Patientin mit paroxysmalem Vorhofflimmern, dauerhaft auf Marcumar eingestellt. Welcher Code dokumentiert die Antikoagulation?',ok:'Z92.1',o:['Z95.1','Z82','I48.0'],tipp:'Laufende Antikoagulation = Z92.1, zusätzlich zur Grunderkrankung (hier I48.0).'},
+ {t:'Hausärztlicher Check-up: Vater und Bruder hatten vor dem 55. Lebensjahr einen Herzinfarkt (KHK in der Familienanamnese).',ok:'Z82',o:['Z95.1','I25.10','Z92.1'],tipp:'In der ICD-10-GM ist Z82 nicht unterteilt – die KHK in der Familienanamnese ist schlicht Z82.'},
+ {t:'66-jähriger Patient, Koronarangiographie: hämodynamisch relevante Stenosen in RIVA, RCX und RCA.',ok:'I25.13',o:['I25.11','I25.12','I25.10'],tipp:'Drei betroffene Gefäße = Drei-Gefäß-Erkrankung I25.13.'},
+ {t:'59-jährige Patientin mit Typ-2-Diabetes, HbA1c im Zielbereich, keine Folgeerkrankungen bekannt.',ok:'E11.90',o:['E11.91','E11.40'],tipp:'Ohne Komplikationen, nicht entgleist = E11.90.'},
+ {t:'48-jähriger Patient: akute Pankreatitis, sonografisch Gallengangssteine, kein Alkohol, keine Organkomplikation.',ok:'K85.10',o:['K85.00','K85.20'],tipp:'Ursache kodieren: biliär = K85.1-, alkoholisch = K85.2-, idiopathisch = K85.0-.'},
+ {t:'77-jährige Patientin, Z. n. Hysterektomie: Erbrechen, Stuhlverhalt, intraoperativ Bridenileus.',ok:'K56.5',o:['K56.7','R10.4'],tipp:'Bekannte Ursache (Briden) = K56.5. K56.7 („Ileus, n. n. bez.“) ist zu unspezifisch.'},
+ {t:'55-jähriger Patient: Lungenembolie im CT, echokardiographisch keine Rechtsherzbelastung.',ok:'I26.9',o:['I26.0'],tipp:'Ohne akutes Cor pulmonale = I26.9.'},
+ {t:'84-jährige Patientin nach Sturz: intrakapsuläre Schenkelhalsfraktur rechts.',ok:'S72.01',o:['S72.00','S72.10'],seite:'R',tipp:'Intrakapsulär = S72.01. Pertrochantäre Frakturen gehören zu S72.1-.'},
+ {t:'Hausarztpraxis: 25-jähriger Patient mit Schmerzen im rechten Unterbauch, Überweisung ins Krankenhaus mit Verdacht auf akute Appendizitis.',ok:'K35.8',o:['K35.30','K35.31','R10.4'],sich:'V',tipp:'Ambulant, Verdacht, Ausmaß unbekannt: K35.8 mit Zusatzkennzeichen V.'},
+ {t:'Praxis: Verdacht auf tiefe Beinvenenthrombose links – Kompressionssonographie unauffällig, Thrombose ausgeschlossen.',ok:'I80.28',o:['I26.9','I26.0'],sich:'A',seite:'L',tipp:'Ausgeschlossene Diagnosen ambulant mit A kennzeichnen.'},
+ {t:'Praxis, Quartalsdiagnose: Arterielle Hypertonie, medikamentös gut eingestellt, keine Krise.',ok:'I10.00',o:['I10.01'],sich:'G',tipp:'Ohne hypertensive Krise = I10.00, gesichert = G.'}
+];
+F.forEach(f=>{ f.o=[...new Set([f.ok,...f.o])]; });
+
+let modus='reihe', ord=[], idx=0, punkte=0, maxP=0, fall, w={}, done=false;
+const $=id=>document.getElementById(id);
+const mix=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+function chips(el,items,key){ el.innerHTML=items.map(([v,l])=>`<button class="chip" data-v="${v}">${l}</button>`).join('');
+  el.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ if(done) return; w[key]=c.dataset.v; el.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===c)); }); }
+function mark(el,ok){ el.querySelectorAll('.chip').forEach(c=>{ if(c.dataset.v===ok) c.classList.add('ok'); else if(c.classList.contains('on')) c.classList.add('bad'); }); }
+function start(){ ord = modus==='reihe'? F.map((_,i)=>i) : mix(F.map((_,i)=>i)); idx=0; punkte=0; maxP=0; laden(); }
+function laden(){
+  fall=F[ord[idx]]; w={}; done=false;
+  $('titel').textContent=`Fall ${idx+1} von ${F.length}`; $('punkte').textContent=`Punkte: ${punkte} / ${maxP}`;
+  $('fall').textContent=fall.t;
+  $('setting').textContent= fall.sich?'Ambulante Kodierung – Zusatzkennzeichen für die Diagnosesicherheit angeben.':'';
+  $('qCode').innerHTML=mix(fall.o).map(c=>`<button class="chip opt" data-v="${c}"><b>${c}</b><span>${T[c]}</span></button>`).join('');
+  $('qCode').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ if(done) return; w.code=c.dataset.v; $('qCode').querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===c)); });
+  $('blkSeite').classList.toggle('hidden',!fall.seite); chips($('qSeite'),[['R','R – rechts'],['L','L – links'],['B','B – beidseits']],'seite');
+  $('blkSich').classList.toggle('hidden',!fall.sich); $('hSich').textContent=(fall.seite?'3':'2')+' · Diagnosesicherheit (ambulant)';
+  chips($('qSich'),[['G','G – gesichert'],['V','V – Verdacht'],['A','A – ausgeschlossen'],['Z','Z – Zustand nach']],'sich');
+  $('ergebnis').classList.add('hidden'); $('fragen').classList.remove('hidden'); window.scrollTo({top:0,behavior:'smooth'});
+}
+$('auswerten').onclick=()=>{
+  if(done) return;
+  if(!w.code||(fall.seite&&!w.seite)||(fall.sich&&!w.sich)){ alert('Bitte alle Fragen beantworten.'); return; }
+  done=true;
+  let p=0,max=1; if(w.code===fall.ok) p++; mark($('qCode'),fall.ok);
+  if(fall.seite){ max++; if(w.seite===fall.seite) p++; mark($('qSeite'),fall.seite); }
+  if(fall.sich){ max++; if(w.sich===fall.sich) p++; mark($('qSich'),fall.sich); }
+  punkte+=p; maxP+=max; $('punkte').textContent=`Punkte: ${punkte} / ${maxP}`;
+  const voll=fall.ok+(fall.sich||'')+(fall.seite||'');
+  let h=`<h2>${p===max?'Richtig!':'Auswertung'} · ${p} von ${max}</h2><div class="fb ${w.code===fall.ok?'ok':'bad'}"><b>${fall.ok}</b>${T[fall.ok]}</div>`;
+  if(fall.sich||fall.seite) h+=`<p>Vollständig: <b>${fall.ok}</b>${fall.sich?' &nbsp;Sicherheit <b>'+fall.sich+'</b>':''}${fall.seite?' &nbsp;Seite <b>'+fall.seite+'</b>':''}</p>`;
+  h+=`<div class="note"><b>Merke:</b> ${fall.tipp}</div>`;
+  const last=idx===F.length-1;
+  h+=`<div style="margin-top:12px"><button class="btn" id="weiter">${last?'Abschließen':'Nächster Fall'}</button></div>`;
+  $('ergebnis').innerHTML=h; $('ergebnis').classList.remove('hidden'); $('ergebnis').scrollIntoView({behavior:'smooth'});
+  $('weiter').onclick=()=>{ if(last) return ende(); idx++; laden(); };
+};
+function ende(){ const q=maxP?Math.round(punkte/maxP*100):0; $('fragen').classList.add('hidden');
+  $('ergebnis').innerHTML=`<h2>Geschafft!</h2><p class="big">${punkte} / ${maxP} Punkte (${q} %)</p><p>${q>=85?'Sehr stark – du kodierst präzise.':q>=60?'Gut! Nochmal gemischt üben.':'Grundlagen lesen und noch einmal starten.'}</p><div class="row"><button class="btn" id="neu">Neu starten</button></div>`;
+  $('neu').onclick=start; }
+function setModus(m){ modus=m; $('mReihe').classList.toggle('on',m==='reihe'); $('mMix').classList.toggle('on',m==='mix'); start(); }
+$('mReihe').onclick=()=>setModus('reihe'); $('mMix').onclick=()=>setModus('mix');
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{ document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t)); $('train').classList.toggle('hidden',t.dataset.t!=='train'); $('basics').classList.toggle('hidden',t.dataset.t!=='basics'); });
+start();
+</script>
+</body>
+</html>
