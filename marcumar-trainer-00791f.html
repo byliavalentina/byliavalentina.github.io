@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marcumar-Trainer – Übungsfälle zur INR-Dosisanpassung</title>
+<style>:root{
+  --bg:#faf7f5; --card:#ffffff; --ink:#2b2b2b; --muted:#6b6464; --line:#e8e1dd;
+  --rose:#b0476b; --rose-soft:#f8e6ec;
+  --pass:#f6d3df; --pass-line:#d891aa; --pen:#22407a;
+  --gruen:#2f7d5b; --gruen-soft:#e5f2ec; --gelb:#a8710f; --gelb-soft:#fbf1dc; --rot:#b23a3a; --rot-soft:#f9e3e3;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:16px 14px 60px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 0 14px}
+header.top h1{font-size:1.35rem;margin:0;letter-spacing:.2px}
+header.top .sub{font-size:.82rem;color:var(--muted)}
+.badge{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--rose-soft);color:var(--rose)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:12px 0}
+.card h2{font-size:1.05rem;margin:0 0 8px}
+.card h3{font-size:.95rem;margin:14px 0 6px}
+.muted{color:var(--muted)}
+.small{font-size:.85rem}
+.tabs{display:flex;gap:6px;margin:6px 0 4px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:.9rem;cursor:pointer;color:var(--ink)}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+button.btn{border:0;border-radius:10px;padding:11px 18px;font-size:.95rem;font-weight:600;cursor:pointer;background:var(--rose);color:#fff}
+button.btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line)}
+button.btn:disabled{opacity:.45;cursor:default}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem;cursor:pointer;color:var(--ink);text-align:left}
+.chip.on{border-color:var(--rose);background:var(--rose-soft);color:var(--rose);font-weight:600}
+.chip.ok{border-color:var(--gruen);background:var(--gruen-soft);color:var(--gruen)}
+.chip.bad{border-color:var(--rot);background:var(--rot-soft);color:var(--rot)}
+.list .chip{display:block;width:100%;margin-bottom:6px}
+label.field{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 4px}
+select,input[type=number],input[type=text]{width:100%;font-size:1rem;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>*{flex:1 1 160px}
+
+/* Marcumar-Pass */
+.pass{background:var(--pass);border-radius:10px;padding:10px;overflow-x:auto}
+.pass{padding:8px 6px}
+.pass table{border-collapse:collapse;width:100%;table-layout:fixed}
+.pass th{font-size:.68rem;font-weight:600;color:#7a3550;text-transform:uppercase;letter-spacing:.3px;padding:4px 2px;border-bottom:1.5px solid var(--pass-line)}
+.pass td{border-bottom:1px solid var(--pass-line);border-left:1px solid var(--pass-line);text-align:center;padding:5px 2px;font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;color:var(--pen);font-size:1.02rem;white-space:nowrap}
+.pass td:first-child{border-left:0}
+.pass tr.neu td{background:rgba(255,255,255,.55)}
+.pass td.inr-neu{font-weight:700;color:#9b1c3c}
+.pass td.sum{font-family:inherit;font-size:.82rem;color:#7a3550}
+.step{display:flex;flex-direction:column;align-items:center;gap:2px}
+.step button{width:100%;max-width:30px;height:22px;border:1px solid var(--pass-line);background:#fff;border-radius:6px;font-size:.8rem;line-height:1;cursor:pointer;color:#7a3550;padding:0}
+.step span{min-width:28px;font-size:1.08rem}
+
+.ampel{display:inline-block;padding:4px 10px;border-radius:8px;font-weight:700;font-size:.9rem}
+.ampel.gruen{background:var(--gruen-soft);color:var(--gruen)}
+.ampel.gelb{background:var(--gelb-soft);color:var(--gelb)}
+.ampel.rot{background:var(--rot-soft);color:var(--rot)}
+.fb{border-radius:10px;padding:10px 12px;margin:8px 0;font-size:.93rem}
+.fb.ok{background:var(--gruen-soft)}
+.fb.bad{background:var(--rot-soft)}
+.fb.neutral{background:#f3efec}
+.fb b{display:block;margin-bottom:2px}
+ul.clean{padding-left:18px;margin:6px 0}
+ul.clean li{margin:3px 0}
+.big{font-size:1.6rem;font-weight:700}
+.kpi{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.kpi>div{flex:1 1 140px;background:#f6f2ef;border-radius:10px;padding:8px 10px}
+.kpi .l{font-size:.75rem;color:var(--muted)}
+.kpi .v{font-size:1.1rem;font-weight:700}
+.note{background:#fff8e6;border:1px solid #f0dfb0;border-radius:10px;padding:10px 12px;font-size:.85rem;color:#6b5420}
+footer{margin-top:24px;font-size:.78rem;color:var(--muted);text-align:center}
+.overlay{position:fixed;inset:0;background:rgba(30,24,26,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.overlay .card{max-width:520px;margin:0}
+table.ref{width:100%;border-collapse:collapse;font-size:.88rem}
+table.ref td,table.ref th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}
+.hidden{display:none!important}
+
+@media (max-width:560px){
+  .pass td{font-size:.92rem;padding:4px 1px}
+  .pass th{font-size:.6rem;padding:3px 0}
+  .pass .hide-m{display:none}
+  .step span{min-width:0;font-size:1rem}
+}
+</style>
+</head>
+<body>
+<div class="overlay" id="disc">
+  <div class="card">
+    <h2>Nur zu Lern- und Trainingszwecken</h2>
+    <p>Dieser Trainer dient ausschließlich der <b>Aus- und Weiterbildung</b>. Alle Fälle sind frei erfunden.</p>
+    <p><b>Er ist kein Medizinprodukt</b> und darf <b>nicht</b> zur Dosierung oder Behandlung realer Patientinnen und Patienten verwendet werden. Maßgeblich sind immer die aktuelle Fachinformation, aktuelle Leitlinien, die Vorgaben deiner Einrichtung und die Entscheidung der behandelnden Ärztin oder des behandelnden Arztes.</p>
+    <p class="small muted">Trotz sorgfältiger Erstellung keine Gewähr für Vollständigkeit und Aktualität; keine Haftung für Entscheidungen, die auf Basis dieses Trainers getroffen werden.</p>
+    <button class="btn" onclick="document.getElementById('disc').classList.add('hidden')">Verstanden – nur zum Üben</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Marcumar-Trainer</h1>
+      <div class="sub">INR lesen · Wochendosis anpassen · Pass ausfüllen</div>
+    </div>
+    <span class="badge">Nur zum Üben</span>
+  </header>
+
+  <div class="tabs">
+    <button class="tab on" data-t="train">Trainieren</button>
+    <button class="tab" data-t="basics">Grundlagen</button>
+  </div>
+
+  <section id="train">
+    <div class="card" id="modus">
+      <div class="row" style="align-items:center">
+        <div><b id="fallTitel">Fall 1 von 12</b><div class="small muted" id="punkte">Punkte: 0</div></div>
+        <div style="flex:0 0 auto" class="chips">
+          <button class="chip on" id="mSerie">Fallserie</button>
+          <button class="chip" id="mZufall">Zufallsfälle</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="fallKarte">
+      <div id="story"></div>
+      <div class="pass" style="margin-top:10px"><table id="passTab"></table></div>
+      <p class="small muted" style="margin:6px 0 0">Neuer Wochenplan: mit ▲ ▼ in Viertel-Tabletten einstellen (1 Tablette = 3 mg). Bei Pausen hier den Standardplan <i>nach</i> der Pause eintragen.</p>
+    </div>
+
+    <div class="card" id="fragen">
+      <h3>1 · Welcher INR-Zielbereich gilt?</h3>
+      <div class="chips" id="qZiel"></div>
+      <h3>2 · Was ist jetzt zu tun?</h3>
+      <div class="list" id="qMass"></div>
+      <h3>3 · Neuer Wochenplan</h3>
+      <div class="small" id="planInfo"></div>
+      <h3>4 · Nächste INR-Kontrolle</h3>
+      <div class="chips" id="qKontr"></div>
+      <div style="margin-top:14px"><button class="btn" id="auswerten">Auswerten</button></div>
+    </div>
+
+    <div class="card hidden" id="ergebnis"></div>
+  </section>
+
+  <section id="basics" class="hidden"><div class="card">
+  <h2>Die 6 Grundregeln</h2>
+  <ul class="clean">
+    <li><b>In Wochendosen denken.</b> Zuerst die aktuelle Wochendosis zusammenzählen (in Tabletten), dann um einen Prozentsatz ändern, erst danach auf Mo–So verteilen.</li>
+    <li><b>Im Ziel? Nichts ändern.</b> Ein INR im Zielbereich ist kein Anlass zur Anpassung.</li>
+    <li><b>Kleine Schritte.</b> Bei Abweichung die Wochendosis meist nur um etwa 10–20 % ändern. Größere Sprünge führen zum Pendeln.</li>
+    <li><b>Geduld.</b> Phenprocoumon wirkt sehr lange (Halbwertszeit mehrere Tage). Eine Änderung zeigt ihre volle Wirkung erst nach rund einer Woche.</li>
+    <li><b>Einzelne Ausreißer bei stabilem Verlauf.</b> Liegt der Wert nur knapp (≤ 0,5) außerhalb und waren die Vorwerte stabil, reicht oft: Ursache erfragen, Dosis lassen, zeitnah kontrollieren.</li>
+    <li><b>Gleichmäßig verteilen.</b> Möglichst ähnliche Tagesdosen; die Tage sollten sich höchstens um ¼–½ Tablette unterscheiden. Das Muster der Patientin oder des Patienten möglichst beibehalten.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>Zielbereiche nach Indikation</h2>
+  <table class="ref">
+    <tr><th>Indikation</th><th>INR</th></tr>
+    <tr><td>Vorhofflimmern</td><td>2,0–3,0</td></tr>
+    <tr><td>Tiefe Venenthrombose / Lungenembolie</td><td>2,0–3,0</td></tr>
+    <tr><td>Antiphospholipid-Syndrom (venöse Thrombose), LV-Thrombus</td><td>2,0–3,0</td></tr>
+    <tr><td>Biologische Klappe (erste 3 Monate, falls VKA)</td><td>2,0–3,0</td></tr>
+    <tr><td>Mech. Aortenklappe, niedrige Thrombogenität, ohne Risikofaktoren</td><td>2,0–3,0 (Ziel 2,5)</td></tr>
+    <tr><td>Mech. Aortenklappe, niedrige Thrombogenität, mit Risikofaktoren · Mech. Mitral-/Trikuspidalklappe</td><td>2,5–3,5 (Ziel 3,0)</td></tr>
+    <tr><td>Mech. Klappe, mittlere Thrombogenität, ohne / mit Risikofaktoren</td><td>2,5–3,5 / 3,0–4,0</td></tr>
+    <tr><td>Mech. Klappe, hohe Thrombogenität, ohne / mit Risikofaktoren</td><td>3,0–4,0 / 3,5–4,5</td></tr>
+  </table>
+  <p class="small muted">Risikofaktoren bei mechanischen Klappen (nach ESC/EACTS): Mitral- oder Trikuspidalersatz, frühere Thromboembolie, Vorhofflimmern, Mitralstenose, LVEF &lt; 35 %. Niedrige Thrombogenität: die meisten modernen Doppelflügelklappen. Im Zweifel steht der Zielbereich im Arztbrief oder im Pass.</p>
+</div>
+
+<div class="card">
+  <h2>Was tun bei welchem INR?</h2>
+  <table class="ref">
+    <tr><th>Situation</th><th>Vorgehen (Orientierung)</th><th>Kontrolle</th></tr>
+    <tr><td>Im Ziel</td><td>Dosis unverändert</td><td>1–4 Wochen, je nach Stabilität</td></tr>
+    <tr><td>≤ 0,5 unter Ziel, Vorwerte stabil</td><td>Ursache erfragen, Dosis meist unverändert</td><td>ca. 1 Woche</td></tr>
+    <tr><td>≤ 0,5 unter Ziel, wiederholt</td><td>Wochendosis + ca. 10 %</td><td>ca. 1 Woche</td></tr>
+    <tr><td>&gt; 0,5 unter Ziel</td><td>Wochendosis + ca. 10–20 %, ggf. einmalig ½ Tbl. extra; bei mech. Klappe Überbrückung mit NMH erwägen</td><td>3–7 Tage</td></tr>
+    <tr><td>≤ 0,5 über Ziel, Vorwerte stabil</td><td>Dosis meist unverändert</td><td>ca. 1 Woche</td></tr>
+    <tr><td>≤ 0,5 über Ziel, wiederholt</td><td>Wochendosis − ca. 10 %</td><td>ca. 1 Woche</td></tr>
+    <tr><td>&gt; 0,5 über Ziel, INR &lt; 5</td><td>1 Tag aussetzen, dann Wochendosis − ca. 10–15 %</td><td>3–5 Tage</td></tr>
+    <tr><td>INR 5–9, keine Blutung</td><td>1–2 Tage pausieren, Vitamin K 1–2 mg p.o. erwägen, dann − ca. 15 %</td><td>1–2 Tage</td></tr>
+    <tr><td>INR ≥ 9, keine Blutung</td><td>Pausieren, Vitamin K ca. 2–5 mg p.o., stationäre Überwachung erwägen</td><td>Folgetag</td></tr>
+    <tr><td>Relevante Blutung</td><td>Marcumar stoppen, Vitamin K i.v., PPSB nach SOP</td><td>sofort</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Typische Ursachen für Ausreißer</h2>
+  <div class="row">
+    <div><h3>INR zu niedrig</h3><ul class="clean small"><li>Tablette vergessen</li><li>Viel Vitamin-K-reiche Kost (Kohl, Spinat, Sauerkraut, Brokkoli)</li><li>Neue Medikamente: Rifampicin, Carbamazepin, Johanniskraut</li><li>Nahrungsergänzung mit Vitamin K</li></ul></div>
+    <div><h3>INR zu hoch</h3><ul class="clean small"><li>Antibiotika (z. B. Cotrimoxazol, Ciprofloxacin, Metronidazol)</li><li>Amiodaron, Azol-Antimykotika</li><li>Fieber, Durchfall, wenig gegessen</li><li>Alkohol, Lebererkrankung, Doppeleinnahme</li></ul></div>
+  </div>
+</div>
+
+<div class="card small muted">
+  <b>Grundlage (sinngemäß zusammengefasst):</b> Fachinformation Marcumar®, ESC/EACTS-Leitlinie zu Herzklappenerkrankungen (Ziel-INR bei mechanischen Klappen), CHEST/ACCP-Empfehlungen zum Management von Vitamin-K-Antagonisten. Bei Abweichungen gelten die aktuelle Fachinformation, aktuelle Leitlinien und die Vorgaben der behandelnden Einrichtung. Stand: November 2026.
+</div>
+</section>
+
+  <footer>Marcumar-Trainer · by Lia Valentina · Nur zu Lern- und Trainingszwecken, kein Medizinprodukt, nicht zur Anwendung an Patient:innen. Alle Fälle fiktiv.</footer>
+</div>
+
+<script>
+/* ===== Marcumar-Logik (gemeinsam für Trainer & Assistent) =====
+   Einheit intern: Viertel-Tabletten (1 Tablette = 3 mg Phenprocoumon = 4 Viertel)
+   Quellen (sinngemäß, eigene Formulierung): Fachinformation Marcumar,
+   ESC/EACTS-Leitlinie Herzklappenerkrankungen (Ziel-INR mech. Klappen),
+   CHEST/ACCP-Empfehlungen zum VKA-Management, Pharmazeutische Zeitung 04/2014.
+*/
+const TAGE = ['Mo','Di','Mi','Do','Fr','Sa','So'];
+
+const INDIKATIONEN = [
+  {id:'vhf',   name:'Vorhofflimmern', lo:2.0, hi:3.0},
+  {id:'vte',   name:'Tiefe Venenthrombose / Lungenembolie', lo:2.0, hi:3.0},
+  {id:'aps',   name:'Antiphospholipid-Syndrom (venöse Thrombose)', lo:2.0, hi:3.0},
+  {id:'lvt',   name:'LV-Thrombus', lo:2.0, hi:3.0},
+  {id:'bio',   name:'Biologische Klappe (erste 3 Monate, falls VKA)', lo:2.0, hi:3.0},
+  {id:'mak1',  name:'Mech. Aortenklappe – niedrige Thrombogenität, ohne Risikofaktoren', lo:2.0, hi:3.0, mech:true},
+  {id:'mak2',  name:'Mech. Aortenklappe – niedrige Thrombogenität, mit Risikofaktoren', lo:2.5, hi:3.5, mech:true},
+  {id:'mmk',   name:'Mech. Mitral- oder Trikuspidalklappe (niedrige Thrombogenität)', lo:2.5, hi:3.5, mech:true},
+  {id:'mmid',  name:'Mech. Klappe – mittlere Thrombogenität, ohne Risikofaktoren', lo:2.5, hi:3.5, mech:true},
+  {id:'mmidrf',name:'Mech. Klappe – mittlere Thrombogenität, mit Risikofaktoren', lo:3.0, hi:4.0, mech:true},
+  {id:'mhigh', name:'Mech. Klappe – hohe Thrombogenität, ohne Risikofaktoren', lo:3.0, hi:4.0, mech:true},
+  {id:'mhighrf',name:'Mech. Klappe – hohe Thrombogenität, mit Risikofaktoren', lo:3.5, hi:4.5, mech:true}
+];
+
+const MASSNAHMEN = {
+  keep:      'Wochendosis unverändert lassen',
+  up:        'Wochendosis um ca. 10–20 % erhöhen',
+  down:      'Wochendosis um ca. 10–20 % senken',
+  hold_down: '1 Tag aussetzen, dann Wochendosis um ca. 10–20 % senken',
+  pause_vitk:'Pausieren (1–2 Tage), Vitamin K erwägen, Wochendosis senken',
+  emergency: 'Notfall: Marcumar stoppen, Blutung managen (Vit. K i.v., PPSB nach SOP)'
+};
+const KONTROLLEN = {
+  c1:  'nach 1–2 Tagen',
+  c3:  'nach 3–5 Tagen',
+  c7:  'nach ca. 1 Woche',
+  c14: 'nach 2–4 Wochen',
+  sofort: 'sofort / stationär'
+};
+
+/* ---------- Hilfsfunktionen ---------- */
+function fmtQ(q){ // Viertel -> "1½"
+  if(q===0) return '0';
+  const w=Math.floor(q/4), r=q%4;
+  const f=['','¼','½','¾'][r];
+  return (w>0?String(w):'')+f || '0';
+}
+function fmtTabs(q){ const t=q/4; return (Number.isInteger(t)?t:t.toFixed(2).replace(/0$/,'')).toString().replace('.',',') }
+function fmtNum(x){ return x.toFixed(1).replace('.',',') }
+function sum(a){ return a.reduce((s,v)=>s+v,0) }
+
+function spreadIdx(n){ const r=[]; for(let k=0;k<n;k++) r.push(Math.floor(k*7/n)); return r; }
+
+/* Wochendosis (Viertel) gleichmäßig auf Mo–So verteilen.
+   halbe=true: nur halbe Tabletten (gerade Viertelzahl pro Tag) */
+function verteilen(Q, halbe){
+  const unit = halbe?2:1;
+  const units = Math.round(Q/unit);
+  const base=Math.floor(units/7), extra=units-7*base;
+  const plan=Array(7).fill(base);
+  spreadIdx(extra).forEach(i=>plan[i]++);
+  return plan.map(u=>u*unit);
+}
+
+/* Bestehenden Plan um delta Viertel ändern: Erhöhung an den niedrigsten Tagen,
+   Reduktion an den höchsten Tagen – das bestehende Muster bleibt so weit wie möglich erhalten. */
+const TIE=[0,3,5,1,4,2,6];
+function anpassen(plan, delta, halbe){
+  const p=plan.slice(), unit=halbe?2:1;
+  let steps=Math.round(Math.abs(delta)/unit);
+  while(steps-->0){
+    let best=-1;
+    for(const i of TIE){
+      if(delta>0){ if(best<0||p[i]<p[best]) best=i; }
+      else { if(p[i]>=unit && (best<0||p[i]>p[best])) best=i; }
+    }
+    if(best<0) break;
+    p[best]+= delta>0?unit:-unit;
+  }
+  return p;
+}
+
+function neueWochendosis(Q, pct, halbe){
+  if(pct===0) return Q;
+  const unit = halbe?2:1;
+  let n = Math.round(Q*(1+pct)/unit)*unit;
+  if(n===Q) n += (pct>0?unit:-unit);
+  return Math.max(0,n);
+}
+
+/* ---------- Kernlogik ----------
+ input: {lo, hi, mech, inr, prev:[INR-Werte älter→neuer], weekQ, plan:[7],
+         blutung:'keine'|'leicht'|'schwer', interaktion:bool, halbe:bool}
+*/
+function empfehlung(inp){
+  const {lo,hi,inr}=inp;
+  const prev=(inp.prev||[]).filter(v=>typeof v==='number' && !isNaN(v));
+  const letzte=prev.slice(-2);
+  const stabil = letzte.length>=2 && letzte.every(v=>v>=lo && v<=hi);
+  const Q = inp.weekQ ?? sum(inp.plan||[]);
+  const r = {kat:'', status:'', ampel:'gruen', massnahme:'keep', alt:[], pct:0, pctMin:0, pctMax:0,
+             kontrolle:'c7', kontrolleAlt:[], heute:'', gruende:[], hinweise:[]};
+
+  if(inp.blutung==='schwer'){
+    Object.assign(r,{status:'Relevante Blutung', ampel:'rot', massnahme:'emergency', kontrolle:'sofort', pct:null});
+    r.heute='Kein Marcumar. Notfallmanagement: Vitamin K i.v. und PPSB nach Klinik-SOP, Kreislauf stabilisieren, Blutungsquelle suchen.';
+    r.gruende.push('Bei relevanter Blutung geht es nicht um Feinjustierung der Wochendosis, sondern um Antagonisierung und Blutstillung.');
+    return fertig(r,inp,Q);
+  }
+
+  if(inr>=lo && inr<=hi){
+    r.status='Im Zielbereich'; r.massnahme='keep';
+    if(stabil){ r.kontrolle='c14'; r.kontrolleAlt=['c7']; r.gruende.push('INR im Ziel und auch die letzten Werte waren stabil – nichts ändern, Kontrollintervall kann länger sein.'); }
+    else { r.kontrolle='c7'; r.kontrolleAlt=['c14']; r.gruende.push('INR im Ziel – Dosis beibehalten. Da die Vorwerte schwankten, eher zeitnah kontrollieren.'); }
+  }
+  else if(inr<lo){
+    const d=lo-inr; r.ampel='gelb';
+    if(d<=0.5 && stabil){
+      r.status='Leicht unter dem Ziel (einmalig)'; r.massnahme='keep'; r.alt=['up']; r.pctMax=0.15;
+      r.kontrolle='c7'; r.kontrolleAlt=['c3'];
+      r.gruende.push('Nur knapp unter dem Ziel bei bisher stabilen Werten: meist eine Einzelursache. Erst Ursache erfragen statt sofort nachzuregeln.');
+    } else if(d<=0.5){
+      r.status='Leicht unter dem Ziel'; r.massnahme='up'; r.pct=0.10; r.pctMin=0.05; r.pctMax=0.20;
+      r.kontrolle='c7'; r.kontrolleAlt=['c3'];
+      r.gruende.push('Wiederholt bzw. ohne stabilen Vorverlauf unter dem Ziel: Wochendosis in kleinem Schritt (~10 %) erhöhen.');
+    } else {
+      r.status='Deutlich unter dem Ziel'; r.ampel='rot'; r.massnahme='up'; r.pct=0.15; r.pctMin=0.05; r.pctMax=0.25;
+      r.kontrolle='c3'; r.kontrolleAlt=['c7'];
+      r.heute='Optional heute einmalig ca. ½ Tablette zusätzlich, danach neuer Wochenplan.';
+      r.gruende.push('Deutlich unter dem Ziel: Wochendosis um ~10–20 % erhöhen. Wegen der langen Halbwertszeit nicht mehr – sonst schießt der INR nach einigen Tagen über.');
+      if(inp.mech) r.hinweise.push('Mechanische Klappe mit deutlich zu niedrigem INR: Überbrückung mit NMH erwägen (individuelles Thromboembolierisiko).');
+    }
+    r.hinweise.push('Ursachen erfragen: vergessene Einnahme, viel Vitamin-K-reiche Kost (Kohl, Spinat, Sauerkraut), neue Medikamente (z. B. Rifampicin, Carbamazepin), Nahrungsergänzung.');
+  }
+  else { // inr > hi
+    const d=inr-hi;
+    if(d<=0.5){
+      r.ampel='gelb';
+      if(stabil){
+        r.status='Leicht über dem Ziel (einmalig)'; r.massnahme='keep'; r.alt=['down']; r.pctMin=-0.15;
+        r.kontrolle='c7'; r.kontrolleAlt=['c3'];
+        r.gruende.push('Nur knapp über dem Ziel bei bisher stabilen Werten: Dosis meist beibehalten und kontrollieren.');
+      } else {
+        r.status='Leicht über dem Ziel'; r.massnahme='down'; r.pct=-0.10; r.pctMin=-0.20; r.pctMax=-0.05;
+        r.kontrolle='c7'; r.kontrolleAlt=['c3'];
+        r.gruende.push('Wiederholt bzw. steigend über dem Ziel: Wochendosis in kleinem Schritt (~10 %) senken.');
+      }
+    } else if(inr<5){
+      r.status='Deutlich über dem Ziel'; r.ampel='rot'; r.massnahme='hold_down';
+      r.pct = d<=1 ? -0.10 : -0.15; r.pctMin=-0.25; r.pctMax=-0.05;
+      r.kontrolle='c3'; r.kontrolleAlt=['c1','c7'];
+      r.heute='Heute keine Tablette (1 Tag aussetzen), danach neuer Wochenplan.';
+      r.gruende.push('Deutlich über dem Ziel, aber < 5 und ohne Blutung: einen Tag pausieren und die Wochendosis um ~10–15 % senken.');
+    } else if(inr<9){
+      r.status='Stark erhöht (5–9)'; r.ampel='rot'; r.massnahme='pause_vitk';
+      r.pct=-0.15; r.pctMin=-0.25; r.pctMax=-0.10;
+      r.kontrolle='c1'; r.kontrolleAlt=['c3'];
+      r.heute='1–2 Tage keine Tablette. Vitamin K 1–2 mg p.o. erwägen, besonders bei erhöhtem Blutungsrisiko. Auf Blutungszeichen achten.';
+      r.gruende.push('INR 5–9 ohne Blutung: pausieren, bis der INR wieder im Ziel ist, dann mit reduzierter Wochendosis weiter. Oral niedrig dosiertes Vitamin K ist eine Option.');
+    } else {
+      r.status='Massiv erhöht (≥ 9)'; r.ampel='rot'; r.massnahme='pause_vitk';
+      r.pct=-0.20; r.pctMin=-0.30; r.pctMax=-0.10;
+      r.kontrolle='c1'; r.kontrolleAlt=[];
+      r.heute='Kein Marcumar. Vitamin K ca. 2–5 mg p.o., INR am Folgetag. Stationäre Überwachung erwägen.';
+      r.gruende.push('INR ≥ 9 ohne Blutung: pausieren und Vitamin K oral geben, engmaschig kontrollieren.');
+    }
+    r.hinweise.push('Ursachen erfragen: neue Medikamente (v. a. Antibiotika wie Cotrimoxazol, Ciprofloxacin; Amiodaron, Azole), Fieber, Durchfall, wenig Essen, Alkohol, Leberfunktion, versehentliche Doppeleinnahme.');
+  }
+
+  if(inp.blutung==='leicht'){
+    r.ampel='rot';
+    if(r.massnahme==='keep'||r.massnahme==='down'){ r.massnahme='hold_down'; if(r.pct===0) r.pct=-0.10; r.pctMin=-0.25; r.pctMax=0; }
+    r.kontrolle = r.kontrolle==='c14'||r.kontrolle==='c7' ? 'c3' : r.kontrolle;
+    r.hinweise.unshift('Leichte Blutung: lokale Maßnahmen, Blutung ärztlich beurteilen, Hb kontrollieren. Bei INR über dem Ziel Pause und ggf. Vitamin K.');
+  }
+  if(inp.interaktion){
+    r.hinweise.push('Neues interagierendes Medikament: Ist es nur vorübergehend (z. B. Antibiotikum), die Wochendosis nur vorsichtig ändern und nach Absetzen zur alten Dosis zurückkehren. Engmaschiger kontrollieren.');
+  }
+  r.hinweise.push('Marcumar hat eine sehr lange Halbwertszeit: Eine Dosisänderung zeigt ihre volle Wirkung erst nach mehreren Tagen. Nicht nach jedem Wert hektisch nachregeln.');
+  return fertig(r,inp,Q);
+}
+
+function fertig(r,inp,Q){
+  r.alteQ=Q;
+  if(r.pct===null){ r.neueQ=null; r.neuerPlan=null; return r; }
+  r.neueQ = neueWochendosis(Q, r.pct, inp.halbe);
+  r.neuerPlan = inp.plan ? anpassen(inp.plan, r.neueQ-Q, inp.halbe) : verteilen(r.neueQ, inp.halbe);
+  r.neueQ = sum(r.neuerPlan);
+  r.realPct = Q>0 ? (r.neueQ-Q)/Q : 0;
+  return r;
+}
+
+/* Prüft eine vom Nutzer gewählte Wochendosis gegen die Empfehlung (für den Trainer) */
+function pruefePlan(r, nutzerQ){
+  if(r.neueQ===null) return {ok: nutzerQ===0, text: nutzerQ===0?'Richtig: kein Wochenplan, sondern Stopp und Notfallmanagement.':'Bei relevanter Blutung wird kein neuer Wochenplan geschrieben – Marcumar ist gestoppt.'};
+  const Q=r.alteQ; const pct = Q>0?(nutzerQ-Q)/Q:0;
+  const eps=0.001;
+  let lo=r.pctMin, hi=r.pctMax;
+  if(r.massnahme==='keep' && r.alt.length===0){ lo=0; hi=0; }
+  const ok = pct>=lo-eps && pct<=hi+eps;
+  return {ok, pct, lo, hi};
+}
+
+
+const ZIELE=[[2.0,3.0],[2.5,3.5],[3.0,4.0],[3.5,4.5]];
+const FAELLE=[
+ {ind:'vhf', plan:[4,4,4,4,4,2,4], prev:[2.3,2.4,2.6], inr:2.7,
+  story:'Frau K., 74 Jahre, Vorhofflimmern. Kommt zur Routinekontrolle, keine Beschwerden, keine neuen Medikamente.',
+  tipp:'Im Ziel heißt: Finger weg von der Dosis. Bei stabilem Verlauf darf das Kontrollintervall länger werden.'},
+ {ind:'vte', plan:[4,4,4,4,4,4,4], prev:[2.2,2.3,2.5], inr:1.7,
+  story:'Herr M., 68 Jahre, Lungenembolie vor 4 Monaten. Erzählt, dass es am Wochenende zweimal Grünkohl gab.',
+  tipp:'Einmalig knapp unter dem Ziel mit erklärbarer Ursache: Dosis lassen, beraten (Vitamin-K-Zufuhr möglichst gleichmäßig), nach einer Woche kontrollieren.'},
+ {ind:'vhf', plan:[2,2,2,2,2,2,2], prev:[2.1,1.8,1.9], inr:1.6,
+  story:'Frau B., 81 Jahre, zierlich, Vorhofflimmern. Nimmt täglich ½ Tablette. Die letzten Werte waren schon grenzwertig.',
+  tipp:'Wiederholt unter dem Ziel: jetzt kleiner Schritt nach oben. Bei 3½ Tabletten pro Woche ist schon ¼ Tablette mehr ca. 7 %.'},
+ {ind:'mmk', plan:[4,4,4,4,4,4,4], prev:[2.8,2.6,2.9], inr:1.9,
+  story:'Herr S., 59 Jahre, mechanische Mitralklappe. Hat im Urlaub zwei Tage seine Tabletten vergessen.',
+  tipp:'Mitralklappe = Ziel 2,5–3,5. Der Wert liegt 0,6 drunter. Dosis etwas erhöhen, früh kontrollieren und bei mechanischer Klappe an Überbrückung mit NMH denken.'},
+ {ind:'vhf', plan:[4,4,4,4,4,2,4], prev:[2.5,2.5,2.8], inr:3.3,
+  story:'Frau T., 77 Jahre, Vorhofflimmern. Sonst immer gut eingestellt, keine Blutungszeichen.',
+  tipp:'Einzelner, knapper Ausreißer nach oben bei stabilem Verlauf: nicht reflexhaft senken. Kontrolle in einer Woche.'},
+ {ind:'vte', plan:[6,4,6,4,6,4,6], prev:[2.8,3.1,3.2], inr:3.4,
+  story:'Herr L., 70 Jahre, tiefe Beinvenenthrombose. Nimmt abwechselnd 1½ und 1 Tablette. Der INR steigt seit Wochen langsam.',
+  tipp:'Steigender Trend und jetzt über dem Ziel: um ca. 10 % senken. 9 Tabletten/Woche minus 10 % ≈ 8 Tabletten.'},
+ {ind:'vhf', plan:[4,4,4,4,4,4,4], prev:[2.4,2.5,2.6], inr:4.3, interaktion:true,
+  story:'Frau H., 83 Jahre, Vorhofflimmern. Nimmt seit 5 Tagen Cotrimoxazol wegen eines Harnwegsinfekts. Keine Blutung.',
+  tipp:'Klassische Interaktion! Einen Tag aussetzen, vorübergehend reduzieren – und nach Ende des Antibiotikums an die alte Dosis denken, sonst rutscht der INR danach ab.'},
+ {ind:'vhf', plan:[4,4,4,4,4,4,4], prev:[2.6,2.8,3.0], inr:6.2,
+  story:'Herr P., 66 Jahre, Vorhofflimmern. Hatte Durchfall und kaum gegessen. Keine Blutungszeichen.',
+  tipp:'INR über 5 ohne Blutung: pausieren, Vitamin K oral erwägen, schon nach 1–2 Tagen kontrollieren.'},
+ {ind:'vte', plan:[4,4,4,4,4,4,4], prev:[2.5,2.7,2.9], inr:3.8, blutung:'leicht',
+  story:'Frau R., 72 Jahre, rezidivierende TVT. Kommt mit Nasenbluten, das nach Kompression steht. Kreislauf stabil.',
+  tipp:'Leichte Blutung + INR über dem Ziel: einen Tag pausieren, Dosis senken, Blutung und Hb ärztlich beurteilen, früh kontrollieren.'},
+ {ind:'mak2', plan:[5,5,5,5,5,5,5], prev:[2.7,3.0,3.2], inr:2.9,
+  story:'Herr W., 62 Jahre, mechanische Aortenklappe, zusätzlich Vorhofflimmern (= Risikofaktor). Routinekontrolle.',
+  tipp:'Aortenklappe mit Risikofaktor: Ziel 2,5–3,5. Der Wert liegt im Ziel, die Vorwerte auch – nichts ändern.'},
+ {ind:'vhf', plan:[4,4,4,4,4,4,4], prev:[2.4,2.6,2.5], inr:4.5, blutung:'schwer',
+  story:'Herr G., 79 Jahre, Vorhofflimmern. Seit gestern Teerstühle, Hb 7,8 g/dl, Puls 118.',
+  tipp:'Hier geht es nicht um den Pass, sondern um den Notfall: Stopp, Antagonisierung nach SOP, Blutungsquelle suchen.'},
+ {ind:'mmidrf', plan:[6,6,6,6,6,6,6], prev:[3.2,3.4,3.1], inr:2.4,
+  story:'Frau F., 64 Jahre, ältere mechanische Klappe mittlerer Thrombogenität, Z. n. Schlaganfall. Kein Infekt, nichts vergessen.',
+  tipp:'Mittlere Thrombogenität + Risikofaktor: Ziel 3,0–4,0. 2,4 ist deutlich darunter – erhöhen, früh kontrollieren, Überbrückung erwägen.'}
+];
+
+let modus='serie', idx=0, punkte=0, maxPunkte=0, fall=null, emp=null;
+let wahl={ziel:null,mass:null,kontr:null}, plan=[0,0,0,0,0,0,0], ausgewertet=false;
+const $=id=>document.getElementById(id);
+const ind=id=>INDIKATIONEN.find(i=>i.id===id);
+
+function datum(off){const d=new Date();d.setDate(d.getDate()+off);return String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')+'.';}
+
+function zufallsFall(){
+  const pool=['vhf','vte','vhf','mak1','mak2','mmk','aps','mmidrf'];
+  const I=ind(pool[Math.floor(Math.random()*pool.length)]);
+  const plaene=[[4,4,4,4,4,4,4],[4,4,4,4,4,2,4],[2,2,2,2,2,2,2],[6,4,6,4,6,4,6],[3,3,3,3,3,3,3],[4,2,4,2,4,2,4],[6,6,6,6,6,6,6]];
+  const p=plaene[Math.floor(Math.random()*plaene.length)];
+  const mid=(I.lo+I.hi)/2, r=()=>Math.round((mid+(Math.random()-.5)*1.1)*10)/10;
+  const prev=[r(),r(),r()];
+  const offs=[-1.3,-0.8,-0.3,0,0.2,0.4,0.8,1.6,3.5,-0.5,0.6];
+  let inr=Math.round((Math.random()<.25? mid+(Math.random()-.5)*.9 : (Math.random()<.5?I.lo:I.hi)+offs[Math.floor(Math.random()*offs.length)])*10)/10;
+  inr=Math.max(1.1,inr);
+  return {ind:I.id, plan:p, prev, inr, zufall:true,
+    story:'Zufallsfall: '+I.name+'. Keine Blutung, keine neuen Medikamente bekannt.', tipp:''};
+}
+
+function laden(){
+  fall = modus==='serie'? FAELLE[idx] : zufallsFall();
+  const I=ind(fall.ind);
+  emp=empfehlung({lo:I.lo,hi:I.hi,mech:!!I.mech,inr:fall.inr,prev:fall.prev,plan:fall.plan,blutung:fall.blutung||'keine',interaktion:!!fall.interaktion});
+  wahl={ziel:null,mass:null,kontr:null}; plan=fall.plan.slice(); ausgewertet=false;
+  $('fallTitel').textContent = modus==='serie' ? `Fall ${idx+1} von ${FAELLE.length}` : 'Zufallsfall';
+  $('punkte').textContent = `Punkte: ${punkte} / ${maxPunkte}`;
+  $('story').innerHTML = `<p style="margin:0">${fall.story}</p><p class="small muted" style="margin:4px 0 0">Indikation steht im Text – den Zielbereich musst du selbst wissen.</p>`;
+  $('ergebnis').classList.add('hidden'); $('fragen').classList.remove('hidden');
+  renderPass(); renderFragen();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderPass(){
+  let h='<tr><th>Datum</th><th>INR</th>'+TAGE.map(t=>`<th>${t}</th>`).join('')+'<th class="hide-m">Woche</th></tr>';
+  fall.prev.forEach((v,i)=>{h+=`<tr><td>${datum(-7*(fall.prev.length-i))}</td><td>${fmtNum(v)}</td>`+fall.plan.map(q=>`<td>${fmtQ(q)}</td>`).join('')+`<td class="sum hide-m">${fmtTabs(sum(fall.plan))} Tbl.</td></tr>`});
+  h+=`<tr class="neu"><td>${datum(0)}</td><td class="inr-neu">${fmtNum(fall.inr)}</td>`+plan.map((q,i)=>`<td><div class="step"><button data-i="${i}" data-d="1" ${ausgewertet?'disabled':''}>▲</button><span>${fmtQ(q)}</span><button data-i="${i}" data-d="-1" ${ausgewertet?'disabled':''}>▼</button></div></td>`).join('')+`<td class="sum hide-m" id="wsum">${fmtTabs(sum(plan))} Tbl.</td></tr>`;
+  $('passTab').innerHTML=h;
+  $('passTab').querySelectorAll('.step button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;plan[i]=Math.max(0,Math.min(12,plan[i]+(+b.dataset.d)));renderPass();});
+  const alt=sum(fall.plan), neu=sum(plan), pct=alt?Math.round((neu-alt)/alt*100):0;
+  $('planInfo').innerHTML=`Bisher <b>${fmtTabs(alt)}</b> Tbl./Woche (${(alt*0.75).toString().replace('.',',')} mg) → neu <b>${fmtTabs(neu)}</b> Tbl./Woche (${(neu*0.75).toString().replace('.',',')} mg) · Änderung <b>${pct>0?'+':''}${pct} %</b>`;
+}
+
+function chipGroup(el, items, key){
+  el.innerHTML=items.map(([v,l])=>`<button class="chip" data-v="${v}">${l}</button>`).join('');
+  el.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ if(ausgewertet) return; wahl[key]=c.dataset.v; el.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===c)); });
+}
+function renderFragen(){
+  chipGroup($('qZiel'), ZIELE.map(z=>[z.join('-'), fmtNum(z[0])+' – '+fmtNum(z[1])]), 'ziel');
+  chipGroup($('qMass'), Object.entries(MASSNAHMEN), 'mass');
+  chipGroup($('qKontr'), Object.entries(KONTROLLEN), 'kontr');
+}
+
+function markiere(el, richtig){
+  el.querySelectorAll('.chip').forEach(c=>{
+    const v=c.dataset.v;
+    if(richtig.includes(v)) c.classList.add('ok');
+    else if(c.classList.contains('on')) c.classList.add('bad');
+  });
+}
+
+$('auswerten').onclick=()=>{
+  if(ausgewertet) return;
+  if(!wahl.ziel||!wahl.mass||!wahl.kontr){ alert('Bitte alle drei Fragen beantworten und den Wochenplan einstellen.'); return; }
+  ausgewertet=true;
+  const I=ind(fall.ind);
+  const zielRichtig=[I.lo,I.hi].join('-');
+  const okZiel = wahl.ziel===zielRichtig;
+  const massRichtig=[emp.massnahme,...emp.alt];
+  const okMass = massRichtig.includes(wahl.mass);
+  const kontrRichtig=[emp.kontrolle,...emp.kontrolleAlt];
+  const okKontr = kontrRichtig.includes(wahl.kontr);
+  const notfall = emp.massnahme==='emergency';
+  const pp = notfall?null:pruefePlan(emp, sum(plan));
+  const okPlan = notfall?true:pp.ok;
+  const p = [okZiel,okMass,okKontr].filter(Boolean).length + (notfall?0:(okPlan?1:0));
+  const max = notfall?3:4;
+  punkte+=p; maxPunkte+=max;
+  markiere($('qZiel'),[zielRichtig]); markiere($('qMass'),massRichtig); markiere($('qKontr'),kontrRichtig);
+  renderPass();
+
+  const fb=(ok,t,x)=>`<div class="fb ${ok?'ok':'bad'}"><b>${ok?'✓':'✗'} ${t}</b>${x}</div>`;
+  let h=`<h2>Auswertung · ${p} von ${max} Punkten</h2>`;
+  h+=`<p><span class="ampel ${emp.ampel}">${emp.status}</span> &nbsp;INR ${fmtNum(fall.inr)} bei Ziel ${fmtNum(I.lo)}–${fmtNum(I.hi)}</p>`;
+  h+=fb(okZiel,'Zielbereich',`${I.name}: <b>${fmtNum(I.lo)}–${fmtNum(I.hi)}</b>`);
+  h+=fb(okMass,'Maßnahme',`Empfohlen: <b>${MASSNAHMEN[emp.massnahme]}</b>`+(emp.alt.length?`<br>Ebenfalls vertretbar: ${emp.alt.map(a=>MASSNAHMEN[a]).join(', ')}`:''));
+  if(notfall){
+    h+=`<div class="fb neutral"><b>Wochenplan</b>Kein neuer Wochenplan – Marcumar ist gestoppt. Das weitere Vorgehen wird nach Stabilisierung festgelegt.</div>`;
+  } else {
+    const bereich = (Math.round(pp.lo*100)===Math.round(pp.hi*100)) ? 'unverändert' : `${Math.round(pp.lo*100)} % bis ${pp.hi>0?'+':''}${Math.round(pp.hi*100)} %`;
+    h+=fb(okPlan,'Wochenplan',`Deine Änderung: <b>${pp.pct>0?'+':''}${Math.round(pp.pct*100)} %</b> · sinnvoller Bereich: ${bereich}<br>Beispiel-Lösung: <b>${emp.neuerPlan.map((q,i)=>TAGE[i]+' '+fmtQ(q)).join(' · ')}</b> = ${fmtTabs(emp.neueQ)} Tbl./Woche`);
+  }
+  h+=fb(okKontr,'Kontrolle',`Empfohlen: <b>${KONTROLLEN[emp.kontrolle]}</b>`+(emp.kontrolleAlt.length?` (auch vertretbar: ${emp.kontrolleAlt.map(k=>KONTROLLEN[k]).join(', ')})`:''));
+  h+='<h3>Warum?</h3><ul class="clean">'+emp.gruende.map(g=>`<li>${g}</li>`).join('')+(emp.heute?`<li><b>Heute:</b> ${emp.heute}</li>`:'')+'</ul>';
+  if(fall.tipp) h+=`<div class="note"><b>Merke:</b> ${fall.tipp}</div>`;
+  if(emp.hinweise.length) h+='<h3>Daran denken</h3><ul class="clean small">'+emp.hinweise.map(g=>`<li>${g}</li>`).join('')+'</ul>';
+  const letzter = modus==='serie' && idx===FAELLE.length-1;
+  h+=`<div style="margin-top:12px" class="row"><button class="btn" id="weiter">${letzter?'Serie abschließen':'Nächster Fall'}</button></div>`;
+  $('ergebnis').innerHTML=h; $('ergebnis').classList.remove('hidden');
+  $('punkte').textContent = `Punkte: ${punkte} / ${maxPunkte}`;
+  $('ergebnis').scrollIntoView({behavior:'smooth'});
+  $('weiter').onclick=()=>{
+    if(letzter){ zeigeEnde(); return; }
+    if(modus==='serie') idx++; laden();
+  };
+};
+
+function zeigeEnde(){
+  const q=maxPunkte?Math.round(punkte/maxPunkte*100):0;
+  $('fragen').classList.add('hidden');
+  $('ergebnis').innerHTML=`<h2>Serie geschafft!</h2><p class="big">${punkte} / ${maxPunkte} Punkte (${q} %)</p>
+   <p>${q>=85?'Sehr sicher – du denkst schon in Wochendosen.':q>=60?'Solide! Schau dir die Grundregeln noch einmal an und übe mit Zufallsfällen weiter.':'Kein Problem – genau dafür ist der Trainer da. Lies die Grundlagen und starte die Serie noch einmal.'}</p>
+   <div class="row"><button class="btn" id="neu">Serie neu starten</button><button class="btn sec" id="zuf">Mit Zufallsfällen weiter</button></div>`;
+  $('neu').onclick=()=>{idx=0;punkte=0;maxPunkte=0;laden();};
+  $('zuf').onclick=()=>setModus('zufall');
+}
+
+function setModus(m){ modus=m; $('mSerie').classList.toggle('on',m==='serie'); $('mZufall').classList.toggle('on',m==='zufall'); idx=0; punkte=0; maxPunkte=0; laden(); }
+$('mSerie').onclick=()=>setModus('serie'); $('mZufall').onclick=()=>setModus('zufall');
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));
+  $('train').classList.toggle('hidden',t.dataset.t!=='train'); $('basics').classList.toggle('hidden',t.dataset.t!=='basics');
+});
+laden();
+</script>
+</body>
+</html>
