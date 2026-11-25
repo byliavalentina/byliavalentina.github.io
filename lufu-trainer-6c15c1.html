@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lufu-Trainer – Spirometrie befunden üben</title>
+<style>:root{
+  --bg:#faf7f5; --card:#ffffff; --ink:#2b2b2b; --muted:#6b6464; --line:#e8e1dd;
+  --rose:#b0476b; --rose-soft:#f8e6ec;
+  --pass:#f6d3df; --pass-line:#d891aa; --pen:#22407a;
+  --gruen:#2f7d5b; --gruen-soft:#e5f2ec; --gelb:#a8710f; --gelb-soft:#fbf1dc; --rot:#b23a3a; --rot-soft:#f9e3e3;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:16px 14px 60px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 0 14px}
+header.top h1{font-size:1.35rem;margin:0;letter-spacing:.2px}
+header.top .sub{font-size:.82rem;color:var(--muted)}
+.badge{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--rose-soft);color:var(--rose)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:12px 0}
+.card h2{font-size:1.05rem;margin:0 0 8px}
+.card h3{font-size:.95rem;margin:14px 0 6px}
+.muted{color:var(--muted)}
+.small{font-size:.85rem}
+.tabs{display:flex;gap:6px;margin:6px 0 4px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:.9rem;cursor:pointer;color:var(--ink)}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+button.btn{border:0;border-radius:10px;padding:11px 18px;font-size:.95rem;font-weight:600;cursor:pointer;background:var(--rose);color:#fff}
+button.btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line)}
+button.btn:disabled{opacity:.45;cursor:default}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem;cursor:pointer;color:var(--ink);text-align:left}
+.chip.on{border-color:var(--rose);background:var(--rose-soft);color:var(--rose);font-weight:600}
+.chip.ok{border-color:var(--gruen);background:var(--gruen-soft);color:var(--gruen)}
+.chip.bad{border-color:var(--rot);background:var(--rot-soft);color:var(--rot)}
+.list .chip{display:block;width:100%;margin-bottom:6px}
+label.field{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 4px}
+select,input[type=number],input[type=text]{width:100%;font-size:1rem;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>*{flex:1 1 160px}
+
+/* Marcumar-Pass */
+.pass{background:var(--pass);border-radius:10px;padding:10px;overflow-x:auto}
+.pass{padding:8px 6px}
+.pass table{border-collapse:collapse;width:100%;table-layout:fixed}
+.pass th{font-size:.68rem;font-weight:600;color:#7a3550;text-transform:uppercase;letter-spacing:.3px;padding:4px 2px;border-bottom:1.5px solid var(--pass-line)}
+.pass td{border-bottom:1px solid var(--pass-line);border-left:1px solid var(--pass-line);text-align:center;padding:5px 2px;font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;color:var(--pen);font-size:1.02rem;white-space:nowrap}
+.pass td:first-child{border-left:0}
+.pass tr.neu td{background:rgba(255,255,255,.55)}
+.pass td.inr-neu{font-weight:700;color:#9b1c3c}
+.pass td.sum{font-family:inherit;font-size:.82rem;color:#7a3550}
+.step{display:flex;flex-direction:column;align-items:center;gap:2px}
+.step button{width:100%;max-width:30px;height:22px;border:1px solid var(--pass-line);background:#fff;border-radius:6px;font-size:.8rem;line-height:1;cursor:pointer;color:#7a3550;padding:0}
+.step span{min-width:28px;font-size:1.08rem}
+
+.ampel{display:inline-block;padding:4px 10px;border-radius:8px;font-weight:700;font-size:.9rem}
+.ampel.gruen{background:var(--gruen-soft);color:var(--gruen)}
+.ampel.gelb{background:var(--gelb-soft);color:var(--gelb)}
+.ampel.rot{background:var(--rot-soft);color:var(--rot)}
+.fb{border-radius:10px;padding:10px 12px;margin:8px 0;font-size:.93rem}
+.fb.ok{background:var(--gruen-soft)}
+.fb.bad{background:var(--rot-soft)}
+.fb.neutral{background:#f3efec}
+.fb b{display:block;margin-bottom:2px}
+ul.clean{padding-left:18px;margin:6px 0}
+ul.clean li{margin:3px 0}
+.big{font-size:1.6rem;font-weight:700}
+.kpi{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.kpi>div{flex:1 1 140px;background:#f6f2ef;border-radius:10px;padding:8px 10px}
+.kpi .l{font-size:.75rem;color:var(--muted)}
+.kpi .v{font-size:1.1rem;font-weight:700}
+.note{background:#fff8e6;border:1px solid #f0dfb0;border-radius:10px;padding:10px 12px;font-size:.85rem;color:#6b5420}
+footer{margin-top:24px;font-size:.78rem;color:var(--muted);text-align:center}
+.overlay{position:fixed;inset:0;background:rgba(30,24,26,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.overlay .card{max-width:520px;margin:0}
+table.ref{width:100%;border-collapse:collapse;font-size:.88rem}
+table.ref td,table.ref th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}
+.hidden{display:none!important}
+
+@media (max-width:560px){
+  .pass td{font-size:.92rem;padding:4px 1px}
+  .pass th{font-size:.6rem;padding:3px 0}
+  .pass .hide-m{display:none}
+  .step span{min-width:0;font-size:1rem}
+}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#fbfaf9}
+.tbl table{border-collapse:collapse;width:100%;font-size:.8rem;font-variant-numeric:tabular-nums}
+.tbl th{font-size:.68rem;color:var(--muted);text-transform:uppercase;padding:6px 4px;text-align:right;border-bottom:1px solid var(--line);background:#f4efec}
+.tbl th:first-child,.tbl td:first-child{text-align:left;padding-left:8px}
+.tbl td{padding:6px 4px;text-align:right;border-bottom:1px solid #efe9e5}
+.tbl td.pre{color:#1f4fa0;font-weight:700}
+.tbl td.post{color:#2f7d5b;font-weight:700}
+.tbl .grp{text-align:center;color:var(--rose);font-weight:700}
+pre.befund{white-space:pre-wrap;background:#f6f2ef;border-radius:10px;padding:12px;font:inherit;font-size:.9rem;margin:8px 0}
+</style>
+</head>
+<body>
+<div class="overlay" id="disc">
+  <div class="card">
+    <h2>Nur zu Lern- und Trainingszwecken</h2>
+    <p>Dieser Trainer dient ausschließlich der <b>Aus- und Weiterbildung</b>. Alle Fälle und Messwerte sind frei erfunden und vereinfacht berechnet.</p>
+    <p><b>Er ist kein Medizinprodukt</b> und darf <b>nicht</b> zur Befundung realer Lungenfunktionsprüfungen verwendet werden. Maßgeblich sind aktuelle Leitlinien, die Vorgaben deiner Einrichtung und die ärztliche Beurteilung inklusive der Fluss-Volumen-Kurven.</p>
+    <p class="small muted">Trotz sorgfältiger Erstellung keine Gewähr für Vollständigkeit und Aktualität; keine Haftung für Entscheidungen auf Basis dieses Trainers.</p>
+    <button class="btn" onclick="document.getElementById('disc').classList.add('hidden')">Verstanden – nur zum Üben</button>
+  </div>
+</div>
+<div class="wrap">
+  <header class="top">
+    <div><h1>Lufu-Trainer</h1><div class="sub">Spirometrie mit Bronchospasmolyse befunden</div></div>
+    <span class="badge">Nur zum Üben</span>
+  </header>
+  <div class="tabs"><button class="tab on" data-t="train">Trainieren</button><button class="tab" data-t="basics">Grundlagen</button></div>
+
+  <section id="train">
+    <div class="card">
+      <div class="row" style="align-items:center">
+        <div><b id="fallTitel"></b><div class="small muted" id="punkte"></div></div>
+        <div style="flex:0 0 auto" class="chips"><button class="chip on" id="mSerie">Fallserie</button><button class="chip" id="mZufall">Zufallsfälle</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <p id="story" style="margin-top:0"></p>
+      <div class="tbl"><table id="tab"></table></div><div class="tbl" style="margin-top:8px"><table id="tab2"></table></div>
+      <p class="small muted" id="qual" style="margin:8px 0 0"></p>
+    </div>
+    <div class="card" id="fragen">
+      <h3>1 · Ist die Messung verwertbar?</h3><div class="chips" id="q1"></div>
+      <h3>2 · Welches Muster liegt vor?</h3><div class="list" id="q2"></div>
+      <h3>3 · Schweregrad (nach FEV1-Z-Score)</h3><div class="chips" id="q3"></div>
+      <h3>4 · Bronchospasmolyse</h3><div class="list" id="q4"></div>
+      <div style="margin-top:14px"><button class="btn" id="auswerten">Auswerten</button></div>
+    </div>
+    <div class="card hidden" id="ergebnis"></div>
+  </section>
+
+  <section id="basics" class="hidden">
+    <div class="card">
+      <h2>Befunden in 5 Schritten</h2>
+      <ul class="clean">
+        <li><b>1 · Qualität:</b> Qualitätsnoten A–C sind verwertbar. D–F oder U: nur unter Vorbehalt, Messung möglichst wiederholen. Immer auch die Kurven anschauen.</li>
+        <li><b>2 · Obstruktion?</b> FEV1/FVC unter dem unteren Grenzwert (UGW/LLN), also Z-Score &lt; −1,645.</li>
+        <li><b>3 · FVC erniedrigt?</b> Normaler Quotient + niedrige FVC: Restriktion <i>möglich</i>, beweisen kann sie nur die TLC (Bodyplethysmographie). Obstruktion + niedrige FVC: Überblähung/Air trapping oder kombinierte Störung – Bodyplethysmographie.</li>
+        <li><b>4 · Schweregrad</b> nach FEV1-Z-Score: leicht −1,65 bis −2,5 · mittelgradig −2,5 bis −4,0 · schwer &lt; −4,0.</li>
+        <li><b>5 · Bronchospasmolyse:</b> signifikant, wenn FEV1 <i>oder</i> FVC um mehr als 10 % des <b>Sollwerts</b> zunimmt (ERS/ATS 2022). Normalisiert sich FEV1/FVC, ist die Obstruktion vollständig reversibel (passt zu Asthma). Bleibt sie bestehen: teil- oder nicht reversibel.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>GOLD-Grad (bei COPD)</h2>
+      <p class="small">Voraussetzung: post FEV1/FVC &lt; 0,70 und passende Klinik.</p>
+      <table class="ref"><tr><th>GOLD</th><th>FEV1 post, % Soll</th></tr><tr><td>1</td><td>≥ 80 %</td></tr><tr><td>2</td><td>50–79 %</td></tr><tr><td>3</td><td>30–49 %</td></tr><tr><td>4</td><td>&lt; 30 %</td></tr></table>
+      <p class="small muted">GOLD nutzt die feste Grenze 0,70, ERS/ATS den LLN. Bei Jüngeren ist der LLN aussagekräftiger, bei Älteren überschätzt 0,70 die Obstruktion.</p>
+    </div>
+    <div class="card small muted">Grundlage (sinngemäß): ERS/ATS-Standard zur Interpretation von Lungenfunktionstests (2022), GLI-2012-Referenzwerte, GOLD-Report. Stand: November 2026. Die Übungswerte sind vereinfacht berechnet und keine echten GLI-Werte.</div>
+  </section>
+  <footer>Lufu-Trainer · by Lia Valentina · Nur zu Lern- und Trainingszwecken, kein Medizinprodukt. Alle Fälle fiktiv.</footer>
+</div>
+<script>
+const LLN=-1.645, SDR=0.055;
+const k=(x,d=2)=>x.toFixed(d).replace('.',',');
+function grad(z){ if(z>=LLN) return 'keine'; if(z>=-2.5) return 'leicht'; if(z>=-4) return 'mittelgradig'; return 'schwer'; }
+const gold=p=>p>=80?1:p>=50?2:p>=30?3:4;
+
+/* Fall aus Z-Scores berechnen (vereinfachtes Modell, nur zum Üben) */
+function bauen(s){
+  const predR=s.sFEV/s.sFVC, lln=predR-1.645*SDR;
+  const pFVC=s.sFVC*(1+s.zFVC*0.12), pFEV=s.sFEV*(1+s.zFEV*0.13);
+  const qFVC=pFVC+s.dFVC, qFEV=pFEV+s.dFEV;
+  const pR=pFEV/pFVC, qR=qFEV/qFVC;
+  return {...s, predR, lln, pFVC, pFEV, qFVC, qFEV, pR, qR,
+    pRz:(pR-predR)/SDR, qRz:(qR-predR)/SDR,
+    qFVCz:(qFVC/s.sFVC-1)/0.12, qFEVz:(qFEV/s.sFEV-1)/0.13};
+}
+/* Musterlösung */
+function loesung(c){
+  const qualOk=['A','B','C'].includes(c.q[0])&&['A','B','C'].includes(c.q[1]);
+  const obstr=c.pRz<LLN, fvcLow=c.zFVC<LLN;
+  const muster= obstr&&fvcLow?'obstrFVC': obstr?'obstr': fvcLow?'restr':'normal';
+  let sev=grad(c.zFEV); if(obstr && sev==='keine') sev='leicht';
+  const dFEVp=c.dFEV/c.sFEV*100, dFVCp=c.dFVC/c.sFVC*100;
+  const sig=dFEVp>10||dFVCp>10, postObstr=c.qRz<LLN;
+  const bdr= !sig?'nein': (obstr&&!postObstr)?'norm':'pers';
+  const postFEVp=c.qFEV/c.sFEV*100;
+  return {qualOk,muster,sev,bdr,dFEVp,dFVCp,postObstr,postFEVp,goldKrit:c.qR<0.70};
+}
+const MUSTER={normal:'Normale Spirometrie',obstr:'Obstruktive Ventilationsstörung',obstrFVC:'Obstruktion mit erniedrigter FVC (Überblähung oder kombinierte Störung → Bodyplethysmographie)',restr:'FVC erniedrigt bei normalem FEV1/FVC – Restriktion möglich (TLC nötig)'};
+const BDR={nein:'Nicht signifikant',norm:'Signifikant – FEV1/FVC normalisiert sich',pers:'Signifikant – Obstruktion bleibt bestehen'};
+const SEV=['keine','leicht','mittelgradig','schwer'];
+
+const FAELLE=[
+ {story:'Frau, 35 Jahre, Nichtraucherin, 168 cm. Gelegentliche Belastungsdyspnoe beim Joggen.',sFVC:3.95,sFEV:3.35,zFVC:-0.3,zFEV:-0.4,dFVC:0.03,dFEV:0.06,q:['A','A'],
+  tipp:'Alles über dem UGW, keine relevante Änderung nach Salbutamol: normale Spirometrie. Werte knapp unter 100 % Soll sind normal – entscheidend ist der LLN/Z-Score, nicht „80 % Soll“.'},
+ {story:'Frau, 24 Jahre, Nichtraucherin. Nächtlicher Husten und pfeifende Atmung im Frühjahr.',sFVC:3.90,sFEV:3.38,zFVC:-0.6,zFEV:-2.2,dFVC:0.10,dFEV:0.55,q:['A','B'],
+  tipp:'Leichte Obstruktion, FEV1 steigt um deutlich mehr als 10 % des Solls und der Quotient normalisiert sich: vollständig reversible Obstruktion – das klassische Asthma-Muster.'},
+ {story:'Mann, 64 Jahre, Raucher (40 Packungsjahre). Zunehmende Belastungsdyspnoe, morgendlicher Auswurf.',sFVC:4.30,sFEV:3.30,zFVC:-1.0,zFEV:-3.2,dFVC:0.05,dFEV:0.08,q:['A','A'],
+  tipp:'Mittelgradige, nicht reversible Obstruktion. Post FEV1/FVC < 0,70 und post FEV1 ca. 60 % Soll: bei passender Klinik COPD GOLD 2.'},
+ {story:'Mann, 71 Jahre, Ex-Raucher. Ruhedyspnoe, fassförmiger Thorax.',sFVC:3.90,sFEV:2.90,zFVC:-2.1,zFEV:-4.5,dFVC:0.08,dFEV:0.10,q:['B','B'],
+  tipp:'Schwere Obstruktion mit erniedrigter FVC. Die FVC ist hier vermutlich durch Überblähung/Air trapping vermindert – klären kann das nur die Bodyplethysmographie (RV, TLC).'},
+ {story:'Frau, 58 Jahre, Nichtraucherin. Trockener Husten, Knisterrasseln basal beidseits.',sFVC:3.30,sFEV:2.70,zFVC:-2.6,zFEV:-2.4,dFVC:0.03,dFEV:0.02,q:['A','A'],
+  tipp:'FVC und FEV1 gleichmäßig vermindert, Quotient normal: Restriktion möglich, aber spirometrisch nicht bewiesen. Nächster Schritt: Bodyplethysmographie (TLC) und Diffusion.'},
+ {story:'Mann, 49 Jahre, Raucher. Seit Jahren Asthma bekannt, unregelmäßige Inhalation.',sFVC:4.60,sFEV:3.70,zFVC:-1.2,zFEV:-3.0,dFVC:0.15,dFEV:0.48,q:['A','A'],
+  tipp:'FEV1 steigt um > 10 % des Solls – signifikant. Trotzdem bleibt der Quotient unter dem LLN: teilreversible Obstruktion.'},
+ {story:'Frau, 82 Jahre, leicht dement. Mitarbeit laut MFA „schwierig“, mehrfach abgebrochen.',sFVC:2.60,sFEV:2.05,zFVC:-2.0,zFEV:-1.8,dFVC:0.20,dFEV:0.10,q:['E','F'],
+  tipp:'Qualitätsnoten E/F: Die niedrige FVC kann allein an unvollständiger Exspiration liegen. Erst verwertbare Messung anstreben, dann befunden.'},
+ {story:'Mann, 29 Jahre, Gelegenheitsraucher. Husten seit einem Infekt vor 2 Monaten.',sFVC:5.40,sFEV:4.55,zFVC:0.3,zFEV:-1.0,dFVC:0.04,dFEV:0.12,q:['A','A'],
+  tipp:'Der Quotient liegt über 0,70, aber unter dem LLN – das ist eine Obstruktion. Die FEV1 ist noch normal, der Schweregrad damit leicht. Bei jungen Menschen übersieht die starre 0,70-Grenze solche Befunde.'},
+ {story:'Frau, 61 Jahre, Ex-Raucherin. Belastungsdyspnoe, Giemen.',sFVC:3.60,sFEV:2.80,zFVC:-1.8,zFEV:-2.8,dFVC:0.50,dFEV:0.20,q:['B','A'],
+  tipp:'Hier steigt vor allem die FVC (> 10 % des Solls) – auch das zählt als signifikante Reaktion („Volumen-Responder“, Abnahme der Überblähung). Der Quotient bleibt erniedrigt.'}
+].map(bauen);
+
+function zufall(){
+  const r=(a,b)=>a+Math.random()*(b-a), pick=a=>a[Math.floor(Math.random()*a.length)];
+  const typ=pick(['normal','asthma','copd','copd','restr','mixed','teil']);
+  const frau=Math.random()<.5, alter=Math.round(typ==='copd'||typ==='mixed'?r(55,80):typ==='asthma'?r(18,45):r(25,75));
+  const sFVC=+(frau?r(3.0,4.1):r(3.9,5.6)).toFixed(2), sFEV=+(sFVC*r(0.76,0.84)).toFixed(2);
+  let s={sFVC,sFEV,q:['A','A'],dFVC:r(0,0.08),dFEV:r(0,0.08)};
+  if(typ==='normal') Object.assign(s,{zFVC:r(-1.2,0.8),zFEV:r(-1.2,0.6)});
+  if(typ==='asthma') Object.assign(s,{zFVC:r(-1.2,0),zFEV:r(-3.2,-1.9),dFEV:sFEV*r(0.14,0.25)});
+  if(typ==='copd')   Object.assign(s,{zFVC:r(-1.5,-0.2),zFEV:r(-4.6,-2),dFEV:sFEV*r(0,0.06)});
+  if(typ==='restr')  Object.assign(s,{zFVC:r(-3.5,-1.8)}), s.zFEV=s.zFVC+r(-0.1,0.4);
+  if(typ==='mixed')  Object.assign(s,{zFVC:r(-3,-1.8),zFEV:r(-4.8,-3.2)});
+  if(typ==='teil')   Object.assign(s,{zFVC:r(-1.4,-0.5),zFEV:r(-3.6,-2.6),dFEV:sFEV*r(0.11,0.16)});
+  if(Math.random()<.15) s.q=[pick(['D','E','F']),pick(['C','D','E','U'])];
+  const desc={normal:'Abklärung Belastungsdyspnoe',asthma:'anfallsartige Atemnot, Allergien bekannt',copd:'Raucheranamnese, chronischer Husten',restr:'trockener Husten, Belastungsdyspnoe',mixed:'langjähriger Raucher, Ruhedyspnoe',teil:'bekannte Atemwegserkrankung, Giemen'}[typ];
+  s.story=`Zufallsfall: ${frau?'Frau':'Mann'}, ${alter} Jahre – ${desc}.`; s.tipp='';
+  return bauen(s);
+}
+
+let modus='serie', idx=0, punkte=0, maxP=0, fall, L, wahl={}, done=false;
+const $=id=>document.getElementById(id);
+function chips(el,items,key){ el.innerHTML=items.map(([v,l])=>`<button class="chip" data-v="${v}">${l}</button>`).join('');
+  el.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ if(done) return; wahl[key]=c.dataset.v; el.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===c)); }); }
+function mark(el,ok){ el.querySelectorAll('.chip').forEach(c=>{ if(c.dataset.v===ok) c.classList.add('ok'); else if(c.classList.contains('on')) c.classList.add('bad'); }); }
+
+function laden(){
+  fall = modus==='serie'?FAELLE[idx]:zufall(); L=loesung(fall); wahl={}; done=false;
+  $('fallTitel').textContent = modus==='serie'?`Fall ${idx+1} von ${FAELLE.length}`:'Zufallsfall';
+  $('punkte').textContent=`Punkte: ${punkte} / ${maxP}`;
+  $('story').textContent=fall.story;
+  const c=fall, pc=(v,s)=>Math.round(v/s*100);
+  $('tab').innerHTML=`<tr><th colspan="6" class="grp">Pre (vor Bronchospasmolyse)</th></tr>
+   <tr><th>Param.</th><th>Bester</th><th>UGW</th><th>Z</th><th>%Soll</th><th>Soll</th></tr>
+   <tr><td>FVC</td><td class="pre">${k(c.pFVC)}</td><td>${k(c.sFVC*(1-1.645*0.12))}</td><td>${k(c.zFVC)}</td><td>${pc(c.pFVC,c.sFVC)}</td><td>${k(c.sFVC)}</td></tr>
+   <tr><td>FEV1</td><td class="pre">${k(c.pFEV)}</td><td>${k(c.sFEV*(1-1.645*0.13))}</td><td>${k(c.zFEV)}</td><td>${pc(c.pFEV,c.sFEV)}</td><td>${k(c.sFEV)}</td></tr>
+   <tr><td>FEV1/FVC</td><td class="pre">${k(c.pR,3)}</td><td>${k(c.lln,3)}</td><td>${k(c.pRz)}</td><td>–</td><td>${k(c.predR,3)}</td></tr>`;
+  $('tab2').innerHTML=`<tr><th colspan="6" class="grp" style="color:var(--gruen)">Post (nach Bronchospasmolyse)</th></tr>
+   <tr><th>Param.</th><th>Bester</th><th>Z</th><th>%Soll</th><th>Diff</th><th>%Diff*</th></tr>
+   <tr><td>FVC</td><td class="post">${k(c.qFVC)}</td><td>${k(c.qFVCz)}</td><td>${pc(c.qFVC,c.sFVC)}</td><td>${k(c.dFVC)}</td><td>${Math.round(L.dFVCp)}</td></tr>
+   <tr><td>FEV1</td><td class="post">${k(c.qFEV)}</td><td>${k(c.qFEVz)}</td><td>${pc(c.qFEV,c.sFEV)}</td><td>${k(c.dFEV)}</td><td>${Math.round(L.dFEVp)}</td></tr>
+   <tr><td>FEV1/FVC</td><td class="post">${k(c.qR,3)}</td><td>${k(c.qRz)}</td><td>–</td><td>${k(c.qR-c.pR,3)}</td><td>–</td></tr>`;
+  $('qual').innerHTML=`Volumen in Litern · Qualitätsbewertung: Pre <b>${c.q[0]}</b> · Post <b>${c.q[1]}</b> · *%Diff = Änderung in % des Sollwerts`;
+  chips($('q1'),[['ja','Verwertbar (Noten A–C)'],['nein','Nur eingeschränkt verwertbar']],'q1');
+  chips($('q2'),Object.entries(MUSTER),'q2');
+  chips($('q3'),SEV.map(s=>[s,s[0].toUpperCase()+s.slice(1)]),'q3');
+  chips($('q4'),Object.entries(BDR),'q4');
+  $('ergebnis').classList.add('hidden'); $('fragen').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function befund(c,L){
+  const s=[`Spirometrie mit Bronchospasmolyse (Übungsfall):`,
+   `Prä: FEV1 ${k(c.pFEV)} l (Z ${k(c.zFEV)}), FVC ${k(c.pFVC)} l (Z ${k(c.zFVC)}), FEV1/FVC ${k(c.pR,3)} (Z ${k(c.pRz)}).`,
+   `Post: FEV1 ${k(c.qFEV)} l (Δ ${c.dFEV>=0?'+':''}${k(c.dFEV)} l = ${Math.round(L.dFEVp)} % des Solls), FVC ${k(c.qFVC)} l (Δ ${Math.round(L.dFVCp)} % des Solls), FEV1/FVC ${k(c.qR,3)}.`];
+  let b=`Beurteilung: ${MUSTER[L.muster].split(' (')[0].split(' – ')[0]}`;
+  if(L.muster!=='normal' && L.sev!=='keine') b+=`, ${L.sev}er Schweregrad`;
+  b+=`; Bronchospasmolyse ${L.bdr==='nein'?'ohne signifikante Reaktion':L.bdr==='norm'?'mit signifikanter Reaktion und Normalisierung von FEV1/FVC':'mit signifikanter Reaktion, Obstruktion persistierend'}.`;
+  s.push(b);
+  if(!L.qualOk) s.push('Einschränkung: Messqualität nicht ausreichend, Interpretation unter Vorbehalt – Wiederholung empfohlen.');
+  if(L.muster==='obstrFVC'||L.muster==='restr') s.push('Empfehlung: Bodyplethysmographie (TLC, RV), ggf. Diffusionsmessung.');
+  if((L.muster==='obstr'||L.muster==='obstrFVC') && L.goldKrit) s.push(`Hinweis: post FEV1/FVC < 0,70 – bei passender Klinik COPD GOLD ${gold(L.postFEVp)} (post FEV1 ${Math.round(L.postFEVp)} % Soll).`);
+  return s.join('\n');
+}
+$('auswerten').onclick=()=>{
+  if(done) return;
+  if(!wahl.q1||!wahl.q2||!wahl.q3||!wahl.q4){ alert('Bitte alle vier Fragen beantworten.'); return; }
+  done=true;
+  const ok={q1:L.qualOk?'ja':'nein',q2:L.muster,q3:L.sev,q4:L.bdr};
+  let p=0; ['q1','q2','q3','q4'].forEach(q=>{ if(wahl[q]===ok[q]) p++; mark($(q),ok[q]); });
+  punkte+=p; maxP+=4; $('punkte').textContent=`Punkte: ${punkte} / ${maxP}`;
+  const fb=(q,t,x)=>`<div class="fb ${wahl[q]===ok[q]?'ok':'bad'}"><b>${wahl[q]===ok[q]?'✓':'✗'} ${t}</b>${x}</div>`;
+  const c=fall;
+  let h=`<h2>Auswertung · ${p} von 4 Punkten</h2>`;
+  h+=fb('q1','Qualität', L.qualOk?'Noten A–C: verwertbar.':`Noten ${c.q[0]}/${c.q[1]}: nur eingeschränkt verwertbar.`);
+  h+=fb('q2','Muster', `<b>${MUSTER[L.muster]}</b><br>FEV1/FVC Z ${k(c.pRz)} (${c.pRz<LLN?'unter':'über'} −1,645) · FVC Z ${k(c.zFVC)} (${c.zFVC<LLN?'erniedrigt':'normal'})`);
+  h+=fb('q3','Schweregrad', `FEV1 Z ${k(c.zFEV)} → <b>${L.sev}</b>`+(c.zFEV>=LLN&&L.sev==='leicht'?' (Obstruktion bei noch normaler FEV1 = leicht)':''));
+  h+=fb('q4','Bronchospasmolyse', `FEV1 ${L.dFEVp>=0?'+':''}${Math.round(L.dFEVp)} % des Solls, FVC ${L.dFVCp>=0?'+':''}${Math.round(L.dFVCp)} % des Solls (Grenze: &gt; 10 %) → <b>${BDR[L.bdr]}</b>`);
+  if(c.tipp) h+=`<div class="note"><b>Merke:</b> ${c.tipp}</div>`;
+  h+=`<h3>Musterbefund</h3><pre class="befund">${befund(c,L)}</pre>`;
+  const last=modus==='serie'&&idx===FAELLE.length-1;
+  h+=`<button class="btn" id="weiter">${last?'Serie abschließen':'Nächster Fall'}</button>`;
+  $('ergebnis').innerHTML=h; $('ergebnis').classList.remove('hidden'); $('ergebnis').scrollIntoView({behavior:'smooth'});
+  $('weiter').onclick=()=>{ if(last) return ende(); if(modus==='serie') idx++; laden(); };
+};
+function ende(){
+  const q=maxP?Math.round(punkte/maxP*100):0; $('fragen').classList.add('hidden');
+  $('ergebnis').innerHTML=`<h2>Serie geschafft!</h2><p class="big">${punkte} / ${maxP} Punkte (${q} %)</p><p>${q>=85?'Sehr sicher – du befundest wie ein Profi.':q>=60?'Solide! Mit Zufallsfällen weiter üben.':'Lies die Grundlagen und starte die Serie noch einmal.'}</p><div class="row"><button class="btn" id="neu">Serie neu starten</button><button class="btn sec" id="zuf">Zufallsfälle</button></div>`;
+  $('neu').onclick=()=>{idx=0;punkte=0;maxP=0;laden();}; $('zuf').onclick=()=>setModus('zufall');
+}
+function setModus(m){ modus=m; $('mSerie').classList.toggle('on',m==='serie'); $('mZufall').classList.toggle('on',m==='zufall'); idx=0; punkte=0; maxP=0; laden(); }
+$('mSerie').onclick=()=>setModus('serie'); $('mZufall').onclick=()=>setModus('zufall');
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{ document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t)); $('train').classList.toggle('hidden',t.dataset.t!=='train'); $('basics').classList.toggle('hidden',t.dataset.t!=='basics'); });
+laden();
+</script>
+</body>
+</html>
