@@ -209,6 +209,13 @@ h4.cat{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--m
 .ptab td.up{color:var(--acc);font-weight:700}.ptab td.dn{color:#c0674b;font-weight:700}.ptab td.key{background:#dff0ea;border-radius:6px}
 @media (max-width:640px){nav button span{font-size:10.5px}.mvals{grid-template-columns:repeat(3,1fr)}.limbs{grid-template-columns:repeat(3,1fr)}}
 
+.calpick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.calpick button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border:1px solid var(--line);border-radius:12px;background:#fbfcfb;color:#34413d;font-size:13.5px}
+.calpick button.on{border-color:var(--acc);background:#e3f1ec;color:#1f3b34}
+.calpick .ci svg{width:52px;height:36px;display:block}
+.cal .row{margin-top:8px}
+input.num{width:72px;padding:7px 8px;border:1px solid var(--line);border-radius:10px;font:inherit}
+
 </style>
 </head>
 <body>
@@ -401,7 +408,9 @@ function detectGrid(src){
  if(!pxmm||pxmm<2)return null;
  // Phase der dicken Linien finden
  const ph=(a,P)=>{a=prof(a);let best=0,bs=-1e9;for(let o=0;o<P;o++){let s=0;for(let x=o;x<a.length;x+=P)s+=a[Math.round(x)]||0;if(s>bs){bs=s;best=o}}return best};
- return{pxmm:pxmm/sc,conf,ox:ph(col,pxmm*5)/sc,oy:ph(row,pxmm*5)/sc}
+ // Nur sicher, wenn waagerecht und senkrecht unabhängig dasselbe Kästchenmaß ergeben
+ const sure=!!(A&&B&&A.score>=.25&&B.score>=.25&&Math.abs(A.small/B.small-1)<.08);
+ return{pxmm:pxmm/sc,conf,sure,ox:ph(col,pxmm*5)/sc,oy:ph(row,pxmm*5)/sc}
 }
 
 /* ================= Streifen mit digitalem Zirkel =================
@@ -451,8 +460,8 @@ function Strip(opts){
   zoom(f){const cx=scroll.scrollLeft+scroll.clientWidth/2,cy=scroll.scrollTop+scroll.clientHeight/2,rx=cx/(W||1),ry=cy/(H||1);const k=[st.xa/(W||1),st.xb/(W||1),st.ya/(H||1),st.yb/(H||1)];
    if(st.src==='gen')st.mm=Math.max(2.2,Math.min(9,st.mm*f));else st.zoom=Math.max(.4,Math.min(5,st.zoom*f));render();st.xa=k[0]*W;st.xb=k[1]*W;st.ya=k[2]*H;st.yb=k[3]*H;place();scroll.scrollLeft=rx*W-scroll.clientWidth/2;scroll.scrollTop=ry*H-scroll.clientHeight/2},
   setImg(img){st.src='img';st.img=img;st.imgW=Math.min(1800,Math.max(640,(scroll.clientWidth||360)*1.7));st.zoom=1;st.pxmm=null;st.grid=null;st.xa=st.xb=st.ya=st.yb=0;render()},
-  autoGrid(){const g=detectGrid(st.img);if(!g)return null;st.grid=g;st.pxmm=g.pxmm*st.imgW/st.img.width;st.showGrid=true;drawGrid();place();return g},
-  calibrate(){const d=st.mode==='t'?Math.abs(st.xb-st.xa):Math.abs(st.yb-st.ya);if(d<10)return false;st.pxmm=d/st.zoom/5;st.grid=null;st.showGrid=false;drawGrid();place();return true},
+  autoGrid(){const g=detectGrid(st.img);if(!g||!g.sure)return null;st.grid=g;st.pxmm=g.pxmm*st.imgW/st.img.width;st.showGrid=true;drawGrid();place();return g},
+  calibrate(mm){const d=st.mode==='t'?Math.abs(st.xb-st.xa):Math.abs(st.yb-st.ya);if(d<10)return false;st.pxmm=d/st.zoom/(mm||5);st.grid=null;st.showGrid=false;drawGrid();place();return true},
   ms(){const mp=msPerPx();return mp?Math.abs(st.xb-st.xa)*mp:null},
   mmv(){const p=pxPerMm();return p?Math.abs(st.yb-st.ya)/p:null},
   calibrated(){return st.src==='gen'||!!st.pxmm}};
@@ -529,7 +538,7 @@ function lage(m){
 /* ================= Befund-Assistent (Foto) ================= */
 const LIMB=['I','II','III','aVR','aVL','aVF'],PREC=['V1','V2','V3','V4','V5','V6'],ALL=LIMB.concat(PREC);
 const BF={step:0,src:null,rot:0,fine:0,img:null,speed:25,meas:{},chk:{rhythm:null,p:null,qrs:'normal',st:'none',stLeads:[],stMM:null,t:'normal',tLeads:[],q:'no',qLeads:[],extra:[],twelve:false,pol:{I:1,II:1,III:1,aVR:-1,aVL:1}},sex:'w',u40:false,note:'',withImg:true,text:null};
-function resetBF(){Object.assign(BF,{step:0,src:null,rot:0,fine:0,img:null,meas:{},text:null,note:''});BF.chk={rhythm:null,p:null,qrs:'normal',st:'none',stLeads:[],stMM:null,t:'normal',tLeads:[],q:'no',qLeads:[],extra:[],twelve:false,pol:{I:1,II:1,III:1,aVR:-1,aVL:1}}}
+function resetBF(){Object.assign(BF,{cal:null,step:0,src:null,rot:0,fine:0,img:null,meas:{},text:null,note:''});BF.chk={rhythm:null,p:null,qrs:'normal',st:'none',stLeads:[],stMM:null,t:'normal',tLeads:[],q:'no',qLeads:[],extra:[],twelve:false,pol:{I:1,II:1,III:1,aVR:-1,aVL:1}}}
 /* Foto drehen (90°-Schritte + Feinkorrektur) -> Canvas */
 function rotated(){const s=BF.src;if(!s)return null;const q=((BF.rot%360)+360)%360,sw=q%180?s.naturalHeight||s.height:s.naturalWidth||s.width,sh=q%180?s.naturalWidth||s.width:s.naturalHeight||s.height;
  const mx=2600,k=Math.min(1,mx/Math.max(sw,sh));const cv=document.createElement('canvas');cv.width=Math.round(sw*k);cv.height=Math.round(sh*k);const c=cv.getContext('2d');c.fillStyle='#fff';c.fillRect(0,0,cv.width,cv.height);
@@ -674,23 +683,46 @@ function stFoto(b,m){
  b.append(h('div',{class:'card'},h('h2',{},'1. Foto vom EKG'),h('p',{class:'lead'},'Fotografiere den Streifen möglichst gerade von oben, bei gutem Licht und ohne Schatten. Ein einzelner Rhythmusstreifen oder ein 12-Kanal-EKG funktionieren beide.'),pv,file,
   h('div',{class:'warn'},'Bitte vorher Name, Geburtsdatum und Fallnummer abdecken oder wegschneiden. Nichts wird hochgeladen oder gespeichert.'),
   !BF.src?h('button',{class:'btn ghost',style:'margin-top:10px',onclick:()=>{const i=samplePhoto();i.onload=()=>{BF.src=i;BF.rot=0;BF.fine=0;prev()}}},'Mit Beispiel-Foto ausprobieren'):null));prev()}
+/* Kalibrierung: automatisch nur bei sicherem Raster, sonst ein kurzer Schritt (Eichzacke, Kästchen oder Zeitachse) */
+const CALW={
+ eich:{n:'Eichzacke',t:'Eichzacke antippen',p:'Das kleine Rechteck am Anfang der Zeilen. Lege die eine Linie auf die Grundlinie und die andere auf die Oberkante.',mode:'v',svg:'<path d="M4 34h10V8h12v26h30" />'},
+ box:{n:'Kästchen',t:'Ein großes Kästchen abgreifen',p:'Lege die zwei Schenkel genau auf zwei dicke Rasterlinien, die ein großes Kästchen (5 mm) einschließen. Vorher mit + heranzoomen.',mode:'t',svg:'<path d="M8 6v30M44 6v30M8 6h36M8 36h36" /><path d="M20 6v30M32 6v30M8 18h36M8 27h36" stroke-width="1" opacity=".5"/>'},
+ axis:{n:'Zeitachse',t:'Zwei Sekundenmarken antippen',p:'Bei Monitor- oder Bildschirm-EKGs mit Zeitleiste (z. B. „5 s, 6 s, 7 s“). Lege die Schenkel auf zwei Marken und gib den Abstand in Sekunden ein.',mode:'t',svg:'<path d="M4 30h52" /><path d="M8 24v12M30 24v12M52 24v12" /><path d="M14 14l12-6M38 14l12-6" stroke-width="1" opacity=".5"/>'}};
 function stRaster(b,m){
- const card=h('div',{class:'card'});b.append(card);const msg=h('div');
- card.append(h('h2',{},'2. Raster & Papiervorschub'),h('div',{class:'row'},h('span',{class:'lab'},'Papiervorschub'),seg([[25,'25 mm/s'],[50,'50 mm/s']],BF.speed,v=>{BF.speed=v;SB.st.speed=v;b.innerHTML='';stRaster(b,m)})),msg,stripCard());
+ const card=h('div',{class:'card'});b.append(card);const msg=h('div'),after=h('div');
+ card.append(h('h2',{},'2. Raster & Papiervorschub'),
+  h('div',{class:'row'},h('span',{class:'lab'},'Papiervorschub'),seg([[25,'25 mm/s'],[50,'50 mm/s']],BF.speed,v=>{if(BF.cal&&BF.cal.k==='axis'&&SB.st.pxmm)SB.st.pxmm*=BF.speed/v;BF.speed=v;SB.st.speed=v;b.innerHTML='';stRaster(b,m)})),
+  h('p',{class:'hint'},'Steht meist klein am Rand, z. B. „50 mm/s, 10 mm/mV“. Klinik-EKGs in Deutschland laufen oft mit 50 mm/s, Rhythmusstreifen und viele andere Länder mit 25 mm/s.'),msg,stripCard(),after);
  if(SB.st.img!==BF.img){SB.setImg(BF.img)}else SB.render();SB.st.speed=BF.speed;
- const manual=()=>{SB.st.showGrid=false;SB.setMode('t');SB.center();msg.innerHTML='';msg.append(h('div',{class:'cal'},h('div',{},h('b',{},'Manuell kalibrieren'),h('p',{},'Lege die zwei Schenkel genau auf die Ränder eines großen Kästchens (5 mm). Tipp: vorher mit + heranzoomen.')),h('button',{class:'btn dark',onclick:()=>{if(SB.calibrate()){toast('Kalibriert');BF.step=2;befund(m)}else toast('Schenkel weiter auseinander ziehen')}},'Kalibrieren')))};
- if(SB.st.pxmm&&!SB.st.grid){msg.append(h('div',{class:'ok'},ic('check',18),' Kalibriert. ',h('button',{class:'lnk',onclick:manual},'Neu kalibrieren')),h('button',{class:'btn dark',style:'margin:8px 0 12px',onclick:()=>{BF.step=2;befund(m)}},'Weiter zum Messen',ic('next',18)));return}
+ const next=()=>{BF.step=2;befund(m)};
+ const choose=k=>{BF.cal=Object.assign({gain:10,sec:1},BF.cal||{},{k});SB.st.grid=null;SB.st.showGrid=false;SB.setMode(CALW[k].mode);SB.center();manual()};
+ function manual(){msg.innerHTML='';const k=BF.cal.k,w=CALW[k];
+  const pick=h('div',{class:'calpick'},Object.keys(CALW).map(x=>h('button',{class:x===k?'on':'',onclick:()=>choose(x)},h('span',{class:'ci',html:'<svg viewBox="0 0 60 42" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'+CALW[x].svg+'</svg>'}),h('b',{},CALW[x].n))));
+  let extra=null;
+  if(k==='eich')extra=h('div',{class:'row'},h('span',{class:'lab'},'Verstärkung'),seg([[10,'10 mm/mV'],[5,'5 mm/mV'],[20,'20 mm/mV']],BF.cal.gain,v=>{BF.cal.gain=v;manual()}));
+  if(k==='axis'){const inp=h('input',{type:'number',min:.2,max:10,step:.1,value:BF.cal.sec,class:'num',oninput:e=>{BF.cal.sec=+e.target.value||1}});extra=h('div',{class:'row'},h('span',{class:'lab'},'Abstand der Marken'),inp,h('span',{},'Sekunden'))}
+  msg.append(h('p',{class:'lead',style:'margin:8px 0 6px'},'Womit möchtest du kalibrieren?'),pick,
+   h('div',{class:'cal'},h('div',{},h('b',{},w.t),h('p',{},w.p+' Das Foto ist direkt darunter.'),extra)));
+  after.innerHTML='';after.append(h('button',{class:'btn dark',style:'margin-top:12px;width:100%',onclick:()=>{const mm=k==='eich'?BF.cal.gain:k==='box'?5:BF.cal.sec*BF.speed;if(SB.calibrate(mm)){toast('Kalibriert');next()}else toast('Linien weiter auseinander ziehen')}},'Kalibrieren',ic('check',18)))}
+ if(SB.st.pxmm&&!SB.st.grid){const how=BF.cal?CALW[BF.cal.k].n:'Kästchen';
+  msg.append(h('div',{class:'ok'},ic('check',18),' Kalibriert über '+how+'. ',h('button',{class:'lnk',onclick:()=>choose(BF.cal?BF.cal.k:'eich')},'Neu kalibrieren')),
+   h('p',{class:'hint'},'Kurze Kontrolle: Miss im nächsten Schritt den RR-Abstand. Die Frequenz sollte ungefähr zu der passen, die auf dem Ausdruck oder Monitor steht.'),
+   h('button',{class:'btn dark',style:'margin:8px 0 12px',onclick:next},'Weiter zum Messen',ic('next',18)));return}
  const g=SB.autoGrid();
- if(g&&g.conf>.05){msg.append(h('div',{class:'cal ok2'},h('div',{},h('b',{},'Raster automatisch erkannt'),h('p',{},'Die grünen Linien sollten genau auf den dicken Kästchenlinien liegen. Zoom ruhig heran und prüfe ein paar Stellen.')),h('div',{class:'row'},h('button',{class:'btn ghost',onclick:manual},'Nein, manuell'),h('button',{class:'btn dark',onclick:()=>{SB.st.showGrid=false;SB.render();BF.step=2;befund(m)}},'Passt',ic('check',18)))))}
- else{msg.append(h('p',{class:'hint'},'Das Raster konnte nicht sicher erkannt werden (z. B. bei Schwarz-Weiß-Ausdrucken).'));manual()}}
+ if(g){BF.cal={k:'auto'};msg.append(h('div',{class:'cal ok2'},h('div',{},h('b',{},'Raster automatisch erkannt'),h('p',{},'Die grünen Linien sollten genau auf den dicken Kästchenlinien liegen. Zoom ruhig heran und prüfe ein paar Stellen.')),h('div',{class:'row'},h('button',{class:'btn ghost',onclick:()=>choose('eich')},'Nein, selbst kalibrieren'),h('button',{class:'btn dark',onclick:()=>{SB.st.showGrid=false;SB.render();next()}},'Passt',ic('check',18)))))}
+ else{msg.append(h('p',{class:'hint'},'Das Raster ließ sich auf diesem Foto nicht sicher erkennen. Das ist bei Ausdrucken mit grauem Raster, schräg fotografierten Bildschirmen und Monitor-EKGs normal. Kalibriere einmal kurz, das dauert nur ein paar Sekunden.'));
+  if(!BF.cal||BF.cal.k==='auto')BF.cal={k:'eich',gain:10,sec:1};SB.st.grid=null;SB.st.showGrid=false;SB.setMode(CALW[BF.cal.k].mode);SB.center();manual()}}
+/* Plausibilität: grobe Grenzen, außerhalb davon ist eher die Kalibrierung oder der Papiervorschub falsch */
+const PLAUS={rr:[240,3000],pq:[50,500],qrs:[40,260],qt:[180,750],stmm:[0,12]};
+const implaus=(k,v)=>{const r=PLAUS[k];return r&&v!=null&&(v<r[0]||v>r[1])};
 function stMess(b,m){
  const card=h('div',{class:'card'});b.append(card);SB.render();
  const t=MTASK[MI];SB.setMode(t.mode);
  const vals=h('div',{class:'mvals'},MTASK.map((x,i)=>h('button',{class:'mv'+(i===MI?' on':'')+(BF.meas[x.k]!=null?' has':''),onclick:()=>{MI=i;b.innerHTML='';stMess(b,m)}},h('small',{},x.n),h('b',{},BF.meas[x.k]!=null?(x.k==='stmm'?f1(BF.meas[x.k])+' mm':fmt(BF.meas[x.k])+' ms'):'–'))));
- const live=h('div',{class:'live'});SB.el.addEventListener('measure',e=>{const d=e.detail;live.innerHTML=d.v?`Zirkel: <b>${d.mm!=null?f1(d.mm)+' mm = '+f1(d.mm/10)+' mV':'–'}</b>`:d.ms?`Zirkel: <b>${fmt(d.ms)} ms</b>${d.ms>150?' · '+fmt(60000/d.ms)+'/min':''}`:''});
+ const live=h('div',{class:'live'}),pw=h('div');let warned=false;SB.el.addEventListener('measure',e=>{const d=e.detail;live.innerHTML=d.v?`Zirkel: <b>${d.mm!=null?f1(d.mm)+' mm = '+f1(d.mm/10)+' mV':'–'}</b>`:d.ms?`Zirkel: <b>${fmt(d.ms)} ms</b>${d.ms>150?' · '+fmt(60000/d.ms)+'/min':''}`:''});
  const nxt=()=>{if(MI<MTASK.length-1){MI++;b.innerHTML='';stMess(b,m)}else{BF.step=3;befund(m)}};
  card.append(h('h2',{},'3. Messen'),h('div',{class:'task'},h('div',{class:'tn'},'Schritt '+(MI+1)+' von '+MTASK.length),h('h3',{},t.n),h('p',{},t.d),h('div',{class:'mini',html:miniSVG(t.k)})),stripCard(),live,
-  h('div',{class:'row',style:'margin-top:10px'},h('button',{class:'btn ghost',onclick:()=>{delete BF.meas[t.k];nxt()}},'Überspringen'),h('button',{class:'btn dark',onclick:()=>{const v=t.mode==='t'?SB.ms():SB.mmv();if(v==null)return toast('Erst kalibrieren');BF.meas[t.k]=v;toast(t.n+' übernommen');nxt()}},'Übernehmen',ic('check',18))),vals,
+  h('div',{class:'row',style:'margin-top:10px'},h('button',{class:'btn ghost',onclick:()=>{delete BF.meas[t.k];nxt()}},'Überspringen'),h('button',{class:'btn dark',onclick:()=>{const v=t.mode==='t'?SB.ms():SB.mmv();if(v==null)return toast('Erst kalibrieren');if(implaus(t.k,v)&&!warned){warned=true;pw.innerHTML='';pw.append(h('div',{class:'warn'},h('b',{},'Dieser Wert ist ungewöhnlich. '),'Oft stimmt dann der Papiervorschub (25 oder 50 mm/s) oder die Kalibrierung nicht. ',h('div',{class:'row',style:'margin-top:8px'},h('button',{class:'btn ghost sm',onclick:()=>{BF.step=1;befund(m)}},'Kalibrierung prüfen'),h('button',{class:'btn ghost sm',onclick:()=>{BF.meas[t.k]=v;toast(t.n+' übernommen');nxt()}},'Trotzdem übernehmen'))));return}BF.meas[t.k]=v;toast(t.n+' übernommen');nxt()}},'Übernehmen',ic('check',18))),pw,vals,
   h('button',{class:'btn ghost',style:'margin-top:12px;width:100%',onclick:()=>{BF.step=3;befund(m)}},'Weiter zur Beurteilung'));SB.setMode(t.mode)}
 function miniSVG(k){const pts='M0 40 L20 40 Q26 30 32 40 L46 40 L49 44 L54 6 L59 52 L63 40 L76 40 Q88 22 100 40 L130 40 L150 40 Q156 30 162 40 L176 40 L179 44 L184 6 L189 52 L193 40 L206 40 Q218 22 230 40 L240 40';
  const mk={rr:[54,184],pq:[20,48],qrs:[48,64],qt:[48,101]}[k];let s=`<svg viewBox="0 0 240 60" width="100%" height="60"><path d="${pts}" fill="none" stroke="#24312e" stroke-width="2" stroke-linejoin="round"/>`;
