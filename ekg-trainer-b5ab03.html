@@ -23,7 +23,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:10px;ma
 h1{font-family:'Fraunces',serif;font-weight:600;font-size:25px;margin:0;letter-spacing:-.01em}
 .tag{color:var(--mute);font-size:13px;margin-top:1px}
 .lang{font-weight:600;font-size:12px;letter-spacing:.05em;border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:#fff}
-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;background:#e7ece8;box-shadow:0 -10px 0 10px var(--bg);padding:5px;border-radius:14px;margin-bottom:16px;position:sticky;top:8px;z-index:5}
+nav{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;background:#e7ece8;box-shadow:0 -10px 0 10px var(--bg);padding:5px;border-radius:14px;margin-bottom:16px;position:sticky;top:8px;z-index:5}
 nav button{padding:10px 6px;border-radius:10px;font-weight:600;font-size:14px;color:var(--mute)}
 nav button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px}
@@ -136,6 +136,79 @@ ul.ml{padding-left:18px;margin:6px 0}ul.ml li{margin:6px 0;font-size:14px}
 @media (max-width:640px){nav button span{font-size:11px}.tr{grid-template-columns:12px 1fr 1fr}}
 [hidden]{display:none!important}
 
+.scroll{max-height:70vh;overflow:auto}
+.strip.photo .scroll{max-height:62vh;background:#f3f1ec}
+.gov{position:absolute;left:0;top:0;pointer-events:none}
+.hl{position:absolute;left:0;right:0;height:0;border-top:2px solid var(--acc);pointer-events:auto;cursor:ns-resize;touch-action:none}
+.hl:before{content:'';position:absolute;left:0;right:0;top:-14px;height:28px}
+.hl i{position:absolute;right:6px;top:-13px;width:24px;height:24px;border-radius:50%;background:var(--acc);border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.hl.b{border-color:#c0674b}.hl.b i{background:#c0674b;right:36px}
+.clab.v{transform:none}
+.btn.sm{padding:8px 12px;font-size:13.5px}
+.lab{font-size:13px;font-weight:600;color:#46534f}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:#fbfcfb;font-weight:600;font-size:13.5px;color:#34413d}
+.seg button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.steps5{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:0 0 12px}
+.steps5 button{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;padding:4px 0;font-size:11.5px;font-weight:600;color:var(--mute)}
+.steps5 i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal;background:#e8ecea;color:#5b6864;font-size:13px}
+.steps5 .on i{background:var(--acc);color:#fff}.steps5 .on{color:var(--ink)}.steps5 .done i{background:#cfe3dd;color:var(--acc)}
+.steps5 button:disabled{opacity:.45}
+.drop{border:2px dashed #c6d2ce;border-radius:16px;padding:34px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;cursor:pointer;color:var(--acc);background:#f7faf9}
+.drop b{color:var(--ink);font-size:16px}.drop span{font-size:13px;color:var(--mute)}
+.pvimg{width:100%;height:auto;border-radius:12px;display:block;max-height:52vh;object-fit:contain;background:#eee}
+.rotbar{display:flex;align-items:center;gap:10px;margin-top:10px}.fine{flex:1;text-align:center}.fine small{display:block;color:var(--mute);font-size:12px}
+.rng{width:100%;accent-color:var(--acc)}
+.cal.ok2{background:#e3f1ec}
+.ok{display:flex;align-items:center;gap:6px;color:var(--acc);font-weight:600;margin:6px 0}
+.lnk{background:none;border:0;color:var(--acc);font-weight:600;text-decoration:underline;padding:0;font-size:inherit}
+.lnk.back{display:inline-flex;align-items:center;gap:4px;text-decoration:none;margin:0 0 10px}
+.task{background:#f4f7f6;border-radius:14px;padding:12px 14px;margin:6px 0 12px}
+.task h3{margin:2px 0 4px}.task p{margin:0 0 6px;font-size:14px;color:#3c4a46}.tn{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:700}
+.mvals{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px}
+.mv{background:#fbfcfb;border:1px solid var(--line);border-radius:10px;padding:6px 4px;text-align:center}
+.mv small{display:block;font-size:10.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mv b{font-size:13.5px}
+.mv.on{border-color:var(--acc);box-shadow:0 0 0 2px rgba(47,107,99,.15)}.mv.has b{color:var(--acc)}
+.chk .q{padding:12px 0;border-top:1px solid var(--line)}.chk .q:first-of-type{border-top:0}
+.qt{font-weight:700;margin-bottom:8px;font-size:14.5px}.qt small{display:block;font-weight:500;color:var(--mute);font-size:12px;margin-top:2px}
+.sub{background:#f6f8f7;border-radius:12px;padding:10px 12px;margin:-4px 0 8px}.sub>small{display:block;color:var(--mute);font-size:12px;margin-bottom:6px}
+.leads{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}.lrow{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.leads button{padding:8px 0;border-radius:9px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:13px}
+.leads button.on{background:#c0674b;border-color:#c0674b;color:#fff}
+.num{width:90px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;font-size:15px}
+.polg{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:6px 0 10px}
+.pol{text-align:center}.pol b{display:block;font-size:13px;margin-bottom:4px}
+.seg3{display:flex;flex-direction:column;gap:4px}.seg3 button{padding:6px 0;border-radius:8px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:15px}
+.seg3 button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.dx.sm{padding:10px 12px}
+.flags{display:flex;flex-direction:column;gap:8px;margin:6px 0 14px}
+.flag{border-radius:12px;padding:10px 12px 10px 14px;border-left:5px solid}
+.flag b{display:block;font-size:14.5px}.flag p{margin:3px 0 0;font-size:13.5px;line-height:1.45;color:#3b3b3b}
+.flag.red{background:#fbe8e4;border-color:#c0392b}.flag.red b{color:#962d22}
+.flag.amber{background:#fdf3dc;border-color:#d4900f}.flag.amber b{color:#7c5208}
+.flag.ok{background:#e3f1ec;border-color:var(--acc)}.flag.ok b{color:var(--acc)}
+.flag.sm{padding:7px 10px;margin:6px 0}
+.bt{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:14.5px;line-height:1.5;resize:vertical}
+.f input[type=text]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit}
+.chl{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.chb{display:flex;align-items:center;gap:12px;text-align:left;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.chb>i{width:34px;height:34px;border-radius:50%;background:#e3efec;color:var(--acc);display:grid;place-items:center;font-style:normal;font-weight:700;flex:none}
+.chb div{flex:1}.chb b{display:block;font-size:15px}.chb span{font-size:13px;color:var(--mute)}
+.chb.hi{border-color:var(--acc);background:#f3f9f7}
+.lc h3{margin:18px 0 6px}.lc p{line-height:1.55}
+.tipb{background:#fdf3dc;border-radius:12px;padding:10px 12px;margin:12px 0;font-size:14px;line-height:1.5}
+.tw{overflow-x:auto}
+h4.cat{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:16px 0 8px}
+.rfb{font-style:normal;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:99px;margin-left:6px;vertical-align:2px}
+.rfb.red{background:#fbe8e4;color:#962d22}.rfb.amber{background:#fdf3dc;color:#7c5208}
+.limbs{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:6px 0 10px}
+.lb{text-align:center;background:#fff8f6;border:1px solid #f3d6cf;border-radius:10px;padding:4px 0 0}.lb b{font-size:12px;color:#8c5b52}.lb svg{width:100%;height:auto;max-width:64px}
+.lb.hl{border-color:var(--acc);box-shadow:0 0 0 2px rgba(47,107,99,.2)}
+.rule{display:grid;gap:4px;font-size:13.5px;background:#f4f7f6;border-radius:12px;padding:10px 12px;margin:8px 0 12px}.rule b{display:inline-block;min-width:30px;color:var(--acc)}
+.ptab td,.ptab th{text-align:center}.ptab td:first-child{text-align:left;font-weight:600}
+.ptab td.up{color:var(--acc);font-weight:700}.ptab td.dn{color:#c0674b;font-weight:700}.ptab td.key{background:#dff0ea;border-radius:6px}
+@media (max-width:640px){nav button span{font-size:10.5px}.mvals{grid-template-columns:repeat(3,1fr)}.limbs{grid-template-columns:repeat(3,1fr)}}
+
 </style>
 </head>
 <body>
@@ -154,12 +227,15 @@ function beat(y,q,o){
  for(let i=a;i<b;i++){const t=i/FS;let v=0;
   if(o.p!==false&&o.pq){const pc=q-o.pq+0.05;v+=G(t,pc,0.022,pa)}
   if(o.delta){v+=G(t,q+0.012,0.022,0.32)}
-  if(o.lbbb){v+=G(t,q+0.03,0.012,-0.05)+G(t,q+0.055,0.02,0.75)+G(t,q+0.1,0.022,0.85)}
+  if(o.rsr){v+=G(t,q+0.025,0.009,0.35)+G(t,q+0.055,0.012,-0.55)+G(t,q+0.1,0.016,0.95)}
+  else if(o.lbbb){v+=G(t,q+0.03,0.012,-0.05)+G(t,q+0.055,0.02,0.75)+G(t,q+0.1,0.022,0.85)}
   else if(o.vent){v+=G(t,q+0.06*w,0.032*w,1.35*(o.vAmp||1))+G(t,q+0.13*w,0.03*w,-0.35*(o.vAmp||1))}
   else{v+=G(t,q+0.012*w,0.006*w,-0.08)+G(t,q+0.04*w,0.011*w,o.rAmp||1.15)+G(t,q+0.068*w,0.009*w,-0.26)}
   const j=q+(o.qrs||0.09);
   if(st){const e=q+qt-0.06;if(t>j-0.01&&t<e){const k=Math.min(1,(t-(j-0.01))/0.02)*Math.min(1,(e-t)/0.12);v+=st*Math.max(0,k)}}
+  if(o.coved){const j2=q+0.1;if(t>j2&&t<q+qt){const u=(t-j2)/(qt-0.1);v+=0.45*Math.max(0,1-u*1.1)*(1-Math.exp(-(t-j2)/0.008))}}
   const tc=q+qt-0.11,ts=o.tW||0.045;v+=G(t,tc,ts*(o.tPeak?0.55:1),tA);
+  if(o.u)v+=G(t,q+qt+0.07,0.03,o.u);
   y[i]+=v}
 }
 function pace(y,q){const i=Math.round(q*FS);for(let k=0;k<3;k++)if(y[i+k]!==undefined)y[i+k]+=k===1?1.6:-0.25}
@@ -179,6 +255,18 @@ const R={
   d:'PQ-Zeit wird von Schlag zu Schlag länger, bis eine P-Welle nicht übergeleitet wird. Danach beginnt der Zyklus neu.'},
  mob2:{n:'AV-Block II° Typ Mobitz II (2:1)',c:'av',hr:42,pq:.18,qrs:.11,qt:.42,
   d:'Konstante PQ-Zeit, aber nur jede zweite P-Welle wird übergeleitet. Gefahr des Übergangs in einen AV-Block III°.'},
+ rbbb:{n:'Rechtsschenkelblock',c:'cond',hr:70,pq:.16,qrs:.13,qt:.40,lead:'V1',
+  d:'QRS 120 ms oder breiter, in V1 rSR’-Form („M“ bzw. Hasenohren), in I und V6 breite, plumpe S-Zacke. Oft harmlos, neu aufgetreten aber an Lungenembolie denken.'},
+ brugada:{n:'Brugada-Muster Typ 1',c:'isch',hr:72,pq:.16,qrs:.11,qt:.40,lead:'V1',
+  d:'In V1–V2 schulterförmige („coved“) ST-Hebung von mindestens 2 mm mit absteigendem Verlauf in eine negative T-Welle. Risiko für plötzlichen Herztod, Synkopen abklären!'},
+ stdep:{n:'ST-Senkung (Ischämiezeichen)',c:'isch',hr:96,pq:.15,qrs:.09,qt:.35,lead:'V5',
+  d:'Horizontale oder deszendierende ST-Senkung von 1 mm oder mehr in zwei benachbarten Ableitungen. Spricht für Ischämie (NSTE-ACS). Spiegelbild einer Hebung ausschließen, auch an posterioren Infarkt denken.'},
+ hypok:{n:'Hypokaliämie',c:'isch',hr:66,pq:.17,qrs:.09,qt:.40,
+  d:'Flache T-Wellen, prominente U-Wellen nach der T-Welle, leichte ST-Senkung. Scheinbar langes QT (eigentlich QU). Risiko für Rhythmusstörungen.'},
+ tdp:{n:'Torsade de pointes',c:'vent',hr:230,pq:0,qrs:.14,qt:0,
+  d:'Polymorphe Kammertachykardie, deren Spitzen sich um die Grundlinie „drehen“. Typisch bei langem QT. Notfall: Magnesium, ggf. Defibrillation.'},
+ flut2:{n:'Vorhofflattern 2:1',c:'supra',hr:150,pq:0,qrs:.08,qt:.30,
+  d:'Regelmäßige Schmalkomplex-Tachykardie mit genau 150/min. Jede zweite Flatterwelle versteckt sich im QRS oder in der T-Welle. Bei Frequenz 150 immer an Flattern denken!'},
  avb3:{n:'AV-Block III°',c:'av',hr:36,pq:0,qrs:.14,qt:.46,
   d:'Vorhöfe und Kammern schlagen unabhängig voneinander. P-Wellen regelmäßig, QRS regelmäßig, aber ohne festen Bezug. Meist breiter Ersatzrhythmus.'},
  af:{n:'Vorhofflimmern',c:'supra',hr:96,pq:0,qrs:.08,qt:.34,
@@ -208,6 +296,7 @@ const R={
  pm:{n:'Schrittmacher-Rhythmus (VVI)',c:'cond',hr:70,pq:0,qrs:.16,qt:.44,
   d:'Schmale Schrittmacher-Spikes, direkt gefolgt von einem breiten QRS-Komplex.'},
 };
+const RF={avb3:['red','Bradykarder Ersatzrhythmus, Synkope- und Asystolie-Gefahr'],mob2:['red','Hohes Risiko für AV-Block III°'],vt:['red','Breitkomplex-Tachykardie: VT bis zum Beweis des Gegenteils'],vf:['red','Herzstillstand: Reanimation und Defibrillation'],asys:['red','Herzstillstand: Reanimation'],tdp:['red','Polymorphe VT bei langem QT'],stemi:['red','STEMI-Verdacht: sofort Katheter-Team'],brugada:['red','Risiko für plötzlichen Herztod'],hyk:['red','Lebensgefährliche Elektrolytstörung'],lqt:['amber','Torsade-Risiko, Medikamente und Elektrolyte prüfen'],stdep:['amber','Ischämie möglich: Troponin, Verlauf'],wpw:['amber','Bei Vorhofflimmern keine AV-Knoten-Blocker'],svt:['amber','Hämodynamik prüfen'],flut2:['amber','Schnelle Überleitung, Hämodynamik prüfen'],af:['amber','Antikoagulation prüfen (CHA₂DS₂-VASc)'],hypok:['amber','Kalium und Magnesium ausgleichen'],lbbb:['amber','Neu aufgetreten mit Brustschmerz: wie STEMI behandeln'],rbbb:['amber','Neu aufgetreten: an Lungenembolie denken']};
 const CAT={norm:'Sinusrhythmen',av:'AV-Blockierungen',supra:'Supraventrikulär',vent:'Ventrikulär & Notfall',cond:'Leitung & Schrittmacher',isch:'Ischämie, QT & Elektrolyte'};
 /* Erzeugt den Streifen + Messwerte (Musterlösung) */
 function gen(key,seed=7){
@@ -216,8 +305,8 @@ function gen(key,seed=7){
  let t=0.55;
  const std=()=>({pq:o.pq,qrs:o.qrs,qt:o.qt});
  switch(key){
-  case 'sinus':case 'brady':case 'tachy':case 'avb1':case 'stemi':case 'lqt':case 'hyk':case 'lbbb':case 'wpw':{
-   const ex={stemi:{st:.3},lqt:{tW:.06},hyk:{tAmp:.85,tPeak:true,pAmp:.06,qrsW:1.15},lbbb:{lbbb:true,tAmp:-.32},wpw:{delta:true,qrsW:1.2}}[key]||{};
+  case 'sinus':case 'brady':case 'tachy':case 'avb1':case 'stemi':case 'lqt':case 'hyk':case 'lbbb':case 'wpw':case 'rbbb':case 'brugada':case 'stdep':case 'hypok':{
+   const ex={stemi:{st:.3},lqt:{tW:.06},hyk:{tAmp:.85,tPeak:true,pAmp:.06,qrsW:1.15},lbbb:{lbbb:true,tAmp:-.32},wpw:{delta:true,qrsW:1.2},rbbb:{rsr:true,tAmp:-.18},brugada:{rsr:true,coved:true,tAmp:-.28,rAmp:.6},stdep:{st:-.2,tAmp:.1},hypok:{tAmp:.08,u:.14,st:-.05}}[key]||{};
    while(t<DUR){const j=(r()-.5)*0.03;beat(y,t,{...std(),...ex});t+=rr+j}break}
   case 'wenck':{const seq=[.16,.24,.30];let k=0;while(t<DUR){if(k%4===3){pWave(y,t-.16+.05);t+=rr*1.05}else{beat(y,t,{...std(),pq:seq[k%4]});t+=rr+(seq[(k+1)%4]||.16)-seq[k%4]*0.35}k++}break}
   case 'mob2':{const pp=rr/2;let k=0;while(t<DUR){beat(y,t,{...std(),qrsW:1.2});pWave(y,t-o.pq+.05+pp);t+=rr;k++}break}
@@ -229,6 +318,8 @@ function gen(key,seed=7){
   case 'vt':{while(t<DUR){beat(y,t,{p:false,vent:true,qrsW:1.15,qt:.3,tAmp:-.5,tW:.06});t+=rr}break}
   case 'pm':{while(t<DUR){pace(y,t-0.01);beat(y,t,{p:false,vent:true,qt:.44,tAmp:-.35,tW:.07});t+=rr}break}
   case 'vf':{let a=.5;for(let i=0;i<y.length;i++){const s=i/FS;if(i%250===0)a=.25+r()*.55;y[i]+=a*(Math.sin(2*Math.PI*4.6*s+Math.sin(s*1.3)*2)+0.5*Math.sin(2*Math.PI*6.9*s+1))}break}
+  case 'tdp':{let k=0;while(t<DUR){const env=0.8+0.45*Math.sin(t*1.9);beat(y,t,{p:false,vent:true,qrsW:.95,vAmp:env*(k%2?1:-1)*1.1,qt:.24,tAmp:0});t+=0.26;k++}break}
+  case 'flut2':{for(let i=0;i<y.length;i++){const s2=i/FS,ph=(s2*5)%1;y[i]+=ph<.75?-0.2*(ph/.75)+0.1:-0.1+0.2*((ph-.75)/.25)}while(t<DUR){beat(y,t,{p:false,qrs:.08,qt:.28,tAmp:.18});t+=0.4}break}
   case 'asys':{break}
  }
  noise(y,r,key==='asys'?0.012:0.018);
@@ -248,7 +339,7 @@ function drawStrip(cv,y,mm,opt={}){
  // Eichzacke 1 mV, 200 ms
  const ox=8*mm;c.moveTo(0,y0);c.lineTo(mm*1.5,y0);c.lineTo(mm*1.5,y0-sc);c.lineTo(mm*6.5,y0-sc);c.lineTo(mm*6.5,y0);c.lineTo(ox,y0);
  for(let i=0;i<y.length;i++){const x=ox+i/FS*25*mm;c.lineTo(x,y0-y[i]*sc)}c.stroke();
- if(opt.label!==false){c.fillStyle='#8c5b52';c.font=`600 ${Math.max(10,mm*2.2)}px DM Sans, sans-serif`;c.fillText('II',mm*1.2,mm*4);c.fillText('25 mm/s · 10 mm/mV',W-mm*38,H-mm*1.6)}
+ if(opt.label!==false){c.fillStyle='#8c5b52';c.font=`600 ${Math.max(10,mm*2.2)}px DM Sans, sans-serif`;c.fillText(opt.lead||'II',mm*1.2,mm*4);c.fillText('25 mm/s · 10 mm/mV',W-mm*38,H-mm*1.6)}
  return{W,H,ox}
 }
 function thumb(cv,key,w,h){const {y}=gen(key,3);const dpr=Math.min(2,devicePixelRatio||1);cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';
@@ -258,156 +349,575 @@ function thumb(cv,key,w,h){const {y}=gen(key,3);const dpr=Math.min(2,devicePixel
 'use strict';
 const $=(s,r=document)=>r.querySelector(s);
 const h=(t,a={},...k)=>{const e=document.createElement(t);for(const x in a){const v=a[x];if(x==='class')e.className=v;else if(x.startsWith('on'))e.addEventListener(x.slice(2),v);else if(x==='html')e.innerHTML=v;else if(x==='style')e.style.cssText=v;else if(v!==false&&v!=null)e.setAttribute(x,v===true?'':v)}for(const c of k.flat()){if(c==null||c===false)continue;e.append(c.nodeType?c:document.createTextNode(c))}return e};
-const toast=m=>{let t=$('.toast');if(!t){t=h('div',{class:'toast'});document.body.append(t)}t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2200)};
+const toast=m=>{let t=$('.toast');if(!t){t=h('div',{class:'toast'});document.body.append(t)}t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2400)};
 const fmt=n=>Math.round(n).toLocaleString('de-DE');
+const f1=n=>(Math.round(n*10)/10).toLocaleString('de-DE');
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 const ICON={
  ruler:'<path d="M3 17 17 3l4 4L7 21z"/><path d="m7 13 2 2M10 10l2 2M13 7l2 2"/>',
  heart:'<path d="M3 12h4l2-5 3 10 2-5h7"/>',
  axis:'<circle cx="12" cy="12" r="9"/><path d="M12 12 18 16"/><path d="M3 12h18"/>',
  book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',
+ learn:'<path d="m3 9 9-5 9 5-9 5z"/><path d="M7 11v5c0 1 2.2 3 5 3s5-2 5-3v-5"/>',
  quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14"/><path d="M12 17.5h.01"/>',
  cam:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
- plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>'};
+ doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',
+ flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+ rot:'<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/>',
+ check:'<path d="m5 12 5 5 9-10"/>',share:'<path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 14v6h14v-6"/>',
+ copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V4h12"/>',
+ plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',
+ back:'<path d="M15 5l-7 7 7 7"/>',next:'<path d="M9 5l7 7-7 7"/>',
+ grid:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>'};
 const ic=(n,s=20)=>h('span',{class:'ic',html:`<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON[n]}</svg>`});
 
-/* ================= Streifen mit digitalem Zirkel ================= */
-function Strip(opts){
- const st={mm:(opts.mm||5)*(innerWidth<640?0.68:1),src:opts.src||'gen',key:opts.key||'sinus',seed:opts.seed||7,img:null,imgW:0,pxmm:null,speed:25,xa:0,xb:0,march:false,ruler:true,zoom:1};
- const cv=h('canvas'),ov=h('div',{class:'ov'}),inner=h('div',{class:'inner'},cv,ov),scroll=h('div',{class:'scroll'},inner);
- const lab=h('div',{class:'clab'}),la=h('div',{class:'cl a'},h('i')),lb=h('div',{class:'cl b'},h('i')),band=h('div',{class:'band'}),ghosts=h('div',{class:'ghosts'}),rul=h('div',{class:'rul'});
- ov.append(band,ghosts,rul,la,lb,lab);
- const el=h('div',{class:'strip'},scroll);
- let W=0,H=0,ox=0;
- const msPerPx=()=>st.src==='gen'?1000/(25*st.mm):(st.pxmm?1000/(st.speed*st.pxmm*st.zoom):null);
- const mmPerPx=()=>st.src==='gen'?1/st.mm:(st.pxmm?1/(st.pxmm*st.zoom):null);
- function render(){
-  if(st.src==='gen'){const g=st.g||(st.g=gen(st.key,st.seed));({W,H,ox}=drawStrip(cv,g.y,st.mm))}
-  else if(st.img){const w=Math.round(st.imgW*st.zoom),hh=Math.round(st.img.naturalHeight*w/st.img.naturalWidth),dpr=Math.min(2,devicePixelRatio||1);cv.width=w*dpr;cv.height=hh*dpr;cv.style.width=w+'px';cv.style.height=hh+'px';const c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.drawImage(st.img,0,0,w,hh);W=w;H=hh}
-  inner.style.width=W+'px';inner.style.height=H+'px';
-  if(!st.xa&&!st.xb){const s=st.src==='gen'?st.g&&firstR(st.g):null;st.xa=s?ox+s[0]*25*st.mm:W*0.3;st.xb=s?ox+s[1]*25*st.mm:W*0.45}
-  place()}
- function firstR(g){const y=g.y,pk=[];for(let i=FS*0.6;i<y.length-2;i++){if(y[i]>0.55&&y[i]>=y[i-1]&&y[i]>y[i+1]){pk.push(i/FS);i+=FS*0.25}if(pk.length>=2)break}return pk.length>=2?pk:[1,1.8]}
- function place(){
-  const a=Math.min(st.xa,st.xb),b=Math.max(st.xa,st.xb);la.style.left=st.xa+'px';lb.style.left=st.xb+'px';band.style.left=a+'px';band.style.width=(b-a)+'px';
-  const mp=msPerPx(),ms=mp?(b-a)*mp:null,mmv=mmPerPx()?(b-a)*mmPerPx():null;
-  lab.style.left=Math.max(52,Math.min(W-52,(a+b)/2))+'px';
-  lab.innerHTML=ms?`<b>${fmt(ms)} ms</b><span>${ms>150?fmt(60000/ms)+'/min':'&nbsp;'}</span><small>${mmv.toFixed(1).replace('.',',')} mm</small>`:'<b>Erst kalibrieren</b>';
-  ghosts.innerHTML='';if(st.march&&b-a>8){const d=b-a;for(let x=b+d,k=2;x<W&&k<60;x+=d,k++)ghosts.append(h('i',{style:`left:${x}px`}))}
-  rul.innerHTML='';rul.style.display=st.ruler&&mp?'block':'none';if(st.ruler&&mp){const step=200/mp;for(let x=st.xa,k=0;x<W&&k<80;x+=step,k++){rul.append(h('i',{style:`left:${x}px`},k%5===0?h('em',{},(k*200/1000).toLocaleString('de-DE')+' s'):''))}}
-  el.dispatchEvent(new CustomEvent('measure',{detail:{ms}}))}
- function drag(handle,key){handle.addEventListener('pointerdown',e=>{e.preventDefault();handle.setPointerCapture(e.pointerId);const r=inner.getBoundingClientRect();
-  const mv=ev=>{st[key]=Math.max(0,Math.min(W,ev.clientX-r.left));place()};const up=()=>{handle.removeEventListener('pointermove',mv);handle.removeEventListener('pointerup',up)};handle.addEventListener('pointermove',mv);handle.addEventListener('pointerup',up)})}
- drag(la,'xa');drag(lb,'xb');
- // Tippen auf den Streifen setzt den näheren Schenkel
- cv.addEventListener('click',e=>{const r=inner.getBoundingClientRect(),x=e.clientX-r.left;if(Math.abs(x-st.xa)<Math.abs(x-st.xb))st.xa=x;else st.xb=x;place()});
- return{el,st,render,place,
-  setKey(k,seed){st.key=k;st.seed=seed||st.seed;st.g=null;st.src='gen';st.xa=st.xb=0;render();scroll.scrollLeft=0},
-  zoom(f){const c=scroll.scrollLeft+scroll.clientWidth/2,ratio=c/(W||1);const oa=st.xa/(W||1),ob=st.xb/(W||1);if(st.src==='gen')st.mm=Math.max(2.2,Math.min(9,st.mm*f));else st.zoom=Math.max(.5,Math.min(4,st.zoom*f));render();st.xa=oa*W;st.xb=ob*W;place();scroll.scrollLeft=ratio*W-scroll.clientWidth/2},
-  setImg(img){st.src='img';st.img=img;st.imgW=Math.min(1600,Math.max(700,scroll.clientWidth*1.6));st.zoom=1;st.pxmm=null;st.xa=st.xb=0;render()},
-  calibrate(){const d=Math.abs(st.xb-st.xa);if(d<10)return false;st.pxmm=d/st.zoom/5;place();return true},
-  ms(){const mp=msPerPx();return mp?Math.abs(st.xb-st.xa)*mp:null}}
+/* ================= Rasterkennung für Fotos =================
+   Sucht die periodischen roten/rosa Kästchenlinien und liefert Pixel pro mm. */
+function detectGrid(src){
+ const mx=1400,sc=Math.min(1,mx/Math.max(src.width,src.height));const w=Math.round(src.width*sc),hh=Math.round(src.height*sc);
+ const cv=document.createElement('canvas');cv.width=w;cv.height=hh;const c=cv.getContext('2d');c.drawImage(src,0,0,w,hh);
+ const d=c.getImageData(0,0,w,hh).data;const col=new Float32Array(w),row=new Float32Array(hh);
+ for(let y=0;y<hh;y++)for(let x=0;x<w;x++){const i=(y*w+x)*4,r=d[i],g=d[i+1],b=d[i+2];
+  // Rasterlinien: rötlich (R deutlich über G) und nicht schwarz (Kurve)
+  let v=r-g;if(r<70)v=0;if(v<0)v=0;col[x]+=v;row[y]+=v}
+ const prof=a=>{const n=a.length,o=new Float32Array(n),win=Math.max(9,Math.round(n/40));let s=0;const q=[];for(let i=0;i<n;i++){s+=a[i];q.push(a[i]);if(q.length>win)s-=q.shift();o[i]=a[i]-s/q.length}return o};
+ const ac=(a,L)=>{let s=0,n=0;for(let i=0;i+L<a.length;i++){s+=a[i]*a[i+L];n++}return n?s/n:0};
+ const analyse=a=>{a=prof(a);const n=a.length,maxL=Math.min(260,Math.floor(n/3)),v=[];let e=ac(a,0)||1;for(let L=0;L<=maxL;L++)v.push(ac(a,L)/e);
+  const peaks=[];for(let L=3;L<maxL;L++)if(v[L]>v[L-1]&&v[L]>=v[L+1]&&v[L]>0.04)peaks.push(L);
+  if(!peaks.length)return null;
+  const vmax=Math.max(...peaks.map(L=>v[L]));const best=peaks.find(L=>v[L]>=vmax*0.85);
+  const at=x=>{const i=Math.round(x);return i>=0&&i<v.length?Math.max(v[i-1]||0,v[i],v[i+1]||0):0};
+  const ref=L=>{const a1=v[L-1],a2=v[L],a3=v[L+1];const den=a1-2*a2+a3;return den?L+0.5*(a1-a3)/den:L};
+  let small;
+  // Ist "best" der 1-mm-Abstand? Dann ist der 5er-Abstand deutlich stärker als 2/3/4
+  if(best*5<maxL&&at(best*5)>at(best*2)*1.08&&at(best*5)>at(best*3)*1.08)small=ref(best);
+  else if(best>=14)small=ref(best)/5;
+  else small=ref(best);
+  return{small,score:v[best]}};
+ const A=analyse(col),B=analyse(row);
+ let pxmm=null,conf=0;
+ if(A&&B){const r=A.small/B.small;if(r>0.88&&r<1.13){pxmm=(A.small+B.small)/2;conf=Math.min(1,(A.score+B.score))}else{const t=A.score>B.score?A:B;pxmm=t.small;conf=t.score*0.5}}
+ else if(A||B){const t=A||B;pxmm=t.small;conf=t.score*0.5}
+ if(!pxmm||pxmm<2)return null;
+ // Phase der dicken Linien finden
+ const ph=(a,P)=>{a=prof(a);let best=0,bs=-1e9;for(let o=0;o<P;o++){let s=0;for(let x=o;x<a.length;x+=P)s+=a[Math.round(x)]||0;if(s>bs){bs=s;best=o}}return best};
+ return{pxmm:pxmm/sc,conf,ox:ph(col,pxmm*5)/sc,oy:ph(row,pxmm*5)/sc}
 }
 
-/* ================= App ================= */
-const TABS=[['mess','Messen','ruler'],['rhy','Rhythmen','heart'],['lage','Lagetyp','axis'],['spick','Spickzettel','book'],['quiz','Quiz','quiz']];
-let tab=location.hash.slice(1)||'mess';
-function shell(){const app=$('#app');app.innerHTML='';
- app.append(h('header',{},h('div',{class:'brand'},h('div',{class:'logo',html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-6 4 12 2-6h8"/></svg>'}),h('div',{},h('h1',{},'EKG-Trainer'),h('div',{class:'tag'},'Messen · Erkennen · Befunden')))),
-  h('nav',{},TABS.map(([k,n,i])=>h('button',{class:tab===k?'on':'',onclick:()=>{tab=k;location.hash=k;shell()}},ic(i,18),h('span',{},n)))),
-  h('section',{id:'main'}),
-  h('p',{class:'disc'},'Lernhilfe für Studium, PJ und Weiterbildung. Ersetzt keine ärztliche Befundung und ist kein Medizinprodukt. Alle Beispiel-EKGs sind simuliert.'));
- ({mess,rhy,lage,spick,quiz})[tab]($('#main'))}
+/* ================= Streifen mit digitalem Zirkel =================
+   Modus 't' = Zeit (senkrechte Schenkel), 'v' = Amplitude (waagerechte Schenkel) */
+function Strip(opts){
+ const st={mm:(opts.mm||5)*(innerWidth<640?0.68:1),src:'gen',key:opts.key||'sinus',seed:opts.seed||7,img:null,imgW:0,pxmm:null,speed:25,xa:0,xb:0,ya:0,yb:0,mode:'t',march:false,ruler:true,zoom:1,grid:null,showGrid:false,lead:null};
+ const cv=h('canvas'),ov=h('div',{class:'ov'}),inner=h('div',{class:'inner'},cv,ov),scroll=h('div',{class:'scroll'},inner);
+ const lab=h('div',{class:'clab'}),la=h('div',{class:'cl a'},h('i')),lb=h('div',{class:'cl b'},h('i')),ha=h('div',{class:'hl a'},h('i')),hb=h('div',{class:'hl b'},h('i')),band=h('div',{class:'band'}),ghosts=h('div',{class:'ghosts'}),rul=h('div',{class:'rul'}),gov=h('canvas',{class:'gov'});
+ ov.append(gov,band,ghosts,rul,la,lb,ha,hb,lab);
+ const el=h('div',{class:'strip'},scroll);
+ let W=0,H=0,ox=0;
+ const pxPerMm=()=>st.src==='gen'?st.mm:(st.pxmm?st.pxmm*st.zoom:null);
+ const msPerPx=()=>{const p=pxPerMm();return p?1000/(st.speed*p):null};
+ function render(){
+  if(st.src==='gen'){const g=st.g||(st.g=gen(st.key,st.seed));({W,H,ox}=drawStrip(cv,g.y,st.mm,{lead:st.lead||R[st.key].lead}))}
+  else if(st.img){const w=Math.round(st.imgW*st.zoom),hh=Math.round(st.img.height*w/st.img.width),dpr=Math.min(2,devicePixelRatio||1);cv.width=w*dpr;cv.height=hh*dpr;cv.style.width=w+'px';cv.style.height=hh+'px';const c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.imageSmoothingQuality='high';c.drawImage(st.img,0,0,w,hh);W=w;H=hh}
+  inner.style.width=W+'px';inner.style.height=H+'px';el.classList.toggle('photo',st.src!=='gen');
+  if(!st.xa&&!st.xb){const s=st.src==='gen'?st.g&&firstR(st.g):null;const v0=scroll.scrollLeft||0,vw=scroll.clientWidth||W;st.xa=s?ox+s[0]*25*st.mm:v0+vw*0.3;st.xb=s?ox+s[1]*25*st.mm:v0+vw*0.62}
+  if(!st.ya&&!st.yb){st.ya=H*0.4;st.yb=H*0.58}
+  drawGrid();place()}
+ function drawGrid(){const p=pxPerMm();if(!st.showGrid||!p||st.src==='gen'){gov.style.display='none';return}gov.style.display='block';
+  const dpr=Math.min(2,devicePixelRatio||1);gov.width=W*dpr;gov.height=H*dpr;gov.style.width=W+'px';gov.style.height=H+'px';const c=gov.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);
+  c.strokeStyle='rgba(20,140,110,.85)';c.lineWidth=1.4;c.setLineDash([6,4]);c.beginPath();const P=p*5,gx=((st.grid?st.grid.ox:0)*st.imgW/st.img.width*st.zoom)%P,gy=((st.grid?st.grid.oy:0)*st.imgW/st.img.width*st.zoom)%P;
+  for(let x=gx;x<W;x+=P){c.moveTo(x,0);c.lineTo(x,H)}for(let y=gy;y<H;y+=P){c.moveTo(0,y);c.lineTo(W,y)}c.stroke()}
+ function firstR(g){const y=g.y,pk=[];for(let i=FS*0.6;i<y.length-2;i++){if(y[i]>0.55&&y[i]>=y[i-1]&&y[i]>y[i+1]){pk.push(i/FS);i+=FS*0.25}if(pk.length>=2)break}return pk.length>=2?pk:[1,1.8]}
+ function place(){
+  const t=st.mode==='t';[la,lb,band].forEach(e=>e.style.display=t?'':'none');[ha,hb].forEach(e=>e.style.display=t?'none':'');
+  const p=pxPerMm();lab.classList.toggle('v',!t);
+  if(t){const a=Math.min(st.xa,st.xb),b=Math.max(st.xa,st.xb);la.style.left=st.xa+'px';lb.style.left=st.xb+'px';band.style.left=a+'px';band.style.width=(b-a)+'px';band.style.top='0';band.style.height='';
+   const mp=msPerPx(),ms=mp?(b-a)*mp:null,mmv=p?(b-a)/p:null;lab.style.left=Math.max(52,Math.min(W-52,(a+b)/2))+'px';lab.style.top='6px';
+   lab.innerHTML=ms?`<b>${fmt(ms)} ms</b><span>${ms>150?fmt(60000/ms)+'/min':'&nbsp;'}</span><small>${f1(mmv)} mm</small>`:'<b>Erst kalibrieren</b>';
+   ghosts.innerHTML='';if(st.march&&b-a>8){const dd=b-a;for(let x=b+dd,k=2;x<W&&k<60;x+=dd,k++)ghosts.append(h('i',{style:`left:${x}px`}))}
+   rul.innerHTML='';rul.style.display=st.ruler&&mp?'block':'none';if(st.ruler&&mp){const step=200/mp;for(let x=st.xa,k=0;x<W&&k<120;x+=step,k++){rul.append(h('i',{style:`left:${x}px`},k%5===0?h('em',{},(k*200/1000).toLocaleString('de-DE')+' s'):''))}}
+   el.dispatchEvent(new CustomEvent('measure',{detail:{ms,mm:mmv}}))}
+  else{const a=Math.min(st.ya,st.yb),b=Math.max(st.ya,st.yb);ha.style.top=st.ya+'px';hb.style.top=st.yb+'px';
+   const mmv=p?(b-a)/p:null;lab.style.left=Math.min(W-70,(scroll.scrollLeft||0)+(scroll.clientWidth||300)-70)+'px';lab.style.top=Math.max(4,(a+b)/2-24)+'px';
+   lab.innerHTML=mmv!=null?`<b>${f1(mmv)} mm</b><span>${f1(mmv/10)} mV</span>`:'<b>Erst kalibrieren</b>';ghosts.innerHTML='';rul.style.display='none';
+   el.dispatchEvent(new CustomEvent('measure',{detail:{mm:mmv,v:true}}))}}
+ function drag(handle,key,axis){handle.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();handle.setPointerCapture(e.pointerId);const r=inner.getBoundingClientRect();
+  const mv=ev=>{if(axis==='x')st[key]=Math.max(0,Math.min(W,ev.clientX-r.left));else st[key]=Math.max(0,Math.min(H,ev.clientY-r.top));place()};const up=()=>{handle.removeEventListener('pointermove',mv);handle.removeEventListener('pointerup',up)};handle.addEventListener('pointermove',mv);handle.addEventListener('pointerup',up)})}
+ drag(la,'xa','x');drag(lb,'xb','x');drag(ha,'ya','y');drag(hb,'yb','y');
+ cv.addEventListener('click',e=>{const r=inner.getBoundingClientRect();if(st.mode==='t'){const x=e.clientX-r.left;if(Math.abs(x-st.xa)<Math.abs(x-st.xb))st.xa=x;else st.xb=x}else{const y=e.clientY-r.top;if(Math.abs(y-st.ya)<Math.abs(y-st.yb))st.ya=y;else st.yb=y}place()});
+ const api={el,st,render,place,scroll,
+  setKey(k,seed){st.key=k;st.seed=seed||st.seed;st.g=null;st.src='gen';st.xa=st.xb=0;render();scroll.scrollLeft=0},
+  setMode(m){st.mode=m;if(m==='t'){const v0=scroll.scrollLeft,vw=scroll.clientWidth;if(vw&&(st.xa<v0||st.xa>v0+vw||Math.abs(st.xb-st.xa)<4)){st.xa=v0+vw*.3;st.xb=v0+vw*.62}}else{const v0=scroll.scrollTop,vh=scroll.clientHeight;if(vh&&(st.ya<v0||st.ya>v0+vh||Math.abs(st.yb-st.ya)<4)){st.ya=v0+vh*.4;st.yb=v0+vh*.58}}place()},
+  center(){if(!scroll.clientWidth)return;const v0=scroll.scrollLeft,vw=scroll.clientWidth,t0=scroll.scrollTop,vh=scroll.clientHeight;if(st.mode==='t'){st.xa=v0+vw*.3;st.xb=v0+vw*.6}else{st.ya=t0+vh*.4;st.yb=t0+vh*.6}place()},
+  zoom(f){const cx=scroll.scrollLeft+scroll.clientWidth/2,cy=scroll.scrollTop+scroll.clientHeight/2,rx=cx/(W||1),ry=cy/(H||1);const k=[st.xa/(W||1),st.xb/(W||1),st.ya/(H||1),st.yb/(H||1)];
+   if(st.src==='gen')st.mm=Math.max(2.2,Math.min(9,st.mm*f));else st.zoom=Math.max(.4,Math.min(5,st.zoom*f));render();st.xa=k[0]*W;st.xb=k[1]*W;st.ya=k[2]*H;st.yb=k[3]*H;place();scroll.scrollLeft=rx*W-scroll.clientWidth/2;scroll.scrollTop=ry*H-scroll.clientHeight/2},
+  setImg(img){st.src='img';st.img=img;st.imgW=Math.min(1800,Math.max(640,(scroll.clientWidth||360)*1.7));st.zoom=1;st.pxmm=null;st.grid=null;st.xa=st.xb=st.ya=st.yb=0;render()},
+  autoGrid(){const g=detectGrid(st.img);if(!g)return null;st.grid=g;st.pxmm=g.pxmm*st.imgW/st.img.width;st.showGrid=true;drawGrid();place();return g},
+  calibrate(){const d=st.mode==='t'?Math.abs(st.xb-st.xa):Math.abs(st.yb-st.ya);if(d<10)return false;st.pxmm=d/st.zoom/5;st.grid=null;st.showGrid=false;drawGrid();place();return true},
+  ms(){const mp=msPerPx();return mp?Math.abs(st.xb-st.xa)*mp:null},
+  mmv(){const p=pxPerMm();return p?Math.abs(st.yb-st.ya)/p:null},
+  calibrated(){return st.src==='gen'||!!st.pxmm}};
+ return api}
 
-/* ---------- Messen ---------- */
+/* ================= App-Rahmen ================= */
+const TABS=[['learn','Lernen','learn'],['mess','Üben','ruler'],['befund','Befund','cam'],['lage','Lagetyp','axis'],['quiz','Quiz','quiz'],['spick','Spick','book']];
+let tab=location.hash.slice(1)||'befund';
+function go(t,arg){tab=t;history.replaceState(null,'','#'+t);shell(arg);scrollTo(0,0)}
+function shell(arg){const app=$('#app');app.innerHTML='';
+ app.append(h('header',{},h('div',{class:'brand'},h('div',{class:'logo',html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-6 4 12 2-6h8"/></svg>'}),h('div',{},h('h1',{},'EKG-Trainer'),h('div',{class:'tag'},'Lernen · Messen · Befunden')))),
+  h('nav',{},TABS.map(([k,n,i])=>h('button',{class:tab===k?'on':'',onclick:()=>go(k)},ic(i,18),h('span',{},n)))),
+  h('section',{id:'main'}),
+  h('p',{class:'disc'},'Lernhilfe für Studium, PJ, Pflege und Weiterbildung. Ersetzt keine ärztliche Befundung und ist kein Medizinprodukt. Alle Beispiel-EKGs sind simuliert.'));
+ const fn={learn,mess,befund,lage,quiz,spick}[tab]||befund;fn($('#main'),arg)}
+/* ================= Lagetyp ================= */
+const LEADS={I:0,II:60,III:120,aVF:90,aVL:-30,aVR:-150};
+const LT=[[-90,-30,'Überdrehter Linkstyp','Linksanteriorer Hemiblock (LAHB), inferiorer Infarkt, Linksherzhypertrophie'],[-30,30,'Linkstyp','Normal bei Erwachsenen über etwa 40 Jahren, Adipositas, Linksherzbelastung'],[30,60,'Indifferenztyp','Normal bei Erwachsenen'],[60,90,'Steiltyp','Normal bei Jugendlichen und schlanken Menschen'],[90,120,'Rechtstyp','Normal bei Kindern, sonst Rechtsherzbelastung (z. B. Lungenembolie, COPD)'],[120,180,'Überdrehter Rechtstyp','Linksposteriorer Hemiblock (LPHB), ausgeprägte Rechtsherzhypertrophie'],[-180,-90,'Extremtyp (Nordwesttyp)','Selten: Elektrodenvertauschung prüfen, Kammerrhythmus, schwere Rechtsherzbelastung']];
+const norm=a=>{a=((a+180)%360+360)%360-180;return a};
+const typeOf=a=>{a=norm(a);return LT.find(t=>a>=t[0]&&a<t[1])||LT[6]};
+const amp=(a,l)=>Math.cos((a-LEADS[l])*Math.PI/180);
+const pol=(a,l,th=.17)=>{const v=amp(a,l);return v>th?1:v<-th?-1:0};
+/* Lias Polaritäten-Methode: jede Typgrenze liegt dort, wo genau eine Ableitung isoelektrisch wird */
+function liaType(p){
+ if(p.I<0&&p.III<0)return{t:'Extremtyp (Nordwesttyp)',why:'I und III negativ: die Achse zeigt nach oben rechts.'};
+ if(p.I<0)return p.aVR>0?{t:'Überdrehter Rechtstyp',why:'I negativ (wie beim Rechtstyp), aber aVR positiv: Grenze bei +120° überschritten.'}:p.aVR===0?{t:'Grenze Rechtstyp / überdrehter Rechtstyp (+120°)',why:'aVR ist isoelektrisch.'}:{t:'Rechtstyp',why:'I negativ, II und III positiv, aVR negativ.'};
+ if(p.I===0)return{t:'Grenze Steiltyp / Rechtstyp (+90°)',why:'I ist isoelektrisch.'};
+ if(p.II<0)return{t:'Überdrehter Linkstyp',why:'I positiv, aber II negativ: Grenze bei −30° überschritten.'};
+ if(p.II===0)return{t:'Grenze Linkstyp / überdrehter Linkstyp (−30°)',why:'II ist isoelektrisch.'};
+ if(p.III<0)return{t:'Linkstyp',why:'I und II positiv, III negativ.'};
+ if(p.III===0)return{t:'Grenze Linkstyp / Indifferenztyp (+30°)',why:'III ist isoelektrisch.'};
+ if(p.aVL>0)return{t:'Indifferenztyp',why:'I, II, III positiv und aVL positiv (Zacke nach oben).'};
+ if(p.aVL===0)return{t:'Grenze Indifferenztyp / Steiltyp (+60°)',why:'aVL ist isoelektrisch.'};
+ return{t:'Steiltyp',why:'I, II, III positiv, aber aVL negativ (Zacke nach unten).'}}
+/* Kleiner QRS-Komplex als SVG für eine Ableitung */
+function cx(a,l,w=64,hh=70){const v=amp(a,l),r=.12+Math.max(0,v)*.95,s=.12+Math.max(0,-v)*.95,tA=(l==='aVR'?-.22:.25)*Math.sign(v||.01)*Math.min(1,Math.abs(v)+.2),y0=hh*.55,k=hh*.42;
+ const p=[[0,0],[8,0],[11,-.07],[14,0],[19,0],[21,.08],[24,-r],[27,s],[30,0],[37,0],[43,-tA],[49,0],[w,0]];
+ return `<svg viewBox="0 0 ${w} ${hh}" width="${w}" height="${hh}"><path d="${p.map((q,i)=>(i?'L':'M')+q[0]+' '+(y0+q[1]*k).toFixed(1)).join('')}" fill="none" stroke="#1f2b28" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>`}
+function limbRow(a,leads=['I','II','III','aVR','aVL','aVF'],hl){return h('div',{class:'limbs'},leads.map(l=>h('div',{class:'lb'+(hl&&hl.includes(l)?' hl':'')},h('b',{},l),h('div',{html:cx(a,l)}))))}
+function cab(a,opt={}){const R0=110,cx0=140,cy=135;const pt=(d,r)=>[cx0+r*Math.cos(d*Math.PI/180),cy+r*Math.sin(d*Math.PI/180)];
+ const seg=(a1,a2,col)=>{const [x1,y1]=pt(a1,R0),[x2,y2]=pt(a2,R0);return`<path d="M${cx0} ${cy}L${x1} ${y1}A${R0} ${R0} 0 ${a2-a1>180?1:0} 1 ${x2} ${y2}Z" fill="${col}"/>`};
+ const cols=['#f1d9d0','#e3efec','#d2e6e0','#c3ddd5','#e8eef6','#f6e6d6','#eee9e4'];
+ let s=`<svg viewBox="0 0 280 270" width="100%" class="cabsvg" style="max-width:340px;display:block;margin:12px auto;touch-action:none">`;LT.forEach((t,i)=>s+=seg(t[0],t[1],cols[i]));
+ s+=`<circle cx="${cx0}" cy="${cy}" r="${R0}" fill="none" stroke="#c9d3cf"/>`;
+ [[0,'I 0°'],[60,'II +60°'],[120,'III +120°'],[90,'aVF +90°'],[-30,'aVL −30°'],[-150,'aVR −150°']].forEach(([d,n])=>{const [x,y]=pt(d,R0+17);const [x1,y1]=pt(d,R0);s+=`<line x1="${cx0}" y1="${cy}" x2="${x1}" y2="${y1}" stroke="#c9d3cf" stroke-dasharray="3 3"/><text x="${x}" y="${y+4}" text-anchor="middle" font-size="10.5" font-weight="600" fill="#6f7d78" font-family="DM Sans">${n}</text>`});
+ if(a!=null){const [ax,ay]=pt(a,R0-8);s+=`<line x1="${cx0}" y1="${cy}" x2="${ax}" y2="${ay}" stroke="#2f6b63" stroke-width="4" stroke-linecap="round"/><circle cx="${ax}" cy="${ay}" r="${opt.drag?11:6}" fill="#2f6b63" stroke="#fff" stroke-width="${opt.drag?3:0}"/><circle cx="${cx0}" cy="${cy}" r="4" fill="#2f6b63"/>`}
+ return s+'</svg>'}
+const PSTATE={I:1,II:1,III:1,aVR:-1,aVL:1};
+function lage(m){
+ // 1) Achse ziehen
+ let A=50;const cabBox=h('div'),limbs=h('div'),info=h('div'),deg=h('input',{type:'range',min:-180,max:180,value:A,class:'rng',oninput:e=>{A=+e.target.value;draw()}});
+ function draw(){const t=typeOf(A);cabBox.innerHTML=cab(A,{drag:true});limbs.innerHTML='';limbs.append(limbRow(A));const p={};['I','II','III','aVR','aVL'].forEach(l=>p[l]=pol(A,l,.06));const li=liaType(p);
+  info.innerHTML='';info.append(h('div',{class:'dx'},h('small',{},'Achse '+fmt(norm(A))+'°'),h('ul',{},h('li',{},t[2]))),h('p',{class:'mn'},h('b',{},'Typisch: '),t[3]),h('p',{class:'mn'},h('b',{},'Polaritäten-Methode: '),li.why));deg.value=norm(A)}
+ cabBox.addEventListener('pointerdown',e=>{const sv=cabBox.querySelector('svg');sv.setPointerCapture(e.pointerId);const mv=ev=>{const r=sv.getBoundingClientRect();const x=(ev.clientX-r.left)/r.width*280-140,y=(ev.clientY-r.top)/r.height*270-135;A=Math.round(Math.atan2(y,x)*180/Math.PI);draw()};mv(e);const up=()=>{sv.removeEventListener('pointermove',mv);sv.removeEventListener('pointerup',up)};sv.addEventListener('pointermove',mv);sv.addEventListener('pointerup',up)});
+ // 2) Polaritäten eintippen
+ const pBox=h('div'),pOut=h('div');
+ function drawP(){pBox.innerHTML='';pBox.append(h('div',{class:'polg'},['I','II','III','aVR','aVL'].map(l=>h('div',{class:'pol'},h('b',{},l),h('div',{class:'seg3'},[[1,'↑','überwiegend positiv'],[0,'≈','isoelektrisch'],[-1,'↓','überwiegend negativ']].map(([v,s,t])=>h('button',{class:PSTATE[l]===v?'on':'','aria-label':l+' '+t,onclick:()=>{PSTATE[l]=v;drawP()}},s)))))));
+  const r=liaType(PSTATE);const t=LT.find(x=>x[2]===r.t);pOut.innerHTML='';pOut.append(h('div',{class:'dx'},h('small',{},'Ergebnis'),h('ul',{},h('li',{},r.t))),h('p',{class:'mn'},r.why),t?h('p',{class:'mn'},h('b',{},'Typisch: '),t[3]):null)}
+ // 3) Amplituden-Rechner
+ const v={I:6,aVF:4};const out=h('div'),svg=h('div');
+ const inp=k=>{const i=h('input',{type:'number',step:'0.5',value:v[k],oninput:e=>{v[k]=parseFloat(String(e.target.value).replace(',','.'))||0;calc()}});return h('div',{class:'f'},h('label',{},'Ableitung '+k,h('small',{},'R minus S in mm')),h('div',{class:'stp'},h('button',{class:'btn ghost icon',onclick:()=>{v[k]-=1;i.value=v[k];calc()}},ic('minus',16)),i,h('button',{class:'btn ghost icon',onclick:()=>{v[k]+=1;i.value=v[k];calc()}},ic('plus',16))))};
+ function calc(){const a=Math.atan2(v.aVF,v.I)*180/Math.PI;const t=typeOf(a);svg.innerHTML=cab(a);out.innerHTML='';out.append(h('div',{class:'dx'},h('small',{},'Elektrische Herzachse'),h('ul',{},h('li',{},t[2]+' · '+fmt(a)+'°'))),h('p',{class:'mn'},h('b',{},'Typisch: '),t[3]))}
+ // Lias Tabelle
+ const tbl=h('table',{class:'ptab'},h('tr',{},h('th',{},'Lagetyp'),['I','II','III','aVR','aVL'].map(l=>h('th',{},l))),
+  [['Überdrehter Linkstyp',-55,'II'],['Linkstyp',0,'III'],['Indifferenztyp',45,'aVL'],['Steiltyp',75,'aVL'],['Rechtstyp',105,'aVR'],['Überdrehter Rechtstyp',140,'aVR']].map(([n,a,k])=>h('tr',{},h('td',{},n),['I','II','III','aVR','aVL'].map(l=>{const p=pol(a,l,.1);return h('td',{class:(l===k?'key ':'')+(p>0?'up':p<0?'dn':'iso')},p>0?'↑':p<0?'↓':'≈')}))));
+ m.append(
+  h('div',{class:'card'},h('h2',{},'Achse ziehen und verstehen'),h('p',{class:'lead'},'Zieh den Pfeil im Cabrera-Kreis. Darunter siehst du sofort, wie die Extremitätenableitungen aussehen.'),cabBox,deg,limbs,info),
+  h('div',{class:'card'},h('h2',{},'Polaritäten-Methode'),h('p',{class:'lead'},'Schau dir in I, II, III, aVR und aVL nur an, ob der QRS-Komplex überwiegend nach oben oder unten zeigt. Jede Typgrenze liegt genau dort, wo eine Ableitung isoelektrisch wird.'),
+   h('div',{class:'rule'},h('div',{},h('b',{},'I'),' kippt bei +90°: Steiltyp → Rechtstyp'),h('div',{},h('b',{},'II'),' kippt bei −30°: Linkstyp → überdrehter Linkstyp'),h('div',{},h('b',{},'III'),' kippt bei +30°: Linkstyp → Indifferenztyp'),h('div',{},h('b',{},'aVL'),' kippt bei +60°: Indifferenztyp → Steiltyp'),h('div',{},h('b',{},'aVR'),' kippt bei +120°: Rechtstyp → überdrehter Rechtstyp')),
+   h('div',{class:'tw'},tbl),h('p',{class:'hint'},'Grün markiert: die Ableitung, die den Typ vom Nachbartyp unterscheidet.'),
+   h('h3',{},'Selbst eintippen'),pBox,pOut),
+  h('div',{class:'card'},h('h2',{},'Lagetyp-Rechner'),h('p',{class:'lead'},'Miss in I und aVF die Höhe der R-Zacke minus die Tiefe der S-Zacke in Millimetern. Überwiegend negativ heißt: negative Zahl.'),h('div',{class:'two'},inp('I'),inp('aVF')),svg,out));
+ draw();drawP();calc()}
+/* ================= Befund-Assistent (Foto) ================= */
+const LIMB=['I','II','III','aVR','aVL','aVF'],PREC=['V1','V2','V3','V4','V5','V6'],ALL=LIMB.concat(PREC);
+const BF={step:0,src:null,rot:0,fine:0,img:null,speed:25,meas:{},chk:{rhythm:null,p:null,qrs:'normal',st:'none',stLeads:[],stMM:null,t:'normal',tLeads:[],q:'no',qLeads:[],extra:[],twelve:false,pol:{I:1,II:1,III:1,aVR:-1,aVL:1}},sex:'w',u40:false,note:'',withImg:true,text:null};
+function resetBF(){Object.assign(BF,{step:0,src:null,rot:0,fine:0,img:null,meas:{},text:null,note:''});BF.chk={rhythm:null,p:null,qrs:'normal',st:'none',stLeads:[],stMM:null,t:'normal',tLeads:[],q:'no',qLeads:[],extra:[],twelve:false,pol:{I:1,II:1,III:1,aVR:-1,aVL:1}}}
+/* Foto drehen (90°-Schritte + Feinkorrektur) -> Canvas */
+function rotated(){const s=BF.src;if(!s)return null;const q=((BF.rot%360)+360)%360,sw=q%180?s.naturalHeight||s.height:s.naturalWidth||s.width,sh=q%180?s.naturalWidth||s.width:s.naturalHeight||s.height;
+ const mx=2600,k=Math.min(1,mx/Math.max(sw,sh));const cv=document.createElement('canvas');cv.width=Math.round(sw*k);cv.height=Math.round(sh*k);const c=cv.getContext('2d');c.fillStyle='#fff';c.fillRect(0,0,cv.width,cv.height);
+ c.translate(cv.width/2,cv.height/2);c.rotate((q+BF.fine)*Math.PI/180);const fz=1+Math.abs(Math.sin(BF.fine*Math.PI/180))*0.9;c.scale(k*fz,k*fz);const iw=s.naturalWidth||s.width,ih=s.naturalHeight||s.height;c.drawImage(s,-iw/2,-ih/2);return cv}
+/* Beispiel-"Foto" zum Ausprobieren */
+function samplePhoto(){const px=6.2,wmm=150,hmm=46,W=Math.round(wmm*px)+120,H=Math.round(hmm*px)+90;const cv=document.createElement('canvas');cv.width=W;cv.height=H;const c=cv.getContext('2d');
+ const g=c.createLinearGradient(0,0,W,H);g.addColorStop(0,'#e9e4da');g.addColorStop(1,'#cfc8bb');c.fillStyle=g;c.fillRect(0,0,W,H);
+ c.save();c.translate(60,45);c.fillStyle='#fffaf6';c.fillRect(0,0,wmm*px,hmm*px);
+ c.strokeStyle='rgba(236,150,140,.55)';c.lineWidth=1;c.beginPath();for(let x=0;x<=wmm;x++){c.moveTo(x*px,0);c.lineTo(x*px,hmm*px)}for(let y=0;y<=hmm;y++){c.moveTo(0,y*px);c.lineTo(wmm*px,y*px)}c.stroke();
+ c.strokeStyle='rgba(214,95,85,.85)';c.lineWidth=1.8;c.beginPath();for(let x=0;x<=wmm;x+=5){c.moveTo(x*px,0);c.lineTo(x*px,hmm*px)}for(let y=0;y<=hmm;y+=5){c.moveTo(0,y*px);c.lineTo(wmm*px,y*px)}c.stroke();
+ const {y}=gen('stemi',11);const y0=hmm*px*.62;c.strokeStyle='#26201e';c.lineWidth=2;c.beginPath();c.moveTo(0,y0);c.lineTo(1.5*px,y0);c.lineTo(1.5*px,y0-10*px);c.lineTo(6.5*px,y0-10*px);c.lineTo(6.5*px,y0);
+ for(let i=0;i<FS*5.6;i++)c.lineTo(8*px+i/FS*25*px,y0-y[i]*10*px);c.stroke();c.fillStyle='#7a4c44';c.font='600 15px sans-serif';c.fillText('V3',8,18);c.fillText('25 mm/s  10 mm/mV',wmm*px-150,hmm*px-8);c.restore();
+ const lg=c.createRadialGradient(W*.3,H*.2,40,W*.5,H*.5,W*.8);lg.addColorStop(0,'rgba(255,255,255,.12)');lg.addColorStop(1,'rgba(60,40,20,.18)');c.fillStyle=lg;c.fillRect(0,0,W,H);
+ const out=document.createElement('canvas');out.width=W;out.height=H;const o=out.getContext('2d');o.fillStyle='#d8d1c4';o.fillRect(0,0,W,H);o.translate(W/2,H/2);o.rotate(-1.6*Math.PI/180);o.filter='blur(.5px)';o.drawImage(cv,-W/2,-H/2);
+ const img=new Image();img.src=out.toDataURL('image/jpeg',.86);return img}
+
+/* ---------- Auswertung & Red Flags ---------- */
+const CONTIG=[['V1','V2'],['V2','V3'],['V3','V4'],['V4','V5'],['V5','V6'],['aVL','I'],['II','aVF'],['aVF','III'],['II','III'],['I','V6'],['aVL','V5'],['I','V5']];
+const contiguous=ls=>CONTIG.some(([a,b])=>ls.includes(a)&&ls.includes(b));
+const TERR=[{n:'Vorderwand (anterior/septal)',l:['V1','V2','V3','V4'],g:'RIVA (LAD)'},{n:'Seitenwand (lateral)',l:['I','aVL','V5','V6'],g:'RCX oder Diagonalast'},{n:'Hinterwand (inferior)',l:['II','III','aVF'],g:'RCA, seltener RCX'}];
+function derive(){const m=BF.meas,c=BF.chk,o={};o.hr=m.rr?60000/m.rr:null;
+ if(m.qt&&m.rr){const rr=m.rr/1000;o.qtc=m.qt/Math.sqrt(rr);o.qtf=m.qt/Math.cbrt(rr)}
+ // Rhythmus
+ const hr=o.hr,wide=m.qrs>=120||c.qrs==='lsb'||c.qrs==='rsb'||c.qrs==='pm';let r='Rhythmus nicht sicher beurteilbar';
+ if(c.qrs==='pm')r='Schrittmacher-Rhythmus';
+ else if(c.p==='flutter')r='Vorhofflattern'+(hr?(hr>140&&hr<160?' (am ehesten 2:1-Überleitung)':''):'');
+ else if(c.p==='none'&&c.rhythm==='irr')r='Absolute Arrhythmie bei Vorhofflimmern';
+ else if(c.p==='more')r='AV-Blockierung II° oder III° (mehr P-Wellen als QRS-Komplexe)';
+ else if(c.p==='none'&&hr>150&&!wide)r='Regelmäßige Schmalkomplex-Tachykardie ohne sichtbare P-Wellen (z. B. AVNRT, Flattern 2:1)';
+ else if(wide&&hr>100&&c.p!=='each')r='Breitkomplex-Tachykardie';
+ else if(c.p==='each'){r=hr==null?'Sinusrhythmus':hr<60?'Sinusbradykardie':hr>100?'Sinustachykardie':'Sinusrhythmus';if(c.rhythm==='irr')r='Sinusrhythmus mit Unregelmäßigkeit (Sinusarrhythmie oder Extrasystolen)';if(c.rhythm==='ex')r+=' mit Extrasystolen'}
+ else if(c.p==='none'&&hr&&hr<60)r='Bradykarder Ersatzrhythmus ohne sichtbare P-Wellen';
+ o.rhythm=r;o.wide=wide;
+ if(c.twelve)o.lage=liaType(c.pol);
+ return o}
+function redFlags(){const m=BF.meas,c=BF.chk,o=derive(),F=[];const add=(l,t,d)=>F.push({l,t,d});
+ const hr=o.hr;
+ if(hr!=null&&hr<40)add('red','Ausgeprägte Bradykardie ('+fmt(hr)+'/min)','Hämodynamik und Symptome prüfen (Synkope, Schwindel). Atropin bzw. externe Stimulation bereithalten.');
+ if(hr!=null&&hr>150&&!o.wide)add('amber','Tachykardie über 150/min','Kreislauf prüfen. Bei regelmäßiger Frequenz um 150 an Vorhofflattern 2:1 denken.');
+ if(o.wide&&hr>100&&c.qrs!=='pm')add('red','Breitkomplex-Tachykardie','Bis zum Beweis des Gegenteils eine ventrikuläre Tachykardie. Instabil: elektrische Kardioversion.');
+ if(c.p==='more')add('red','AV-Block II° oder III°','Mobitz II und AV-Block III° können plötzlich in eine Asystolie übergehen. Monitoring, Schrittmacher-Bereitschaft.');
+ if(c.extra.includes('pause'))add('red','Pause über 3 Sekunden','Sinusarrest oder höhergradiger Block möglich, besonders mit Synkope abklärungsbedürftig.');
+ if(c.p==='each'&&m.pq>200&&c.p!=='more')add('amber','AV-Block I° (PQ '+fmt(m.pq)+' ms)','Meist harmlos, Medikamente (Betablocker, Digitalis, Verapamil) prüfen.');
+ if(o.qtc!=null){if(o.qtc>500)add('red','QTc deutlich verlängert ('+fmt(o.qtc)+' ms)','Hohes Risiko für Torsade de pointes. QT-verlängernde Medikamente stoppen, Kalium und Magnesium ausgleichen.');else if(o.qtc>(BF.sex==='w'?460:450))add('amber','QTc verlängert ('+fmt(o.qtc)+' ms)','Medikamente und Elektrolyte prüfen.');else if(o.qtc<340)add('amber','QTc kurz ('+fmt(o.qtc)+' ms)','An Hyperkalzämie, Digitalis oder ein Short-QT-Syndrom denken.')}
+ if(m.qrs>=120&&!(o.wide&&hr>100)&&c.qrs==='normal')add('amber','QRS verbreitert ('+fmt(m.qrs)+' ms)','Schenkelblock, Hyperkaliämie oder Medikamente (z. B. trizyklische Antidepressiva) bedenken.');
+ if(c.qrs==='lsb')add('amber','Linksschenkelblock','Neu aufgetreten mit Brustschmerz: wie STEMI behandeln. Sgarbossa-Kriterien prüfen.');
+ if(c.qrs==='rsb')add('amber','Rechtsschenkelblock','Neu aufgetreten, vor allem mit Tachykardie und Atemnot: an Lungenembolie denken.');
+ if(c.qrs==='delta'||(m.pq&&m.pq<120&&c.p==='each')){add(c.qrs==='delta'?'amber':'amber','Präexzitation möglich (WPW)','Kurzes PQ'+(c.qrs==='delta'?' und Delta-Welle':'')+'. Bei Vorhofflimmern keine AV-Knoten-Blocker geben.');if(c.qrs==='delta'&&c.rhythm==='irr')add('red','Präexzitiertes Vorhofflimmern','Gefahr von Kammerflimmern. Kein Adenosin, Verapamil, Digitalis oder Betablocker.')}
+ // ST
+ if(c.st==='up'&&c.stLeads.length){const mm=c.stMM??m.stmm??null;const thr=l=>['V2','V3'].includes(l)?(BF.sex==='w'?1.5:BF.u40?2.5:2):1;const ok=mm==null?c.stLeads:c.stLeads.filter(l=>mm>=thr(l));
+  if(contiguous(ok)){const terr=TERR.filter(t=>t.l.filter(l=>ok.includes(l)).length>=2);add('red','STEMI-Kriterien erfüllt','ST-Hebung'+(mm!=null?' von '+f1(mm)+' mm':'')+' in '+ok.join(', ')+(terr.length?'. Region: '+terr.map(t=>t.n+' ('+t.g+')').join(', '):'')+'. Sofort Herzkatheter-Team informieren.')}
+  else if(c.stLeads.length===1||!contiguous(c.stLeads))add('amber','ST-Hebung ohne benachbarte Ableitung','Für STEMI braucht es zwei benachbarte Ableitungen. Verlauf, Troponin und Vor-EKG vergleichen.');
+  else add('amber','ST-Hebung unter dem Grenzwert','Grenzwerte: 1 mm, in V2–V3 je nach Geschlecht und Alter 1,5–2,5 mm. Kontrolle in 15–30 Minuten.');
+  if(c.stLeads.includes('aVR'))add('red','ST-Hebung in aVR','Zusammen mit ausgedehnten ST-Senkungen: Hauptstamm- oder Mehrgefäß-Ischämie möglich.')}
+ if(c.st==='down'&&c.stLeads.length){const v13=['V1','V2','V3'].filter(l=>c.stLeads.includes(l)).length;if(v13>=2)add('red','ST-Senkung in V1–V3','Kann ein posteriorer Infarkt sein (STEMI-Äquivalent). Hinterwandableitungen V7–V9 schreiben.');
+  if(c.stLeads.length>=6)add('red','Ausgedehnte ST-Senkungen','In 6 oder mehr Ableitungen, besonders mit Hebung in aVR: an Hauptstamm-Ischämie denken.');
+  else if(v13<2)add('amber','ST-Senkung','Ischämie möglich (NSTE-ACS). Troponin, Verlauf, Spiegelbild einer Hebung ausschließen.')}
+ if(c.t==='peak')add('red','Hohe, spitze T-Wellen','An Hyperkaliämie denken: Kalium sofort bestimmen. Mit breitem QRS: Notfall.');
+ if(c.t==='neg'&&c.tLeads.some(l=>['V2','V3'].includes(l)))add('amber','Negative T-Wellen in V2–V3','Wellens-Muster möglich (kritische RIVA-Stenose), Kontrolle und kardiologische Abklärung.');
+ if(c.q==='yes'&&c.qLeads.length&&contiguous(c.qLeads))add('amber','Pathologische Q-Zacken','Hinweis auf abgelaufenen Infarkt in '+c.qLeads.join(', ')+'.');
+ if(c.extra.includes('brugada'))add('red','Brugada-Muster','Risiko für plötzlichen Herztod. Bei Synkope oder Familienanamnese kardiologisch abklären, Fieber senken.');
+ if(c.extra.includes('lowv'))add('amber','Niedervoltage','An Perikarderguss, Adipositas, Emphysem, Amyloidose denken.');
+ if(c.extra.includes('u'))add('amber','U-Wellen','An Hypokaliämie denken, Kalium und Magnesium prüfen.');
+ if(c.p==='none'&&c.rhythm==='irr')add('amber','Vorhofflimmern','Frequenz- bzw. Rhythmuskontrolle, Antikoagulation (CHA₂DS₂-VASc) prüfen.'+(hr>110?' Schnelle Überleitung!':''));
+ if(o.lage&&/Extremtyp/.test(o.lage.t))add('amber','Extremtyp','Elektrodenvertauschung ausschließen, sonst ventrikulärer Rhythmus oder schwere Rechtsbelastung.');
+ if(o.lage&&/Überdrehter Rechtstyp/.test(o.lage.t))add('amber','Überdrehter Rechtstyp','Beim Erwachsenen selten normal: LPHB, Rechtsherzbelastung, Lungenembolie bedenken.');
+ const ord={red:0,amber:1};return F.sort((a,b)=>ord[a.l]-ord[b.l])}
+function befundText(){const m=BF.meas,c=BF.chk,o=derive(),L=[];
+ L.push(o.rhythm+(o.hr?', Frequenz '+fmt(o.hr)+'/min':'')+'.');
+ if(o.lage)L.push('Lagetyp: '+o.lage.t+'.');
+ const z=[];if(m.pq)z.push('PQ '+fmt(m.pq)+' ms');if(m.qrs)z.push('QRS '+fmt(m.qrs)+' ms');if(m.qt)z.push('QT '+fmt(m.qt)+' ms'+(o.qtc?' (QTc Bazett '+fmt(o.qtc)+' ms, Fridericia '+fmt(o.qtf)+' ms)':''));if(z.length)L.push('Zeiten: '+z.join(', ')+'.');
+ const q={normal:'',rsb:'Rechtsschenkelblock-Bild.',lsb:'Linksschenkelblock-Bild.',delta:'Delta-Welle (Präexzitation).',pm:'Schrittmacher-Spikes mit breiten Komplexen.'}[c.qrs];if(q)L.push(q);
+ if(c.st==='none')L.push('Keine relevanten ST-Streckenveränderungen.');else if(c.stLeads.length)L.push((c.st==='up'?'ST-Hebung':'ST-Senkung')+((c.stMM??m.stmm)!=null?' bis '+f1(c.stMM??m.stmm)+' mm':'')+' in '+c.stLeads.join(', ')+'.');
+ if(c.t==='neg'&&c.tLeads.length)L.push('Negative T-Wellen in '+c.tLeads.join(', ')+'.');if(c.t==='peak')L.push('Hohe, spitze T-Wellen.');
+ if(c.q==='yes'&&c.qLeads.length)L.push('Pathologische Q-Zacken in '+c.qLeads.join(', ')+'.');
+ const ex={pause:'Pause über 3 s.',brugada:'Brugada-Muster in V1–V2.',lowv:'Niedervoltage.',u:'U-Wellen.'};c.extra.forEach(e=>L.push(ex[e]));
+ const F=redFlags();if(F.length)L.push('\nBeurteilung: '+F.map(f=>f.t).join('; ')+'.');else L.push('\nBeurteilung: Kein Hinweis auf eine akut gefährliche Veränderung in den erfassten Kriterien.');
+ return L.join(' ').replace(/ \n/g,'\n')}
+
+/* ---------- PDF (lokal erzeugt, mit Bild) ---------- */
+const HW=(()=>{const w={};const s=' 278!278"355#556$556%889&667\'191(333)333*389+584,278-333.278/278:278;278<584=584>584?556@1015A667B667C722D722E667F611G778H722I278J500K667L556M833N722O778P667Q778R722S667T611U722V667W944X667Y667Z611[278\\278]278^469_556`333a556b556c500d556e556f278g556h556i222j222k500l222m833n556o556p556q556r333s500t278u556v500w722x500y500z500{334|260}334~584';
+ for(let i=0;i<10;i++)w[String(i)]=556;s.replace(/(.)(\d+)/g,(m,c,n)=>{w[c]=+n});Object.assign(w,{'Ä':667,'Ö':778,'Ü':722,'ä':556,'ö':556,'ü':556,'ß':611,'é':556,'°':400,'²':333,'–':556,'—':1000,'„':333,'“':333,'”':333,'‘':222,'’':222,'·':278,'×':584,'µ':556,'±':584,'…':1000});return w})();
+const WIN={'Ä':0xC4,'Ö':0xD6,'Ü':0xDC,'ä':0xE4,'ö':0xF6,'ü':0xFC,'ß':0xDF,'é':0xE9,'°':0xB0,'²':0xB2,'–':0x96,'—':0x97,'„':0x84,'“':0x93,'”':0x94,'‘':0x91,'’':0x92,'·':0xB7,'×':0xD7,'µ':0xB5,'±':0xB1,'…':0x85};
+const pdfClean=s=>s.replace(/₂/g,'2').replace(/≥/g,'>=').replace(/≤/g,'<=').replace(/→/g,'->').replace(/⁺/g,'+').replace(/≈/g,'~').replace(/[↑]/g,'+').replace(/[↓]/g,'-');
+const twd=(s,size,b)=>[...s].reduce((a,c)=>a+(HW[c]||556)*(b?1.05:1),0)*size/1000;
+function wrapT(s,size,max,b){const out=[];pdfClean(s).split('\n').forEach(par=>{let line='';par.split(/ +/).forEach(w=>{const t=line?line+' '+w:w;if(twd(t,size,b)>max&&line){out.push(line);line=w}else line=t});out.push(line)});return out}
+const hex=s=>'<'+[...pdfClean(s)].map(c=>{const k=WIN[c]!=null?WIN[c]:c.charCodeAt(0)<256?c.charCodeAt(0):63;return k.toString(16).padStart(2,'0')}).join('')+'>';
+async function makePDF(){const W=595,H=842,M=50,max=W-2*M;const pages=[];let ops=[],y=H-M;const imgs=[];
+ const np=()=>{pages.push(ops);ops=[];y=H-M};const need=hh=>{if(y-hh<M+24)np()};
+ const T=(s,x,yy,size,bold,col)=>ops.push(`BT /${bold?'F2':'F1'} ${size} Tf ${col||'0.12 0.17 0.16 rg'} ${x.toFixed(1)} ${yy.toFixed(1)} Td ${hex(s)} Tj ET`);
+ const para=(s,size=10.5,bold,col,ind=0,ld=14.5)=>wrapT(s,size,max-ind,bold).forEach(l=>{need(ld);T(l,M+ind,y,size,bold,col);y-=ld});
+ const head=s=>{y-=8;need(28);T(s,M,y,12.5,true,'0.18 0.42 0.39 rg');y-=8;ops.push(`0.86 0.89 0.88 RG 0.6 w ${M} ${y} m ${W-M} ${y} l S`);y-=16};
+ const now=new Date();T('EKG-Befund',M,y-14,20,true);y-=30;T(now.toLocaleDateString('de-DE')+' · '+now.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})+' · Papiervorschub '+BF.speed+' mm/s',M,y,9.5,false,'0.45 0.5 0.49 rg');y-=22;
+ const F=redFlags();if(F.length){head('Red Flags');F.forEach(f=>{const lines=wrapT(f.d,9.5,max-30);const hh=18+lines.length*12.5+8;need(hh+6);const col=f.l==='red'?'0.98 0.91 0.89 rg':'0.99 0.95 0.86 rg',bar=f.l==='red'?'0.75 0.2 0.15 rg':'0.82 0.55 0.1 rg';
+  ops.push(`${col} ${M} ${(y-hh+12).toFixed(1)} ${max} ${hh} re f ${bar} ${M} ${(y-hh+12).toFixed(1)} 4 ${hh} re f`);T(f.t,M+14,y,11,true,f.l==='red'?'0.6 0.13 0.1 rg':'0.5 0.32 0.05 rg');y-=15;lines.forEach(l=>{T(l,M+14,y,9.5,false,'0.25 0.25 0.25 rg');y-=12.5});y-=16})}
+ head('Messwerte');const o=derive(),m=BF.meas;const rows=[['Herzfrequenz',o.hr?fmt(o.hr)+' /min':'–','60–100 /min'],['PQ-Zeit',m.pq?fmt(m.pq)+' ms':'–','120–200 ms'],['QRS-Breite',m.qrs?fmt(m.qrs)+' ms':'–','< 100 ms (≥ 120 ms Block)'],['QT-Zeit',m.qt?fmt(m.qt)+' ms':'–','frequenzabhängig'],['QTc Bazett',o.qtc?fmt(o.qtc)+' ms':'–','♀ < 460 ms, ♂ < 450 ms'.replace('♀','Frauen').replace('♂','Männer')],['QTc Fridericia',o.qtf?fmt(o.qtf)+' ms':'–','genauer bei HF > 90'],['ST-Amplitude',m.stmm!=null?f1(m.stmm)+' mm':'–','Hebung ab 1 mm relevant']];
+ rows.forEach((r,i)=>{need(17);if(i%2===0)ops.push(`0.96 0.97 0.965 rg ${M} ${(y-5).toFixed(1)} ${max} 17 re f`);T(r[0],M+8,y,10,true);T(r[1],M+170,y,10,false);T(r[2],M+290,y,9.5,false,'0.45 0.5 0.49 rg');y-=17});
+ head('Befund');para(BF.text||befundText());
+ if(BF.note.trim()){head('Notiz');para(BF.note)}
+ if(BF.withImg&&BF.img){const src=BF.img,mxw=1400,k=Math.min(1,mxw/src.width),cw=Math.round(src.width*k),ch=Math.round(src.height*k);const cv=document.createElement('canvas');cv.width=cw;cv.height=ch;cv.getContext('2d').drawImage(src,0,0,cw,ch);
+  const b64=cv.toDataURL('image/jpeg',.82).split(',')[1],bin=atob(b64),bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+  let dw=max,dh=dw*ch/cw;if(dh>380){dh=380;dw=dh*cw/ch}need(dh+60);head('EKG-Bild');imgs.push({bytes,w:cw,h:ch});ops.push(`q ${dw.toFixed(1)} 0 0 ${dh.toFixed(1)} ${M} ${(y-dh+10).toFixed(1)} cm /Im${imgs.length} Do Q`);y-=dh+6}
+ y-=6;para('Erstellt mit dem EKG-Trainer von Lia Valentina. Lernhilfe, ersetzt keine ärztliche Befundung. Bitte keine Patientendaten eintragen.',8.5,false,'0.5 0.55 0.54 rg',0,11);
+ pages.push(ops);
+ // Datei zusammensetzen (Bytes)
+ const enc=new TextEncoder(),parts=[],off=[];let len=0;const put=x=>{const b=typeof x==='string'?enc.encode(x):x;parts.push(b);len+=b.length};
+ const objs=[];const add=o=>{objs.push(o);return objs.length};
+ const fA=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>'),fB=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+ const imIds=imgs.map(im=>add({head:`<< /Type /XObject /Subtype /Image /Width ${im.w} /Height ${im.h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${im.bytes.length} >>`,bytes:im.bytes}));
+ const pagesId=add(null),kids=[];const xo=imIds.length?'/XObject << '+imIds.map((id,i)=>`/Im${i+1} ${id} 0 R`).join(' ')+' >>':'';
+ pages.forEach((p,i)=>{const st=p.concat([`BT /F1 8 Tf 0.6 g ${W-M-30} 28 Td ${hex((i+1)+' / '+pages.length)} Tj ET`]).join('\n');const c=add(`<< /Length ${enc.encode(st).length} >>\nstream\n${st}\nendstream`);kids.push(add(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 ${fA} 0 R /F2 ${fB} 0 R >> ${xo} >> /Contents ${c} 0 R >>`))});
+ objs[pagesId-1]=`<< /Type /Pages /Kids [${kids.map(k=>k+' 0 R').join(' ')}] /Count ${kids.length} >>`;const cat=add(`<< /Type /Catalog /Pages ${pagesId} 0 R >>`);
+ put('%PDF-1.4\n%\xE2\xE3\n');objs.forEach((o,i)=>{off.push(len);put(`${i+1} 0 obj\n`);if(typeof o==='string')put(o);else{put(o.head+'\nstream\n');put(o.bytes);put('\nendstream')}put('\nendobj\n')});
+ const xr=len;put(`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`+off.map(x=>String(x).padStart(10,'0')+' 00000 n \n').join('')+`trailer\n<< /Size ${objs.length+1} /Root ${cat} 0 R >>\nstartxref\n${xr}\n%%EOF`);
+ return new Blob(parts,{type:'application/pdf'})}
+async function shareFile(blob,name){const f=new File([blob],name,{type:blob.type});if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:name});return}catch(e){if(e.name==='AbortError')return}}
+ const u=URL.createObjectURL(blob),a=h('a',{href:u,download:name});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);toast('PDF gespeichert')}
+
+/* ---------- Oberfläche ---------- */
+const STEPS=['Foto','Raster','Messen','Beurteilen','Befund'];
+const MTASK=[{k:'rr',n:'RR-Abstand',d:'Lege die Schenkel auf die Spitzen zweier aufeinanderfolgender R-Zacken. Daraus wird die Herzfrequenz.',mode:'t'},
+ {k:'pq',n:'PQ-Zeit',d:'Vom Beginn der P-Welle bis zum Beginn des QRS-Komplexes. Normal 120–200 ms.',mode:'t'},
+ {k:'qrs',n:'QRS-Breite',d:'Vom Beginn der Q- bzw. R-Zacke bis zum Ende der S-Zacke (J-Punkt). Normal unter 100 ms.',mode:'t'},
+ {k:'qt',n:'QT-Zeit',d:'Vom Beginn des QRS bis zum Ende der T-Welle. Am besten in II oder V5 messen.',mode:'t'},
+ {k:'stmm',n:'ST-Strecke (Amplitude)',d:'Ein Schenkel auf die Grundlinie (PQ-Strecke), der andere auf die ST-Strecke kurz nach dem J-Punkt. Überspringen, wenn ST unauffällig.',mode:'v'}];
+function seg(opts,cur,set,cls='seg'){return h('div',{class:cls},opts.map(([v,t])=>h('button',{class:cur===v?'on':'',onclick:()=>set(v)},t)))}
+function leadPick(sel,onCh){const box=h('div',{class:'leads'});const draw=()=>{box.innerHTML='';[LIMB,PREC].forEach(g=>box.append(h('div',{class:'lrow'},g.map(l=>h('button',{class:sel.includes(l)?'on':'',onclick:()=>{const i=sel.indexOf(l);i<0?sel.push(l):sel.splice(i,1);draw();onCh&&onCh()}},l)))))};draw();return box}
+let SB=null,MI=0;
+function befund(m){
+ const steps=h('div',{class:'steps5'},STEPS.map((s,i)=>h('button',{class:(i===BF.step?'on ':'')+(i<BF.step?'done':''),disabled:i>BF.step&&!(i<=maxStep()),onclick:()=>{if(i<=maxStep()){BF.step=i;befund(m)}}},h('i',{},i<BF.step?'✓':i+1),h('span',{},s))));
+ m.innerHTML='';m.append(steps);const body=h('div');m.append(body);
+ [stFoto,stRaster,stMess,stCheck,stOut][BF.step](body,m)}
+const maxStep=()=>!BF.img?0:!(SB&&SB.calibrated())?1:4;
+function stripCard(){if(!SB){SB=Strip({});}const tg=(k,t)=>h('label',{class:'tg'},h('input',{type:'checkbox',checked:SB.st[k],onchange:e=>{SB.st[k]=e.target.checked;SB.render()}}),t);
+ return h('div',{class:'stripwrap'},h('div',{class:'tools'},h('div',{class:'zoom'},h('button',{class:'btn ghost icon',onclick:()=>SB.zoom(1/1.3),'aria-label':'Verkleinern'},ic('minus',18)),h('button',{class:'btn ghost icon',onclick:()=>SB.zoom(1.3),'aria-label':'Vergrößern'},ic('plus',18))),h('button',{class:'btn ghost sm',onclick:()=>SB.center()},'Zirkel herholen'),tg('showGrid','Raster zeigen')),SB.el)}
+function stFoto(b,m){
+ const file=h('input',{type:'file',accept:'image/*',style:'display:none',onchange:e=>{const f=e.target.files[0];if(!f)return;const img=new Image();img.onload=()=>{BF.src=img;BF.rot=0;BF.fine=0;prev()};img.src=URL.createObjectURL(f);e.target.value=''}});
+ const pv=h('div',{class:'pv'});
+ function prev(){pv.innerHTML='';if(!BF.src){pv.append(h('div',{class:'drop',onclick:()=>file.click()},ic('cam',34),h('b',{},'EKG fotografieren oder Foto wählen'),h('span',{},'Das Foto bleibt nur auf deinem Gerät.')));return}
+  const c=rotated();c.className='pvimg';pv.append(c,h('div',{class:'rotbar'},h('button',{class:'btn ghost sm',onclick:()=>{BF.rot-=90;prev()}},'↺ 90°'),h('div',{class:'fine'},h('small',{},'Schief? Fein drehen'),h('input',{type:'range',min:-10,max:10,step:.5,value:BF.fine,class:'rng',oninput:e=>{BF.fine=+e.target.value;const n=rotated();n.className='pvimg';pv.replaceChild(n,pv.firstChild)}})),h('button',{class:'btn ghost sm',onclick:()=>{BF.rot+=90;prev()}},'90° ↻')),
+   h('div',{class:'row',style:'margin-top:12px'},h('button',{class:'btn ghost',onclick:()=>file.click()},'Anderes Foto'),h('button',{class:'btn dark',onclick:()=>{BF.img=rotated();SB=Strip({});BF.step=1;befund(m)}},'Weiter zum Raster',ic('next',18))))}
+ b.append(h('div',{class:'card'},h('h2',{},'1. Foto vom EKG'),h('p',{class:'lead'},'Fotografiere den Streifen möglichst gerade von oben, bei gutem Licht und ohne Schatten. Ein einzelner Rhythmusstreifen oder ein 12-Kanal-EKG funktionieren beide.'),pv,file,
+  h('div',{class:'warn'},'Bitte vorher Name, Geburtsdatum und Fallnummer abdecken oder wegschneiden. Nichts wird hochgeladen oder gespeichert.'),
+  !BF.src?h('button',{class:'btn ghost',style:'margin-top:10px',onclick:()=>{const i=samplePhoto();i.onload=()=>{BF.src=i;BF.rot=0;BF.fine=0;prev()}}},'Mit Beispiel-Foto ausprobieren'):null));prev()}
+function stRaster(b,m){
+ const card=h('div',{class:'card'});b.append(card);const msg=h('div');
+ card.append(h('h2',{},'2. Raster & Papiervorschub'),h('div',{class:'row'},h('span',{class:'lab'},'Papiervorschub'),seg([[25,'25 mm/s'],[50,'50 mm/s']],BF.speed,v=>{BF.speed=v;SB.st.speed=v;b.innerHTML='';stRaster(b,m)})),msg,stripCard());
+ if(SB.st.img!==BF.img){SB.setImg(BF.img)}else SB.render();SB.st.speed=BF.speed;
+ const manual=()=>{SB.st.showGrid=false;SB.setMode('t');SB.center();msg.innerHTML='';msg.append(h('div',{class:'cal'},h('div',{},h('b',{},'Manuell kalibrieren'),h('p',{},'Lege die zwei Schenkel genau auf die Ränder eines großen Kästchens (5 mm). Tipp: vorher mit + heranzoomen.')),h('button',{class:'btn dark',onclick:()=>{if(SB.calibrate()){toast('Kalibriert');BF.step=2;befund(m)}else toast('Schenkel weiter auseinander ziehen')}},'Kalibrieren')))};
+ if(SB.st.pxmm&&!SB.st.grid){msg.append(h('div',{class:'ok'},ic('check',18),' Kalibriert. ',h('button',{class:'lnk',onclick:manual},'Neu kalibrieren')),h('button',{class:'btn dark',style:'margin:8px 0 12px',onclick:()=>{BF.step=2;befund(m)}},'Weiter zum Messen',ic('next',18)));return}
+ const g=SB.autoGrid();
+ if(g&&g.conf>.05){msg.append(h('div',{class:'cal ok2'},h('div',{},h('b',{},'Raster automatisch erkannt'),h('p',{},'Die grünen Linien sollten genau auf den dicken Kästchenlinien liegen. Zoom ruhig heran und prüfe ein paar Stellen.')),h('div',{class:'row'},h('button',{class:'btn ghost',onclick:manual},'Nein, manuell'),h('button',{class:'btn dark',onclick:()=>{SB.st.showGrid=false;SB.render();BF.step=2;befund(m)}},'Passt',ic('check',18)))))}
+ else{msg.append(h('p',{class:'hint'},'Das Raster konnte nicht sicher erkannt werden (z. B. bei Schwarz-Weiß-Ausdrucken).'));manual()}}
+function stMess(b,m){
+ const card=h('div',{class:'card'});b.append(card);SB.render();
+ const t=MTASK[MI];SB.setMode(t.mode);
+ const vals=h('div',{class:'mvals'},MTASK.map((x,i)=>h('button',{class:'mv'+(i===MI?' on':'')+(BF.meas[x.k]!=null?' has':''),onclick:()=>{MI=i;b.innerHTML='';stMess(b,m)}},h('small',{},x.n),h('b',{},BF.meas[x.k]!=null?(x.k==='stmm'?f1(BF.meas[x.k])+' mm':fmt(BF.meas[x.k])+' ms'):'–'))));
+ const live=h('div',{class:'live'});SB.el.addEventListener('measure',e=>{const d=e.detail;live.innerHTML=d.v?`Zirkel: <b>${d.mm!=null?f1(d.mm)+' mm = '+f1(d.mm/10)+' mV':'–'}</b>`:d.ms?`Zirkel: <b>${fmt(d.ms)} ms</b>${d.ms>150?' · '+fmt(60000/d.ms)+'/min':''}`:''});
+ const nxt=()=>{if(MI<MTASK.length-1){MI++;b.innerHTML='';stMess(b,m)}else{BF.step=3;befund(m)}};
+ card.append(h('h2',{},'3. Messen'),h('div',{class:'task'},h('div',{class:'tn'},'Schritt '+(MI+1)+' von '+MTASK.length),h('h3',{},t.n),h('p',{},t.d),h('div',{class:'mini',html:miniSVG(t.k)})),stripCard(),live,
+  h('div',{class:'row',style:'margin-top:10px'},h('button',{class:'btn ghost',onclick:()=>{delete BF.meas[t.k];nxt()}},'Überspringen'),h('button',{class:'btn dark',onclick:()=>{const v=t.mode==='t'?SB.ms():SB.mmv();if(v==null)return toast('Erst kalibrieren');BF.meas[t.k]=v;toast(t.n+' übernommen');nxt()}},'Übernehmen',ic('check',18))),vals,
+  h('button',{class:'btn ghost',style:'margin-top:12px;width:100%',onclick:()=>{BF.step=3;befund(m)}},'Weiter zur Beurteilung'));SB.setMode(t.mode)}
+function miniSVG(k){const pts='M0 40 L20 40 Q26 30 32 40 L46 40 L49 44 L54 6 L59 52 L63 40 L76 40 Q88 22 100 40 L130 40 L150 40 Q156 30 162 40 L176 40 L179 44 L184 6 L189 52 L193 40 L206 40 Q218 22 230 40 L240 40';
+ const mk={rr:[54,184],pq:[20,48],qrs:[48,64],qt:[48,101]}[k];let s=`<svg viewBox="0 0 240 60" width="100%" height="60"><path d="${pts}" fill="none" stroke="#24312e" stroke-width="2" stroke-linejoin="round"/>`;
+ if(mk)s+=`<rect x="${mk[0]}" y="2" width="${mk[1]-mk[0]}" height="56" fill="rgba(47,107,99,.15)"/><line x1="${mk[0]}" y1="0" x2="${mk[0]}" y2="60" stroke="#2f6b63" stroke-width="2"/><line x1="${mk[1]}" y1="0" x2="${mk[1]}" y2="60" stroke="#c0674b" stroke-width="2"/>`;
+ else s+=`<line x1="0" y1="40" x2="240" y2="40" stroke="#2f6b63" stroke-width="1.5" stroke-dasharray="4 3"/><line x1="0" y1="30" x2="240" y2="30" stroke="#c0674b" stroke-width="1.5" stroke-dasharray="4 3"/>`;return s+'</svg>'}
+function stCheck(b,m){const c=BF.chk;const card=h('div',{class:'card chk'});b.append(card);const re=()=>{b.innerHTML='';stCheck(b,m)};
+ const q=(t,ctl,sub)=>h('div',{class:'q'},h('div',{class:'qt'},t,sub?h('small',{},sub):null),ctl);
+ card.append(...[h('h2',{},'4. Beurteilen'),h('p',{class:'lead'},'Tippe an, was du siehst. Nicht Zutreffendes einfach überspringen.'),
+  q('Rhythmus',seg([['reg','regelmäßig'],['irr','unregelmäßig'],['ex','Extraschläge']],c.rhythm,v=>{c.rhythm=v;re()})),
+  q('P-Wellen',seg([['each','vor jedem QRS'],['none','keine sichtbar'],['flutter','Sägezahn'],['more','mehr P als QRS']],c.p,v=>{c.p=v;re()})),
+  q('QRS-Form',seg([['normal','unauffällig'],['rsb','RSB-Bild'],['lsb','LSB-Bild'],['delta','Delta-Welle'],['pm','Schrittmacher']],c.qrs,v=>{c.qrs=v;re()}),'RSB: rSR’ in V1. LSB: breites, plumpes R in I, V5, V6'),
+  q('ST-Strecke',seg([['none','unauffällig'],['up','Hebung'],['down','Senkung']],c.st,v=>{c.st=v;re()})),
+  c.st!=='none'?h('div',{class:'sub'},h('small',{},'In welchen Ableitungen?'),leadPick(c.stLeads),h('div',{class:'row'},h('span',{class:'lab'},'Ausmaß in mm'),h('input',{type:'number',step:'0.5',class:'num',value:c.stMM??(BF.meas.stmm!=null?Math.round(BF.meas.stmm*2)/2:''),oninput:e=>{const v=parseFloat(String(e.target.value).replace(',','.'));c.stMM=isNaN(v)?null:v}}))):null,
+  q('T-Wellen',seg([['normal','unauffällig'],['neg','negativ'],['peak','hoch & spitz']],c.t,v=>{c.t=v;re()})),
+  c.t==='neg'?h('div',{class:'sub'},h('small',{},'Negative T in'),leadPick(c.tLeads)):null,
+  q('Q-Zacken',seg([['no','unauffällig'],['yes','pathologisch']],c.q,v=>{c.q=v;re()}),'breiter als 40 ms oder tiefer als ¼ der R-Zacke'),
+  c.q==='yes'?h('div',{class:'sub'},h('small',{},'Q-Zacken in'),leadPick(c.qLeads)):null,
+  q('Besonderheiten',h('div',{class:'seg multi'},[['pause','Pause > 3 s'],['brugada','Brugada-Muster'],['lowv','Niedervoltage'],['u','U-Wellen']].map(([v,t])=>h('button',{class:c.extra.includes(v)?'on':'',onclick:()=>{const i=c.extra.indexOf(v);i<0?c.extra.push(v):c.extra.splice(i,1);re()}},t)))),
+  q('Lagetyp',seg([[false,'nur Streifen'],[true,'12-Kanal vorhanden']],c.twelve,v=>{c.twelve=v;re()})),
+  c.twelve?h('div',{class:'sub'},h('small',{},'QRS überwiegend nach oben (↑), unten (↓) oder isoelektrisch (≈)?'),h('div',{class:'polg'},['I','II','III','aVR','aVL'].map(l=>h('div',{class:'pol'},h('b',{},l),h('div',{class:'seg3'},[[1,'↑'],[0,'≈'],[-1,'↓']].map(([v,s])=>h('button',{class:c.pol[l]===v?'on':'',onclick:()=>{c.pol[l]=v;re()}},s)))))),h('div',{class:'dx sm'},h('small',{},'Lagetyp'),h('ul',{},h('li',{},liaType(c.pol).t)))):null,
+  q('Angaben für Grenzwerte',h('div',{class:'row'},seg([['w','weiblich'],['m','männlich']],BF.sex,v=>{BF.sex=v;re()}),h('label',{class:'tg'},h('input',{type:'checkbox',checked:BF.u40,onchange:e=>{BF.u40=e.target.checked}}),'unter 40'))),
+  h('button',{class:'btn dark',style:'width:100%;margin-top:14px',onclick:()=>{BF.text=null;BF.step=4;befund(m)}},'Befund erstellen',ic('doc',18))].filter(Boolean))}
+function stOut(b,m){const F=redFlags(),o=derive();if(BF.text==null)BF.text=befundText();
+ const ta=h('textarea',{class:'bt',rows:8,oninput:e=>BF.text=e.target.value},BF.text);
+ b.append(
+  h('div',{class:'card'},h('h2',{},'5. Befund'),
+   F.length?h('div',{class:'flags'},F.map(f=>h('div',{class:'flag '+f.l},h('b',{},(f.l==='red'?'Red Flag: ':'Achtung: ')+f.t),h('p',{},f.d)))):h('div',{class:'flag ok'},h('b',{},'Keine Red Flags in den erfassten Kriterien'),h('p',{},'Trotzdem immer mit Klinik, Vor-EKG und Labor zusammen bewerten.')),
+   h('div',{class:'vals'},[['Frequenz',o.hr?fmt(o.hr)+'/min':'–'],['PQ',BF.meas.pq?fmt(BF.meas.pq)+' ms':'–'],['QRS',BF.meas.qrs?fmt(BF.meas.qrs)+' ms':'–'],['QTc',o.qtc?fmt(o.qtc)+' ms':'–']].map(([a,v])=>h('div',{class:'val'},h('small',{},a),h('span',{},v)))),
+   h('h3',{},'Befundtext'),h('p',{class:'hint'},'Du kannst den Text noch anpassen.'),ta,
+   h('div',{class:'f'},h('label',{},'Notiz',h('small',{},'ohne Patientendaten')),h('input',{type:'text',value:BF.note,placeholder:'z. B. Vergleich mit Vor-EKG',oninput:e=>BF.note=e.target.value})),
+   h('label',{class:'tg',style:'margin:10px 0'},h('input',{type:'checkbox',checked:BF.withImg,onchange:e=>BF.withImg=e.target.checked}),'EKG-Foto ins PDF übernehmen'),
+   h('div',{class:'row'},h('button',{class:'btn dark',onclick:async()=>{const bl=await makePDF();shareFile(bl,'EKG-Befund-'+new Date().toISOString().slice(0,10)+'.pdf')}},ic('share',18),'Als PDF teilen'),h('button',{class:'btn ghost',onclick:()=>{navigator.clipboard&&navigator.clipboard.writeText(BF.text).then(()=>toast('Text kopiert'))}},ic('copy',18),'Text kopieren'))),
+  h('button',{class:'btn ghost',style:'width:100%',onclick:()=>{resetBF();SB=null;MI=0;befund(m)}},'Neues EKG befunden'))}
+/* ================= Lernen ================= */
+function complexSVG(){return `<svg viewBox="0 0 340 170" width="100%" style="max-width:460px;display:block;margin:6px auto">
+<defs><pattern id="g" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M10 0H0V10" fill="none" stroke="#f6d4cd" stroke-width=".6"/></pattern><pattern id="G" width="50" height="50" patternUnits="userSpaceOnUse"><rect width="50" height="50" fill="url(#g)"/><path d="M50 0H0V50" fill="none" stroke="#eba697" stroke-width="1"/></pattern></defs>
+<rect width="340" height="130" fill="#fff8f6"/><rect width="340" height="130" fill="url(#G)"/>
+<path d="M0 95 L30 95 Q42 75 54 95 L82 95 L86 101 L94 22 L101 112 L106 95 L136 95 Q160 60 184 95 L205 95 Q213 88 221 95 L340 95" fill="none" stroke="#1f2b28" stroke-width="2.2" stroke-linejoin="round"/>
+<g font-family="DM Sans" font-size="12" font-weight="700" fill="#2f6b63"><text x="38" y="70">P</text><text x="78" y="118">Q</text><text x="96" y="16">R</text><text x="103" y="126">S</text><text x="155" y="55">T</text><text x="207" y="82">U</text><text x="114" y="88">ST</text></g>
+<g stroke="#c0674b" stroke-width="1.4"><path d="M30 140h52M30 136v8M82 136v8"/><path d="M82 152h24M82 148v8M106 148v8"/><path d="M82 164h104M82 160v8M186 160v8"/></g>
+<g font-family="DM Sans" font-size="10.5" fill="#8c5b52" font-weight="600"><text x="34" y="137">PQ 120–200 ms</text><text x="110" y="155">QRS &lt; 100 ms</text><text x="190" y="168">QT frequenzabhängig</text></g></svg>`}
+const CH=[
+ {id:'basics',n:'Grundlagen',s:'Was das EKG zeigt und wie das Papier funktioniert',q:'basics',b:[
+  ['p','Das EKG misst die elektrische Erregung des Herzens von der Körperoberfläche aus. Jede Welle steht für einen Abschnitt der Erregung, nicht für die mechanische Pumpleistung.'],
+  ['svg',complexSVG()],
+  ['list',['P-Welle: Erregung der Vorhöfe','PQ-Zeit: Weg vom Vorhof über AV-Knoten und His-Bündel bis zur Kammer','QRS-Komplex: Erregung der Kammern','ST-Strecke: Kammern komplett erregt (normal auf der Grundlinie)','T-Welle: Erregungsrückbildung der Kammern','QT-Zeit: gesamte Kammererregung von Anfang bis Ende']],
+  ['h','Erregungsleitung'],['p','Sinusknoten → Vorhöfe → AV-Knoten (bremst kurz) → His-Bündel → rechter und linker Tawara-Schenkel → Purkinje-Fasern. Die Bildung des Impulses im Sinusknoten selbst sieht man im EKG nicht.'],
+  ['h','Das Papier'],['list',['Standard: 25 mm/s → 1 mm = 40 ms, 1 großes Kästchen (5 mm) = 200 ms','Bei 50 mm/s: 1 mm = 20 ms, alles erscheint doppelt so breit','Eichzacke: 10 mm entsprechen 1 mV','Immer zuerst Eichzacke und Vorschub prüfen, sonst stimmen alle Messungen nicht']],
+  ['tip','Faustregel Frequenz: 300 geteilt durch die Zahl großer Kästchen zwischen zwei R-Zacken.']]},
+ {id:'ableit',n:'Ableitungen',s:'Wer schaut wohin? Extremitäten und Brustwand',q:'basics',b:[
+  ['p','Ein 12-Kanal-EKG schaut aus 12 Blickwinkeln auf dasselbe Herz. Zeigt die Erregung auf eine Ableitung zu, wird der Ausschlag positiv, zeigt sie weg, wird er negativ.'],
+  ['h','Extremitätenableitungen (Frontalebene)'],['list',['Einthoven (bipolar): I (0°), II (+60°), III (+120°)','Goldberger (unipolar): aVR (−150°), aVL (−30°), aVF (+90°)','Cabrera-Reihenfolge: aVL, I, −aVR, II, aVF, III']],
+  ['h','Brustwandableitungen (Horizontalebene)'],['list',['V1, V2: Septum und rechter Ventrikel','V3, V4: Vorderwand','V5, V6: Seitenwand','R-Progression: R-Zacke wird von V1 nach V5 größer, S-Zacke kleiner']],
+  ['h','Benachbarte Ableitungen'],['list',['Inferior: II, III, aVF','Lateral: I, aVL, V5, V6','Anterior/Septal: V1–V4']],
+  ['tip','aVR schaut von rechts oben in die Herzhöhle. Beim Gesunden ist dort fast alles negativ.']]},
+ {id:'system',n:'Befundung in 8 Schritten',s:'Ein fester Ablauf, damit nichts fehlt',q:'basics',b:[
+  ['steps',['Eichung und Vorschub prüfen','Rhythmus: regelmäßig? P vor jedem QRS? Sinusrhythmus?','Frequenz bestimmen','Lagetyp (I, II, III, aVR, aVL)','P-Welle und PQ-Zeit','QRS: Breite, Form, Q-Zacken, R-Progression','ST-Strecke: Hebung oder Senkung, wo?','T-Welle, QT und QTc']],
+  ['tip','Im Tab „Befund“ führt dich der Assistent genau durch diese Schritte und erstellt am Ende ein PDF.']]},
+ {id:'lage',n:'Lagetyp',s:'Polaritäten-Methode und Cabrera-Kreis',q:'lage',b:[
+  ['p','Der Lagetyp beschreibt die Hauptrichtung der Kammererregung in der Frontalebene. Er hängt von Alter, Körperbau und Belastung der Kammern ab.'],
+  ['table',[['Typ','Winkel','typisch'],['Überdrehter Linkstyp','< −30°','LAHB'],['Linkstyp','−30° bis +30°','Erwachsene > 40'],['Indifferenztyp','+30° bis +60°','Erwachsene'],['Steiltyp','+60° bis +90°','Jugendliche, Schlanke'],['Rechtstyp','+90° bis +120°','Kinder, Rechtsbelastung'],['Überdrehter Rechtstyp','> +120°','LPHB, Rechtshypertrophie']]],
+  ['h','Polaritäten-Methode'],['p','Jede Typgrenze liegt dort, wo eine Ableitung isoelektrisch wird. Deshalb reicht es, in I, II, III, aVR und aVL nur nach „oben“ oder „unten“ zu schauen.'],
+  ['list',['I negativ → Rechtstyp, mit positivem aVR sogar überdrehter Rechtstyp','I positiv, II negativ → überdrehter Linkstyp','I, II positiv, III negativ → Linkstyp','I, II, III positiv: aVL positiv → Indifferenztyp, aVL negativ → Steiltyp']],
+  ['go','lage','Zum interaktiven Lagetyp']]},
+ {id:'rhythm',n:'Rhythmus & Tachykardien',s:'Schmal oder breit, regelmäßig oder nicht',q:'rhy',b:[
+  ['p','Bei jeder Tachykardie helfen zwei Fragen: Ist der QRS schmal (unter 120 ms) oder breit? Und ist der Rhythmus regelmäßig?'],
+  ['table',[['','regelmäßig','unregelmäßig'],['schmal','Sinustachykardie, AVNRT, Flattern 2:1','Vorhofflimmern, Flattern mit wechselnder Überleitung'],['breit','VT (bis zum Beweis des Gegenteils), SVT mit Block','Vorhofflimmern mit Block oder WPW, Torsade']]],
+  ['strips',['af','flut2','svt','vt']],
+  ['tip','Regelmäßig mit genau 150/min? Immer an Vorhofflattern 2:1 denken.']]},
+ {id:'block',n:'AV-Blöcke & Schenkelblöcke',s:'Wenn die Leitung stockt',q:'block',b:[
+  ['h','AV-Blöcke'],['list',['I°: PQ konstant über 200 ms, jede P-Welle wird übergeleitet','II° Wenckebach: PQ wird länger, bis ein QRS ausfällt','II° Mobitz: PQ konstant, plötzlich fällt ein QRS aus. Gefährlicher!','III°: P-Wellen und QRS völlig unabhängig, meist breiter Ersatzrhythmus']],
+  ['strips',['avb1','wenck','mob2','avb3']],
+  ['h','Schenkelblöcke'],['list',['QRS ab 120 ms: kompletter Block, 100–119 ms: inkompletter Block','Rechtsschenkelblock: rSR’ („M“) in V1, breites S in I und V6','Linksschenkelblock: breites, plumpes R in I, aVL, V5, V6, tiefes S in V1','Beim LSB sind ST-T-Veränderungen normal (diskordant), Infarktdiagnose schwierig']],
+  ['strips',['rbbb','lbbb']]]},
+ {id:'isch',n:'Ischämie & Infarkt',s:'STEMI-Kriterien, Lokalisation, Äquivalente',q:'isch',b:[
+  ['h','STEMI-Kriterien'],['p','Neue ST-Hebung am J-Punkt in mindestens zwei benachbarten Ableitungen:'],['list',['alle Ableitungen außer V2–V3: ≥ 1 mm','V2–V3 Männer ab 40: ≥ 2 mm','V2–V3 Männer unter 40: ≥ 2,5 mm','V2–V3 Frauen: ≥ 1,5 mm']],
+  ['table',[['Region','Ableitungen','Gefäß meist'],['Anterior/Septal','V1–V4','RIVA (LAD)'],['Lateral','I, aVL, V5, V6','RCX, Diagonalast'],['Inferior','II, III, aVF','RCA (seltener RCX)'],['Posterior','ST-Senkung V1–V3','RCX oder RCA'],['Rechtsventrikulär','V4r','proximale RCA']]],
+  ['h','STEMI-Äquivalente, nicht übersehen'],['list',['Posteriorer Infarkt: ST-Senkung V1–V3 mit hohen R-Zacken','Hauptstamm: ST-Hebung aVR mit ausgedehnten ST-Senkungen','Neuer Linksschenkelblock mit Brustschmerz (Sgarbossa-Kriterien)','De-Winter-Muster: aszendierende ST-Senkung mit hohen T in V1–V6','Wellens: biphasische oder tief negative T in V2–V3 nach Schmerzen']],
+  ['strips',['stemi','stdep']],['tip','Reziproke ST-Senkungen in der gegenüberliegenden Region machen eine Hebung zum Infarkt wahrscheinlicher.']]},
+ {id:'elyt',n:'Elektrolyte & Medikamente',s:'Kalium, Kalzium, QT-Verlängerer',q:'elyt',b:[
+  ['table',[['Störung','EKG'],['Hyperkaliämie','hohe spitze T, flache P, breiter QRS, Sinuswelle'],['Hypokaliämie','flache T, U-Welle, ST-Senkung'],['Hyperkalzämie','kurzes QT'],['Hypokalzämie','langes QT (lange ST-Strecke)'],['Digitalis','muldenförmige ST-Senkung, kurzes QT']]],
+  ['strips',['hyk','hypok','lqt']],
+  ['h','QT-Verlängerer (Auswahl)'],['list',['Antiarrhythmika: Amiodaron, Sotalol','Antibiotika: Makrolide, Fluorchinolone','Psychopharmaka: Haloperidol, Citalopram, Trizyklika','Antiemetika: Ondansetron, Domperidon','Methadon']],
+  ['tip','QTc über 500 ms ist eine Red Flag: Medikamente prüfen, Kalium auf hoch-normal, Magnesium geben.']]},
+ {id:'flags',n:'Red Flags',s:'Diese Befunde darfst du nicht verpassen',q:'flags',b:[
+  ['flagl',[['STEMI und Äquivalente','ST-Hebung in 2 benachbarten Ableitungen, posteriorer Infarkt, Hauptstamm, neuer LSB'],['Breitkomplex-Tachykardie','VT bis zum Beweis des Gegenteils'],['AV-Block II° Mobitz und III°','Asystolie-Gefahr, Schrittmacher-Bereitschaft'],['Hyperkaliämie','spitze T, breiter QRS, Bradykardie'],['QTc über 500 ms','Torsade-Gefahr'],['Brugada-Muster','plötzlicher Herztod'],['WPW mit Vorhofflimmern','keine AV-Knoten-Blocker'],['Wellens-Muster','kritische RIVA-Stenose'],['Pause über 3 Sekunden','Synkope-Gefahr']]],
+  ['strips',['vt','tdp','brugada','avb3']],['go','befund','Foto befunden mit Red-Flag-Check']]},
+];
+function learn(m,arg){
+ if(arg&&CH.find(c=>c.id===arg))return chapter(m,CH.find(c=>c.id===arg));
+ m.append(h('p',{class:'lead'},'Kurz erklärt, mit Beispielen und Übungen zu jedem Kapitel.'),h('div',{class:'chl'},CH.map((c,i)=>h('button',{class:'chb',onclick:()=>go('learn',c.id)},h('i',{},i+1),h('div',{},h('b',{},c.n),h('span',{},c.s)),ic('next',18)))),
+  h('h3',{},'Alle Rhythmen'),rhyGrid())}
+function rhyGrid(){const box=h('div');for(const [c,n] of Object.entries(CAT)){box.append(h('h4',{class:'cat'},n));const g=h('div',{class:'rg'});
+  Object.entries(R).filter(([,o])=>o.c===c).forEach(([k,o])=>{const cv=h('canvas');const card=h('button',{class:'rc',onclick:()=>go('mess',k)},cv,h('b',{},o.n,RF[k]?h('em',{class:'rfb '+RF[k][0]},RF[k][0]==='red'?'Red Flag':'Achtung'):null),h('p',{},o.d));g.append(card);requestAnimationFrame(()=>thumb(cv,k,Math.min(360,card.clientWidth-24),86))});box.append(g)}return box}
+function chapter(m,c){const i=CH.indexOf(c);
+ const body=c.b.map(([t,v,x])=>{switch(t){
+  case 'p':return h('p',{},v);case 'h':return h('h3',{},v);case 'tip':return h('div',{class:'tipb'},h('b',{},'Merke: '),v);
+  case 'list':return h('ul',{class:'ml'},v.map(x=>h('li',{},x)));case 'steps':return h('ol',{class:'steps'},v.map(x=>h('li',{},x)));
+  case 'svg':return h('div',{html:v});
+  case 'table':return h('div',{class:'tw'},h('table',{},v.map((r,j)=>h('tr',{},r.map(cc=>h(j?'td':'th',{},cc))))));
+  case 'strips':{const g=h('div',{class:'rg'});v.forEach(k=>{const cv=h('canvas');const card=h('button',{class:'rc',onclick:()=>go('mess',k)},cv,h('b',{},R[k].n),h('p',{},R[k].d));g.append(card);requestAnimationFrame(()=>thumb(cv,k,Math.min(360,card.clientWidth-24),86))});return g}
+  case 'flagl':return h('div',{class:'flags'},v.map(([a,b])=>h('div',{class:'flag red'},h('b',{},a),h('p',{},b))));
+  case 'go':return h('button',{class:'btn ghost',onclick:()=>go(v)},x,ic('next',18))}});
+ m.append(h('button',{class:'lnk back',onclick:()=>go('learn')},ic('back',16),'Alle Kapitel'),h('div',{class:'card lc'},h('div',{class:'tn'},'Kapitel '+(i+1)+' von '+CH.length),h('h2',{},c.n),body,
+  h('div',{class:'row',style:'margin-top:16px'},h('button',{class:'btn',onclick:()=>go('quiz',c.q)},ic('quiz',18),'Dazu üben'),CH[i+1]?h('button',{class:'btn dark',onclick:()=>go('learn',CH[i+1].id)},'Nächstes Kapitel',ic('next',18)):null)))}
+
+/* ================= Üben (Messen am simulierten Streifen) ================= */
 const M={rr:null,pq:null,qrs:null,qt:null};
-function mess(m){
- const S=Strip({mm:5});window._S=S;let cur='sinus';
- const sel=h('select',{class:'sel',onchange:e=>{cur=e.target.value;S.setKey(cur,1+Math.random()*999|0);sol.hidden=true;Object.keys(M).forEach(k=>M[k]=null);drawRes()}},Object.entries(CAT).map(([c,n])=>h('optgroup',{label:n},Object.entries(R).filter(([,o])=>o.c===c).map(([k,o])=>h('option',{value:k},o.n)))));
- const file=h('input',{type:'file',accept:'image/*',style:'display:none',onchange:e=>{const f=e.target.files[0];if(!f)return;const img=new Image();img.onload=()=>{S.setImg(img);calBox.hidden=false;sol.hidden=true;toast('Jetzt kalibrieren: Zirkel auf ein großes Kästchen legen')};img.src=URL.createObjectURL(f);e.target.value=''}});
- const speed=h('select',{class:'sel sm',onchange:e=>{S.st.speed=+e.target.value;S.place()}},h('option',{value:25},'25 mm/s'),h('option',{value:50},'50 mm/s'));
- const calBox=h('div',{class:'cal',hidden:true},h('div',{},h('b',{},'Kalibrierung'),h('p',{},'Lege die beiden Zirkelschenkel genau auf die Ränder eines großen Kästchens (5 mm). Tipp: vorher heranzoomen.')),h('div',{class:'row'},speed,h('button',{class:'btn dark',onclick:()=>{if(S.calibrate()){toast('Kalibriert. Jetzt kannst du messen.')}else toast('Zirkel weiter auseinander ziehen')}},'Kalibrieren')));
+function mess(m,arg){
+ const S=Strip({mm:5});window._S=S;let cur=arg&&R[arg]?arg:'sinus';if(arg)S.st.key=cur;
+ const sel=h('select',{class:'sel',onchange:e=>{cur=e.target.value;S.setKey(cur,1+Math.random()*999|0);sol.hidden=true;Object.keys(M).forEach(k=>M[k]=null);drawRes()}},Object.entries(CAT).map(([c,n])=>h('optgroup',{label:n},Object.entries(R).filter(([,o])=>o.c===c).map(([k,o])=>h('option',{value:k,selected:k===cur},o.n)))));
  const tg=(k,t)=>h('label',{class:'tg'},h('input',{type:'checkbox',checked:S.st[k],onchange:e=>{S.st[k]=e.target.checked;S.place()}}),t);
- const res=h('div');const live=h('div',{class:'live'});
- S.el.addEventListener('measure',e=>{const ms=e.detail.ms;live.innerHTML=ms?`Zirkel: <b>${fmt(ms)} ms</b>${ms>150?` · entspricht <b>${fmt(60000/ms)}/min</b>`:''}`:'Foto noch nicht kalibriert'});
- const take=k=>()=>{const ms=S.ms();if(!ms)return toast('Erst kalibrieren');M[k]=ms;drawRes();toast(({rr:'RR',pq:'PQ',qrs:'QRS',qt:'QT'})[k]+' übernommen: '+fmt(ms)+' ms')};
+ const res=h('div'),live=h('div',{class:'live'});
+ S.el.addEventListener('measure',e=>{const d=e.detail;live.innerHTML=d.v?`Zirkel: <b>${f1(d.mm)} mm = ${f1(d.mm/10)} mV</b>`:d.ms?`Zirkel: <b>${fmt(d.ms)} ms</b>${d.ms>150?` · entspricht <b>${fmt(60000/d.ms)}/min</b>`:''}`:''});
+ const take=k=>()=>{if(S.st.mode!=='t')S.setMode('t');const ms=S.ms();M[k]=ms;drawRes();toast(({rr:'RR',pq:'PQ',qrs:'QRS',qt:'QT'})[k]+' übernommen: '+fmt(ms)+' ms')};
  const sol=h('div',{class:'card sol',hidden:true});
- const showSol=()=>{if(S.st.src!=='gen')return toast('Beim eigenen Foto gibt es keine Lösung');const o=R[cur];sol.innerHTML='';sol.append(h('h2',{},o.n),h('p',{},o.d),o.hr?h('div',{class:'vals'},h('div',{class:'val'},h('small',{},'Frequenz'),h('span',{},o.hr+'/min')),o.pq?h('div',{class:'val'},h('small',{},'PQ'),h('span',{},fmt(o.pq*1000)+' ms')):null,h('div',{class:'val'},h('small',{},'QRS'),h('span',{},fmt(o.qrs*1000)+' ms')),h('div',{class:'val'},h('small',{},'QT'),h('span',{},fmt(o.qt*1000)+' ms'))):null);sol.hidden=false;sol.scrollIntoView({behavior:'smooth',block:'nearest'})};
- function drawRes(){res.innerHTML='';const rows=[];const hr=M.rr?60000/M.rr:null;
-  const ev=(v,lo,hi)=>v==null?'muted':(v<lo||v>hi)?'bad':'ok';
+ const showSol=()=>{const o=R[cur];sol.innerHTML='';sol.append(h('h2',{},o.n),RF[cur]?h('div',{class:'flag '+RF[cur][0]},h('b',{},(RF[cur][0]==='red'?'Red Flag: ':'Achtung: ')+RF[cur][1])):null,h('p',{},o.d),o.hr?h('div',{class:'vals'},h('div',{class:'val'},h('small',{},'Frequenz'),h('span',{},o.hr+'/min')),o.pq?h('div',{class:'val'},h('small',{},'PQ'),h('span',{},fmt(o.pq*1000)+' ms')):null,o.qrs?h('div',{class:'val'},h('small',{},'QRS'),h('span',{},fmt(o.qrs*1000)+' ms')):null,o.qt?h('div',{class:'val'},h('small',{},'QT'),h('span',{},fmt(o.qt*1000)+' ms')):null):null);sol.hidden=false;sol.scrollIntoView({behavior:'smooth',block:'nearest'})};
+ function drawRes(){res.innerHTML='';const hr=M.rr?60000/M.rr:null;const ev=(v,lo,hi)=>v==null?'muted':(v<lo||v>hi)?'bad':'ok';const rows=[];
   rows.push(['Herzfrequenz',hr?fmt(hr)+'/min':'–','60–100/min',ev(hr,60,100),hr?(hr<60?'Bradykardie':hr>100?'Tachykardie':'normal'):'RR-Abstand messen']);
-  rows.push(['PQ-Zeit',M.pq?fmt(M.pq)+' ms':'–','120–200 ms',ev(M.pq,120,200),M.pq?(M.pq>200?'verlängert: AV-Block I° möglich':M.pq<120?'verkürzt: an Präexzitation (WPW) denken':'normal'):'']);
-  rows.push(['QRS-Breite',M.qrs?fmt(M.qrs)+' ms':'–','unter 100 ms',ev(M.qrs,0,99),M.qrs?(M.qrs>=120?'verbreitert: Schenkelblock oder ventrikulär':M.qrs>=100?'grenzwertig: inkompletter Block':'normal'):'']);
+  rows.push(['PQ-Zeit',M.pq?fmt(M.pq)+' ms':'–','120–200 ms',ev(M.pq,120,200),M.pq?(M.pq>200?'verlängert: AV-Block I° möglich':M.pq<120?'verkürzt: an WPW denken':'normal'):'']);
+  rows.push(['QRS-Breite',M.qrs?fmt(M.qrs)+' ms':'–','unter 100 ms',ev(M.qrs,0,99),M.qrs?(M.qrs>=120?'verbreitert: Block oder ventrikulär':M.qrs>=100?'grenzwertig: inkompletter Block':'normal'):'']);
   let qtc=null,qtf=null;if(M.qt&&M.rr){const rr=M.rr/1000;qtc=M.qt/Math.sqrt(rr);qtf=M.qt/Math.cbrt(rr)}
   rows.push(['QT-Zeit',M.qt?fmt(M.qt)+' ms':'–','frequenzabhängig','muted','']);
   rows.push(['QTc (Bazett)',qtc?fmt(qtc)+' ms':'–','♂ < 450 · ♀ < 460 ms',qtc==null?'muted':qtc>460?'bad':'ok',qtc?(qtc>500?'deutlich verlängert: Torsade-Risiko':qtc>460?'verlängert':'normal'):'QT und RR messen']);
   rows.push(['QTc (Fridericia)',qtf?fmt(qtf)+' ms':'–','genauer bei HF > 90',qtf==null?'muted':qtf>460?'bad':'ok',qtf?(qtf>460?'verlängert':'normal'):'']);
-  res.append(h('div',{class:'card'},h('h2',{},'Dein Befund'),h('div',{class:'tbl'},rows.map(r=>h('div',{class:'tr'},h('span',{class:'dot '+r[3]}),h('div',{},h('b',{},r[0]),h('small',{},r[2])),h('div',{class:'v'},h('b',{},r[1]),h('small',{},r[4]))))),h('button',{class:'btn ghost',style:'margin-top:12px',onclick:()=>{Object.keys(M).forEach(k=>M[k]=null);drawRes()}},'Zurücksetzen')))}
- m.append(
-  h('div',{class:'card'},h('div',{class:'row'},h('div',{class:'src'},sel),h('button',{class:'btn ghost',onclick:()=>file.click()},ic('cam',18),'Eigenes EKG-Foto'),file),
-   calBox,
-   h('div',{class:'tools'},h('div',{class:'zoom'},h('button',{class:'btn ghost icon',onclick:()=>S.zoom(1/1.25),'aria-label':'Verkleinern'},ic('minus',18)),h('button',{class:'btn ghost icon',onclick:()=>S.zoom(1.25),'aria-label':'Vergrößern'},ic('plus',18))),tg('march','Abstand weitertragen'),tg('ruler','Zeit-Lineal')),
-   S.el,live,
-   h('p',{class:'hint'},'Ziehe die zwei Schenkel des Zirkels an den runden Griffen. Oder tippe auf den Streifen, dann springt der nähere Schenkel dorthin.'),
-   h('div',{class:'takes'},h('button',{class:'btn',onclick:take('rr')},'Als RR'),h('button',{class:'btn',onclick:take('pq')},'Als PQ'),h('button',{class:'btn',onclick:take('qrs')},'Als QRS'),h('button',{class:'btn',onclick:take('qt')},'Als QT'),h('button',{class:'btn dark',onclick:showSol},'Lösung'))),
-  sol,res,
-  h('div',{class:'warn'},'Eigene EKG-Fotos bleiben nur auf deinem Gerät und werden nicht hochgeladen. Bitte trotzdem Name und Geburtsdatum vorher abdecken oder wegschneiden.'));
+  res.append(h('div',{class:'card'},h('h2',{},'Dein Messergebnis'),h('div',{class:'tbl'},rows.map(r=>h('div',{class:'tr'},h('span',{class:'dot '+r[3]}),h('div',{},h('b',{},r[0]),h('small',{},r[2])),h('div',{class:'v'},h('b',{},r[1]),h('small',{},r[4]))))),h('button',{class:'btn ghost',style:'margin-top:12px',onclick:()=>{Object.keys(M).forEach(k=>M[k]=null);drawRes()}},'Zurücksetzen')))}
+ m.append(h('div',{class:'card'},h('h2',{},'Üben mit simulierten EKGs'),h('div',{class:'src'},sel),
+   h('div',{class:'tools'},h('div',{class:'zoom'},h('button',{class:'btn ghost icon',onclick:()=>S.zoom(1/1.25),'aria-label':'Verkleinern'},ic('minus',18)),h('button',{class:'btn ghost icon',onclick:()=>S.zoom(1.25),'aria-label':'Vergrößern'},ic('plus',18))),seg([['t','Zeit'],['v','Amplitude']],'t',v=>{S.setMode(v);[...document.querySelectorAll('.tools .seg button')].forEach(b=>b.classList.toggle('on',b.textContent===(v==='t'?'Zeit':'Amplitude')))}),tg('march','Abstand weitertragen'),tg('ruler','Zeit-Lineal')),
+   S.el,live,h('p',{class:'hint'},'Ziehe die Schenkel an den runden Griffen oder tippe auf den Streifen. Im Modus „Amplitude“ misst du Höhen in mm und mV, z. B. eine ST-Hebung.'),
+   h('div',{class:'takes'},h('button',{class:'btn',onclick:take('rr')},'Als RR'),h('button',{class:'btn',onclick:take('pq')},'Als PQ'),h('button',{class:'btn',onclick:take('qrs')},'Als QRS'),h('button',{class:'btn',onclick:take('qt')},'Als QT'),h('button',{class:'btn dark',onclick:showSol},'Lösung'))),sol,res);
  S.render();drawRes()}
+/* ================= Quiz ================= */
+// [Frage, richtig, [falsch...], Erklärung]
+const QB={
+ basics:[
+  ['Wie viele Millisekunden entspricht 1 mm bei 25 mm/s?','40 ms',['20 ms','100 ms','200 ms'],'25 mm pro Sekunde → 1000 ms / 25 = 40 ms pro mm.'],
+  ['Was zeigt die P-Welle?','Erregung der Vorhöfe',['Erregungsrückbildung der Vorhöfe','Erregung des Sinusknotens selbst','Erregung des Septums'],'Die P-Welle ist die Vorhofdepolarisation. Den Sinusknoten selbst sieht man im EKG nicht.'],
+  ['Normale PQ-Zeit?','120–200 ms',['80–120 ms','200–300 ms','unter 100 ms'],'Unter 120 ms an Präexzitation denken, über 200 ms AV-Block I°.'],
+  ['Ab welcher QRS-Breite spricht man von einem kompletten Schenkelblock?','ab 120 ms',['ab 100 ms','ab 80 ms','ab 160 ms'],'100–119 ms: inkompletter Block, ab 120 ms: kompletter Block.'],
+  ['RR-Abstand 4 große Kästchen bei 25 mm/s. Frequenz?','75/min',['60/min','100/min','50/min'],'300 / 4 = 75/min.'],
+  ['Welche Ableitungen schauen auf die Hinterwand (inferior)?','II, III, aVF',['I, aVL, V5, V6','V1–V4','aVR, V1'],'II, III und aVF sind die inferioren Ableitungen.'],
+  ['Wofür steht die Eichzacke?','1 mV = 10 mm',['1 s = 25 mm','1 mV = 5 mm','Nullpunkt der Kurve'],'Immer prüfen: Bei halbierter Eichung sind alle Amplituden halb so groß.'],
+  ['In welcher Ableitung ist beim Gesunden fast alles negativ?','aVR',['aVF','II','V5'],'aVR schaut von rechts oben in das Herz, die Erregung läuft von ihr weg.'],
+  ['Wie verändert sich die R-Zacke normalerweise von V1 nach V5?','Sie wird größer',['Sie wird kleiner','Sie bleibt gleich','Sie verschwindet'],'Normale R-Progression. Fehlende Progression kann auf einen Vorderwandinfarkt hindeuten.'],
+  ['Welche Formel ist bei hoher Herzfrequenz genauer für die QTc?','Fridericia',['Bazett','Sokolow-Lyon','Lewis'],'Bazett überkorrigiert bei hohen Frequenzen. Fridericia teilt durch die dritte Wurzel aus RR.']],
+ block:[
+  ['PQ wird von Schlag zu Schlag länger, dann fällt ein QRS aus. Was ist das?','AV-Block II° Typ Wenckebach',['AV-Block II° Typ Mobitz','AV-Block I°','AV-Block III°'],'Wenckebach (Mobitz I): progressive PQ-Verlängerung bis zum Ausfall.'],
+  ['Welcher AV-Block ist am gefährlichsten im Hinblick auf eine plötzliche Asystolie?','AV-Block III° (und Mobitz II)',['AV-Block I°','Wenckebach','Sinusarrhythmie'],'Mobitz II und III° können plötzlich in eine Asystolie übergehen.'],
+  ['P-Wellen und QRS-Komplexe laufen völlig unabhängig. Diagnose?','AV-Block III°',['AV-Block I°','Vorhofflimmern','Sinusbradykardie'],'AV-Dissoziation: totaler AV-Block mit Ersatzrhythmus.'],
+  ['rSR’ („M“) in V1 und breites S in I, V6. Diagnose?','Rechtsschenkelblock',['Linksschenkelblock','WPW','Linksanteriorer Hemiblock'],'Das klassische RSB-Bild.'],
+  ['Breites, plumpes R in I, aVL, V5, V6 und tiefes S in V1. Diagnose?','Linksschenkelblock',['Rechtsschenkelblock','Posteriorer Infarkt','Rechtsherzhypertrophie'],'Typisches LSB-Bild.'],
+  ['Welcher Lagetyp passt zum linksanterioren Hemiblock?','Überdrehter Linkstyp',['Rechtstyp','Steiltyp','Indifferenztyp'],'LAHB → Achse unter −30°.'],
+  ['Kurze PQ-Zeit und Delta-Welle. Was liegt vor?','Präexzitation (WPW)',['AV-Block I°','Linksschenkelblock','Hyperkaliämie'],'Akzessorische Bahn leitet am AV-Knoten vorbei.'],
+  ['Konstante PQ-Zeit, plötzlich fällt ein QRS aus. Diagnose?','AV-Block II° Typ Mobitz',['Wenckebach','AV-Block I°','Sinusarrest'],'Mobitz II: keine PQ-Verlängerung vor dem Ausfall.']],
+ isch:[
+  ['Ab wie viel mm ST-Hebung in II, III, aVF spricht man von STEMI-Kriterien?','≥ 1 mm in 2 benachbarten Ableitungen',['≥ 0,5 mm in einer Ableitung','≥ 2 mm in allen Ableitungen','≥ 3 mm'],'Außerhalb V2–V3 gilt 1 mm in zwei benachbarten Ableitungen.'],
+  ['STEMI-Grenzwert in V2–V3 für Frauen?','≥ 1,5 mm',['≥ 1 mm','≥ 2 mm','≥ 2,5 mm'],'Männer ab 40: 2 mm, Männer unter 40: 2,5 mm, Frauen: 1,5 mm.'],
+  ['ST-Hebung in V1–V4. Welches Gefäß ist meist betroffen?','RIVA (LAD)',['RCA','RCX','Hauptstamm immer'],'Vorderwand bzw. Septum → RIVA.'],
+  ['ST-Hebung in II, III, aVF. Welches Gefäß meist?','RCA',['RIVA','Diagonalast','Hauptstamm'],'Inferior → meist RCA, seltener RCX.'],
+  ['ST-Senkung in V1–V3 mit hohen R-Zacken. Woran denkst du?','Posteriorer Infarkt',['Normalbefund','Digitalis','Rechtsschenkelblock'],'STEMI-Äquivalent: Hinterwandableitungen V7–V9 schreiben.'],
+  ['ST-Hebung in aVR mit ausgedehnten ST-Senkungen. Verdacht?','Hauptstamm- oder Mehrgefäß-Ischämie',['Perikarditis','Normalvariante','Hypokaliämie'],'Wichtiges STEMI-Äquivalent.'],
+  ['Biphasische oder tief negative T in V2–V3 nach Brustschmerz?','Wellens-Muster (kritische RIVA-Stenose)',['Hyperkaliämie','Lungenembolie sicher','Normalbefund'],'Hohe Infarktgefahr, keine Belastungstests.'],
+  ['Was ist eine pathologische Q-Zacke?','breiter als 40 ms oder tiefer als ¼ von R',['jede Q-Zacke in aVR','Q in III allein','jede Q-Zacke über 1 mm'],'Hinweis auf abgelaufenen Infarkt, wenn in benachbarten Ableitungen.'],
+  ['Diffuse, konkave ST-Hebungen mit PQ-Senkung. Woran denkst du?','Perikarditis',['Hinterwandinfarkt','Brugada','Digitalis'],'Typisch: in vielen Ableitungen, keine Gefäßzuordnung, PQ-Senkung.']],
+ elyt:[
+  ['Hohe, spitze, zeltförmige T-Wellen?','Hyperkaliämie',['Hypokaliämie','Hyperkalzämie','Digitalis'],'Später: breiter QRS, flache P, Sinuswelle.'],
+  ['Flache T-Wellen und U-Wellen?','Hypokaliämie',['Hyperkaliämie','Hypokalzämie','Perikarditis'],'Auch ST-Senkungen und scheinbar langes QT (QU).'],
+  ['Langes QT durch lange ST-Strecke?','Hypokalzämie',['Hyperkalzämie','Hyperkaliämie','Sinustachykardie'],'Kalzium beeinflusst vor allem die ST-Strecke.'],
+  ['Kurzes QT?','Hyperkalzämie',['Hypokalzämie','Hypokaliämie','Amiodaron'],'Auch Digitalis verkürzt das QT.'],
+  ['Muldenförmige ST-Senkung („Salvador-Dalí-Schnurrbart“)?','Digitalis-Wirkung',['Hyperkaliämie','Infarkt','Brugada'],'Digitalis-Effekt, nicht automatisch eine Vergiftung.'],
+  ['Welches Medikament verlängert das QT NICHT typischerweise?','Paracetamol',['Haloperidol','Clarithromycin','Ondansetron'],'Makrolide, Haloperidol und Ondansetron sind klassische QT-Verlängerer.'],
+  ['Erste Maßnahme bei Torsade de pointes mit Puls?','Magnesium i. v.',['Amiodaron','Adenosin','Digitalis'],'Magnesiumsulfat, QT-Verlängerer stoppen, Kalium hoch-normal.'],
+  ['Ab welcher QTc steigt das Torsade-Risiko deutlich?','über 500 ms',['über 400 ms','über 440 ms','über 600 ms nur'],'QTc > 500 ms ist eine Red Flag.']],
+ flags:[
+  ['Regelmäßige Breitkomplex-Tachykardie mit 170/min. Arbeitsdiagnose?','Ventrikuläre Tachykardie',['Sinustachykardie','AVNRT sicher','Vorhofflimmern'],'Breit und schnell ist ventrikulär, bis das Gegenteil bewiesen ist.'],
+  ['WPW mit Vorhofflimmern. Was darfst du NICHT geben?','AV-Knoten-Blocker (Verapamil, Adenosin, Digitalis)',['Elektrische Kardioversion','Procainamid','Sauerstoff'],'Blockade des AV-Knotens begünstigt schnelle Leitung über die Nebenbahn → Kammerflimmern.'],
+  ['Schulterförmige ST-Hebung in V1–V2 mit negativem T. Verdacht?','Brugada-Syndrom',['Rechtsschenkelblock harmlos','Vorderwandinfarkt sicher','Hypokaliämie'],'Risiko für plötzlichen Herztod, besonders bei Fieber.'],
+  ['Regelmäßige Schmalkomplex-Tachykardie mit genau 150/min. Woran musst du denken?','Vorhofflattern 2:1',['Sinusrhythmus','VT','Kammerflimmern'],'Flatterwellen um 300/min, jede zweite übergeleitet.'],
+  ['Neu aufgetretener Linksschenkelblock mit typischem Brustschmerz?','Wie STEMI behandeln',['Abwarten','Nur Troponin','Betablocker und Entlassung'],'Sgarbossa-Kriterien helfen, ein akutes Ischämie-Bild zu erkennen.'],
+  ['Neu aufgetretener Rechtsschenkelblock, Tachykardie, Atemnot nach OP?','Lungenembolie',['Perikarditis','Hyperkalzämie','WPW'],'Auch S1Q3-Muster, Rechtstyp, Sinustachykardie.'],
+  ['Pause von 4 Sekunden im Langzeit-EKG eines Patienten mit Synkope?','Red Flag: Schrittmacher-Indikation prüfen',['Normalbefund','Sportlerherz','nur Kontrolle in 1 Jahr'],'Pausen über 3 s mit Symptomen sind abklärungsbedürftig.']]};
+const QTOP=[['mix','Alles gemischt','Rhythmen, Lagetyp, Messen und Wissen'],['rhy','Rhythmen erkennen','Streifen ansehen, messen, zuordnen'],['lage','Lagetyp','Extremitätenableitungen lesen'],['mess','Messen','Zeiten und Frequenz am Streifen'],['basics','Grundlagen','Papier, Ableitungen, Normwerte'],['block','Blöcke & Leitung','AV-Blöcke, Schenkelblöcke, WPW'],['isch','Ischämie & Infarkt','STEMI, Äquivalente, Lokalisation'],['elyt','Elektrolyte & Medikamente','Kalium, Kalzium, QT'],['flags','Red Flags','Notfälle sicher erkennen']];
+function mkRhyQ(){const keys=Object.keys(R),k=keys[Math.random()*keys.length|0];const same=keys.filter(x=>x!==k&&R[x].c===R[k].c),other=keys.filter(x=>R[x].c!==R[k].c);const wr=shuffle(same).slice(0,2).concat(shuffle(other)).slice(0,3);
+ return{type:'strip',key:k,q:'Welcher Rhythmus ist das?',opts:shuffle([k,...wr].map(x=>R[x].n)),ok:R[k].n,ex:R[k].d,rf:RF[k]}}
+function mkLageQ(){const pool=[[-75,-38],[-22,22],[36,54],[66,84],[96,114],[128,170]];const r=pool[Math.random()*pool.length|0];const a=Math.round(r[0]+Math.random()*(r[1]-r[0]));const t=typeOf(a)[2];
+ const types=LT.slice(0,6).map(x=>x[2]);const p={};['I','II','III','aVR','aVL'].forEach(l=>p[l]=pol(a,l,.06));
+ return{type:'lage',a,q:'Welcher Lagetyp liegt vor?',opts:shuffle([t,...shuffle(types.filter(x=>x!==t)).slice(0,3)]),ok:t,ex:liaType(p).why+' Achse etwa '+a+'°.'}}
+function mkMessQ(){const keys=['sinus','brady','tachy','avb1','lqt','lbbb','wpw','rbbb','hypok'];const k=keys[Math.random()*keys.length|0],o=R[k];const what=shuffle(['hr','pq','qrs','qt'].filter(w=>w==='hr'||o[w]))[0];
+ const val=what==='hr'?o.hr:Math.round(o[what]*1000);const unit=what==='hr'?'/min':' ms';const step=what==='hr'?Math.max(12,Math.round(val*.25)):Math.max(40,Math.round(val*.3/10)*10);
+ let c=[val-2*step,val-step,val,val+step,val+2*step].filter(x=>x>0);const i=c.indexOf(val),s=Math.max(0,Math.min(c.length-4,i-(Math.random()*4|0)));c=c.slice(s,s+4);if(!c.includes(val))c[0]=val;
+ const name={hr:'die Herzfrequenz',pq:'die PQ-Zeit',qrs:'die QRS-Breite',qt:'die QT-Zeit'}[what];
+ return{type:'strip',key:k,measure:true,q:'Miss mit dem Zirkel: Wie groß ist '+name+'?',opts:c.map(x=>fmt(x)+unit),ok:fmt(val)+unit,ex:R[k].n+'. Lösung: '+name.replace('die ','')+' '+fmt(val)+unit+'.'}}
+function mkTextQ(top){const a=QB[top][Math.random()*QB[top].length|0];return{type:'text',q:a[0],opts:shuffle([a[1],...a[2]]),ok:a[1],ex:a[3],src:a}}
+function buildSet(top,n=10){const out=[],seen=new Set();let guard=0;while(out.length<n&&guard++<300){let t=top;if(top==='mix')t=shuffle(['rhy','rhy','lage','lage','mess','basics','block','isch','elyt','flags'])[0];
+  const q=t==='rhy'?mkRhyQ():t==='lage'?mkLageQ():t==='mess'?mkMessQ():mkTextQ(t);const id=q.key?q.key+q.q:q.q+(q.a||'');if(seen.has(id))continue;seen.add(id);out.push(q)}return out}
+let QS=null;
+function quiz(m,arg){
+ if(arg&&QTOP.find(t=>t[0]===arg)){QS={top:arg,set:buildSet(arg),i:0,score:0,wrong:[]};return qPlay(m)}
+ if(QS&&QS.i<QS.set.length)return qPlay(m);
+ m.append(h('p',{class:'lead'},'Wähle ein Thema oder üb alles durcheinander. Jede Runde hat 10 Fragen.'),h('div',{class:'chl'},QTOP.map(([k,n,s])=>h('button',{class:'chb'+(k==='mix'?' hi':''),onclick:()=>{QS={top:k,set:buildSet(k),i:0,score:0,wrong:[]};go('quiz')}},h('i',{html:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+(ICON[{rhy:'heart',lage:'axis',mess:'ruler',mix:'quiz'}[k]||'book'])+'</svg>'}),h('div',{},h('b',{},n),h('span',{},s)),ic('next',18)))))}
+function qPlay(m){m.innerHTML='';const S2=QS;
+ if(S2.i>=S2.set.length){const top=QTOP.find(t=>t[0]===S2.top);m.append(h('div',{class:'card'},h('h2',{style:'text-align:center'},top[1]+': geschafft!'),h('div',{class:'score'},S2.score+' / '+S2.set.length),
+   h('p',{style:'text-align:center;color:var(--mute)'},S2.score>=8?'Stark, das sitzt.':S2.score>=5?'Gute Basis. Schau dir die falschen Fragen noch einmal an.':'Übung macht den Meister. Die Lernkapitel helfen.'),
+   S2.wrong.length?h('div',{},h('h3',{},'Zum Wiederholen'),h('ul',{class:'ml'},S2.wrong.map(w=>h('li',{},h('b',{},w.ok+': '),w.ex)))):null,
+   h('div',{class:'row',style:'justify-content:center;margin-top:12px'},h('button',{class:'btn ghost',onclick:()=>{QS=null;go('quiz')}},'Anderes Thema'),h('button',{class:'btn dark',onclick:()=>{QS={top:S2.top,set:buildSet(S2.top),i:0,score:0,wrong:[]};qPlay(m)}},'Neue Runde'))));return}
+ const q=S2.set[S2.i];const fb=h('div');let done=false;let stripEl=null;
+ if(q.type==='strip'){const S=Strip({mm:4.2});S.setKey(q.key,1+Math.random()*999|0);stripEl=S.el;requestAnimationFrame(()=>S.render())}
+ const top=QTOP.find(t=>t[0]===S2.top);
+ m.append(h('button',{class:'lnk back',onclick:()=>{QS=null;go('quiz')}},ic('back',16),'Themen'),h('div',{class:'card'},h('div',{class:'qtop'},h('span',{},top[1]+' · Frage '+(S2.i+1)+' von '+S2.set.length),h('span',{},S2.score+' richtig')),h('div',{class:'bar'},h('i',{style:`width:${S2.i/S2.set.length*100}%`})),
+  h('p',{class:'story'},q.q),stripEl,q.type==='lage'?h('div',{},limbRow(q.a),h('p',{class:'hint'},'QRS-Komplexe der Extremitätenableitungen')):null,
+  h('div',{class:'opts',style:'margin-top:14px'},q.opts.map(o=>h('button',{class:'opt',onclick:e=>{if(done)return;done=true;const ok=o===q.ok;if(ok)S2.score++;else S2.wrong.push(q);e.currentTarget.classList.add(ok?'right':'wrong');[...e.currentTarget.parentNode.children].forEach((b,j)=>{if(q.opts[j]===q.ok)b.classList.add('right')});
+   fb.append(h('div',{class:'fb'},h('h4',{},ok?'Richtig!':'Leider nicht.'),q.rf?h('div',{class:'flag '+q.rf[0]+' sm'},h('b',{},(q.rf[0]==='red'?'Red Flag: ':'Achtung: ')+q.rf[1])):null,h('p',{},h('b',{},q.ok+': '),q.ex),q.type==='lage'?h('div',{html:cab(q.a)}):null),h('div',{style:'margin-top:12px;text-align:right'},h('button',{class:'btn dark',onclick:()=>{S2.i++;qPlay(m);scrollTo(0,0)}},S2.i+1<S2.set.length?'Weiter':'Ergebnis')))}},o))),fb))}
 
-/* ---------- Rhythmen ---------- */
-function rhy(m){
- m.append(h('p',{class:'lead'},'Alle 20 Rhythmen auf einen Blick. Tippe auf eine Karte, um den Streifen im Messmodus zu öffnen.'));
- for(const [c,n] of Object.entries(CAT)){m.append(h('h3',{},n));const g=h('div',{class:'rg'});
-  Object.entries(R).filter(([,o])=>o.c===c).forEach(([k,o])=>{const cv=h('canvas');const card=h('button',{class:'rc',onclick:()=>{tab='mess';location.hash='mess';shell();const s=$('.sel');s.value=k;s.dispatchEvent(new Event('change'))}},cv,h('b',{},o.n),h('p',{},o.d));g.append(card);requestAnimationFrame(()=>thumb(cv,k,Math.min(360,card.clientWidth-24),86))});m.append(g)}}
-
-/* ---------- Lagetyp ---------- */
-const LT=[[-180,-30,'Überdrehter Linkstyp','Linksanteriorer Hemiblock, Herzinfarkt der Hinterwand, Linksherzhypertrophie'],[-30,30,'Linkstyp','Normal bei Erwachsenen über 40, Adipositas, Linksherzbelastung'],[30,60,'Indifferenztyp','Normal bei Erwachsenen'],[60,90,'Steiltyp','Normal bei Jugendlichen und schlanken Menschen'],[90,120,'Rechtstyp','Normal bei Kindern, sonst Rechtsherzbelastung (z. B. Lungenembolie, COPD)'],[120,180,'Überdrehter Rechtstyp','Linksposteriorer Hemiblock, ausgeprägte Rechtsherzhypertrophie']];
-function lage(m){
- const v={I:6,aVF:4};
- const out=h('div'),svg=h('div',{class:'cab'});
- const inp=k=>{const i=h('input',{type:'number',step:'0.5',value:v[k],oninput:e=>{v[k]=parseFloat(String(e.target.value).replace(',','.'))||0;calc()}});return h('div',{class:'f'},h('label',{},'Ableitung '+k,h('small',{},'R minus S in mm')),h('div',{class:'stp'},h('button',{class:'btn ghost icon',onclick:()=>{v[k]-=1;i.value=v[k];calc()}},ic('minus',16)),i,h('button',{class:'btn ghost icon',onclick:()=>{v[k]+=1;i.value=v[k];calc()}},ic('plus',16))))};
- function calc(){const a=Math.atan2(v.aVF,v.I)*180/Math.PI;const t=LT.find(x=>a>=x[0]&&a<x[1])||LT[5];
-  svg.innerHTML=cab(a);out.innerHTML='';out.append(h('div',{class:'dx'},h('small',{},'Elektrische Herzachse'),h('ul',{},h('li',{},t[2]+' · '+fmt(a)+'°'))),h('p',{class:'mn'},h('b',{},'Typisch: '),t[3]))}
- m.append(h('div',{class:'card'},h('h2',{},'Lagetyp-Rechner'),h('p',{class:'lead'},'Miss in Ableitung I und aVF die Höhe der R-Zacke und die Tiefe der S-Zacke in Millimetern und trage die Differenz ein. Überwiegend negativ heißt: negative Zahl.'),h('div',{class:'two'},inp('I'),inp('aVF')),svg,out),
-  h('div',{class:'card'},h('h2',{},'Schnellmethode'),h('table',{},h('tr',{},h('th',{},'I'),h('th',{},'aVF'),h('th',{},'II'),h('th',{},'Lagetyp')),
-   [['+','+','','Normal (Indifferenz- bis Steiltyp)'],['+','−','+','Linkstyp'],['+','−','−','Überdrehter Linkstyp'],['−','+','','Rechtstyp'],['−','−','','Extremtyp (Northwest)']].map(r=>h('tr',{},r.map(c=>h('td',{},c)))))));
- calc()}
-function cab(a){const R0=110,cx=140,cy=135;const pt=(d,r)=>[cx+r*Math.cos(d*Math.PI/180),cy+r*Math.sin(d*Math.PI/180)];
- const seg=(a1,a2,col)=>{const [x1,y1]=pt(a1,R0),[x2,y2]=pt(a2,R0);return`<path d="M${cx} ${cy}L${x1} ${y1}A${R0} ${R0} 0 ${a2-a1>180?1:0} 1 ${x2} ${y2}Z" fill="${col}"/>`};
- const cols=['#f1d9d0','#e3efec','#d2e6e0','#c3ddd5','#e8eef6','#f6e6d6'];
- let s=`<svg viewBox="0 0 280 270" width="100%" style="max-width:340px;display:block;margin:12px auto">`;LT.forEach((t,i)=>s+=seg(t[0],t[1],cols[i]));
- s+=`<circle cx="${cx}" cy="${cy}" r="${R0}" fill="none" stroke="#c9d3cf"/>`;
- [[0,'I'],[60,'II'],[120,'III'],[90,'aVF'],[-30,'aVL'],[-150,'aVR']].forEach(([d,n])=>{const [x,y]=pt(d,R0+16);const [x1,y1]=pt(d,R0);s+=`<line x1="${cx}" y1="${cy}" x2="${x1}" y2="${y1}" stroke="#c9d3cf" stroke-dasharray="3 3"/><text x="${x}" y="${y+4}" text-anchor="middle" font-size="11" font-weight="600" fill="#6f7d78" font-family="DM Sans">${n}</text>`});
- const [ax,ay]=pt(a,R0-8);s+=`<line x1="${cx}" y1="${cy}" x2="${ax}" y2="${ay}" stroke="#2f6b63" stroke-width="4" stroke-linecap="round"/><circle cx="${ax}" cy="${ay}" r="6" fill="#2f6b63"/><circle cx="${cx}" cy="${cy}" r="4" fill="#2f6b63"/></svg>`;return s}
-
-/* ---------- Spickzettel ---------- */
+/* ================= Spickzettel ================= */
 function spick(m){
  m.append(h('div',{class:'row noprint',style:'margin-bottom:12px'},h('p',{class:'lead',style:'margin:0'},'Alles Wichtige auf einen Blick, auch zum Ausdrucken.'),h('button',{class:'btn dark',onclick:()=>print()},'Drucken / PDF')),
- h('div',{class:'card sheet'},h('h2',{},'Befundung in 8 Schritten'),h('ol',{class:'steps'},['Rhythmus: regelmäßig? P vor jedem QRS? Sinusrhythmus?','Frequenz: RR-Abstand messen oder 300-Regel','Lagetyp: Ableitung I und aVF (Cabrera-Kreis)','P-Welle: Dauer, Form, Höhe','PQ-Zeit: 120–200 ms, konstant?','QRS: Breite, Form, Q-Zacken, R-Progression','ST-Strecke: Hebung oder Senkung, in welchen Ableitungen?','T-Welle und QT/QTc: Form, Ausrichtung, Dauer'].map(t=>h('li',{},t)))),
- h('div',{class:'card sheet'},h('h2',{},'Normwerte'),h('table',{},h('tr',{},h('th',{},'Messgröße'),h('th',{},'Normal'),h('th',{},'Hinweis')),
-  [['Herzfrequenz','60–100/min','< 60 Bradykardie, > 100 Tachykardie'],['P-Welle','< 110 ms, < 0,25 mV','breit: P mitrale, hoch: P pulmonale'],['PQ-Zeit','120–200 ms','> 200 ms AV-Block I°, < 120 ms WPW?'],['QRS','< 100 ms','100–119 inkomplett, ≥ 120 ms kompletter Block'],['QTc','♂ < 450 ms · ♀ < 460 ms','> 500 ms hohes Torsade-Risiko'],['Q-Zacke','< 40 ms, < ¼ von R','pathologisch: an alten Infarkt denken'],['Sokolow-Lyon','SV1 + RV5/6 < 3,5 mV','darüber: Linksherzhypertrophie möglich']].map(r=>h('tr',{},r.map(c=>h('td',{},c)))))),
+ h('div',{class:'card sheet'},h('h2',{},'Befundung in 8 Schritten'),h('ol',{class:'steps'},['Eichung (10 mm/mV) und Vorschub (25 oder 50 mm/s)','Rhythmus: regelmäßig? P vor jedem QRS?','Frequenz: 300-Regel oder RR messen','Lagetyp: I, II, III, aVR, aVL','P-Welle und PQ-Zeit','QRS: Breite, Form, Q-Zacken, R-Progression','ST-Strecke: Hebung oder Senkung, wo?','T-Welle, QT und QTc'].map(t=>h('li',{},t)))),
+ h('div',{class:'card sheet'},h('h2',{},'Normwerte'),h('div',{class:'tw'},h('table',{},h('tr',{},h('th',{},'Messgröße'),h('th',{},'Normal'),h('th',{},'Hinweis')),
+  [['Herzfrequenz','60–100/min','< 60 Brady-, > 100 Tachykardie'],['P-Welle','< 110 ms, < 0,25 mV','breit: P mitrale, hoch: P pulmonale'],['PQ-Zeit','120–200 ms','> 200 ms AV-Block I°, < 120 ms WPW?'],['QRS','< 100 ms','100–119 inkomplett, ≥ 120 ms kompletter Block'],['QTc','Männer < 450 ms, Frauen < 460 ms','> 500 ms Torsade-Risiko'],['Q-Zacke','< 40 ms, < ¼ von R','pathologisch: abgelaufener Infarkt?'],['Sokolow-Lyon','SV1 + RV5/6 < 3,5 mV','darüber: Linksherzhypertrophie möglich']].map(r=>h('tr',{},r.map(c=>h('td',{},c))))))),
+ h('div',{class:'card sheet'},h('h2',{},'Red Flags'),h('ul',{class:'ml'},['ST-Hebung in 2 benachbarten Ableitungen (V2–V3: Frauen 1,5 mm, Männer 2 bzw. 2,5 mm, sonst 1 mm)','STEMI-Äquivalente: ST-Senkung V1–V3, ST-Hebung aVR + diffuse Senkungen, neuer LSB, De Winter, Wellens','Breitkomplex-Tachykardie = VT bis zum Beweis des Gegenteils','AV-Block II° Mobitz und III°, Pausen > 3 s','Hohe spitze T, breiter QRS: Hyperkaliämie','QTc > 500 ms, Brugada-Muster, WPW mit Vorhofflimmern'].map(t=>h('li',{},t)))),
+ h('div',{class:'card sheet'},h('h2',{},'Lagetyp: Polaritäten-Methode'),h('div',{class:'tw'},h('table',{class:'ptab'},h('tr',{},h('th',{},'Typ'),['I','II','III','aVR','aVL'].map(l=>h('th',{},l))),[['Überdrehter Linkstyp',-55,'II'],['Linkstyp',0,'III'],['Indifferenztyp',45,'aVL'],['Steiltyp',75,'aVL'],['Rechtstyp',105,'aVR'],['Überdrehter Rechtstyp',140,'aVR']].map(([n,a,k])=>h('tr',{},h('td',{},n),['I','II','III','aVR','aVL'].map(l=>{const p=pol(a,l,.1);return h('td',{class:(l===k?'key ':'')+(p>0?'up':p<0?'dn':'iso')},p>0?'↑':p<0?'↓':'≈')})))))),
  h('div',{class:'two'},
-  h('div',{class:'card sheet'},h('h2',{},'Frequenz schnell bestimmen'),h('div',{class:'formula'},h('b',{},'300-Regel: '),'300 ÷ Anzahl großer Kästchen zwischen zwei R-Zacken (bei 25 mm/s)'),h('div',{class:'formula'},h('b',{},'Bei 50 mm/s: '),'600 ÷ Anzahl großer Kästchen'),h('div',{class:'formula'},h('b',{},'Unregelmäßig: '),'QRS-Komplexe in 10 Sekunden zählen × 6'),h('div',{class:'formula'},h('b',{},'Zeit: '),'1 mm = 40 ms · 1 großes Kästchen = 200 ms (25 mm/s)')),
-  h('div',{class:'card sheet'},h('h2',{},'QT-Korrektur'),h('div',{class:'formula'},h('b',{},'Bazett: '),'QTc = QT ÷ √RR (RR in Sekunden)'),h('div',{class:'formula'},h('b',{},'Fridericia: '),'QTc = QT ÷ ∛RR, genauer bei hoher Frequenz'),h('p',{class:'mn'},h('b',{},'Merke: '),'QT von QRS-Beginn bis T-Ende messen, am besten in II oder V5.'))),
- h('div',{class:'card sheet'},h('h2',{},'Infarkt-Lokalisation'),h('table',{},h('tr',{},h('th',{},'Region'),h('th',{},'Ableitungen'),h('th',{},'Gefäß meist')),
-  [['Anteroseptal','V1–V4','RIVA (LAD)'],['Anterolateral','I, aVL, V5–V6','RIVA-Diagonalast oder RCX'],['Inferior','II, III, aVF','RCA (seltener RCX)'],['Posterior','ST-Senkung V1–V3, hohe R in V1–V2','RCX oder RCA'],['Rechtsventrikulär','V4r','proximale RCA']].map(r=>h('tr',{},r.map(c=>h('td',{},c))))),
-  h('p',{class:'mn'},h('b',{},'STEMI-Kriterien: '),'neue ST-Hebung am J-Punkt in zwei benachbarten Ableitungen, ≥ 1 mm. In V2–V3: Männer ab 40 ≥ 2 mm, unter 40 ≥ 2,5 mm, Frauen ≥ 1,5 mm.')),
- h('div',{class:'card sheet'},h('h2',{},'Merksätze'),h('ul',{class:'ml'},['Wenckebach: „länger, länger, länger, weg – so wird aus Wenckebach ein Block“','Breit und schnell ist ventrikulär, bis das Gegenteil bewiesen ist.','Absolute Arrhythmie ohne P-Wellen: Vorhofflimmern.','Sägezahn mit 300/min: Vorhofflattern, Kammerfrequenz meist 150 oder 75.','Hohe spitze T-Wellen: an Kalium denken.','Vor jeder Befundung: Eichzacke, Papiervorschub und Elektrodenlage prüfen.'].map(t=>h('li',{},t)))))}
-
-/* ---------- Quiz ---------- */
-function quiz(m){
- const keys=Object.keys(R);let Q=[],i=0,score=0;
- const start=()=>{Q=keys.slice().sort(()=>Math.random()-.5).slice(0,10);i=0;score=0;q()};
- const S=Strip({mm:4.2});
- function q(){m.innerHTML='';if(i>=Q.length){m.append(h('div',{class:'card'},h('h2',{style:'text-align:center'},'Geschafft!'),h('div',{class:'score'},score+' / '+Q.length),h('p',{style:'text-align:center;color:var(--mute)'},score>=8?'Stark, du liest EKGs wie ein Profi.':score>=5?'Gute Basis! Schau dir die Rhythmen noch einmal an.':'Übung macht den Meister. Der Spickzettel hilft.'),h('div',{style:'text-align:center;margin-top:12px'},h('button',{class:'btn dark',onclick:start},'Neue Runde'))));return}
-  const k=Q[i];const wrong=keys.filter(x=>x!==k&&R[x].c===R[k].c).concat(keys.filter(x=>R[x].c!==R[k].c)).filter(x=>x!==k);const opts=[k,...wrong.sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);
-  const fb=h('div');let done=false;
-  S.setKey(k,1+Math.random()*999|0);
-  m.append(h('div',{class:'card'},h('div',{class:'qtop'},h('span',{},'Frage '+(i+1)+' von '+Q.length),h('span',{},score+' richtig')),h('div',{class:'bar'},h('i',{style:`width:${i/Q.length*100}%`})),
-   h('p',{class:'story'},'Welcher Rhythmus ist das? Du kannst den Zirkel zum Messen benutzen.'),S.el,
-   h('div',{class:'opts',style:'margin-top:14px'},opts.map(o=>h('button',{class:'opt',onclick:e=>{if(done)return;done=true;const ok=o===k;if(ok)score++;e.currentTarget.classList.add(ok?'right':'wrong');[...e.currentTarget.parentNode.children].forEach((b,j)=>{if(opts[j]===k)b.classList.add('right')});
-    fb.append(h('div',{class:'fb'},h('h4',{},ok?'Richtig!':'Leider nicht.'),h('p',{},h('b',{},R[k].n+': '),R[k].d)),h('div',{style:'margin-top:12px;text-align:right'},h('button',{class:'btn dark',onclick:()=>{i++;q()}},i+1<Q.length?'Weiter':'Ergebnis')))}},R[o].n))),fb));
-  S.render()}
- start()}
+  h('div',{class:'card sheet'},h('h2',{},'Frequenz schnell'),h('div',{class:'formula'},h('b',{},'25 mm/s: '),'300 ÷ große Kästchen zwischen zwei R'),h('div',{class:'formula'},h('b',{},'50 mm/s: '),'600 ÷ große Kästchen'),h('div',{class:'formula'},h('b',{},'Unregelmäßig: '),'QRS in 10 s × 6'),h('div',{class:'formula'},h('b',{},'Zeit: '),'1 mm = 40 ms, 1 großes Kästchen = 200 ms')),
+  h('div',{class:'card sheet'},h('h2',{},'QT-Korrektur'),h('div',{class:'formula'},h('b',{},'Bazett: '),'QTc = QT ÷ √RR (s)'),h('div',{class:'formula'},h('b',{},'Fridericia: '),'QTc = QT ÷ ∛RR, genauer bei hoher Frequenz'),h('p',{class:'mn'},'QT von QRS-Beginn bis T-Ende, am besten in II oder V5.'))),
+ h('div',{class:'card sheet'},h('h2',{},'Infarkt-Lokalisation'),h('div',{class:'tw'},h('table',{},h('tr',{},h('th',{},'Region'),h('th',{},'Ableitungen'),h('th',{},'Gefäß meist')),
+  [['Anterior/Septal','V1–V4','RIVA (LAD)'],['Lateral','I, aVL, V5–V6','RCX, Diagonalast'],['Inferior','II, III, aVF','RCA (seltener RCX)'],['Posterior','ST-Senkung V1–V3, hohe R','RCX oder RCA'],['Rechtsventrikulär','V4r','proximale RCA']].map(r=>h('tr',{},r.map(c=>h('td',{},c))))))),
+ h('div',{class:'card sheet'},h('h2',{},'Merksätze'),h('ul',{class:'ml'},['Wenckebach: länger, länger, länger, weg','Breit und schnell ist ventrikulär, bis das Gegenteil bewiesen ist','Absolute Arrhythmie ohne P-Wellen: Vorhofflimmern','Genau 150/min regelmäßig: an Flattern 2:1 denken','Hohe spitze T-Wellen: an Kalium denken','Vor jeder Befundung: Eichzacke, Vorschub, Elektrodenlage'].map(t=>h('li',{},t)))))}
 shell();
 
 </script>
