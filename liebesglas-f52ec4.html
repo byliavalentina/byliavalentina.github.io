@@ -299,7 +299,7 @@ function jarSVG(rem,total){const T=VT[S.th];let notes='';const n=Math.min(60,rem
 /* ---------- view ---------- */
 let showList=false;
 function applyTheme(){const T=VT[S.th];const v=$('#view');v.style.background=T.bg;for(const k of ['acc','ink','sub','paper'])v.style.setProperty('--'+k,T[k]);v.classList.toggle('dark',T.dark)}
-function renderView(){applyTheme();const v=$('#view');v.innerHTML='';const N=list().length,A=avail(),O=order(),R=list();
+function renderView(){applyTheme();const v=$('#view');v.style.overflowY='';v.innerHTML='';const N=list().length,A=avail(),O=order(),R=list();
  const hearts=h('div',{class:'hearts'});for(let i=0;i<12;i++)hearts.append(h('i',{style:`left:${(i*41)%100}%;animation-delay:${-(i*1.9)%12}s;animation-duration:${11+(i%5)*2}s;font-size:${12+(i%4)*6}px`},'♥'));v.append(hearts);
  v.append(h('div',{class:'hd'},h('h1',{},tl('forT').replace('{n}',S.to||'')),h('p',{},S.head||tl('headD').replace('{n}',N))));
  if(showList){const ul=h('div',{class:'mine'});for(let i=0;i<Math.min(drawn,N);i++)ul.append(h('div',{class:'mn'},h('b',{},tl('reason').replace('{n}',i+1)),h('p',{},R[O[i]])));v.append(ul,h('button',{class:'pill',onclick:()=>{showList=false;renderView()}},'← '+tl('back')));return}
@@ -315,7 +315,7 @@ function drawNote(){const O=order(),R=list();const i=drawn;const txt=R[O[i]];set
  const jar=v.querySelector('.jar');if(jar){jar.classList.remove('wig');void jar.offsetWidth;jar.classList.add('wig')}
  const ov=h('div',{class:'ov'});const note=h('div',{class:'note'},h('div',{class:'fold'}),h('div',{class:'nin'},h('b',{},tl('reason').replace('{n}',i+1)),h('p',{},txt),h('div',{class:'sig'},h('span',{},tl('love')),h('i',{},S.from||''))));
  ov.append(note,h('button',{class:'okb',onclick:()=>{ov.classList.add('out');setTimeout(renderView,300)}},tl('next')+' ♥'));
- v.append(ov);requestAnimationFrame(()=>requestAnimationFrame(()=>ov.classList.add('go')));
+ ov.style.top=v.scrollTop+'px';ov.style.bottom='auto';ov.style.height=v.clientHeight+'px';v.style.overflowY='hidden';v.append(ov);requestAnimationFrame(()=>requestAnimationFrame(()=>ov.classList.add('go')));
  burst(v)}
 function burst(v){const T=VT[S.th];for(let i=0;i<18;i++){const s=h('i',{class:'bh',style:`left:50%;top:38%;color:${i%2?T.acc:'#f6c1c7'};--dx:${(Math.cos(i/18*6.28)*(90+i*5)).toFixed(0)}px;--dy:${(Math.sin(i/18*6.28)*(90+i*5)-60).toFixed(0)}px;animation-delay:${(i%4)*.03}s`},'♥');v.append(s);setTimeout(()=>s.remove(),1400)}}
 /* ---------- modal ---------- */

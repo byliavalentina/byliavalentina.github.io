@@ -227,7 +227,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 /* ---------- recipient view ---------- */
 let cur=-1;
 function applyTheme(){const T=VT[S.th];const v=$('#view');v.style.background=T.bg;for(const k of ['env','flap','seal','acc','ink','sub','paper'])v.style.setProperty('--'+k,T[k]);v.classList.toggle('dark',T.dark)}
-function renderView(){applyTheme();const v=$('#view');v.innerHTML='';
+function renderView(){applyTheme();const v=$('#view');v.style.overflowY='';v.innerHTML='';
  const hearts=h('div',{class:'hearts'});for(let i=0;i<14;i++)hearts.append(h('i',{style:`left:${(i*37)%100}%;animation-delay:${-(i*1.7)%12}s;animation-duration:${10+(i%5)*2}s;font-size:${12+(i%4)*6}px`},'♥'));v.append(hearts);
  v.append(h('div',{class:'hd'},h('h1',{},tl('forT').replace('{n}',S.to||'')),h('p',{},S.intro||tl('introD').replace('{c}',S.L.length))));
  const g=h('div',{class:'grid'});
@@ -248,7 +248,7 @@ function showLetter(i,anim){const l=S.L[i];const v=$('#view');v.querySelector('.
    h('div',{class:'sig'},h('span',{},tl('love')),h('b',{},S.from||''))),
   h('div',{class:'front'}),h('div',{class:'topflap'}),h('div',{class:'seal2',html:'<svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-8.6C1.1 9.3 2.9 5.5 6.4 5.1c2-.2 3.6.9 4.6 2.4 1-1.5 2.6-2.6 4.6-2.4 3.5.4 5.3 4.2 3.7 7.3C19 16.6 12 21 12 21z" fill="currentColor"/></svg>'}));
  ov.append(big,h('button',{class:'backbtn',onclick:()=>{cur=-1;ov.classList.add('out');setTimeout(()=>renderView(),350)}},'← '+tl('back')));
- v.append(ov);if(anim){requestAnimationFrame(()=>requestAnimationFrame(()=>ov.classList.add('go')))}else ov.classList.add('go','done');
+ ov.style.top=v.scrollTop+'px';ov.style.bottom='auto';ov.style.height=v.clientHeight+'px';v.style.overflowY='hidden';v.append(ov);if(anim){requestAnimationFrame(()=>requestAnimationFrame(()=>ov.classList.add('go')))}else ov.classList.add('go','done');
  markOpen(i)}
 /* ---------- link / modal ---------- */
 function linkURL(){return location.href.split('#')[0].split('?')[0]+'#i='+enc({lang:S.lang,th:S.th,to:S.to,from:S.from,intro:S.intro,L:S.L})}
