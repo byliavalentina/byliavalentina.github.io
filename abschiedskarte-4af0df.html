@@ -2488,7 +2488,7 @@ const O=c=>OCC[c.lg][c.oc]||OCC[c.lg].abschied;
 const fill=(s,c)=>s.replace(/\{n\}/g,c.n||'');
 function stripes(){return h('div',{class:'stripes',html:'<svg viewBox="0 0 400 800" preserveAspectRatio="none">'+Array.from({length:9},(_,i)=>{const x=i*46-10;return `<path d="M${x} -10 C${x+18} 120 ${x-18} 260 ${x} 400 S${x+18} 680 ${x} 810 L${x+23} 810 C${x+41} 680 ${x+5} 540 ${x+23} 400 S${x+5} 120 ${x+23} -10 Z" fill="#f7c9d4"/>`}).join('')+'</svg>'})}
 function cover(c,preview){const o=O(c),t=T[c.lg];const s=h('section',{class:'cover cv-'+c.t});
- if(c.t==='retro'){s.append(stripes(),h('div',{class:'cin'},h('div',{class:'k'},c.k||o.k),h('div',{class:'big'},c.big||o.big),h('div',{class:'sub'},c.sub||o.sub)))}
+ if(c.t==='retro'){s.append(stripes(),h('div',{class:'cin'},h('div',{class:'k'},c.k||o.k),(()=>{const t=c.big||o.big,L=Math.max(...t.split(/[\s\u00ad]+/).map(w=>w.length));return h('div',{class:'big',style:'hyphens:manual;word-break:normal'+(L>6?';font-size:'+Math.max(36,Math.round(66*5.7/L))+'px':'')},t)})(),h('div',{class:'sub'},c.sub||o.sub)))}
  else if(c.t==='aqua'){s.append(h('div',{class:'nm'},(c.lg==='de'?'LIEBE ':'DEAR ')+(c.n||'').toUpperCase()),h('div',{class:'sc1'},c.big||o.aqH),h('img',{src:IMG[c.mot]||IMG.strandstuhl,alt:''}),h('div',{class:'tx'},c.sub||o.aqT))}
  else s.append(h('div',{class:'k'},c.k||o.fk),h('div',{class:'big'},c.big||o.fb),h('img',{src:IMG[c.mot]||IMG.koffer,alt:''}),h('div',{class:'fs'},c.sub||o.fs));
  return s}
