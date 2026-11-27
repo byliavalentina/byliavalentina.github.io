@@ -2488,7 +2488,7 @@ function card(root,c,preview){const t=T[c.lg],Th=TH[c.t]||TH.mini,R=role(c),P=pl
  const after=h('div',{class:'after'});
  if(c.p)after.append(h('div',{class:'pol'},h('img',{src:c.p,alt:''})));
  after.append(h('p',{class:'msg'},c.m||t.msgPh),h('div',{class:'kid'},h('small',{},P?t.kidP:t.kid),h('div',{class:'kn'},c.k||'♡')),c.par?h('div',{class:'par'},'& '+c.par):null);
- if(c.d&&c.dk!=='n'){after.append(h('p',{class:'date'},(c.dk==='b'?t.born:t.date).replace('{d}',fmtD(c.d,c.lg))));if(c.dk==='b'){const el=h('div',{class:'cdn'});after.append(el);countdown(el,new Date(c.d+'T12:00'),t.cd)}}
+ if(c.d&&c.dk!=='n'){after.append(h('p',{class:'date'},(c.dk==='b'?t.born:t.date).replace('{d}',fmtD(c.d,c.lg))));if(c.dk==='b'){const el=h('div',{class:'cdn'});after.append(el);setTimeout(()=>countdown(el,new Date(c.d+'T12:00'),t.cd),0)}}
  const showCert=()=>{if(after.querySelector('.cert'))return;const ce=cert(c);after.append(ce,h('button',{class:'btn ghost prt',onclick:()=>{if(!preview)window.print()}},'🖨 '+t.certP));confetti(root,[Th.acc,'#f3d58a','#e8d9c5','#fff']);setTimeout(()=>ce.scrollIntoView({behavior:'smooth'}),preview?0:300)};
  const ans=(txt)=>h('a',{class:'btn',href:preview?null:waLink(c.w,txt),target:'_blank',rel:'noopener',onclick:()=>setTimeout(showCert,400)});
  after.append(h('div',{class:'ab'},ans(t.yesMsg.replace('{r}',R[1]).replace('{n}',c.n||'')),ans(t.cryMsg.replace('{n}',c.n||''))));
