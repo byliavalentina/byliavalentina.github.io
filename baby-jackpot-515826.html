@@ -148,6 +148,7 @@ const guest=location.hash.startsWith('#i=');
 try{if(guest){S={...S,...JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(3).replace(/-/g,'+').replace(/_/g,'/')))))}}else{const v=localStorage.getItem(KEY);if(v)S={...S,...JSON.parse(v)};else applyOcc('baby')}}catch(e){applyOcc('baby')}
 if(!S.serial)S.serial=String(2027)+'·'+String(1000+Math.floor(Math.random()*9000));
 if(!guest)ui=S.lang;
+const LOCK=(()=>{try{const v=new URLSearchParams(location.search).get('lang');return v==='de'||v==='en'?v:null}catch(e){return null}})();if(LOCK){S.lang=LOCK;ui=LOCK}
 const save=()=>{if(guest)return;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){try{localStorage.setItem(KEY,JSON.stringify({...S,photo:''}))}catch(x){}}};
 /* ---------- layout ---------- */
 const W=1080,H=1920,TX=60,TY=70,TW=960,TH_=1780;
@@ -216,7 +217,7 @@ function drawFrame(c,tt,dt){const T=TH[S.look];const g=c.createLinearGradient(0,
  if(won){tmp.globalAlpha=clamp((tt-wonT)/.5,0,1);tmp.fillRect(PZ.x,PZ.y,PZ.w,PZ.h);tmp.globalAlpha=1}
  c.drawImage(frameFoil,0,0);
  // stamp
- if(won){const k=clamp((tt-wonT)/.35,0,1),sc=1+(1-k)*1.6;c.save();c.globalAlpha=k;c.translate(PZ.x+PZ.w-90,PZ.y-30);c.rotate(.16);c.scale(sc,sc);const tw=L[S.lang].tk.win;c.font=`76px ${FS}`;const w=c.measureText(tw).width+60;c.fillStyle=T.acc;c.shadowColor='rgba(0,0,0,.25)';c.shadowBlur=24;c.shadowOffsetY=10;rr(c,-w/2,-62,w,118,22);c.fill();c.shadowColor='transparent';c.strokeStyle=T.paper;c.lineWidth=8;rr(c,-w/2+10,-52,w-20,98,16);c.stroke();c.fillStyle=T.paper;c.textAlign='center';c.fillText(tw,0,22);c.restore()}
+ if(won){const k=clamp((tt-wonT)/.35,0,1),sc=1+(1-k)*1.6;c.save();c.globalAlpha=k;c.translate(PZ.x+PZ.w-90,PZ.y-30);c.rotate(.16);c.scale(sc,sc);const tw=L[S.lang].tk.win;let fz=76;c.font=`${fz}px ${FS}`;while(c.measureText(tw).width>300&&fz>40){fz-=4;c.font=`${fz}px ${FS}`};const w=c.measureText(tw).width+60;c.fillStyle=T.acc;c.shadowColor='rgba(0,0,0,.25)';c.shadowBlur=24;c.shadowOffsetY=10;rr(c,-w/2,-62,w,118,22);c.fill();c.shadowColor='transparent';c.strokeStyle=T.paper;c.lineWidth=8;rr(c,-w/2+10,-52,w-20,98,16);c.stroke();c.fillStyle=T.paper;c.textAlign='center';c.fillText(tw,0,22);c.restore()}
  for(const p of conf){p.vy+=1400*dt;p.vx*=.99;p.x+=p.vx*dt;p.y+=p.vy*dt;p.rot+=dt*8;c.save();c.translate(p.x,p.y);c.rotate(p.rot);c.fillStyle=p.c;c.fillRect(-p.w/2,-p.w/4,p.w,p.w/2);c.restore()}conf=conf.filter(p=>p.y<H+60)}
 const frameFoil=document.createElement('canvas');frameFoil.width=W;frameFoil.height=H;
 /* ---------- live ---------- */
@@ -252,7 +253,7 @@ function inp(key,lbl,ph=''){const i=h('input',{type:'text',placeholder:ph});i.va
 function photoPick(){const fi=h('input',{type:'file',accept:'image/*',style:'display:none'});fi.onchange=async()=>{const f=fi.files[0];if(!f)return;const u=URL.createObjectURL(f);const im=new Image();await new Promise(r=>{im.onload=im.onerror=r;im.src=u});const k=Math.min(1,700/Math.max(im.naturalWidth,im.naturalHeight));const c=document.createElement('canvas');c.width=Math.round(im.naturalWidth*k);c.height=Math.round(im.naturalHeight*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);S.photo=c.toDataURL('image/jpeg',.82);URL.revokeObjectURL(u);save();renderPanel()};
  const b=h('button',{class:'big',style:'justify-content:center;gap:12px',onclick:()=>fi.click()});if(S.photo)b.append(h('img',{src:S.photo,style:'width:52px;height:52px;object-fit:cover;border-radius:8px'}));b.append(h('span',{},t('photoBtn')));return h('div',{},b,fi,S.photo?h('button',{class:'hint',style:'text-decoration:underline',onclick:()=>{S.photo='';save();renderPanel()}},t('photoReset')):'')}
 function renderPanel(){const p=$('#panel');p.innerHTML='';
- p.append(h('div',{class:'top'},h('h1',{},t('title')),h('button',{class:'lang',onclick:()=>{ui=ui==='de'?'en':'de';renderPanel()}},ui==='de'?'EN':'DE')),h('p',{class:'sub'},t('sub')));
+ p.append(h('div',{class:'top'},h('h1',{},t('title')),(LOCK?'':h('button',{class:'lang',onclick:()=>{ui=ui==='de'?'en':'de';renderPanel()}},ui==='de'?'EN':'DE'))),h('p',{class:'sub'},t('sub')));
  p.append(h('h3',{},t('occ')));const oc=h('div',{class:'occ'});Object.keys(L.en.occs).forEach(k=>oc.append(h('button',{class:S.occ===k?'on':'',onclick:()=>{applyOcc(k);reset();save();renderPanel();renderActs()}},t('occs')[k])));p.append(oc);
  p.append(h('h3',{},t('look')));const ths=h('div',{class:'themes'});Object.keys(TH).forEach(k=>{const T=TH[k];ths.append(h('div',{},h('button',{class:'th'+(S.look===k?' on':''),style:`width:100%;background:linear-gradient(${T.bg[0]},${T.bg[1]})`,onclick:()=>{S.look=k;save();renderPanel();renderActs()}},h('i',{style:`background:${T.acc}`})),h('div',{class:'thn'},t('looks')[k])))});p.append(ths);
  p.append(h('h3',{},t('texts')),inp('head',t('f_head')));
@@ -260,7 +261,7 @@ function renderPanel(){const p=$('#panel');p.innerHTML='';
  else p.append(inp('prize',t('f_prize')));
  p.append(inp('small',t('f_small')));
  if(S.occ!=='gender'){p.append(h('label',{},t('sym')));const icr=h('div',{class:'occ'});SYMS.forEach(k=>{const T=TH[S.look];const b=h('button',{class:S.sym===k?'on':'',style:'padding:6px;width:46px;height:46px',onclick:()=>{S.sym=k;reset();save();renderPanel()}});b.append(h('img',{src:svgURL(ICON[k].replace(/C1/g,T.c1).replace(/C2/g,T.c2)),style:'width:100%;height:100%'}));icr.append(b)});p.append(icr)}
- const ls=h('select',{},h('option',{value:'en',selected:S.lang==='en'},'English'),h('option',{value:'de',selected:S.lang==='de'},'Deutsch'));ls.onchange=()=>{S.lang=ls.value;save();renderActs()};p.append(h('div',{},h('label',{},t('f_lang')),ls));
+ const ls=h('select',{},h('option',{value:'en',selected:S.lang==='en'},'English'),h('option',{value:'de',selected:S.lang==='de'},'Deutsch'));ls.onchange=()=>{S.lang=ls.value;save();renderActs()};if(!LOCK)p.append(h('div',{},h('label',{},t('f_lang')),ls));
  p.append(h('h3',{},t('photo')),h('p',{class:'hint',style:'margin:0 0 8px'},t('photoHint')),photoPick());
  p.append(h('h3',{},t('reply')),inp('reply',t('f_reply'),t('ph_reply')));
  p.append(h('h3',{},t('send')));[['video','vid','vidS',exportVideo,true],['link','link','linkS',showLink]].forEach(([i,a2,b2,fn,dark])=>{const bt=h('button',{class:'big'+(dark?' dark':''),onclick:fn},h('span'),h('span',{},t(a2),h('small',{},t(b2))));bt.firstChild.innerHTML=ic(i);p.append(bt)});
