@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+<script>/*lv-lock*/(function(){var v=null;try{v=new URLSearchParams(location.search).get('lang')}catch(e){}if(v!=='de'&&v!=='en')return;window.__LOCK=v;var loc=v==='de'?'de-DE':'en-US';
+try{Object.defineProperty(Navigator.prototype,'language',{get:function(){return loc},configurable:true});Object.defineProperty(Navigator.prototype,'languages',{get:function(){return [loc]},configurable:true})}catch(e){}
+try{var P=Storage.prototype,g=P.getItem,s=P.setItem,r=P.removeItem,K=function(k){return k==='lv-lang'?k:k+'@'+v};P.getItem=function(k){return k==='lv-lang'?v:g.call(this,K(k))};P.setItem=function(k,x){if(k==='lv-lang')return;return s.call(this,K(k),x)};P.removeItem=function(k){return r.call(this,K(k))}}catch(e){}
+document.documentElement.classList.add('lv-lock');document.documentElement.lang=v;
+function hide(){document.querySelectorAll('select:not([data-lvh])').forEach(function(x){var o=[].map.call(x.options,function(y){return y.value}).sort().join(',');if(o!=='de,en')return;x.setAttribute('data-lvh','1');var p=x.parentElement;if(p&&p!==document.body&&p.children.length<=2){p.style.display='none'}else{x.style.display='none';var q=x.previousElementSibling;if(q&&q.tagName==='LABEL')q.style.display='none'}});
+document.querySelectorAll('.lbl:not([data-lvh])').forEach(function(l){if(/Sprache\s*·\s*Language/.test(l.textContent)){l.setAttribute('data-lvh','1');l.style.display='none';if(l.nextElementSibling)l.nextElementSibling.style.display='none'}})}
+new MutationObserver(hide).observe(document.documentElement,{childList:true,subtree:true});document.addEventListener('DOMContentLoaded',hide)})();</script>
+<style>.lv-lock .lang,.lv-lock #langBtn,.lv-lock button[aria-label="Language"]{display:none!important}</style>
+
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
