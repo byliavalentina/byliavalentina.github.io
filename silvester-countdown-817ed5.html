@@ -170,7 +170,212 @@ textarea.inp{min-height:170px;resize:vertical;line-height:1.5}
 <body>
 <div id="app"></div>
 
-<script>
+<script>(function(){var q=new URLSearchParams(location.search).get('lang');var L=q||localStorage.getItem('lv-lang')||((navigator.language||'de').toLowerCase().startsWith('de')?'de':'en');if(L!=='de'&&L!=='en')L='en';window.__LANG=L;document.documentElement.lang=L;
+var b=document.createElement('button');b.textContent=L==='de'?'EN':'DE';b.setAttribute('aria-label','Language');b.style.cssText='position:fixed;left:10px;bottom:10px;z-index:99999;font:600 12px system-ui,sans-serif;padding:6px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.4);background:rgba(255,255,255,.85);color:#333;opacity:.75;cursor:pointer';b.onclick=function(){try{localStorage.setItem('lv-lang',L==='de'?'en':'de')}catch(e){};var u=new URL(location.href);u.searchParams.delete('lang');location.href=u.toString()};document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(b)});if(document.body)document.body.appendChild(b)})();
+if(window.__LANG==='en'){(function(){
+
+'use strict';
+/* ================= Silvester-Countdown · Lia Valentina ================= */
+const $=(s,r=document)=>r.querySelector(s);
+const h=(tag,attrs={},...kids)=>{const e=document.createElement(tag);for(const k in attrs){const v=attrs[k];if(k==='class')e.className=v;else if(k.startsWith('on'))e.addEventListener(k.slice(2),v);else if(k==='html')e.innerHTML=v;else if(v!==false&&v!=null)e.setAttribute(k,v===true?'':v)}for(const c of kids.flat()){if(c==null||c===false)continue;e.append(c.nodeType?c:document.createTextNode(c))}return e};
+const toast=m=>{let t=$('.toast');if(!t){t=h('div',{class:'toast'});document.body.append(t)}t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2600)};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* ---------- Standardtexte ---------- */
+const DEF={
+ rueck:['{alt}: We made it. And sometimes we even enjoyed it.','What was good in {alt}, we take along. The rest stays here.','Thank you to everyone who made this year brighter.','Laughed more than planned. Exactly how it should be.','365 days, countless coffees and the best crew.','Not everything went to plan. But we were together.','Here\'s to the little wins of {alt}!','A year full of moments no photo can hold.','If you grew this year, raise your glass now.','Saying {alt} one last time. And then: bye!'],
+ affi:['I can dream big and start small.','I am enough, just as I am.','I let go of what doesn\'t serve me.','I trust my path.','My pace is the right pace.','I deserve rest as much as success.','I\'m grateful for what is and open to what\'s coming.','I\'m allowed to make mistakes and grow from them.','I surround myself with people who are good for me.','I celebrate my progress, even the small steps.','{neu} will be my year.','I\'m braver than I think.','I say yes to myself more often.','Good things are already on their way to me.'],
+ vors:['Put the phone down more often.','See more sunrises. Or at least one.','Call friends instead of just sending voice notes.','Try a new recipe every month.','Do something for the first time once a month.','Drink more water. Champagne doesn\'t count.','Go to bed earlier. Starting tomorrow. Maybe.','Finally declutter the closet.','Say no more often, without feeling guilty.','10 minutes a day just for me.','Take the trip I\'ve been planning forever.','Scroll less, live more.','Read one book a month.','Go for walks more often, even in the rain.','Say thank you more often.','Actually water the plants.','Be more spontaneous. According to plan.','Learn something completely new.','Dance more often, even in the kitchen.','Treat myself like I treat my best friend.']
+};
+const nextNY=()=>{const n=new Date();return new Date(n.getFullYear()+1,0,1,0,0,0)};
+const pad=n=>String(n).padStart(2,'0');
+const toLocalInput=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+const KEY='silvester-countdown-v1-en';
+let S=Object.assign({party:'New Year\'s Eve Party',sub:'',theme:'mid',target:toLocalInput(nextNY()),rueck:DEF.rueck.join('\n'),affi:DEF.affi.join('\n'),vors:DEF.vors.join('\n'),head:'Happy {neu}!',msg:'Here\'s to a year full of love, laughter and good moments. So glad you\'re here!',sound:true,slide:8,useR:true,useA:true,useV:true},(()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}})());
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const targetDate=()=>{const d=new Date(S.target);return isNaN(d)?nextNY():d};
+const years=()=>{const t=targetDate();let neu=t.getFullYear();if(!(t.getMonth()===0&&t.getDate()===1))neu=t.getFullYear()+1;return{neu,alt:neu-1}};
+const fill=s=>{const y=years();return s.replace(/\{neu\}/g,y.neu).replace(/\{alt\}/g,y.alt)};
+const lines=s=>s.split('\n').map(x=>x.trim()).filter(Boolean).map(fill);
+const setTheme=()=>{document.body.className='t-'+({mid:'mid',champ:'champ',bord:'bord'}[S.theme]||'mid')};
+
+/* ---------- Fotos (IndexedDB, bleiben auf dem Gerät) ---------- */
+const DB={db:null,
+ open(){return this.db?Promise.resolve(this.db):new Promise((res,rej)=>{const r=indexedDB.open('silvester-countdown',1);r.onupgradeneeded=()=>r.result.createObjectStore('p',{keyPath:'id'});r.onsuccess=()=>{this.db=r.result;res(this.db)};r.onerror=()=>rej(r.error)})},
+ async all(){const db=await this.open();return new Promise(res=>{const out=[];const c=db.transaction('p').objectStore('p').openCursor();c.onsuccess=()=>{const cur=c.result;if(cur){out.push(cur.value);cur.continue()}else res(out.sort((a,b)=>a.id-b.id))};c.onerror=()=>res(out)})},
+ async put(v){const db=await this.open();return new Promise((res,rej)=>{const t=db.transaction('p','readwrite');t.objectStore('p').put(v);t.oncomplete=res;t.onerror=()=>rej(t.error)})},
+ async del(id){const db=await this.open();return new Promise(res=>{const t=db.transaction('p','readwrite');t.objectStore('p').delete(id);t.oncomplete=res})}
+};
+let PH=[];const urls=new Map();
+const urlOf=p=>{if(!urls.has(p.id))urls.set(p.id,URL.createObjectURL(p.blob));return urls.get(p.id)};
+const compress=f=>new Promise((res,rej)=>{const img=new Image();const u=URL.createObjectURL(f);img.onload=()=>{const m=1800,s=Math.min(1,m/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>b?res(b):rej(),'image/jpeg',.86)};img.onerror=()=>{URL.revokeObjectURL(u);rej()};img.src=u});
+
+/* ---------- Ton (wird im Browser erzeugt) ---------- */
+const AU={ctx:null,
+ init(){if(!this.ctx){const C=window.AudioContext||window.webkitAudioContext;if(C)this.ctx=new C()}if(this.ctx&&this.ctx.state==='suspended')this.ctx.resume()},
+ beep(f=880,d=.18,v=.25){if(!S.sound||!this.ctx)return;const c=this.ctx,o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,c.currentTime);g.gain.linearRampToValueAtTime(v,c.currentTime+.01);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);o.connect(g).connect(c.destination);o.start();o.stop(c.currentTime+d+.05)},
+ chime(){[523.25,659.25,783.99,1046.5].forEach((f,i)=>setTimeout(()=>this.beep(f,1.4,.18),i*110))},
+ boom(v=.5){if(!S.sound||!this.ctx)return;const c=this.ctx,len=c.sampleRate*1.2,b=c.createBuffer(1,len,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3.5);const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type='lowpass';f.frequency.value=600+Math.random()*900;const g=c.createGain();g.gain.value=v*(.5+Math.random()*.5);s.connect(f).connect(g).connect(c.destination);s.start()},
+ crackle(){if(!S.sound||!this.ctx)return;for(let i=0;i<7;i++)setTimeout(()=>this.beep(1800+Math.random()*2400,.04,.05),300+i*45+Math.random()*80)}
+};
+
+/* =================== EINRICHTUNG =================== */
+async function renderSetup(){
+ stopShow();setTheme();PH=await DB.all().catch(()=>[]);
+ const app=$('#app');app.innerHTML='';
+ const T=k=>h('textarea',{class:'inp',oninput:e=>{S[k]=e.target.value;save();cnt[k].textContent=lines(S[k]).length+' entries'}},S[k]);
+ const cnt={rueck:h('div',{class:'cnt'}),affi:h('div',{class:'cnt'}),vors:h('div',{class:'cnt'})};
+ ['rueck','affi','vors'].forEach(k=>cnt[k].textContent=lines(S[k]).length+' entries');
+ const inp=(k,ph,type='text')=>h('input',{class:'inp',type,placeholder:ph||'',value:S[k],oninput:e=>{S[k]=e.target.value;save()}});
+ const thBtn=(k,name,desc,grad)=>h('button',{class:'th'+(S.theme===k?' on':''),onclick:()=>{S.theme=k;save();setTheme();document.querySelectorAll('.th').forEach(b=>b.classList.toggle('on',b.dataset.k===k))},'data-k':k},h('div',{class:'sw',style:`background:${grad}`}),h('b',{},name),h('small',{},desc));
+ const grid=h('div',{class:'photos'});
+ const drawGrid=()=>{grid.innerHTML='';PH.forEach(p=>grid.append(h('div',{class:'ph'},h('img',{src:urlOf(p),alt:''}),h('button',{title:'Remove',onclick:async()=>{await DB.del(p.id);PH=PH.filter(x=>x.id!==p.id);drawGrid()}},'×'))));phCount.textContent=PH.length?PH.length+' photos in the slideshow':'No photos yet. Without photos the countdown runs in the middle of the screen.'};
+ const phCount=h('div',{class:'cnt'});
+ const file=h('input',{type:'file',accept:'image/*',multiple:true,style:'display:none',onchange:async e=>{const fs=[...e.target.files];e.target.value='';toast(fs.length+' photos are being added …');let id=Date.now();for(const f of fs){try{const b=await compress(f);const p={id:id++,blob:b};await DB.put(p);PH.push(p)}catch(err){}}drawGrid();toast('Photos saved')}});
+ let tab='rueck';
+ const tabBox=h('div');
+ const tabs=h('div',{class:'tabs'});
+ const TL={rueck:'Year in review',affi:'Affirmations',vors:'Resolutions'};
+ const useK={rueck:'useR',affi:'useA',vors:'useV'};
+ const drawTabs=()=>{tabs.innerHTML='';for(const k in TL)tabs.append(h('button',{class:'tab'+(tab===k?' on':''),onclick:()=>{tab=k;drawTabs()}},TL[k]));tabBox.innerHTML='';tabBox.append(T(tab),cnt[tab],h('label',{class:'chk'},h('input',{type:'checkbox',checked:S[useK[tab]],onchange:e=>{S[useK[tab]]=e.target.checked;save()}}),'Show in countdown'),h('button',{class:'btn ghost',style:'margin-top:14px;padding:10px 18px;font-size:14px',onclick:()=>{S[tab]=DEF[tab].join('\n');save();drawTabs();toast('Templates restored')}},'Restore templates'))};
+ drawTabs();
+ const y=years();
+ app.append(h('div',{class:'setup'},
+  h('div',{class:'brand'},h('div',{class:'k'},'New Year\'s Eve '+y.alt+' · '+y.neu),h('h1',{},'Your ',h('i',{},'Countdown')),h('p',{},'Set everything up in peace, then tap “Start countdown” and let it run on your TV, projector or laptop.')),
+  h('div',{class:'sec'},h('h2',{},h('span',{class:'n'},'1'),'Your party'),h('p',{class:'hint'},'Name and subtitle appear large in the countdown.'),
+   h('div',{class:'row'},h('label',{class:'f'},h('span',{},'Party name'),inp('party','e.g. New Year\'s at Lia & Max\'s')),h('label',{class:'f'},h('span',{},'Subtitle (optional)'),inp('sub','e.g. Brooklyn · Rooftop'))),
+   h('div',{class:'row',style:'margin-top:14px'},h('label',{class:'f'},h('span',{},'Countdown ends on'),h('input',{class:'inp',type:'datetime-local',value:S.target,onchange:e=>{S.target=e.target.value;save()}})),h('label',{class:'f'},h('span',{},'Slideshow: seconds per photo'),h('select',{class:'inp',onchange:e=>{S.slide=+e.target.value;save()}},[5,8,12,20].map(v=>h('option',{value:v,selected:S.slide==v},v+' seconds')))))),
+  h('div',{class:'sec'},h('h2',{},h('span',{class:'n'},'2'),'Design'),h('p',{class:'hint'},'Choose the color mood for the night.'),
+   h('div',{class:'themes'},thBtn('mid','Midnight','Navy & gold','linear-gradient(135deg,#0b1430,#1c2a58 60%,#d9b56b)'),thBtn('champ','Champagne','Black & champagne','linear-gradient(135deg,#11100e,#2b2520 60%,#e3c48a)'),thBtn('bord','Bordeaux','Burgundy & gold','linear-gradient(135deg,#1c0910,#431326 60%,#e2b66e)'))),
+  h('div',{class:'sec'},h('h2',{},h('span',{class:'n'},'3'),'Photos for the slideshow'),h('p',{class:'hint'},'Favorite photos of the year or from your guests. The photos stay on this device only.'),
+   h('label',{class:'add'},file,'＋ Add photos'),phCount,grid),
+  h('div',{class:'sec'},h('h2',{},h('span',{class:'n'},'4'),'Quotes, affirmations & resolutions'),h('p',{class:'hint'},'They take turns in the countdown. One entry per line. {alt} becomes '+y.alt+', {neu} becomes '+y.neu+'.'),tabs,tabBox),
+  h('div',{class:'sec'},h('h2',{},h('span',{class:'n'},'5'),'At midnight'),h('p',{class:'hint'},'Appears with fireworks and confetti as soon as the countdown hits zero.'),
+   h('label',{class:'f'},h('span',{},'Headline'),inp('head','Happy {neu}!')),
+   h('label',{class:'f',style:'margin-top:14px'},h('span',{},'Your text'),h('textarea',{class:'inp',style:'min-height:90px',oninput:e=>{S.msg=e.target.value;save()}},S.msg)),
+   h('label',{class:'chk'},h('input',{type:'checkbox',checked:S.sound,onchange:e=>{S.sound=e.target.checked;save()}}),'Play sounds (beeps in the last 10 seconds, fireworks)')),
+  h('p',{class:'note'},'Everything is saved automatically on this device. Tip: run the countdown on a laptop connected to your TV via HDMI, and plug in the charger.')
+ ),
+ h('div',{class:'bar'},h('button',{class:'btn ghost',onclick:()=>startShow(true)},'Test run: last 15 seconds'),h('button',{class:'btn ghost',onclick:()=>{AU.init();openDraw()}},'Draw a resolution'),h('button',{class:'btn gold',onclick:()=>startShow(false)},'Start countdown ✦')));
+ drawGrid();
+}
+
+/* =================== SHOW =================== */
+let SH=null;
+function stopShow(){if(!SH)return;cancelAnimationFrame(SH.raf);clearInterval(SH.iv);clearInterval(SH.slideIv);clearInterval(SH.cardIv);clearTimeout(SH.idleT);if(SH.wake)SH.wake.release().catch(()=>{});window.removeEventListener('resize',SH.onResize);document.removeEventListener('keydown',SH.onKey);SH=null;if(document.fullscreenElement)document.exitFullscreen().catch(()=>{})}
+async function startShow(test){
+ AU.init();PH=await DB.all().catch(()=>[]);
+ stopShow();setTheme();
+ const app=$('#app');app.innerHTML='';
+ const y=years();
+ const tgt=test?new Date(Date.now()+15500):targetDate();
+ const items=[];
+ if(S.useR)lines(S.rueck).forEach(t=>items.push(['Looking back '+y.alt,t]));
+ if(S.useA)lines(S.affi).forEach(t=>items.push(['Affirmation',t]));
+ if(S.useV)lines(S.vors).forEach(t=>items.push(['Resolution for '+y.neu,t]));
+ const mix=shuffle(items);
+ const hasPh=PH.length>0;
+ const unit=(l)=>{const v=h('div',{class:'v'});return{el:h('div',{class:'unit'},v,h('div',{class:'l'},l)),v}};
+ const uD=unit('Days'),uH=unit('Hours'),uM=unit('Minutes'),uS=unit('Seconds');
+ const sepD=h('div',{class:'sep'},'·');
+ const clock=h('div',{class:'clock'},uD.el,sepD,uH.el,h('div',{class:'sep'},':'),uM.el,h('div',{class:'sep'},':'),uS.el);
+ const tick=h('div',{class:'tick'});
+ const frame=h('div',{class:'frame'});
+ const blur=h('div',{class:'blurbg'});
+ const big=h('div',{class:'big'},'60');
+ const midH=h('h1',{},fill(S.head||'Happy {neu}!'));
+ const root=h('div',{class:'show'},
+  h('canvas',{id:'stars'}),blur,
+  h('div',{class:'stage '+(hasPh?'photos':'nophotos')},frame,h('div',{class:'side'},h('div',{},h('div',{class:'pname'},S.party||'New Year\'s Eve'),S.sub?h('div',{class:'psub'},S.sub):null),h('div',{class:'goldline'}),clock,tick)),
+  h('div',{class:'final'},h('div',{class:'lab'},'Only'),big,h('div',{class:'pn'},S.party||'')),
+  h('div',{class:'mid'},midH,h('p',{},fill(S.msg||'')),h('div',{class:'pn'},S.party||'')),
+  h('canvas',{id:'fx'}),h('canvas',{id:'cf'}),
+  h('div',{class:'ctrl'},h('button',{onclick:()=>fs()},'⛶ Fullscreen'),h('button',{onclick:()=>openDraw()},'✦ Draw a resolution'),h('button',{onclick:e=>{S.sound=!S.sound;save();e.target.textContent=S.sound?'🔊 Sound on':'🔇 Sound off';AU.init()}},S.sound?'🔊 Sound on':'🔇 Sound off'),h('button',{onclick:()=>{location.hash='';renderSetup()}},'✎ Edit'))
+ );
+ app.append(root);
+ SH={root,tgt,test,state:'run',last:-1,mix,mi:0,pi:0};
+ // Fotos
+ if(hasPh){const order=shuffle(PH);const imgs=[h('img',{alt:''}),h('img',{alt:''})];frame.append(...imgs);let k=0;
+  const next=()=>{const p=order[SH.pi++%order.length];const im=imgs[k%2];k++;im.onload=()=>{imgs.forEach(x=>x.classList.remove('on'));void im.offsetWidth;im.classList.add('on');blur.style.backgroundImage=`url(${im.src})`;blur.classList.add('on')};im.src=urlOf(p)};
+  next();SH.slideIv=setInterval(next,Math.max(4,S.slide||8)*1000)}
+ // Sprüche
+ const showCard=()=>{if(!mix.length)return;const [c,t]=mix[SH.mi++%mix.length];const old=tick.querySelector('.card.on');if(old){old.classList.remove('on');setTimeout(()=>old.remove(),1100)}const cd=h('div',{class:'card'},h('div',{class:'chip'},c),h('q',{},t));tick.append(cd);requestAnimationFrame(()=>requestAnimationFrame(()=>cd.classList.add('on')))};
+ showCard();SH.cardIv=setInterval(showCard,9000);
+ // Ziffern
+ const setV=(u,n)=>{const s=pad(n);if(u.v.textContent!==s){u.v.innerHTML='';[...s].forEach(ch=>u.v.append(h('span',{},ch)))}};
+ const upd=()=>{if(!SH)return;const ms=SH.tgt-Date.now();const sec=Math.ceil(ms/1000);
+  if(ms<=0){if(SH.state!=='zero'&&SH.state!=='after')midnight();return}
+  const d=Math.floor(sec/86400),hh=Math.floor(sec%86400/3600),mm=Math.floor(sec%3600/60),ss=sec%60;
+  uD.el.style.display=sepD.style.display=d>0?'':'none';setV(uD,d);setV(uH,hh);setV(uM,mm);setV(uS,ss);
+  if(sec<=60){if(SH.state==='run'){SH.state='fin';root.classList.add('fin')}
+   if(sec!==SH.last){big.textContent=sec;big.classList.remove('pop');void big.offsetWidth;big.classList.add('pop');if(sec<=10){root.classList.add('ten');AU.beep(sec<=3?1046:880,.22,.3)}}}
+  SH.last=sec};
+ upd();SH.iv=setInterval(upd,200);
+ // Sterne & Feuerwerk
+ const st=$('#stars',root),fx=$('#fx',root),cf=$('#cf',root);
+ const resize=()=>{const dpr=Math.min(2,devicePixelRatio||1);[st,fx,cf].forEach(c=>{c.width=innerWidth*dpr;c.height=innerHeight*dpr;c.getContext('2d').setTransform(dpr,0,0,dpr,0,0)});SH.stars=Array.from({length:Math.round(innerWidth*innerHeight/5200)},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.3+.2,p:Math.random()*6.28,s:.4+Math.random()*1.4}))};
+ SH.onResize=resize;window.addEventListener('resize',resize);resize();
+ SH.P=[];SH.R=[];SH.C=[];SH.rate=0;
+ const gold=getComputedStyle(document.body).getPropertyValue('--gold').trim()||'#d9b56b';
+ const COLS=[gold,'#fff4dc','#f3dfaa','#ffd1dc','#bfe3ff','#ffe08a','#ffffff'];
+ const loop=t=>{if(!SH)return;const sx=st.getContext('2d'),w=innerWidth,hgt=innerHeight;sx.clearRect(0,0,w,hgt);
+  for(const s of SH.stars){const a=.35+.65*Math.abs(Math.sin(t/1000*s.s+s.p));sx.globalAlpha=a*.8;sx.fillStyle='#fff8e6';sx.beginPath();sx.arc(s.x,s.y,s.r,0,6.28);sx.fill()}sx.globalAlpha=1;
+  const c=fx.getContext('2d');c.globalCompositeOperation='destination-out';c.fillStyle='rgba(0,0,0,.22)';c.fillRect(0,0,w,hgt);c.globalCompositeOperation='lighter';
+  if(SH.rate&&Math.random()<SH.rate)launch();
+  for(let i=SH.R.length-1;i>=0;i--){const r=SH.R[i];r.x+=r.vx;r.y+=r.vy;r.vy+=.06;c.fillStyle=r.col;c.globalAlpha=.9;c.beginPath();c.arc(r.x,r.y,2,0,6.28);c.fill();if(Math.random()<.6)SH.P.push({x:r.x,y:r.y,vx:(Math.random()-.5)*.6,vy:Math.random()*.8,life:24,max:24,col:'#ffe9b8',s:1.2,g:.02});if(r.vy>=-.4){explode(r);SH.R.splice(i,1)}}
+  for(let i=SH.P.length-1;i>=0;i--){const p=SH.P[i];p.x+=p.vx;p.y+=p.vy;p.vx*=.985;p.vy=p.vy*.985+(p.g??.045);p.life--;const a=Math.max(0,p.life/p.max);c.globalAlpha=a;c.fillStyle=p.col;c.beginPath();c.arc(p.x,p.y,p.s*(p.tw?(.6+Math.random()*.8):1),0,6.28);c.fill();if(p.life<=0)SH.P.splice(i,1)}
+  c.globalCompositeOperation='source-over';c.globalAlpha=1;
+  {const c=cf.getContext('2d');c.clearRect(0,0,w,hgt);
+  for(let i=SH.C.length-1;i>=0;i--){const k=SH.C[i];k.x+=k.vx+Math.sin(t/600+k.p)*.6;k.y+=k.vy;k.r+=k.vr;c.globalAlpha=1;c.save();c.translate(k.x,k.y);c.rotate(k.r);c.scale(1,Math.cos(t/220+k.p));c.fillStyle=k.col;c.fillRect(-k.w/2,-k.h/2,k.w,k.h);c.restore();if(k.y>hgt+30)SH.C.splice(i,1)}}
+  c.globalAlpha=1;SH.raf=requestAnimationFrame(loop)};
+ const launch=(x)=>{const w=innerWidth,hgt=innerHeight;x=x??w*(.12+Math.random()*.76);const ty=hgt*(.12+Math.random()*.32);const vy=-Math.sqrt(2*.06*(hgt-ty));SH.R.push({x,y:hgt+10,vx:(Math.random()-.5)*1.2,vy,col:'#fff1cf'})};
+ const explode=r=>{const col=COLS[Math.random()*COLS.length|0],col2=COLS[Math.random()*COLS.length|0];const n=90+Math.random()*80|0,sp=2.6+Math.random()*2.6,type=Math.random();
+  for(let i=0;i<n;i++){const a=Math.random()*6.28,v=type<.35?sp:(Math.random()**.5)*sp;SH.P.push({x:r.x,y:r.y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:60+Math.random()*40,max:100,col:Math.random()<.5?col:col2,s:1.6+Math.random()*1.2,tw:type>.7})}
+  AU.boom(.45);if(type>.6)AU.crackle()};
+ SH.confetti=n=>{const w=innerWidth;for(let i=0;i<n;i++)SH.C.push({x:Math.random()*w,y:-20-Math.random()*innerHeight*.6,vx:(Math.random()-.5)*1.2,vy:1.6+Math.random()*2.6,r:Math.random()*6.28,vr:(Math.random()-.5)*.2,w:6+Math.random()*7,h:9+Math.random()*9,p:Math.random()*6.28,col:COLS[Math.random()*COLS.length|0]})};
+ SH.launch=launch;
+ SH.raf=requestAnimationFrame(loop);
+ // Mitternacht
+ const midnight=()=>{SH.state='zero';root.classList.remove('fin','ten');root.classList.add('zero');AU.chime();
+  for(let i=0;i<7;i++)setTimeout(()=>SH&&launch(innerWidth*(.1+i*.13)),i*160);
+  SH.confetti(260);setTimeout(()=>SH&&SH.confetti(180),2500);SH.rate=.09;
+  setTimeout(()=>{if(!SH)return;SH.rate=.035},25000);
+  setTimeout(()=>{if(!SH)return;SH.state='after';root.classList.add('after');
+   // Nach Mitternacht: Vorsätze & Affirmationen weiter, Überschrift wird zum neuen Jahr
+   $('.pname',root).textContent=fill(S.head||'Happy {neu}!');clock.style.display='none';
+   const post=shuffle([...lines(S.vors).map(t=>['Resolution for '+y.neu,t]),...lines(S.affi).map(t=>['Affirmation',t])]);if(post.length){mix.length=0;mix.push(...post);SH.mi=0}SH.rate=.02},90000)};
+ // Steuerung
+ const wake=async()=>{try{if('wakeLock' in navigator)SH.wake=await navigator.wakeLock.request('screen')}catch(e){}};wake();
+ document.addEventListener('visibilitychange',()=>{if(SH&&document.visibilityState==='visible')wake()});
+ const idle=()=>{root.classList.remove('idle');clearTimeout(SH.idleT);SH.idleT=setTimeout(()=>SH&&root.classList.add('idle'),3000)};
+ root.addEventListener('mousemove',idle);root.addEventListener('touchstart',idle,{passive:true});idle();
+ SH.onKey=e=>{if($('.draw.on'))return;if(e.key==='f'||e.key==='F')fs();if(e.key==='v'||e.key==='V')openDraw();if(e.key==='Escape'&&!document.fullscreenElement){renderSetup()}};
+ document.addEventListener('keydown',SH.onKey);
+ if(test)toast('Test run: fireworks in 15 seconds');
+ if(!test&&!document.fullscreenElement){root.append(h('div',{class:'start'},h('button',{class:'btn gold',onclick:e=>{AU.init();fs();e.target.parentNode.remove()}},'Start in fullscreen'),h('p',{},'Tip: press F to toggle fullscreen, press V to draw a resolution.')))}
+}
+function fs(){const d=document.documentElement;if(!document.fullscreenElement){(d.requestFullscreen||d.webkitRequestFullscreen||(()=>{})).call(d)}else document.exitFullscreen&&document.exitFullscreen()}
+
+/* ---------- Vorsatz ziehen ---------- */
+function openDraw(){
+ const y=years();const v=lines(S.vors),a=lines(S.affi);if(!v.length&&!a.length)return toast('No resolutions added');
+ const vt=v.length?v[Math.random()*v.length|0]:'',at=a.length?a[Math.random()*a.length|0]:'';
+ let ov=$('.draw');if(ov)ov.remove();
+ const card=h('div',{class:'dc'},
+  h('div',{class:'fr'},h('div',{class:'orn'}),h('small',{},'Your resolution for'),h('div',{class:'yr'},String(y.neu)),h('div',{class:'tap'},'Tap to reveal')),
+  h('div',{class:'bk'},h('div',{class:'orn'}),h('div',{class:'k'},'Your resolution for '+y.neu),h('h3',{},vt||at),at&&vt?h('div',{class:'ln'}):null,at&&vt?h('div',{class:'k',style:'margin-bottom:10px'},'Your affirmation'):null,at&&vt?h('p',{},at):null));
+ ov=h('div',{class:'draw on',onclick:e=>{if(e.target===ov)ov.remove()}},card,h('div',{class:'drawhint'},'Tap to reveal · tap outside to close'));
+ card.addEventListener('click',()=>{if(!card.classList.contains('flip')){card.classList.add('flip');AU.init();AU.chime();if(SH&&SH.confetti)SH.confetti(90)}else{ov.remove();openDraw()}});
+ document.body.append(ov);
+}
+
+/* ---------- Start ---------- */
+window.addEventListener('hashchange',()=>{if(location.hash==='#show')startShow(false)});
+(location.hash==='#show'?startShow(false):renderSetup());
+
+
+})()}else{(function(){
+
 'use strict';
 /* ================= Silvester-Countdown · Lia Valentina ================= */
 const $=(s,r=document)=>r.querySelector(s);
@@ -370,6 +575,7 @@ function openDraw(){
 window.addEventListener('hashchange',()=>{if(location.hash==='#show')startShow(false)});
 (location.hash==='#show'?startShow(false):renderSetup());
 
-</script>
+
+})()}</script>
 </body>
 </html>

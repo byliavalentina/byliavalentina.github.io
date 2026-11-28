@@ -112,7 +112,163 @@ h1.t i{font-family:'Great Vibes',cursive;font-style:normal;font-weight:400;color
 <body>
 <div id="app"></div>
 
-<script>
+<script>(function(){var q=new URLSearchParams(location.search).get('lang');var L=q||localStorage.getItem('lv-lang')||((navigator.language||'de').toLowerCase().startsWith('de')?'de':'en');if(L!=='de'&&L!=='en')L='en';window.__LANG=L;document.documentElement.lang=L;
+var b=document.createElement('button');b.textContent=L==='de'?'EN':'DE';b.setAttribute('aria-label','Language');b.style.cssText='position:fixed;left:10px;bottom:10px;z-index:99999;font:600 12px system-ui,sans-serif;padding:6px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.4);background:rgba(255,255,255,.85);color:#333;opacity:.75;cursor:pointer';b.onclick=function(){try{localStorage.setItem('lv-lang',L==='de'?'en':'de')}catch(e){};var u=new URL(location.href);u.searchParams.delete('lang');location.href=u.toString()};document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(b)});if(document.body)document.body.appendChild(b)})();
+if(window.__LANG==='en'){(function(){
+
+/* Alle Texte: eigene Formulierungen von Lia Valentina. {alt} = altes Jahr, {neu} = neues Jahr, {spieler} = zufälliger Mitspieler */
+const CARDS={
+gut:[
+'What was your best moment of {alt}?','What are you really proud of in {alt}?','Who made your {alt} better? Tell them now.','What was the best meal you had in {alt}?','Which song was your soundtrack for {alt}?','Which decision in {alt} was exactly right?','What did you do for the first time in {alt}?','Which day of {alt} would you happily repeat?','What did you learn about yourself in {alt}?','Which small habit did you good in {alt}?','What was your best purchase in {alt}?','Which place impressed you most in {alt}?','What made you laugh the most in {alt}?','Which compliment from {alt} do you still remember?','Which show or book was your highlight of {alt}?','What are you grateful for tonight?','What did {spieler} do especially well in {alt}?','Which photo from {alt} will you show everyone? Phones out!','What did you achieve in {alt} even though you had doubts?','Which adventure from {alt} will you still tell in ten years?','What was the best gift you got in {alt}?','What courage did you have in {alt} that you didn\'t have before?','What surprised you in {alt}, in a good way?','What was the best moment with this group in {alt}?','Describe {alt} in three words, positive only.'
+],
+schlecht:[
+'What was your biggest flop of {alt}?','Which message from {alt} do you wish you hadn\'t sent?','What did you completely forget in {alt}?','Which bad buy from {alt} is still unopened in your closet?','What was the most embarrassing moment of {alt}?','Which resolution for {alt} didn\'t even last until February?','What annoyed you most in {alt}?','Which appointment did you forget in {alt}, hoping nobody noticed?','What was your worst workday of {alt}?','Which hairstyle or outfit from {alt} do you regret?','Which trend from {alt} should please stay behind?','When did you shake your head at yourself the most in {alt}?','What was your most absurd argument of {alt}?','What did you put off far too long in {alt}?','Which dish went totally wrong for you in {alt}?','Which excuse did you use most in {alt}?','Which rumor about you from {alt} is half true?','Which sentence do you never want to hear again in {neu}?','What was your silliest accident of {alt}?','Which date or meetup from {alt} was a disaster?','Which feeling from {alt} are you leaving behind tonight?','What would you delete from {alt} right away if you could?','When did you swear the loudest in {alt}?','Which app stole the most time from you in {alt}?','Describe {alt} in three words, totally honest.'
+],
+vorsatz:[
+'What\'s your honest resolution for {neu}?','Which habit are you leaving behind in {neu}?','What do you want to try for the first time in {neu}?','Where do you really want to travel in {neu}?','Who do you want to see more often in {neu}?','What should {spieler} ask you more often in {neu}?','Which resolution have you made five times already? For real this time?','What do you want to learn in {neu}?','What do you want more time for in {neu}?','What will you say more often in {neu}: yes or no?','Give {spieler} a resolution for {neu}. They have to accept it.','What will you treat yourself to in {neu}?','Which goal for {neu} do you barely dare to say out loud? Say it.','What should be different at the end of {neu}?','Who will you finally call in {neu}?','Which resolution would you prescribe to everyone here?','What\'s your funniest resolution for {neu}?','What do you want to do less in {neu}?','Which project are you starting in January?','If {neu} had a title, what would it be?','What do you want to tackle more bravely in {neu}?','Which resolution should we remind you of in twelve months?','What will you finally clear up in {neu}, in your head or at home?','What do you wish {spieler} for {neu}?','Which sentence will you write on your mirror for {neu}?'
+],
+w1:[
+'What were you most afraid of as a kid?','Which song do you secretly sing along to the loudest?','What\'s your most useless talent?','Which food would you never touch again?','What was your first dream job?','Which show have you binge-watched the most?','What\'s the most childish thing you still do?','Who in this group do you call when your car breaks down at night?','What was your most embarrassing nickname?','Which celebrity would you like to shadow for a day?','What\'s the last thing you googled?','Which lie do you tell most often, like “On my way”?','What was your worst summer job?','What\'s the longest you\'ve gone without a shower?','Which of your parents\' rules do you still secretly break?','What\'s the weirdest thing in your bag or pocket right now?','What would you do with a million, honestly?','Which animal would you be and why?','Which movie makes you cry every time?','What do you eat when nobody\'s watching?','When did you last really laugh?','Which superpower would you want, and how would you misuse it?','What annoys you most about yourself?','Which gift have you regifted?','Who here would you pick as a roommate, and who never?','What was your biggest school prank?','Which ad jingle is stuck in your head forever?','What would you do if you were invisible for a day?','Which three things would you take to a desert island?','Which question have you never dared to ask here?'
+],
+w2:[
+'Which message on your phone must nobody here ever see?','Who here did you completely misjudge when you first met?','What\'s the biggest lie you ever told your parents?','When did you last totally embarrass yourself?','Which unpopular opinion do you secretly hold?','Who do you still owe an apology?','What\'s the dumbest idea you ever actually did?','Who in your life would you love to tell what you really think?','Which secret have you kept the longest? No names.','When did you last cry and why?','What\'s the most expensive thing you ever broke?','Which quality of {spieler} would you like to have?','What would you change in your life right away if nobody judged?','Who did you last stalk, online of course?','What\'s the most dishonest thing you did in {alt}?','Which contact in your phone is saved under a fake name?','What was your worst excuse to skip a party?','When did you last pretend to be busy?','Who in your life thinks you\'re nicer than you are?','What would your younger self say about your life today?','What have you kept that wasn\'t yours?','Who here would survive a zombie apocalypse, and who wouldn\'t make it first?','What was your biggest mistake at work?','What do you regret never saying?','Who here would you ask for advice on heartbreak?'
+],
+w3:[
+'How many people have you kissed, roughly?','What was your worst date?','Who was your secret teenage crush?','Who here would you go on a week\'s vacation with, just the two of you?','What\'s the most embarrassing reason one of your relationships ended?','Which pickup line has actually worked on you?','What\'s the craziest thing you ever did for a crush?','Which dating app bio would you write for yourself? Say it out loud.','When did you last text someone you shouldn\'t have?','Which celebrity is your free pass?','What was your most absurd attempt at flirting?','What\'s your biggest weakness when dating?','What was your most embarrassing moment after too much champagne?','Which ex are you still in touch with, and why?','What\'s the most romantic thing you\'ve ever done?','What was the worst kiss of your life?','What would your ex say about you, honestly?','Which quality in others makes you weak instantly?','What\'s the most spontaneous thing you\'ve done at a party?','Who in this room is the best dressed tonight?','Have you ever ghosted someone? Tell us.','What\'s your biggest red flag in others, and do you have it yourself?','Which message did you send at 3 a.m. and regret in the morning?','What\'s the strangest place you\'ve met someone?','Which secret about you would blow everyone\'s mind here?'
+],
+p1:[
+'Give a 30-second farewell toast to {alt}.','Impersonate someone here until the others guess who it is.','Sing the chorus of your favorite song, with full passion.','Dance for 20 seconds like you\'re at an 80s party.','Talk in a news anchor voice until your next turn.','Tell a joke. If nobody laughs, tell another.','Take a selfie with {spieler} making your silliest faces.','Name five things in 10 seconds that shouldn\'t exist anymore in {neu}.','Strike a champion\'s victory pose and hold it until your next turn.','Explain {alt} to us as a weather forecast.','Act out your favorite moment of {alt} without words.','Show the last photo in your camera roll.','Let {spieler} style your hair.','Wear something funny on your head until midnight.','Read out the last message from your mom or dad.','Give everyone here an honest compliment.','Speak only in rhymes until your next turn.','Do ventriloquism for one minute.','Sell us an object in the room like a TV shopping host.','Invent a New Year\'s battle cry and teach it to everyone.','Count down from 20 and dance on every number.','Describe your {alt} as a movie trailer, in a trailer voice.','Do 10 squats and shout “Happy {neu}!” on each one.','Let {spieler} pick a pose for you. Hold it for 30 seconds.','Tell a story from {alt} that\'s half made up. The group guesses.','Talk like a robot until your next turn.','Moonwalk across the room.','Show your most-used emoji and explain it.','Top up everyone\'s drinks. With a butler\'s bow.','Let the group pick a resolution for you and solemnly swear to it.'
+],
+p2:[
+'Ring the neighbors\' bell and ask for a roll of toilet paper. Thank them with “Happy {neu}!”.','Ding dong ditch: ring once, run, get back to the party without being caught.','Go to the window or balcony and shout “Happy {neu}!”.','Sing one verse of a cheesy song on the balcony or in the stairwell.','Call someone you haven\'t talked to in ages and wish them a happy new year.','Send your boss a singing New Year\'s voice note.','Post a story the group chooses. You can delete it tomorrow.','Let {spieler} write a message to a contact of your choice. All you do is press send.','Show your screen time from last week.','Read out your last three Google searches.','Show the most embarrassing photo on your phone.','Send your group chat just the word “Pineapple?” and explain nothing.','Step outside and wish the first person you see a happy new year.','Swap one piece of clothing with {spieler} until midnight.','Eat a spoonful of something from the fridge that the group picks.','Drink your next drink without hands.','Let {spieler} change your social media bio for 24 hours.','Call your parents and tell them you have a resolution that will shock them. Let them guess.','Send your best friend a voice note singing a love song.','Give a speech on why {spieler} is the person of the year {alt}.','Get a mustache drawn on with eyeliner or a pen. It stays until midnight.','Order a fictional pizza with the most absurd toppings in a message to {spieler}.','Stand on a chair for 30 seconds and give a campaign speech for {neu}.','Call your favorite takeout place and wish them a happy new year.','Take a group photo where everyone pretends it\'s 1985.'
+],
+p3:[
+'Read out the last message in your chat with your crush or ex.','Text your ex “Happy {neu}! 🙂”. Replies get read out loud.','Let the group swipe three dating profiles for you.','Whisper a pickup line into {spieler}\'s ear. The group rates it from 1 to 10.','Give {spieler} a kiss on the cheek at midnight.','Dance as seductively as possible with a pillow for 30 seconds.','Text your last date “Still thinking about that night” and show the reply tomorrow.','Let {spieler} read your last dating app message in a dramatic voice.','Propose to {spieler} on one knee with a tinfoil ring.','Show the last selfie you didn\'t send.','Let the group feed you blindfolded.','Tell the story of your first kiss with all the details.','Give the person to your left a 20-second shoulder massage.','Read out the second page of your notes app, whatever\'s on it.','Send a heart emoji to someone of your choice, no explanation.','Make a romantic declaration of love to your phone.','Let {spieler} take a flirty photo of you and set it as your profile picture until tomorrow morning.','Swap tops with {spieler} for the next three rounds.','Tell us what you find attractive about {spieler}, totally honest.','Call your crush, wish them a happy new year and hang up after ten seconds.'
+],
+};
+'use strict';
+const $=(s,r=document)=>r.querySelector(s);
+const h=(t,a={},...k)=>{const e=document.createElement(t);for(const x in a){const v=a[x];if(x==='class')e.className=v;else if(x.startsWith('on'))e.addEventListener(x.slice(2),v);else if(x==='html')e.innerHTML=v;else if(v!==false&&v!=null)e.setAttribute(x,v===true?'':v)}for(const c of k.flat()){if(c==null||c===false)continue;e.append(c.nodeType?c:document.createTextNode(c))}return e};
+const toast=m=>{let t=$('.toast');if(!t){t=h('div',{class:'toast'});document.body.append(t)}t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2200)};
+const rnd=a=>a[Math.random()*a.length|0];
+const now=new Date();const NEU=now.getMonth()>=9?now.getFullYear()+1:now.getFullYear();const ALT=NEU-1;
+const KEY='flaschendrehen-silvester-v1-en';
+let S=Object.assign({players:[],mode:2,drink:false,sound:true,own:{w:[],p:[],r:[],v:[]}},(()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}})());
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+/* ---------- Ton ---------- */
+const AU={c:null,init(){if(!this.c){const C=window.AudioContext||window.webkitAudioContext;if(C)this.c=new C()}if(this.c&&this.c.state==='suspended')this.c.resume()},
+ tone(f,d=.08,v=.12,type='triangle'){if(!S.sound||!this.c)return;const c=this.c,o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(v,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);o.connect(g).connect(c.destination);o.start();o.stop(c.currentTime+d+.02)},
+ tick(){this.tone(1400+Math.random()*300,.03,.06,'square')},
+ chime(){[659,784,988,1319].forEach((f,i)=>setTimeout(()=>this.tone(f,.9,.1,'sine'),i*90))},
+ pop(){if(!S.sound||!this.c)return;const c=this.c,n=c.sampleRate*.25,b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,6);const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=900;s.connect(f).connect(c.destination);s.start()}};
+/* ---------- Sterne ---------- */
+function sky(){const cv=$('#sky')||document.body.appendChild(h('canvas',{id:'sky'}));const x=cv.getContext('2d');let st=[];
+ const rs=()=>{const d=Math.min(2,devicePixelRatio||1);cv.width=innerWidth*d;cv.height=innerHeight*d;x.setTransform(d,0,0,d,0,0);st=Array.from({length:Math.round(innerWidth*innerHeight/6000)},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.2+.2,p:Math.random()*6,s:.5+Math.random()*1.5}))};
+ rs();addEventListener('resize',rs);const lp=t=>{x.clearRect(0,0,innerWidth,innerHeight);for(const s of st){x.globalAlpha=.25+.6*Math.abs(Math.sin(t/1000*s.s+s.p));x.fillStyle='#fff6df';x.beginPath();x.arc(s.x,s.y,s.r,0,6.3);x.fill()}requestAnimationFrame(lp)};requestAnimationFrame(lp)}
+/* ---------- Karten ziehen ---------- */
+const CAT={w:{n:'Truth',ic:'💬',c:'var(--cw)',cd:'#3f5f99'},p:{n:'Dare',ic:'🔥',c:'var(--cp)',cd:'#a8473a'},r:{n:'Looking back '+ALT,ic:'🕰️',c:'var(--cr)',cd:'#3f7d5a'},v:{n:'Resolution '+NEU,ic:'✨',c:'var(--cv)',cd:'#8a6a1c'}};
+const LV=['','Harmless','Bold','Spicy · 18+'];
+const used=new Set();
+function pool(cat){const m=S.mode,o=[];const add=(arr,tag,lv)=>arr.forEach(t=>o.push({t,tag,lv}));
+ if(cat==='w'){add(CARDS.w1,'',1);if(m>=2)add(CARDS.w2,'',2);if(m>=3)add(CARDS.w3,'',3)}
+ if(cat==='p'){add(CARDS.p1,'',1);if(m>=2)add(CARDS.p2,'',2);if(m>=3)add(CARDS.p3,'',3)}
+ if(cat==='r'){add(CARDS.gut,'What was good?',0);add(CARDS.schlecht,'What was bad?',0)}
+ if(cat==='v')add(CARDS.vors||CARDS.vorsatz,'',0);
+ (S.own[cat]||[]).forEach(t=>o.push({t,tag:'Your own card',lv:0}));return o}
+function draw(cat,who){let p=pool(cat);let free=p.filter(c=>!used.has(cat+c.t));if(!free.length){p.forEach(c=>used.delete(cat+c.t));free=p}
+ // höhere Stufen etwas häufiger, damit es eskaliert
+ const w=free.map(c=>c.lv===3?1.6:c.lv===2?1.3:1);let r=Math.random()*w.reduce((a,b)=>a+b,0),i=0;for(;i<free.length;i++){r-=w[i];if(r<=0)break}
+ const c=free[Math.min(i,free.length-1)];used.add(cat+c.t);
+ const others=S.players.filter(x=>x!==who);const txt=c.t.replace(/\{alt\}/g,ALT).replace(/\{neu\}/g,NEU).replace(/\{spieler\}/g,others.length?rnd(others):'someone');
+ return{...c,txt}}
+/* =================== EINRICHTUNG =================== */
+function setup(){const app=$('#app');app.innerHTML='';
+ const list=h('div',{class:'pl'});const draw_=()=>{list.innerHTML='';if(!S.players.length)list.append(h('span',{style:'color:var(--mute);font-size:14px'},'Nobody here yet.'));S.players.forEach((p,i)=>list.append(h('span',{class:'chip'},h('b',{},p),h('button',{title:'Remove',onclick:()=>{S.players.splice(i,1);save();draw_()}},'×'))))};
+ const inp=h('input',{class:'inp',placeholder:'Type a name',maxlength:18,onkeydown:e=>{if(e.key==='Enter')add()}});
+ const add=()=>{const v=inp.value.trim();if(!v)return;if(S.players.length>=14)return toast('Maximum 14 players');if(S.players.includes(v))return toast('That name is already taken');S.players.push(v);save();inp.value='';inp.focus();draw_()};
+ const mode=(n,e,t,d)=>h('button',{class:'mode'+(S.mode===n?' on':''),onclick:ev=>{S.mode=n;save();document.querySelectorAll('.mode').forEach((b,i)=>b.classList.toggle('on',i+1===n))}},h('span',{class:'e'},e),h('b',{},t),h('small',{},d));
+ const sw=(k,t,d)=>h('label',{class:'tog'},h('div',{},h('span',{},t),d?h('small',{},d):null),h('span',{class:'sw'},h('input',{type:'checkbox',checked:S[k],onchange:e=>{S[k]=e.target.checked;save()}}),h('i')));
+ app.append(h('div',{class:'wrap'},
+  h('div',{style:'text-align:center'},h('div',{class:'k'},'New Year\'s Eve '+ALT+' · '+NEU)),
+  h('h1',{class:'t'},'Spin the ',h('i',{},'bottle')),
+  h('p',{class:'sub'},'Truth or dare, year in review and resolutions. Spin the bottle, draw a card, bring on the new year.'),
+  h('div',{class:'sec'},h('h2',{},'Who\'s playing?'),h('p',{class:'h'},'At least 2, best with 4 or more.'),list,h('div',{class:'add'},inp,h('button',{class:'btn gold',onclick:add},'Add'))),
+  h('div',{class:'sec'},h('h2',{},'How wild will it get?'),h('p',{class:'h'},'Decides which truth and dare cards are in the game.'),
+   h('div',{class:'modes'},mode(1,'🥂','Family','harmless, for everyone'),mode(2,'🎉','Friends','with dares at the neighbors\' & on the phone'),mode(3,'🌶️','18+','cheeky, flirty, with dating questions'))),
+  h('div',{class:'sec'},sw('drink','Drinking game rule','Pass and you take a sip. Works just as well alcohol-free.'),sw('sound','Sounds','Clicks while spinning, a chime for each card')),
+  h('div',{class:'sec'},h('h2',{},'Your own cards'),h('p',{class:'h'},'Inside jokes, family stories, office jokes: just add them.'),ownEditor()),
+  h('p',{class:'note'},'Everyone may pass. Without the drinking rule, everyone gets 2 jokers per game.',h('br'),'Please only do dares that don\'t disturb or hurt anyone.')),
+ h('div',{class:'bar'},h('button',{class:'btn gold',onclick:()=>{if(S.players.length<2)return toast('Please add at least 2 names');AU.init();game()}},'Let\'s go ✦')));
+ draw_()}
+function ownEditor(){let tab='w';const box=h('div');const ta=h('input',{class:'inp',placeholder:'Type a new card',maxlength:160,onkeydown:e=>{if(e.key==='Enter')add()}});
+ const add=()=>{const v=ta.value.trim();if(!v)return;(S.own[tab]=S.own[tab]||[]).push(v);save();ta.value='';drawO()};
+ const tabs=h('div',{class:'tabs'});const drawO=()=>{tabs.innerHTML='';for(const k in CAT)tabs.append(h('button',{class:'tab'+(tab===k?' on':''),onclick:()=>{tab=k;drawO()}},CAT[k].n.split(' ')[0]));box.innerHTML='';(S.own[tab]||[]).forEach((t,i)=>box.append(h('div',{class:'own'},h('span',{},t),h('button',{onclick:()=>{S.own[tab].splice(i,1);save();drawO()}},'×'))))};
+ drawO();return h('div',{},tabs,box,h('div',{class:'add'},ta,h('button',{class:'btn ghost',onclick:add},'＋')))}
+/* =================== SPIEL =================== */
+let G=null;
+function game(){const app=$('#app');app.innerHTML='';
+ G={pts:Object.fromEntries(S.players.map(p=>[p,0])),jok:Object.fromEntries(S.players.map(p=>[p,2])),ang:0,spinning:false,cur:null,round:0};
+ const n=S.players.length;const table=h('div',{class:'table'},h('div',{class:'felt'}));
+ const seats=S.players.map((p,i)=>{const a=(i/n)*Math.PI*2-Math.PI/2;const r=44;const el=h('div',{class:'seat',style:`left:${50+r*Math.cos(a)}%;top:${50+r*Math.sin(a)}%`},p);table.append(el);return el});
+ const bottle=h('div',{class:'bottle',html:BOTTLE});table.append(bottle);
+ const hint=h('div',{class:'hint'},'Tap or swipe the bottle to spin');
+ const ch=(k,cls,sub)=>h('button',{class:'choice '+cls,disabled:true,onclick:()=>reveal(k)},CAT[k].ic+' '+CAT[k].n.split(' ')[0],h('small',{},sub));
+ const B={w:ch('w','w',LV[S.mode]),p:ch('p','p',LV[S.mode]),r:ch('r','r','What was good, what was bad?'),v:ch('v','v','for '+NEU)};
+ const round=h('div',{class:'round'},'Round 1');
+ app.append(h('div',{class:'game'},
+  h('div',{class:'top'},h('button',{class:'btn ghost',onclick:()=>{if(confirmLeave())setup()}},'‹ Settings'),round,h('button',{class:'btn ghost',onclick:scores},'🏆 Points')),
+  h('div',{class:'tablewrap'},table),
+  h('div',{class:'side'},hint,h('div',{class:'choices'},B.w,B.p,B.r,B.v))));
+ const setB=on=>Object.values(B).forEach(b=>b.disabled=!on);
+ const spin=(power=1)=>{if(G.spinning)return;AU.init();G.spinning=true;setB(false);seats.forEach(s=>s.classList.remove('hit'));hint.textContent='The bottle is spinning …';
+  let pick;do{pick=Math.random()*n|0}while(n>2&&pick===G.last);G.last=pick;const pa=pick/n*360+(Math.random()-.5)*.6*(360/n);const turns=3+Math.floor(Math.random()*2+power*2);const start=G.ang;const target=start+turns*360+((pa-start)%360+360)%360;const dur=3200+power*900;const t0=performance.now();let lastTick=start;
+  const ease=t=>1-Math.pow(1-t,3.2);
+  const step=t=>{const k=Math.min(1,(t-t0)/dur);const a=start+(target-start)*ease(k);bottle.style.transform=`rotate(${a}deg)`;if(a-lastTick>=360/Math.max(n,6)){lastTick=a;AU.tick()}
+   if(k<1)return requestAnimationFrame(step);G.ang=target%360;bottle.style.transform=`rotate(${G.ang}deg)`;
+   // Flaschenhals zeigt nach oben (0°) → Winkel des Spielers
+   let best=0,bd=999;S.players.forEach((p,i)=>{const pa=(i/n)*360;let d=Math.abs(((G.ang-pa)%360+540)%360-180);if(d<bd){bd=d;best=i}});
+   G.cur=S.players[best];seats[best].classList.add('hit');G.spinning=false;AU.pop();G.round++;round.textContent='Round '+G.round;
+   hint.innerHTML='';hint.append(h('b',{style:'color:var(--gold2)'},G.cur),'\'s turn! Pick a card.');setB(true)};
+  requestAnimationFrame(step)};
+ // Tippen oder Wischen
+ let sx=0,sy=0,st=0;bottle.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;st=performance.now()});
+ bottle.addEventListener('pointerup',e=>{const d=Math.hypot(e.clientX-sx,e.clientY-sy),dt=performance.now()-st;spin(Math.min(1.6,d>30?d/dt/1.2:.6))});
+ table.addEventListener('click',e=>{if(e.target===table||e.target.classList.contains('felt'))spin(.8)});
+ G.spin=spin;G.setB=setB;G.hint=hint;G.seats=seats}
+function confirmLeave(){return !G||G.round===0||confirm('End the game and go to settings? The points will be lost.')}
+function reveal(cat){if(!G.cur)return;const who=G.cur;const c=draw(cat,who);const C=CAT[cat];AU.chime();
+ const jk=S.drink?'Pass = 1 sip':`Joker (${G.jok[who]} left)`;
+ const ov=h('div',{class:'ov'},
+  h('div',{class:'card',style:`--c:${C.c};--cd:${C.cd}`},h('div',{class:'face'},h('div',{class:'ic'},C.ic),h('div',{class:'cat'},C.n),h('div',{class:'who'},who),h('div',{class:'lvl'},c.tag||LV[c.lv]||''),h('h3',{},c.txt))),
+  h('div',{class:'acts'},
+   h('button',{class:'btn ghost',onclick:()=>{if(!S.drink){if(G.jok[who]<=0)return toast('No jokers left, you\'ve got to do it!');G.jok[who]--}done(ov,0)}},jk),
+   h('button',{class:'btn gold',onclick:()=>done(ov,cat==='p'?2:1)},cat==='p'?'Done! +2':'Answered +1')));
+ document.body.append(ov)}
+function done(ov,p){ov.remove();G.pts[G.cur]+=p;G.setB(false);G.cur=null;G.hint.textContent=p?'Next up: spin the bottle!':'Passed. Next up: spin the bottle!';G.seats.forEach(s=>s.classList.remove('hit'))}
+function scores(){const arr=Object.entries(G.pts).sort((a,b)=>b[1]-a[1]);const ov=h('div',{class:'ov',onclick:e=>{if(e.target===ov)ov.remove()}},
+ h('div',{class:'panel'},h('h2',{},'Scoreboard'),arr[0]&&arr[0][1]>0?h('div',{class:'crown'},'👑 '+arr[0][0]):null,
+  arr.map(([n,p],i)=>h('div',{class:'sc'},h('span',{class:'r'},i+1+'.'),h('span',{class:'n'},n,S.drink?null:h('span',{class:'j'},'Jokers: '+G.jok[n])),h('span',{class:'p'},p+' P'))),
+  h('p',{class:'note'},'Truth, looking back and resolution earn 1 point, a dare earns 2. Whoever leads at midnight gives the New Year\'s toast.'),
+  h('div',{style:'text-align:center;margin-top:14px'},h('button',{class:'btn gold',onclick:()=>ov.remove()},'Keep playing'))));document.body.append(ov)}
+/* ---------- Flasche (Draufsicht von der Seite, Hals zeigt nach oben) ---------- */
+const BOTTLE=`<svg viewBox="0 0 100 300" xmlns="http://www.w3.org/2000/svg"><defs>
+<linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#0d3a2b"/><stop offset=".28" stop-color="#2f7a5c"/><stop offset=".45" stop-color="#5fae8b"/><stop offset=".62" stop-color="#226049"/><stop offset="1" stop-color="#0a2c20"/></linearGradient>
+<linearGradient id="fo" x1="0" x2="1"><stop offset="0" stop-color="#8a6a2a"/><stop offset=".35" stop-color="#f3dc9c"/><stop offset=".55" stop-color="#c99b45"/><stop offset="1" stop-color="#6e5220"/></linearGradient>
+<linearGradient id="lb" x1="0" x2="1"><stop offset="0" stop-color="#d8c9a6"/><stop offset=".4" stop-color="#fbf4e3"/><stop offset="1" stop-color="#c9b88f"/></linearGradient></defs>
+<path d="M38 8h24v58c0 14 26 30 26 58v162c0 6-5 10-11 10H23c-6 0-11-4-11-10V124c0-28 26-44 26-58z" fill="url(#gl)"/>
+<path d="M36 4h28v74c0 6-6 10-14 10s-14-4-14-10z" fill="url(#fo)"/>
+<rect x="34" y="2" width="32" height="10" rx="4" fill="#e9cf8b"/>
+<rect x="18" y="168" width="64" height="82" rx="6" fill="url(#lb)"/>
+<rect x="24" y="176" width="52" height="66" rx="4" fill="none" stroke="#b8955a" stroke-width="1.5"/>
+<text x="50" y="208" text-anchor="middle" font-family="Great Vibes, cursive" font-size="22" fill="#8a6a2a">${NEU}</text>
+<text x="50" y="228" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="7" letter-spacing="2" fill="#7a6440">SILVESTER</text>
+<path d="M27 132c4-20 12-30 18-38" stroke="rgba(255,255,255,.35)" stroke-width="4" fill="none" stroke-linecap="round"/>
+<rect x="24" y="258" width="5" height="26" rx="2.5" fill="rgba(255,255,255,.18)"/></svg>`;
+sky();setup();
+
+
+})()}else{(function(){
+
 /* Alle Texte: eigene Formulierungen von Lia Valentina. {alt} = altes Jahr, {neu} = neues Jahr, {spieler} = zufälliger Mitspieler */
 const CARDS={
 gut:[
@@ -263,6 +419,7 @@ const BOTTLE=`<svg viewBox="0 0 100 300" xmlns="http://www.w3.org/2000/svg"><def
 <rect x="24" y="258" width="5" height="26" rx="2.5" fill="rgba(255,255,255,.18)"/></svg>`;
 sky();setup();
 
-</script>
+
+})()}</script>
 </body>
 </html>
